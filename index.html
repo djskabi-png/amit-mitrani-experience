@@ -253,27 +253,231 @@
     .course-card p { color: var(--muted); line-height: 1.65; font-size: 13px; }
     .course-card b { color: var(--gold); font-size: 13px; }
     .magic-lab {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 38px;
-      align-items: center;
+      position: relative;
+      overflow: hidden;
       padding: 40px;
       border-radius: 30px;
       border: 1px solid rgba(139,104,255,.3);
       background:
-        radial-gradient(circle at 15% 30%, rgba(139,104,255,.25), transparent 22rem),
-        linear-gradient(145deg, #171324, #0e0d15);
+        radial-gradient(circle at 12% 8%, rgba(139,104,255,.25), transparent 25rem),
+        radial-gradient(circle at 92% 88%, rgba(237,192,105,.13), transparent 22rem),
+        linear-gradient(145deg, #171324, #0b0a11);
+      box-shadow: 0 35px 90px rgba(0,0,0,.36);
     }
-    .magic-lab p { color: var(--muted); line-height: 1.75; }
-    .magic-board { min-height: 390px; padding: 25px; border: 1px solid var(--line); border-radius: 24px; background: rgba(0,0,0,.28); display: grid; align-content: center; text-align: center; }
-    .magic-board small { color: #c8c3d2; }
-    .number-picker { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; margin: 20px 0; direction: ltr; }
-    .number-picker button { height: 54px; border: 1px solid var(--line); border-radius: 13px; color: var(--white); background: rgba(255,255,255,.05); font: inherit; font-weight: 900; cursor: pointer; }
-    .number-picker button:hover, .number-picker button.selected { color: #15101b; border-color: var(--gold); background: var(--gold); }
-    .magic-result { display: none; padding: 25px 12px; }
-    .magic-result strong { display: block; color: var(--gold); font-size: 78px; line-height: 1; margin: 15px 0; }
-    .magic-result.active { display: block; animation: reveal .5s ease both; }
-    @keyframes reveal { from { opacity: 0; transform: scale(.88); } to { opacity: 1; transform: scale(1); } }
+    .magic-lab::before {
+      content: "";
+      position: absolute;
+      inset: -70%;
+      pointer-events: none;
+      background: conic-gradient(from 0deg, transparent, rgba(139,104,255,.07), transparent 28%);
+      animation: auraSpin 18s linear infinite;
+    }
+    .magic-intro { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: end; margin-bottom: 28px; }
+    .magic-intro p { max-width: 690px; margin: 10px 0 0; color: var(--muted); line-height: 1.75; }
+    .magic-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .magic-tab {
+      min-height: 46px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #d8d3df;
+      background: rgba(255,255,255,.04);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+    .magic-tab:hover, .magic-tab.active {
+      color: #17111d;
+      border-color: var(--gold);
+      background: var(--gold);
+      box-shadow: 0 0 30px rgba(237,192,105,.2);
+    }
+    .magic-stage {
+      position: relative;
+      z-index: 1;
+      min-height: 510px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 26px;
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+        radial-gradient(circle at 50% 38%, rgba(139,104,255,.13), transparent 45%),
+        rgba(0,0,0,.35);
+      background-size: 32px 32px, 32px 32px, auto, auto;
+    }
+    .magic-stage::after {
+      content: "";
+      position: absolute;
+      right: 10%;
+      bottom: -30px;
+      left: 10%;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(139,104,255,.16);
+      filter: blur(28px);
+      pointer-events: none;
+    }
+    .trick-panel { display: none; min-height: 510px; grid-template-columns: .78fr 1.22fr; gap: 25px; align-items: center; padding: 30px; }
+    .trick-panel.active { display: grid; animation: stageIn .5s ease both; }
+    .trick-copy { position: relative; z-index: 4; }
+    .trick-step { display: inline-flex; padding: 7px 11px; border: 1px solid rgba(139,104,255,.35); border-radius: 999px; color: #cbbfff; background: rgba(139,104,255,.1); font-size: 11px; font-weight: 900; }
+    .trick-copy h3 { margin: 16px 0 10px; font-size: clamp(28px, 3vw, 42px); }
+    .trick-copy p { min-height: 76px; margin: 0 0 18px; color: #c0bcc8; line-height: 1.75; }
+    .trick-action { min-width: 190px; justify-content: center; }
+    .trick-action[hidden] { display: none; }
+    .effect-status { min-height: 26px; margin-top: 13px; color: var(--gold); font-size: 12px; font-weight: 800; }
+    .card-table { position: relative; min-height: 390px; display: grid; place-items: center; perspective: 1000px; }
+    .card-deck { width: 100%; display: grid; grid-template-columns: repeat(3, 108px); gap: 15px; justify-content: center; direction: ltr; }
+    .playing-card {
+      position: relative;
+      width: 108px;
+      aspect-ratio: .7;
+      padding: 0;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 14px;
+      color: #18131c;
+      background: linear-gradient(145deg, #fffdf7, #e9e3d6);
+      box-shadow: 0 16px 30px rgba(0,0,0,.35);
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform .35s ease, opacity .35s ease, box-shadow .35s ease;
+    }
+    .playing-card:hover, .playing-card:focus-visible { transform: translateY(-9px) rotate(-1deg); box-shadow: 0 22px 40px rgba(0,0,0,.5), 0 0 0 2px var(--gold); }
+    .playing-card.selected { transform: translateY(-18px) scale(1.05); box-shadow: 0 25px 55px rgba(0,0,0,.55), 0 0 0 3px var(--gold), 0 0 34px rgba(237,192,105,.38); }
+    .playing-card .corner { position: absolute; top: 10px; left: 11px; font-size: 22px; font-weight: 900; line-height: .9; }
+    .playing-card .corner.bottom { inset: auto 11px 10px auto; transform: rotate(180deg); }
+    .playing-card .suit { display: grid; place-items: center; height: 100%; font-size: 46px; }
+    .playing-card.red { color: #b02133; }
+    .card-deck.is-shuffling .playing-card { animation: cardShuffle .75s ease-in-out both; }
+    .card-deck.is-shuffling .playing-card:nth-child(2) { animation-delay: .05s; }
+    .card-deck.is-shuffling .playing-card:nth-child(3) { animation-delay: .1s; }
+    .card-deck.is-shuffling .playing-card:nth-child(4) { animation-delay: .15s; }
+    .card-deck.is-shuffling .playing-card:nth-child(5) { animation-delay: .2s; }
+    .card-deck.is-shuffling .playing-card:nth-child(6) { animation-delay: .25s; }
+    .playing-card.vanished { opacity: 0; transform: scale(.2) rotate(35deg) translateY(-80px); pointer-events: none; }
+    .vanish-mark {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 128px;
+      height: 128px;
+      border: 1px solid rgba(237,192,105,.35);
+      border-radius: 50%;
+      color: var(--gold);
+      font-size: 47px;
+      opacity: 0;
+      transform: scale(.45);
+      box-shadow: inset 0 0 36px rgba(237,192,105,.08), 0 0 50px rgba(139,104,255,.15);
+      pointer-events: none;
+    }
+    .vanish-mark.show { animation: portalReveal 1.1s ease both; }
+    .number-stage { min-height: 390px; display: grid; align-content: center; justify-items: center; text-align: center; }
+    .number-orb {
+      position: relative;
+      width: 128px;
+      height: 128px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      border: 1px solid rgba(139,104,255,.45);
+      border-radius: 50%;
+      color: var(--gold);
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.14), transparent 22%), rgba(139,104,255,.1);
+      box-shadow: inset 0 0 35px rgba(139,104,255,.18), 0 0 50px rgba(139,104,255,.16);
+      font-size: 54px;
+      font-weight: 900;
+    }
+    .number-orb::before, .number-orb::after {
+      content: "";
+      position: absolute;
+      inset: -12px;
+      border: 1px solid rgba(237,192,105,.15);
+      border-radius: 50%;
+      animation: orbPulse 2.4s ease-in-out infinite;
+    }
+    .number-orb::after { inset: -25px; animation-delay: .6s; }
+    .number-picker { display: grid; grid-template-columns: repeat(3, 58px); gap: 9px; margin: 17px 0; direction: ltr; }
+    .number-picker button { height: 52px; border: 1px solid var(--line); border-radius: 13px; color: var(--white); background: rgba(255,255,255,.05); font: inherit; font-weight: 900; cursor: pointer; transition: .2s ease; }
+    .number-picker button:hover, .number-picker button.selected { color: #15101b; border-color: var(--gold); background: var(--gold); transform: scale(1.06); }
+    .math-progress { width: min(330px, 100%); height: 5px; overflow: hidden; margin: 18px 0; border-radius: 999px; background: rgba(255,255,255,.08); }
+    .math-progress span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--purple), var(--gold)); transition: width .4s ease; }
+    .math-prompt { min-height: 48px; max-width: 350px; color: #e6e1eb; font-size: 16px; line-height: 1.55; }
+    .magic-result { display: none; text-align: center; }
+    .magic-result strong { display: block; color: var(--gold); font-size: 92px; line-height: 1; margin: 12px 0; text-shadow: 0 0 40px rgba(237,192,105,.38); }
+    .magic-result.active { display: block; animation: reveal .65s cubic-bezier(.2,.8,.2,1) both; }
+    .prediction-stage { min-height: 390px; display: grid; align-content: center; justify-items: center; }
+    .envelope {
+      position: relative;
+      width: 230px;
+      height: 145px;
+      margin-bottom: 26px;
+      border: 1px solid rgba(237,192,105,.35);
+      border-radius: 10px;
+      background: linear-gradient(145deg, #e8d6ad, #a68b5b);
+      box-shadow: 0 25px 50px rgba(0,0,0,.45);
+      perspective: 700px;
+    }
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 0, 50% 63%, 100% 0);
+      background: linear-gradient(155deg, #f0dfba, #b79b69);
+      transform-origin: top;
+      z-index: 3;
+      transition: transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+    .envelope.open::before { transform: rotateX(180deg); }
+    .prediction-paper {
+      position: absolute;
+      right: 18px;
+      bottom: 10px;
+      left: 18px;
+      height: 112px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      color: #1a1420;
+      background: #fffdf6;
+      font-size: 48px;
+      font-weight: 900;
+      transform: translateY(0);
+      transition: transform .85s .25s cubic-bezier(.2,.8,.2,1);
+      z-index: 2;
+    }
+    .envelope.open .prediction-paper { transform: translateY(-82px); }
+    .wax-seal {
+      position: absolute;
+      top: 54px;
+      left: 50%;
+      z-index: 5;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #f3d591;
+      background: #6c1830;
+      box-shadow: 0 4px 10px rgba(0,0,0,.3);
+      transform: translateX(-50%);
+      transition: opacity .3s ease, transform .3s ease;
+    }
+    .envelope.open .wax-seal { opacity: 0; transform: translateX(-50%) scale(.5); }
+    .symbol-picker { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; direction: ltr; }
+    .symbol-picker button { width: 54px; height: 54px; border: 1px solid var(--line); border-radius: 50%; color: #fff; background: rgba(255,255,255,.05); font-size: 23px; cursor: pointer; transition: .25s ease; }
+    .symbol-picker button:hover, .symbol-picker button.selected { color: #16111d; border-color: var(--gold); background: var(--gold); transform: translateY(-4px); }
+    .spark-field { position: absolute; inset: 0; z-index: 10; overflow: hidden; pointer-events: none; }
+    .spark { position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 13px var(--gold); animation: sparkFly .9s ease-out forwards; }
+    @keyframes auraSpin { to { transform: rotate(360deg); } }
+    @keyframes stageIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes cardShuffle { 0% { transform: none; } 45% { transform: translateX(var(--shuffle-x, 0)) translateY(-35px) rotate(var(--shuffle-r, 0)); } 100% { transform: none; } }
+    @keyframes portalReveal { 0% { opacity: 0; transform: scale(.4) rotate(-20deg); } 45% { opacity: 1; transform: scale(1.16) rotate(8deg); } 100% { opacity: .9; transform: scale(1) rotate(0); } }
+    @keyframes orbPulse { 0%, 100% { opacity: .25; transform: scale(.94); } 50% { opacity: .75; transform: scale(1.04); } }
+    @keyframes sparkFly { to { opacity: 0; transform: translate(var(--spark-x), var(--spark-y)) scale(.2); } }
+    @keyframes reveal { from { opacity: 0; transform: scale(.72) rotate(-4deg); filter: blur(8px); } to { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); } }
     .tool-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; }
     .tool-card { min-height: 225px; padding: 23px; border: 1px solid var(--line); border-radius: 21px; background: var(--panel); }
     .tool-card i { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: rgba(101,212,169,.12); color: var(--green); font-style: normal; font-weight: 900; }
@@ -358,12 +562,27 @@
       .trust-items div:nth-child(2) { border-left: 0; }
       .video-layout, .why-layout, .invite-box, .about, .seo-grid, .contact { grid-template-columns: 1fr; }
       .portal-grid, .course-grid, .tool-grid, .business-grid, .system-flow { grid-template-columns: 1fr; }
-      .academy-layout, .magic-lab, .calculator-wrap { grid-template-columns: 1fr; }
+      .academy-layout, .calculator-wrap { grid-template-columns: 1fr; }
       .academy-summary { position: static; }
       .portal-card { min-height: 235px; }
       .portal-card small { margin-bottom: 35px; }
-      .magic-lab { padding: 21px; gap: 25px; }
-      .magic-board { min-height: 350px; padding: 18px; }
+      .magic-lab { padding: 20px; }
+      .magic-intro { grid-template-columns: 1fr; gap: 18px; margin-bottom: 20px; }
+      .magic-tabs { justify-content: flex-start; display: grid; grid-template-columns: repeat(3, 1fr); }
+      .magic-tab { min-height: 42px; padding: 8px 6px; font-size: 11px; }
+      .magic-stage, .trick-panel { min-height: 700px; }
+      .trick-panel { grid-template-columns: 1fr; align-content: start; gap: 10px; padding: 22px 16px; }
+      .trick-copy { text-align: center; }
+      .trick-copy p { min-height: 0; }
+      .trick-action { width: 100%; }
+      .card-table, .number-stage, .prediction-stage { min-height: 350px; }
+      .card-deck { grid-template-columns: repeat(3, 78px); gap: 11px; }
+      .playing-card { width: 78px; border-radius: 11px; }
+      .playing-card .corner { top: 7px; left: 8px; font-size: 16px; }
+      .playing-card .corner.bottom { inset: auto 8px 7px auto; }
+      .playing-card .suit { font-size: 33px; }
+      .number-orb { width: 104px; height: 104px; font-size: 44px; }
+      .envelope { transform: scale(.88); margin-bottom: 13px; }
       .tool-card, .business-card { min-height: 0; }
       .system-step:not(:last-child)::after { content: "↓"; left: 50%; top: auto; bottom: -19px; }
       .video-box { min-height: 330px; }
@@ -408,6 +627,9 @@
       .mobile-sticky a { padding: 11px; border-radius: 10px; text-align: center; font-size: 12px; font-weight: 800; }
       .mobile-sticky a:first-child { color: #151019; background: var(--gold); }
       .mobile-sticky a:last-child { border: 1px solid var(--line); background: #181720; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
@@ -517,23 +739,92 @@
 
     <section class="section" id="magic">
       <div class="shell magic-lab">
-        <div>
-          <div class="kicker">תנסו אותי</div>
-          <h2 class="section-title">אפשר להפתיע גם דרך המסך</h2>
-          <p>בחרו מספר בין 1 ל-9 ושמרו אותו בראש. לאחר הבחירה תקבלו סדרת פעולות קצרה. אין צורך לכתוב לנו דבר.</p>
-          <p>זהו אב טיפוס לחוויה אינטראקטיבית. בגרסה המלאה ניתן לפתח קסמים נוספים עם קלפים, צבעים, שרבוטים וסרטוני תגובה של עמית.</p>
-        </div>
-        <div class="magic-board" aria-live="polite">
-          <div id="magic-choice">
-            <small>בחרו מספר ושמרו אותו בסוד</small>
-            <div class="number-picker">
-              <button type="button">1</button><button type="button">2</button><button type="button">3</button>
-              <button type="button">4</button><button type="button">5</button><button type="button">6</button>
-              <button type="button">7</button><button type="button">8</button><button type="button">9</button>
-            </div>
-            <button class="btn btn-gold" id="magic-start" type="button" disabled>בחרתי, מתחילים</button>
+        <div class="magic-intro">
+          <div>
+            <div class="kicker">הבמה הדיגיטלית של עמית</div>
+            <h2 class="section-title">המסך שלכם עומד לעשות קסם</h2>
+            <p>לא קוראים כאן הסבר על קסמים. בוחרים חוויה, משתתפים בה ורואים משהו שלא אמור לקרות. הפעילו צליל לחוויה מלאה.</p>
           </div>
-          <div class="magic-result" id="magic-result"><small>התוצאה שלכם היא</small><strong>5</strong><p>איך ידענו? עכשיו דמיינו מה קורה כשעמית נמצא מול הקהל.</p><button class="btn btn-dark" id="magic-again" type="button">לנסות שוב</button></div>
+          <div class="magic-tabs" role="tablist" aria-label="בחירת קסם">
+            <button class="magic-tab active" type="button" role="tab" aria-selected="true" data-trick="cards">קלף נעלם</button>
+            <button class="magic-tab" type="button" role="tab" aria-selected="false" data-trick="number">קריאת מספר</button>
+            <button class="magic-tab" type="button" role="tab" aria-selected="false" data-trick="symbol">תחזית סגורה</button>
+          </div>
+        </div>
+        <div class="magic-stage" aria-live="polite">
+          <div class="spark-field" id="spark-field"></div>
+
+          <div class="trick-panel active" data-panel="cards">
+            <div class="trick-copy">
+              <span class="trick-step">קסם ראשון</span>
+              <h3>הקלף שנעלם</h3>
+              <p id="card-instruction">בחרו קלף אחד. הביטו בו לשנייה, זכרו אותו ולחצו עליו. עמית ינסה להעלים רק אותו.</p>
+              <button class="btn btn-gold trick-action" id="card-action" type="button" hidden>עמית, תעלים אותו</button>
+              <div class="effect-status" id="card-status"></div>
+            </div>
+            <div class="card-table">
+              <div class="card-deck" id="card-deck" aria-label="בחרו קלף">
+                <button class="playing-card red" type="button" data-card="Q♥" aria-label="מלכה לב"><span class="corner">Q<br>♥</span><span class="suit">♥</span><span class="corner bottom">Q<br>♥</span></button>
+                <button class="playing-card" type="button" data-card="7♠" aria-label="שבע עלה"><span class="corner">7<br>♠</span><span class="suit">♠</span><span class="corner bottom">7<br>♠</span></button>
+                <button class="playing-card red" type="button" data-card="A♦" aria-label="אס יהלום"><span class="corner">A<br>♦</span><span class="suit">♦</span><span class="corner bottom">A<br>♦</span></button>
+                <button class="playing-card" type="button" data-card="K♣" aria-label="מלך תלתן"><span class="corner">K<br>♣</span><span class="suit">♣</span><span class="corner bottom">K<br>♣</span></button>
+                <button class="playing-card red" type="button" data-card="10♥" aria-label="עשר לב"><span class="corner">10<br>♥</span><span class="suit">♥</span><span class="corner bottom">10<br>♥</span></button>
+                <button class="playing-card" type="button" data-card="3♠" aria-label="שלוש עלה"><span class="corner">3<br>♠</span><span class="suit">♠</span><span class="corner bottom">3<br>♠</span></button>
+              </div>
+              <div class="vanish-mark" id="vanish-mark">✦</div>
+            </div>
+          </div>
+
+          <div class="trick-panel" data-panel="number">
+            <div class="trick-copy">
+              <span class="trick-step">קסם שני</span>
+              <h3>עמית קורא את המספר</h3>
+              <p id="math-copy">בחרו מספר בין 1 ל-9. בצעו בראש את הפעולות שיופיעו, שלב אחרי שלב. אל תגלו את התוצאה למסך.</p>
+              <button class="btn btn-gold trick-action" id="math-next" type="button" disabled>בחרתי מספר</button>
+              <div class="effect-status" id="math-status"></div>
+            </div>
+            <div class="number-stage">
+              <div id="number-game">
+                <div class="number-orb" id="number-orb">?</div>
+                <div class="number-picker" aria-label="בחרו מספר">
+                  <button type="button">1</button><button type="button">2</button><button type="button">3</button>
+                  <button type="button">4</button><button type="button">5</button><button type="button">6</button>
+                  <button type="button">7</button><button type="button">8</button><button type="button">9</button>
+                </div>
+                <div class="math-progress" aria-hidden="true"><span id="math-progress-bar"></span></div>
+                <div class="math-prompt" id="math-prompt">בחרו מספר כדי לפתוח את שער המחשבה</div>
+              </div>
+              <div class="magic-result" id="magic-result">
+                <small>עמית קלט את התוצאה שלכם</small>
+                <strong>5</strong>
+                <p>אם ביצעתם את השלבים נכון, זה המספר שנמצא אצלכם בראש.</p>
+                <button class="btn btn-dark" id="magic-again" type="button">לנסות שוב</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-panel" data-panel="symbol">
+            <div class="trick-copy">
+              <span class="trick-step">קסם שלישי</span>
+              <h3>התחזית כבר בפנים</h3>
+              <p id="symbol-copy">המעטפה נסגרה לפני שבחרתם. בחרו עכשיו סמל אחד שמושך אתכם, ואז פתחו את התחזית.</p>
+              <button class="btn btn-gold trick-action" id="symbol-reveal" type="button" disabled>לפתוח את המעטפה</button>
+              <div class="effect-status" id="symbol-status">אל תשנו את הבחירה אחרי שהמחשבה ננעלה.</div>
+            </div>
+            <div class="prediction-stage">
+              <div class="envelope" id="envelope" aria-label="מעטפת התחזית">
+                <div class="prediction-paper" id="prediction-paper">?</div>
+                <div class="wax-seal">A</div>
+              </div>
+              <div class="symbol-picker" aria-label="בחרו סמל">
+                <button type="button" data-symbol="★" aria-label="כוכב">★</button>
+                <button type="button" data-symbol="☾" aria-label="ירח">☾</button>
+                <button type="button" data-symbol="♦" aria-label="יהלום">♦</button>
+                <button type="button" data-symbol="●" aria-label="עיגול">●</button>
+                <button type="button" data-symbol="✚" aria-label="צלב">✚</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -682,31 +973,230 @@
       window.setTimeout(() => toast.classList.remove("show"), 3200);
     };
 
-    const numberButtons = document.querySelectorAll(".number-picker button");
-    const magicStart = document.querySelector("#magic-start");
-    const magicChoice = document.querySelector("#magic-choice");
-    const magicResult = document.querySelector("#magic-result");
-    numberButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        numberButtons.forEach((item) => item.classList.remove("selected"));
-        button.classList.add("selected");
-        magicStart.disabled = false;
+    let magicAudio;
+    const playMagicTone = (frequency = 520, duration = .18, delay = 0) => {
+      try {
+        magicAudio = magicAudio || new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = magicAudio.createOscillator();
+        const gain = magicAudio.createGain();
+        oscillator.type = "sine";
+        oscillator.frequency.setValueAtTime(frequency, magicAudio.currentTime + delay);
+        gain.gain.setValueAtTime(.0001, magicAudio.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(.08, magicAudio.currentTime + delay + .02);
+        gain.gain.exponentialRampToValueAtTime(.0001, magicAudio.currentTime + delay + duration);
+        oscillator.connect(gain);
+        gain.connect(magicAudio.destination);
+        oscillator.start(magicAudio.currentTime + delay);
+        oscillator.stop(magicAudio.currentTime + delay + duration + .03);
+      } catch (error) {
+        return;
+      }
+    };
+
+    const burstMagic = (count = 26) => {
+      const field = document.querySelector("#spark-field");
+      field.replaceChildren();
+      for (let index = 0; index < count; index += 1) {
+        const spark = document.createElement("i");
+        const angle = (Math.PI * 2 * index) / count;
+        const distance = 100 + Math.random() * 190;
+        spark.className = "spark";
+        spark.style.setProperty("--spark-x", Math.cos(angle) * distance + "px");
+        spark.style.setProperty("--spark-y", Math.sin(angle) * distance + "px");
+        spark.style.animationDelay = Math.random() * .12 + "s";
+        field.appendChild(spark);
+      }
+      window.setTimeout(() => field.replaceChildren(), 1300);
+    };
+
+    document.querySelectorAll(".magic-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".magic-tab").forEach((item) => {
+          item.classList.toggle("active", item === tab);
+          item.setAttribute("aria-selected", item === tab ? "true" : "false");
+        });
+        document.querySelectorAll("[data-panel]").forEach((panel) => {
+          panel.classList.toggle("active", panel.dataset.panel === tab.dataset.trick);
+        });
+        playMagicTone(340, .12);
       });
     });
-    magicStart.addEventListener("click", () => {
-      magicStart.textContent = "הכפילו ב-2, הוסיפו 10, חלקו ב-2 והחסירו את המספר שבחרתם";
-      magicStart.disabled = true;
+
+    const cards = Array.from(document.querySelectorAll(".playing-card"));
+    const cardAction = document.querySelector("#card-action");
+    const cardDeck = document.querySelector("#card-deck");
+    const cardInstruction = document.querySelector("#card-instruction");
+    const cardStatus = document.querySelector("#card-status");
+    const vanishMark = document.querySelector("#vanish-mark");
+    let selectedCard;
+    let cardVanished = false;
+    cards.forEach((card, index) => {
+      card.style.setProperty("--shuffle-x", (index % 2 === 0 ? 52 : -52) + "px");
+      card.style.setProperty("--shuffle-r", (index % 2 === 0 ? 9 : -9) + "deg");
+      card.addEventListener("click", () => {
+        if (cardVanished) return;
+        cards.forEach((item) => item.classList.remove("selected"));
+        card.classList.add("selected");
+        selectedCard = card;
+        cardAction.hidden = false;
+        cardAction.disabled = false;
+        cardStatus.textContent = "הבחירה ננעלה. עמית לא יכול לראות את הקלף.";
+        playMagicTone(430, .12);
+      });
+    });
+    const resetCards = () => {
+      cardVanished = false;
+      selectedCard = undefined;
+      cards.forEach((card) => card.classList.remove("selected", "vanished"));
+      cardDeck.classList.remove("is-shuffling");
+      vanishMark.classList.remove("show");
+      cardAction.hidden = true;
+      cardAction.disabled = false;
+      cardAction.textContent = "עמית, תעלים אותו";
+      cardInstruction.textContent = "בחרו קלף אחד. הביטו בו לשנייה, זכרו אותו ולחצו עליו. עמית ינסה להעלים רק אותו.";
+      cardStatus.textContent = "";
+    };
+    cardAction.addEventListener("click", () => {
+      if (cardVanished) {
+        resetCards();
+        return;
+      }
+      if (!selectedCard) return;
+      cardAction.disabled = true;
+      cardInstruction.textContent = "השאירו את העיניים על הקלף. הקלפים מתערבבים והמחשבה שלכם נשארת במקום.";
+      cardStatus.textContent = "3... 2... 1...";
+      cardDeck.classList.add("is-shuffling");
+      playMagicTone(170, .55);
       window.setTimeout(() => {
-        magicChoice.style.display = "none";
+        selectedCard.classList.add("vanished");
+        selectedCard.classList.remove("selected");
+        vanishMark.classList.add("show");
+        cardVanished = true;
+        cardInstruction.textContent = "בדקו את השולחן. הקלף שבחרתם נעלם, ורק הוא.";
+        cardStatus.textContent = "המחשבה שלכם נשארה. הקלף איננו.";
+        cardAction.textContent = "להחזיר את הקלף ולנסות שוב";
+        cardAction.disabled = false;
+        burstMagic(34);
+        playMagicTone(620, .18);
+        playMagicTone(920, .3, .1);
+      }, 1050);
+    });
+
+    const numberButtons = document.querySelectorAll(".number-picker button");
+    const mathNext = document.querySelector("#math-next");
+    const mathPrompt = document.querySelector("#math-prompt");
+    const mathProgress = document.querySelector("#math-progress-bar");
+    const mathStatus = document.querySelector("#math-status");
+    const numberOrb = document.querySelector("#number-orb");
+    const numberGame = document.querySelector("#number-game");
+    const magicResult = document.querySelector("#magic-result");
+    const mathSteps = [
+      "הכפילו את המספר שבחרתם ב-2.",
+      "הוסיפו לתוצאה 10.",
+      "חלקו את התוצאה שקיבלתם ב-2.",
+      "החסירו עכשיו את המספר המקורי שבחרתם."
+    ];
+    let selectedNumber;
+    let mathStep = -1;
+    numberButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (mathStep >= 0) return;
+        numberButtons.forEach((item) => item.classList.remove("selected"));
+        button.classList.add("selected");
+        selectedNumber = button.textContent;
+        numberOrb.textContent = selectedNumber;
+        mathPrompt.textContent = "עמית נעל את המספר. שמרו אותו בזיכרון.";
+        mathNext.disabled = false;
+        mathStatus.textContent = "המספר לא נשלח לשום מקום.";
+        playMagicTone(390, .12);
+      });
+    });
+    mathNext.addEventListener("click", () => {
+      if (!selectedNumber) return;
+      mathStep += 1;
+      if (mathStep < mathSteps.length) {
+        numberButtons.forEach((button) => { button.disabled = true; });
+        numberOrb.textContent = "✦";
+        mathPrompt.textContent = mathSteps[mathStep];
+        mathProgress.style.width = ((mathStep + 1) / mathSteps.length * 88) + "%";
+        mathNext.textContent = mathStep === mathSteps.length - 1 ? "סיימתי, עמית יכול לגלות" : "סיימתי, לשלב הבא";
+        mathStatus.textContent = "שלב " + (mathStep + 1) + " מתוך " + mathSteps.length;
+        playMagicTone(360 + mathStep * 90, .13);
+        return;
+      }
+      mathNext.disabled = true;
+      mathStatus.textContent = "קורא את התוצאה...";
+      numberOrb.textContent = "?";
+      mathProgress.style.width = "100%";
+      playMagicTone(190, .55);
+      window.setTimeout(() => {
+        numberGame.style.display = "none";
         magicResult.classList.add("active");
-      }, 2600);
+        mathStatus.textContent = "התוצאה נקלטה.";
+        burstMagic(38);
+        playMagicTone(660, .16);
+        playMagicTone(990, .35, .12);
+      }, 900);
     });
     document.querySelector("#magic-again").addEventListener("click", () => {
+      selectedNumber = undefined;
+      mathStep = -1;
+      numberGame.style.display = "block";
       magicResult.classList.remove("active");
-      magicChoice.style.display = "block";
-      magicStart.textContent = "בחרתי, מתחילים";
-      magicStart.disabled = true;
-      numberButtons.forEach((item) => item.classList.remove("selected"));
+      numberOrb.textContent = "?";
+      mathPrompt.textContent = "בחרו מספר כדי לפתוח את שער המחשבה";
+      mathProgress.style.width = "0";
+      mathStatus.textContent = "";
+      mathNext.textContent = "בחרתי מספר";
+      mathNext.disabled = true;
+      numberButtons.forEach((button) => {
+        button.disabled = false;
+        button.classList.remove("selected");
+      });
+    });
+
+    const symbolButtons = document.querySelectorAll("[data-symbol]");
+    const symbolReveal = document.querySelector("#symbol-reveal");
+    const symbolStatus = document.querySelector("#symbol-status");
+    const symbolCopy = document.querySelector("#symbol-copy");
+    const envelope = document.querySelector("#envelope");
+    const predictionPaper = document.querySelector("#prediction-paper");
+    let selectedSymbol;
+    let predictionOpen = false;
+    symbolButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (predictionOpen) return;
+        symbolButtons.forEach((item) => item.classList.remove("selected"));
+        button.classList.add("selected");
+        selectedSymbol = button.dataset.symbol;
+        symbolReveal.disabled = false;
+        symbolStatus.textContent = "המחשבה ננעלה. המעטפה לא השתנתה.";
+        playMagicTone(470, .12);
+      });
+    });
+    symbolReveal.addEventListener("click", () => {
+      if (predictionOpen) {
+        predictionOpen = false;
+        selectedSymbol = undefined;
+        envelope.classList.remove("open");
+        predictionPaper.textContent = "?";
+        symbolButtons.forEach((button) => button.classList.remove("selected"));
+        symbolReveal.disabled = true;
+        symbolReveal.textContent = "לפתוח את המעטפה";
+        symbolCopy.textContent = "המעטפה נסגרה לפני שבחרתם. בחרו עכשיו סמל אחד שמושך אתכם, ואז פתחו את התחזית.";
+        symbolStatus.textContent = "אל תשנו את הבחירה אחרי שהמחשבה ננעלה.";
+        return;
+      }
+      if (!selectedSymbol) return;
+      predictionOpen = true;
+      predictionPaper.textContent = selectedSymbol;
+      envelope.classList.add("open");
+      symbolReveal.textContent = "לסגור ולנסות שוב";
+      symbolCopy.textContent = "התחזית הייתה סגורה מולכם מהרגע הראשון. עכשיו הביטו בסמל שבתוכה.";
+      symbolStatus.textContent = "אותו סמל. אותה מחשבה.";
+      burstMagic(32);
+      playMagicTone(570, .18);
+      playMagicTone(870, .32, .11);
     });
 
     const kidsRange = document.querySelector("#kids-range");
