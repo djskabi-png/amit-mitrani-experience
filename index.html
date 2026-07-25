@@ -706,6 +706,45 @@
     .illusion-note { display: block; margin: 12px 0 16px; color: #aeb7c8; font-size: 12px; line-height: 1.55; }
     .illusion-controls { display: flex; flex-wrap: wrap; gap: 9px; }
     .illusion-controls .btn { min-width: 0; }
+    .object-stage { min-height: 390px; display: grid; align-content: center; gap: 18px; }
+    .object-grid { display: grid; grid-template-columns: repeat(4, minmax(76px, 1fr)); gap: 10px; direction: rtl; }
+    .object-grid[hidden] { display: none; }
+    .object-card {
+      min-height: 82px;
+      display: grid;
+      place-items: center;
+      gap: 3px;
+      padding: 10px 7px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 15px;
+      color: #e7e2ec;
+      background: linear-gradient(145deg, rgba(139,104,255,.13), rgba(255,255,255,.035));
+      text-align: center;
+      box-shadow: inset 0 0 24px rgba(139,104,255,.04);
+    }
+    .object-card i { font-size: 29px; font-style: normal; line-height: 1; filter: drop-shadow(0 5px 10px rgba(0,0,0,.35)); }
+    .object-card b { font-size: 12px; }
+    .object-round { display: none; }
+    .object-round.active { display: grid; gap: 16px; animation: stageIn .45s ease both; }
+    .object-round-title { margin: 0; color: #e8d49e; font-size: 16px; text-align: center; }
+    .object-answers { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .object-answers .btn { width: 100%; }
+    .object-reveal { display: none; min-height: 300px; align-content: center; justify-items: center; text-align: center; }
+    .object-reveal.active { display: grid; animation: reveal .7s cubic-bezier(.2,.8,.2,1) both; }
+    .object-reveal-icon {
+      width: 126px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      border: 1px solid rgba(237,192,105,.48);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(237,192,105,.19), rgba(139,104,255,.12) 52%, transparent 70%);
+      box-shadow: 0 0 55px rgba(139,104,255,.28);
+      font-size: 62px;
+    }
+    .object-reveal strong { color: var(--gold); font-size: clamp(34px, 4vw, 52px); }
+    .object-reveal p { max-width: 420px; margin: 8px 0 18px; color: #c9c3d0; line-height: 1.65; }
     .magic-footer-actions { position: relative; z-index: 2; display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
     .spark-field { position: absolute; inset: 0; z-index: 10; overflow: hidden; pointer-events: none; }
     .spark { position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 13px var(--gold); animation: sparkFly .9s ease-out forwards; }
@@ -859,10 +898,11 @@
       .trick-copy { text-align: center; }
       .trick-copy p { min-height: 0; }
       .trick-action { width: 100%; }
-      .card-table, .number-stage, .prediction-stage, .illusion-stage { min-height: 350px; }
+      .card-table, .number-stage, .prediction-stage, .illusion-stage, .object-stage { min-height: 350px; }
       .illusion-stage { grid-template-columns: 1fr; gap: 18px; }
       .illusion-target img { width: 126px; }
       .illusion-controls, .magic-footer-actions { display: grid; grid-template-columns: 1fr; }
+      .object-grid { grid-template-columns: repeat(3, minmax(70px, 1fr)); }
       .card-deck { grid-template-columns: repeat(3, 78px); gap: 11px; }
       .playing-card { width: 78px; border-radius: 11px; }
       .playing-card .corner { top: 7px; left: 8px; font-size: 16px; }
@@ -1265,6 +1305,7 @@
             <button class="magic-tab" type="button" aria-pressed="false" data-trick="number">קריאת מספר</button>
             <button class="magic-tab" type="button" aria-pressed="false" data-trick="symbol">תחזית סגורה</button>
             <button class="magic-tab" type="button" aria-pressed="false" data-trick="illusion">אשליית ראייה</button>
+            <button class="magic-tab" type="button" aria-pressed="false" data-trick="object">חפץ במחשבה</button>
           </div>
         </div>
         <div class="magic-stage" aria-live="polite">
@@ -1365,6 +1406,34 @@
               <div class="illusion-target" id="illusion-target">
                 <img src="assets/optimized/amit-headshot-720.webp" alt="פניו של עמית מיטרני, נקודת מבט לאחר האשליה" loading="lazy">
                 <strong>בסיום, הביטו כאן או בכף היד</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-panel" data-panel="object">
+            <div class="trick-copy">
+              <span class="trick-step">חוויה חמישית</span>
+              <h3>עמית ימצא את החפץ שבחרתם</h3>
+              <p id="object-copy">בחרו חפץ אחד מהרשימה בעיניים בלבד. אל תלחצו עליו ואל תגידו את שמו. כשתהיו מוכנים, ענו על ארבע שאלות קצרות.</p>
+              <button class="btn btn-gold trick-action" id="object-start" type="button">בחרתי חפץ במחשבה</button>
+              <div class="effect-status" id="object-status">הבחירה נשארת אצלכם. האתר מקבל רק תשובות כן או לא.</div>
+            </div>
+            <div class="object-stage">
+              <div class="object-grid" id="object-opening" aria-label="שישה עשר חפצים לבחירה במחשבה"></div>
+              <div class="object-round" id="object-round">
+                <p class="object-round-title" id="object-round-title"></p>
+                <div class="object-grid" id="object-round-grid" aria-live="polite"></div>
+                <div class="object-answers">
+                  <button class="btn btn-gold" id="object-yes" type="button">כן, החפץ כאן</button>
+                  <button class="btn btn-dark" id="object-no" type="button">לא, הוא לא כאן</button>
+                </div>
+              </div>
+              <div class="object-reveal" id="object-reveal" aria-live="polite">
+                <div class="object-reveal-icon" id="object-reveal-icon" aria-hidden="true"></div>
+                <small>המחשבה שלכם הובילה לכאן</small>
+                <strong id="object-reveal-name"></strong>
+                <p>לא לחצתם על החפץ עצמו. ארבע תשובות הספיקו כדי לחשוף אותו.</p>
+                <button class="btn btn-dark" id="object-again" type="button">לנסות עם חפץ אחר</button>
               </div>
             </div>
           </div>
@@ -1958,6 +2027,90 @@
         playMagicTone(640, .22);
       }, 1000);
     });
+
+    const objectChoices = [
+      ["מפתח", "🔑"], ["שעון", "⌚"], ["מטרייה", "☂️"], ["כתר", "👑"],
+      ["אופניים", "🚲"], ["נר", "🕯️"], ["ספר", "📕"], ["בלון", "🎈"],
+      ["ספל", "☕"], ["משקפיים", "👓"], ["מצלמה", "📷"], ["עוגה", "🎂"],
+      ["גיטרה", "🎸"], ["מטוס", "✈️"], ["תפוח", "🍎"], ["נעל", "👟"]
+    ];
+    const objectOpening = document.querySelector("#object-opening");
+    const objectRound = document.querySelector("#object-round");
+    const objectRoundGrid = document.querySelector("#object-round-grid");
+    const objectRoundTitle = document.querySelector("#object-round-title");
+    const objectStart = document.querySelector("#object-start");
+    const objectYes = document.querySelector("#object-yes");
+    const objectNo = document.querySelector("#object-no");
+    const objectStatus = document.querySelector("#object-status");
+    const objectCopy = document.querySelector("#object-copy");
+    const objectReveal = document.querySelector("#object-reveal");
+    const objectRevealIcon = document.querySelector("#object-reveal-icon");
+    const objectRevealName = document.querySelector("#object-reveal-name");
+    let objectRoundIndex = 0;
+    let objectAnswerCode = 0;
+    const renderObjectCards = (target, indexes) => {
+      target.replaceChildren(...indexes.map((index) => {
+        const card = document.createElement("span");
+        card.className = "object-card";
+        card.setAttribute("role", "img");
+        card.setAttribute("aria-label", objectChoices[index][0]);
+        const icon = document.createElement("i");
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = objectChoices[index][1];
+        const name = document.createElement("b");
+        name.textContent = objectChoices[index][0];
+        card.append(icon, name);
+        return card;
+      }));
+    };
+    const resetObjectTrick = () => {
+      objectRoundIndex = 0;
+      objectAnswerCode = 0;
+      objectOpening.hidden = false;
+      objectRound.classList.remove("active");
+      objectReveal.classList.remove("active");
+      objectStart.hidden = false;
+      objectStart.disabled = false;
+      objectStart.textContent = "בחרתי חפץ במחשבה";
+      objectCopy.textContent = "בחרו חפץ אחד מהרשימה בעיניים בלבד. אל תלחצו עליו ואל תגידו את שמו. כשתהיו מוכנים, ענו על ארבע שאלות קצרות.";
+      objectStatus.textContent = "הבחירה נשארת אצלכם. האתר מקבל רק תשובות כן או לא.";
+    };
+    const showObjectRound = () => {
+      const indexes = objectChoices.map((_, index) => index).filter((index) => (index & (1 << objectRoundIndex)) !== 0);
+      objectRoundTitle.textContent = "שאלה " + (objectRoundIndex + 1) + " מתוך 4: האם החפץ שלכם מופיע כאן?";
+      renderObjectCards(objectRoundGrid, indexes);
+      objectStatus.textContent = "חשבו רק על החפץ. אל תחפשו דפוס בין הקבוצות.";
+      playMagicTone(350 + objectRoundIndex * 70, .12);
+    };
+    const answerObjectRound = (isPresent) => {
+      if (isPresent) objectAnswerCode += 1 << objectRoundIndex;
+      objectRoundIndex += 1;
+      if (objectRoundIndex < 4) {
+        showObjectRound();
+        return;
+      }
+      objectRound.classList.remove("active");
+      const [name, icon] = objectChoices[objectAnswerCode];
+      objectRevealIcon.textContent = icon;
+      objectRevealName.textContent = name;
+      objectReveal.classList.add("active");
+      objectCopy.textContent = "ארבע תשובות קצרות הספיקו. עמית נעל את המחשבה.";
+      objectStatus.textContent = "החפץ שבחרתם נחשף.";
+      burstMagic(38);
+      playMagicTone(650, .2);
+      playMagicTone(960, .36, .12);
+    };
+    renderObjectCards(objectOpening, objectChoices.map((_, index) => index));
+    objectStart.addEventListener("click", () => {
+      objectOpening.hidden = true;
+      objectStart.hidden = true;
+      objectRound.classList.add("active");
+      objectCopy.textContent = "בכל שאלה בדקו אם החפץ שבחרתם נמצא בקבוצה. ענו בכנות ואל תשנו את הבחירה.";
+      showObjectRound();
+    });
+    objectYes.addEventListener("click", () => answerObjectRound(true));
+    objectNo.addEventListener("click", () => answerObjectRound(false));
+    document.querySelector("#object-again").addEventListener("click", resetObjectTrick);
 
     document.querySelector("#magic-share").addEventListener("click", async () => {
       const shareUrl = new URL(window.location.href);
