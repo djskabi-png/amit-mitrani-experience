@@ -120,6 +120,10 @@
     .footer-seo a { color:#d8d4df; font-size:13px; }
     .footer-seo a:hover { color:var(--gold); }
     .footer-row { display:flex; justify-content:space-between; gap:20px; }
+    .social-links { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 24px; }
+    .social-link { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:9px 13px; border:1px solid var(--line); border-radius:999px; color:#e8e4ee; background:rgba(255,255,255,.025); }
+    .social-link:hover,.social-link:focus-visible { color:var(--gold); border-color:rgba(237,192,105,.55); }
+    .social-link svg { width:21px; height:21px; fill:currentColor; stroke:currentColor; stroke-width:1.7; }
     .breadcrumbs { padding-top:24px; color:var(--muted); font-size:13px; }
     .breadcrumbs a { color:var(--gold); }
     .commerce-modal { position:fixed; inset:0; z-index:50; display:none; place-items:center; padding:18px; }
@@ -222,7 +226,7 @@
   </style>
 </head>
 <body>
-  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="index.html#shows">מופעים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="magic-courses.html">קורסים</a><a href="business-magic.html">לעסקים</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div></nav></header>
+  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div></nav></header>
   <main>
     <div class="shell breadcrumbs"><a href="index.html">עמוד הבית</a> / מופעים לילדים</div>
     <section class="hero shell">
@@ -240,7 +244,7 @@
     <section><div class="shell"><div class="section-head"><div class="kicker">המשך הדרך</div><h2>עולמות נוספים באתר</h2></div><div class="related"><a href="shows-for-families.html">מופעים למשפחות</a><a href="shows-for-institutions.html">קייטנות ומוסדות</a><a href="magic-courses.html">קורסי קסמים</a></div></div></section>
     <section><div class="shell"><div class="cta"><div><h2>לא צריך להמתין כדי להתחיל הזמנה</h2><p>ממלאים את כל פרטי האירוע, מקבלים מספר הזמנה ושולחים לעמית לאישור זמינות ותנאים.</p></div><button class="btn btn-gold" type="button" data-commerce-open>פתיחת הזמנה ישירה</button></div></div></section>
   </main>
-  <footer><div class="shell"><div class="footer-seo"><a href="shows-for-kids.html">קוסם ליום הולדת לילדים</a><a href="mentalist-adult-parties.html">אמן חושים למסיבת מבוגרים</a><a href="magician-bar-bat-mitzvah.html">קוסם לבר ובת מצווה</a><a href="magician-brit-brita.html">קוסם לברית או בריתה</a><a href="magician-purim-events.html">קוסם לאירועי פורים</a><a href="close-up-magic-receptions.html">קוסם לקבלת פנים</a><a href="shows-for-companies.html">אמן חושים לאירוע חברה</a><a href="shows-for-institutions.html">קוסם לקייטנות ובתי ספר</a><a href="shows-for-families.html">מופע קסמים למשפחות</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל לדוברי עברית</a><a href="magic-courses.html">קורסי קסמים אונליין</a><a href="business-magic.html">קסם ותוכן שיווקי לעסקים</a></div><div class="footer-row"><span>עמית מיטרני, קוסם ואמן חושים</span><span class="legal-links"><a href="index.html">עמוד הבית</a><a href="index.html#contact">יצירת קשר</a><a href="index.html?modal=privacy">פרטיות</a><a href="index.html?modal=terms">תקנון האתר</a><a href="index.html?modal=accessibility-statement">הצהרת נגישות</a></span></div></div></footer>
+  <footer><div class="shell"><div class="footer-seo"><a href="shows-for-kids.html">קוסם ליום הולדת לילדים</a><a href="mentalist-adult-parties.html">אמן חושים למסיבת מבוגרים</a><a href="magician-bar-bat-mitzvah.html">קוסם לבר ובת מצווה</a><a href="magician-brit-brita.html">קוסם לברית או בריתה</a><a href="magician-purim-events.html">קוסם לאירועי פורים</a><a href="close-up-magic-receptions.html">קוסם לקבלת פנים</a><a href="shows-for-companies.html">אמן חושים לאירוע חברה</a><a href="shows-for-institutions.html">קוסם לקייטנות ובתי ספר</a><a href="shows-for-families.html">מופע קסמים למשפחות</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל לדוברי עברית</a><a href="magic-courses.html">קורסי קסמים אונליין</a><a href="business-magic.html">קסם מותאם למסר עסקי</a></div><div class="social-links" aria-label="הערוצים של עמית"><a class="social-link" href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener" aria-label="אינסטגרם של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.7" r="1"></circle></svg><span>אינסטגרם</span></a><a class="social-link" href="https://www.facebook.com/amitgic/" target="_blank" rel="noopener" aria-label="פייסבוק של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3.5l.5-4h-4V9c0-.7.3-1 1-1z"></path></svg><span>פייסבוק</span></a><a class="social-link" href="https://www.tiktok.com/@amit_miteranii" target="_blank" rel="noopener" aria-label="טיקטוק של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3c.5 2.8 2.1 4.4 5 4.8v4c-1.9-.1-3.5-.7-5-1.8v6.2a6.2 6.2 0 1 1-5.4-6.1v4.1a2.3 2.3 0 1 0 1.4 2.1V3h4z"></path></svg><span>טיקטוק</span></a><a class="social-link" href="https://wa.me/972523416151" target="_blank" rel="noopener" aria-label="וואטסאפ של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.6A10 10 0 0 0 4.8 15.7L3.4 21l5.4-1.4A10 10 0 0 0 20.5 3.6zM12 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.2.8.9-3.1-.2-.3A8 8 0 1 1 12 18zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-1.5-.7-2.5-1.4-3.5-3-.2-.3 0-.4.1-.5l.6-.7c.1-.1.2-.3.2-.5s0-.3-.1-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.8-1.1 1.7-1.1 2.8 0 1.7 1.2 3.4 1.4 3.6 1.7 2.6 4.2 4 6.9 4.8.8.2 1.7.1 2.3-.2.7-.4 1.2-1.1 1.4-1.9.1-.2.1-.4 0-.5-.1-.1-.3-.2-.5-.3z"></path></svg><span>וואטסאפ</span></a></div><div class="footer-row"><span>עמית מיטרני, קוסם ואמן חושים</span><span class="legal-links"><a href="index.html">עמוד הבית</a><a href="index.html#contact">יצירת קשר</a><a href="index.html?modal=privacy">פרטיות</a><a href="index.html?modal=terms">תקנון האתר</a><a href="index.html?modal=accessibility-statement">הצהרת נגישות</a></span></div></div></footer>
   <button class="a11y-trigger" id="a11y-trigger" type="button" aria-expanded="false" aria-controls="a11y-panel">נגישות</button>
   <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="false" aria-labelledby="a11y-title" inert>
     <h2 id="a11y-title">התאמות נגישות</h2>
@@ -374,7 +378,8 @@
       commerceError.textContent = "";
       const orderId = "EVENT-" + Date.now().toString().slice(-7);
       const message = [
-        "היי עמית, נוצרה פעולה חדשה באתר.",
+        "היי עמית, פנייה חדשה מהאתר.",
+        "סוג הפנייה: מופעים לילדים,",
         "מספר: " + orderId,
         "מסלול: " + data.get("product"),
         "שם: " + data.get("name"),

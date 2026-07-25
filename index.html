@@ -27,7 +27,7 @@
         "https://msha.ke/amitgic.co.il/",
         "https://www.instagram.com/reel/DBqYN9uNbON/"
       ],
-      "knowsAbout": ["קסמים", "אמנות חושים", "מופעים", "סדנאות לקוסמים", "תוכן שיווקי לעסקים"]
+      "knowsAbout": ["קסמים", "אמנות חושים", "מופעים לילדים", "מופעים לאירועים עסקיים", "קסם מותאם למסר עסקי"]
     }
   </script>
   <style>
@@ -190,6 +190,10 @@
     .invite-template-option[data-template="celebration"]::before { background: radial-gradient(circle at 78% 12%,#ffe7a6 0 2px,transparent 3px),radial-gradient(circle at 22% 28%,#ffe7a6 0 2px,transparent 3px),linear-gradient(135deg,#711f45,#df7b5d); background-size:auto,auto,auto; }
     .invite-template-option[data-template="corporate"]::before { background: linear-gradient(120deg,transparent 48%,rgba(90,219,198,.2) 49% 52%,transparent 53%),linear-gradient(135deg,#0c2440,#12636c); }
     .invite-template-option[data-template="elegant"]::before { background: radial-gradient(circle at 20% 20%,rgba(237,192,105,.22),transparent 22%),linear-gradient(135deg,#171717,#49371f); }
+    .invite-template-option[data-template="mitzvah"]::before { background: radial-gradient(circle at 75% 20%,rgba(255,255,255,.2),transparent 20%),linear-gradient(135deg,#163267,#7d5fc9); }
+    .invite-template-option[data-template="wedding"]::before { background: radial-gradient(circle at 20% 20%,#fff5e5 0 2px,transparent 3px),linear-gradient(135deg,#6d3e4a,#d6a77a); }
+    .invite-template-option[data-template="reception"]::before { background: linear-gradient(120deg,transparent 46%,rgba(255,255,255,.12) 47% 50%,transparent 51%),linear-gradient(135deg,#1a4250,#227a72); }
+    .invite-template-option[data-template="abroad"]::before { background: radial-gradient(circle at 78% 22%,rgba(255,255,255,.2),transparent 20%),linear-gradient(135deg,#182c58,#b46b52); }
     .invite-template-option[aria-pressed="true"] { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(237,192,105,.18), 0 14px 35px rgba(0,0,0,.28); transform: translateY(-3px); }
     .invite-ui .screen { position: relative; overflow: hidden; transition: .35s ease; }
     .invite-ui .screen::before { content: "✦"; position: absolute; left: 22px; top: 16px; color: rgba(255,255,255,.28); font-size: 48px; animation: inviteTwinkle 2.4s ease-in-out infinite; }
@@ -201,19 +205,27 @@
     .invite-ui .screen.theme-corporate::before { content: "AM"; left: 24px; top: 22px; font-size: 28px; font-weight: 900; letter-spacing: -2px; animation: none; }
     .invite-ui .screen.theme-corporate::after { opacity: 1; background: linear-gradient(120deg,transparent 58%,rgba(96,224,200,.16) 59% 61%,transparent 62%); }
     .invite-ui .screen.theme-elegant { background: radial-gradient(circle at 12% 18%,rgba(237,192,105,.16),transparent 13rem),linear-gradient(145deg,#121212,#49371f); }
-    .invite-ui .screen.theme-elegant::before { content: "AM"; color: var(--gold); font-size: 24px; font-weight: 900; animation: none; }
+    .invite-ui .screen.theme-elegant::before { color: var(--gold); animation: none; }
+    .invite-ui .screen.theme-mitzvah { background: radial-gradient(circle at 12% 18%,rgba(255,255,255,.14),transparent 13rem),linear-gradient(145deg,#142c62,#7655bc); }
+    .invite-ui .screen.theme-wedding { background: radial-gradient(circle at 82% 12%,rgba(255,245,229,.2),transparent 13rem),linear-gradient(145deg,#663744,#bd835f); }
+    .invite-ui .screen.theme-reception { background: linear-gradient(145deg,#102f3b,#1d746c); }
+    .invite-ui .screen.theme-abroad { background: radial-gradient(circle at 12% 18%,rgba(255,255,255,.14),transparent 13rem),linear-gradient(145deg,#172956,#a35f49); }
     .invite-ui .screen.theme-corporate .invite-preview-actions a { background: #62dac6; }
     .invite-ui .screen.theme-celebration .invite-preview-actions a { background: #ffe1a1; }
     .invite-ui .screen.theme-elegant .invite-preview-actions a { background: var(--gold); }
     .invite-brandline { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .invite-brandline strong { font-size: 13px; }
+    .amit-seal { display:inline-flex; align-items:center; gap:6px; color:rgba(255,255,255,.78); font-size:9px; font-weight:700; }
+    .amit-seal b { color:white; font-size:11px; }
     .invite-brandline span { padding: 6px 9px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: rgba(255,255,255,.8); font-size: 10px; font-weight: 800; }
-    .invite-main { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr .72fr; align-items: center; min-height: 210px; }
+    .invite-main { position: relative; z-index: 2; display: grid; grid-template-columns: .88fr 1.12fr; gap:16px; align-items: center; min-height: 230px; }
     .invite-main-copy { position: relative; z-index: 2; }
     .invite-main-copy small { display: block; margin-bottom: 8px; }
     .invite-main-copy b { display: block; max-width: 300px; font-size: clamp(25px, 3vw, 35px); line-height: 1.08; }
-    .invite-art { position: absolute; top: -26px; bottom: -24px; left: -18px; width: 47%; overflow: hidden; pointer-events: none; }
-    .invite-art img { width: 100%; height: 100%; object-fit: contain; object-position: left bottom; filter: drop-shadow(0 15px 24px rgba(0,0,0,.32)); }
+    .invite-art { position:relative; width:100%; height:210px; overflow:hidden; border:1px solid rgba(255,255,255,.2); border-radius:15px; background:rgba(0,0,0,.18); pointer-events:none; box-shadow:0 16px 35px rgba(0,0,0,.25); }
+    .invite-art[hidden] { display:none; }
+    .invite-art img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .invite-photo-note { position:absolute; right:8px; bottom:8px; padding:5px 7px; border-radius:8px; color:white; background:rgba(0,0,0,.58); font-size:9px; }
     .invite-detail-grid { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
     .invite-detail-grid span { display: grid; gap: 2px; padding: 9px; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; background: rgba(0,0,0,.17); }
     .invite-detail-grid small { font-size: 9px; }
@@ -256,6 +268,10 @@
     form .btn { grid-column: 1/-1; border: 0; }
     footer { padding: 38px 0; border-top: 1px solid var(--line); color: #85818f; font-size: 13px; }
     .footer-row { display: flex; justify-content: space-between; gap: 30px; }
+    .social-links { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 24px; }
+    .social-link { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:9px 13px; border:1px solid var(--line); border-radius:999px; color:#e8e4ee; background:rgba(255,255,255,.025); }
+    .social-link:hover,.social-link:focus-visible { color:var(--gold); border-color:rgba(237,192,105,.55); }
+    .social-link svg { width:21px; height:21px; fill:currentColor; stroke:currentColor; stroke-width:1.7; }
     .footer-seo-home { display:grid; grid-template-columns:repeat(3,1fr); gap:9px 20px; margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--line); }
     .footer-seo-home a { color:#d8d4df; }
     .footer-seo-home a:hover { color:var(--gold); }
@@ -799,8 +815,8 @@
       .invite-controls label.wide { grid-column: auto; }
       .invite-ui .screen { min-height: 500px; padding: 18px; }
       .invite-main { grid-template-columns: 1fr; align-items: start; padding-top: 12px; }
-      .invite-main-copy b { max-width: 72%; font-size: 28px; }
-      .invite-art { top: 38px; width: 50%; height: 210px; }
+      .invite-main-copy b { max-width: 100%; font-size: 28px; }
+      .invite-art { width:100%; height:210px; }
       .invite-detail-grid { grid-template-columns: 1fr; }
       .pizza-visual { min-height: 230px; }
       .planner-selects, .planner-checks, .planner-advice { grid-template-columns:1fr; }
@@ -1043,7 +1059,7 @@
   <header>
     <nav class="shell">
       <a class="brand" href="#worlds"><span class="brand-mark"></span><span>עמית מיטרני</span></a>
-      <div class="nav-links"><a href="#shows">מופעים</a><a href="#academy">האקדמיה</a><a href="#magic">תנסו אותי</a><a href="#business">לעסקים</a><a href="#about">על עמית</a></div>
+      <div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a></div>
       <div class="nav-tools">
         <button class="language-switcher" type="button" aria-expanded="false" aria-controls="language-menu">
           <span>HE</span><span class="language-label">עברית</span>
@@ -1080,7 +1096,7 @@
         <div><strong>מופעים חיים</strong><span>לילדים, משפחות וארגונים</span></div>
         <div><strong>קורסים דיגיטליים</strong><span>לכל גיל ולכל רמה</span></div>
         <div><strong>כלים חכמים</strong><span>הזמנות, אישורי הגעה ומחשבונים</span></div>
-        <div><strong>ידע מקצועי</strong><span>סדנאות וייעוץ לקוסמים ולעסקים</span></div>
+        <div><strong>מופעים עסקיים</strong><span>במה, קבלת פנים ואירועי חברה</span></div>
       </div>
     </section>
 
@@ -1091,7 +1107,7 @@
           <article class="portal-card"><small>01 / אירוע</small><h3>להזמין מופע</h3><p>מופע שמתאים לגיל, לקהל, למקום ולרגע שאתם רוצים ליצור.</p><a href="#shows">לבחירת מופע</a></article>
           <article class="portal-card"><small>02 / לימוד</small><h3>ללמוד קסמים</h3><p>קורסים קצרים ומעשיים לילדים, לדייטים, למשפחות ולקוסמים שרוצים להתקדם.</p><a href="#academy">לאקדמיה</a></article>
           <article class="portal-card"><small>03 / חוויה</small><h3>לנסות קסם</h3><p>לא רק לצפות בעמית. לחוות עכשיו קטע אינטראקטיבי דרך המסך.</p><a href="#magic">אני רוצה לנסות</a></article>
-          <article class="portal-card"><small>04 / עסק</small><h3>לייצר השפעה</h3><p>תוכן שיווקי, סדנאות, ייעוץ מקצועי וחיבור בין קסם לבין מסר עסקי.</p><a href="#business">לעולם העסקי</a></article>
+          <article class="portal-card"><small>04 / עסק</small><h3>ליצור רגע סביב המסר</h3><p>קסם ואמנות חושים שמותאמים למוצר, למסר, לצילום או לאירוע עסקי.</p><a href="business-magic.html">לקסם מותאם לעסק</a></article>
         </div>
       </div>
     </section>
@@ -1147,7 +1163,6 @@
           <article class="course-card"><span class="tag">לילדים</span><h3>הקוסם הצעיר</h3><p>קסמים בטוחים, ברורים ומרשימים שאפשר לבצע בבית ולבנות איתם ביטחון מול קהל.</p><b>מסלול יסודות ותרגול</b></article>
           <article class="course-card"><span class="tag">לדייטים וחברים</span><h3>לשבור את הקרח</h3><p>קטעים קלילים שמייצרים שיחה, חיוך ורגע בלתי נשכח בלי צורך בציוד מורכב.</p><b>שיעורים קצרים ומעשיים</b></article>
           <article class="course-card"><span class="tag">להורים ולסבים</span><h3>קסמים למשפחה</h3><p>רעיונות משמחים שאפשר לבצע לילדים ולנכדים בבית, בחג או ביום הולדת.</p><b>מתאים גם ללא ניסיון</b></article>
-          <article class="course-card"><span class="tag">למקצוענים</span><h3>קוסם שעובד נכון</h3><p>מופע, שיווק, תמחור, שירות וחשיבה עסקית לקוסמים ולמפעילים שרוצים לגדול.</p><b>סדנאות, ייעוץ ותוכן מתקדם</b></article>
         </div>
       </div>
     </section>
@@ -1286,19 +1301,24 @@
     <section class="section" id="invitation">
       <div class="shell invite-box">
         <div>
-          <div class="kicker">שירות משלים לאירועים</div><h2 class="section-title">הזמנה דיגיטלית שמתאימה לאירוע</h2><p class="section-copy">בחרו עולם עיצוב, עדכנו את הפרטים וראו איך אותה מערכת הופכת להזמנה קסומה, חגיגית, עסקית או אלגנטית.</p>
+          <div class="kicker">שירות משלים לאירועים</div><h2 class="section-title">הזמנה שנותנת את הבמה לחוגגים</h2><p class="section-copy">השם, התמונה והסיפור של החוגג, המשפחה, בני הזוג או העסק נמצאים במרכז. עמית מופיע כחותמת הטכנולוגיה והחוויה, לא כגיבור ההזמנה.</p>
           <div class="invite-template-picker" aria-label="בחירת סגנון להזמנה">
             <button class="invite-template-option" type="button" data-template="magic" aria-pressed="true"><b>קסומה לילדים</b><small>סגול, שובב ומלא הפתעה</small></button>
             <button class="invite-template-option" type="button" data-template="celebration" aria-pressed="false"><b>חגיגית למשפחה</b><small>חמה, צבעונית ומרגשת</small></button>
             <button class="invite-template-option" type="button" data-template="corporate" aria-pressed="false"><b>חברה ועסק</b><small>מדויקת, נקייה ומקצועית</small></button>
             <button class="invite-template-option" type="button" data-template="elegant" aria-pressed="false"><b>ערב אלגנטי</b><small>כהה, יוקרתי ומעודן</small></button>
+            <button class="invite-template-option" type="button" data-template="mitzvah" aria-pressed="false"><b>בר ובת מצווה</b><small>צעירה, מרגשת ומלאת נוכחות</small></button>
+            <button class="invite-template-option" type="button" data-template="wedding" aria-pressed="false"><b>זוגות ואירוסין</b><small>רכה, אלגנטית ורומנטית</small></button>
+            <button class="invite-template-option" type="button" data-template="reception" aria-pressed="false"><b>קבלת פנים</b><small>מסקרנת, מודרנית ומזמינה</small></button>
+            <button class="invite-template-option" type="button" data-template="abroad" aria-pressed="false"><b>אירוע בחו״ל</b><small>ישראלי, חם ומדויק למקום</small></button>
           </div>
           <div class="invite-controls">
             <label>שם החוגג, המשפחה או האירוע<input id="invite-name" value="נועה" maxlength="32"></label>
             <label>תאריך<input id="invite-date" type="date"></label>
             <label>שעה<input id="invite-time" type="time" value="17:00"></label>
-            <label>ערכת עיצוב<select id="invite-theme"><option value="magic">קסומה לילדים</option><option value="celebration">חגיגית למשפחה</option><option value="corporate">חברה ועסק</option><option value="elegant">ערב אלגנטי</option></select></label>
+            <label>ערכת עיצוב<select id="invite-theme"><option value="magic">קסומה לילדים</option><option value="celebration">חגיגית למשפחה</option><option value="corporate">חברה ועסק</option><option value="elegant">ערב אלגנטי</option><option value="mitzvah">בר ובת מצווה</option><option value="wedding">זוגות ואירוסין</option><option value="reception">קבלת פנים</option><option value="abroad">אירוע בחו״ל</option></select></label>
             <label class="wide">מיקום<input id="invite-location" value="המיקום יישלח למוזמנים" maxlength="42"></label>
+            <label class="wide">תמונת החוגגים או העסק<input id="invite-photo-upload" type="file" accept="image/png,image/jpeg,image/webp"></label>
           </div>
           <div class="invite-features">
             <button type="button" data-invite-feature="theme">החלפת עיצוב</button>
@@ -1309,10 +1329,10 @@
         </div>
         <div class="invite-ui">
           <div class="screen theme-magic" id="invite-screen">
-            <div class="invite-brandline"><strong>עמית מיטרני</strong><span id="invite-style-label">הזמנה קסומה</span></div>
+            <div class="invite-brandline"><span id="invite-style-label">הזמנה קסומה</span><small class="amit-seal">חוויה אינטראקטיבית מבית <b>עמית מיטרני</b></small></div>
             <div class="invite-main">
               <div class="invite-main-copy"><small id="invite-eyebrow">אתם מוזמנים לחוויה בלתי נשכחת</small><b id="invite-title">יום ההולדת הקסום של נועה</b></div>
-              <div class="invite-art"><img id="invite-art-img" src="assets/optimized/amit-time-machine-700.webp" alt="" loading="lazy"></div>
+              <div class="invite-art" id="invite-art"><img id="invite-art-img" src="assets/optimized/invitation-honoree-1200.webp" alt="תמונת המחשה של החוגגים" loading="lazy"><small class="invite-photo-note">בהזמנה אמיתית תופיע כאן התמונה שתבחרו</small></div>
             </div>
             <div class="invite-detail-grid">
               <span><small>תאריך</small><strong id="invite-date-copy">התאריך יישלח למוזמנים</strong></span>
@@ -1366,25 +1386,13 @@
       </div>
     </section>
 
-    <section class="section" id="tools">
-      <div class="shell">
-        <div class="section-head"><div class="kicker">מוצרים וכלים דיגיטליים</div><h2 class="section-title">הקסם ממשיך גם אחרי המופע</h2><p class="section-copy">ערכות לימוד, כלים מקצועיים ומועדון תוכן נבנים כמוצרים משלימים. בשלב זה אפשר להירשם לקבלת עדכון ולספר מה תרצו ללמוד.</p></div>
-        <div class="tool-grid">
-          <article class="tool-card"><i>01</i><h3>ערכות קסמים דיגיטליות</h3><p>חבילות וידאו ותרגול לפי גיל, רמה וסיטואציה. התוכן, המחיר והגישה ייפתחו לאחר אישור עמית וחיבור המערכת.</p><span>מוצר דיגיטלי בתכנון</span><a class="tool-link" href="magic-courses.html">לצפייה במסלולים</a></article>
-          <article class="tool-card"><i>02</i><h3>כלים לקוסמים ומפעילים</h3><p>תבניות עבודה, חומרי שיווק, מערכי מופע וכלים לניהול עסק מקצועי.</p><span>ספריית מקצוענים בתכנון</span><a class="tool-link" href="business-magic.html">לעולם המקצועי</a></article>
-          <article class="tool-card"><i>03</i><h3>מועדון הקסם</h3><p>מסלול תוכן מתוכנן עם אתגרים, מפגשים והטבות למי שרוצה להמשיך ללמוד ולהתאמן.</p><span>מנוי עתידי, לבחינה</span><a class="tool-link" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%9B%D7%A9%D7%9E%D7%95%D7%A2%D7%93%D7%95%D7%9F%20%D7%94%D7%A7%D7%A1%D7%9D%20%D7%99%D7%99%D7%A4%D7%AA%D7%97." target="_blank" rel="noopener">בקשת עדכון בוואטסאפ</a></article>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="business">
       <div class="shell">
-        <div class="section-head"><div class="kicker">לעסקים, ארגונים ולאנשי מקצוע</div><h2 class="section-title">הקסם הוא גם כלי שיווקי ועסקי</h2><p class="section-copy">עמית ציין פעילות רחבה מעבר לבמה: תוכן שיווקי לעסקים, סדנאות והרצאות, ייעוץ לקוסמים ולמפעילים ופעילות מקצועית במסגרת אגודת הקוסמים.</p></div>
+        <div class="section-head"><div class="kicker">לעסקים ולארגונים</div><h2 class="section-title">קסם שמתחבר לרגע העסקי</h2><p class="section-copy">אפשר לבדוק התאמה של קסם ואמנות חושים למוצר, למסר, לצילום או לרגע בתוך אירוע עסקי. ההיקף נקבע רק לאחר בריף ואישור ישיר של עמית.</p></div>
         <div class="business-grid">
-          <article class="business-card"><b>תוכן מסחרי</b><h3>קסם שמספר את הסיפור של המותג</h3><p>פיתוח קטעים וסרטונים שבהם המוצר או המסר העסקי הופכים לחלק מההפתעה.</p></article>
-          <article class="business-card"><b>ידע מקצועי</b><h3>סדנאות והרצאות לקוסמים</h3><p>למידה מקצועית על מופע, קהל, יצירת תוכן ושיפור העבודה העסקית.</p></article>
-          <article class="business-card"><b>ייעוץ</b><h3>ליווי לקוסמים ולמפעילים</h3><p>דיוק הצעה, תמחור, שיווק, שירות וחוויית לקוח למי שרוצה להפוך כישרון לעסק.</p></article>
-          <article class="business-card"><b>שיתופי פעולה</b><h3>פרזנטור ויצירת קמפיינים</h3><p>חיבור בין נוכחות מול מצלמה, אמנות חושים ורעיון שיווקי שנועד לבלוט.</p></article>
+          <article class="business-card"><b>מוצר או מסר</b><h3>ההפתעה נבנית סביב הדבר שרוצים לזכור</h3><p>בודקים איך מוצר, ערך או מסר יכולים להיכנס באופן טבעי לתוך קטע קסם.</p></article>
+          <article class="business-card"><b>צילום ותוכן</b><h3>קטע קצר שמתאים למסך</h3><p>פיתוח רעיון מצולם שבו עמית והקסם נמצאים במרכז, לפי בריף ותיאום מראש.</p></article>
+          <article class="business-card"><b>אירוע עסקי</b><h3>רגע מותאם בתוך האירוע</h3><p>קטע לבמה, להשקה, להרמת כוסית או לקבלת פנים, לפי הקהל ולוח הזמנים.</p></article>
         </div>
       </div>
     </section>
@@ -1399,20 +1407,6 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="shell">
-        <div class="section-head"><div class="kicker">מאחורי החוויה</div><h2 class="section-title">מערכת אחת שמנהלת את כל העסק</h2><p class="section-copy">לא רק דף יפה. תשתית שמחברת שיווק, מכירה, תשלום, שירות ולמידה, עם לוח ניהול ברור לעמית.</p></div>
-        <div class="system-flow">
-          <div class="system-step"><b>כניסת ליד</b><span>טופס, וואטסאפ, קמפיין או חיפוש אורגני.</span></div>
-          <div class="system-step"><b>התאמה ומכירה</b><span>סוג אירוע, קהל, תאריך, הצעה ומעקב.</span></div>
-          <div class="system-step"><b>גבייה וסליקה</b><span>מקדמה, תשלום מלא, חשבונית וקופון לפי הרשאה.</span></div>
-          <div class="system-step"><b>אספקת השירות</b><span>מופע, קורס, מוצר דיגיטלי או פגישת ייעוץ.</span></div>
-          <div class="system-step"><b>שימור וצמיחה</b><span>פידבק, המלצה, מכירה חוזרת ותוכן מותאם.</span></div>
-        </div>
-        <p class="disclaimer">המחשה זו מציגה את החזון. בחירת ספק סליקה, חשבוניות, CRM ואוטומציות תיעשה לאחר אפיון, אבטחה ואישור.</p>
-      </div>
-    </section>
-
     <section class="section" id="reviews">
       <div class="shell proof-panel">
         <div class="proof-photo"><img src="assets/optimized/amit-headshot-720.webp" alt="עמית מיטרני" loading="lazy"></div>
@@ -1421,7 +1415,7 @@
           <h2 class="section-title">מקבלים תשובה ישירה מעמית</h2>
           <p class="section-copy">כל אירוע נראה אחרת. שולחים כמה פרטים, עמית בודק את סוג הקהל, המקום והתאריך וחוזר לשיחה קצרה כדי להבין מה באמת יתאים.</p>
           <div class="proof-points"><span>התאמה לגיל ולקהל</span><span>תיאום ציפיות ברור</span><span>קשר ישיר בוואטסאפ</span></div>
-          <div class="hero-actions"><a class="btn btn-gold" href="#contact" data-interest="מופע לאירוע">בדיקת התאמה לאירוע</a><a class="btn btn-dark" href="tel:+972523416151">חיוג לעמית</a></div>
+          <div class="hero-actions"><a class="btn btn-gold" href="#contact" data-interest="מופע או אירוע, עדיין לא בטוחים">בדיקת התאמה לאירוע</a><a class="btn btn-dark" href="tel:+972523416151">חיוג לעמית</a></div>
         </div>
       </div>
     </section>
@@ -1451,8 +1445,8 @@
 
     <section class="section" id="about">
       <div class="shell about">
-        <div class="about-copy"><div class="kicker">הסיפור של עמית</div><h2 class="section-title">קסם הוא לא טריק. הוא דרך ליצור חיבור</h2><p>עמית מיטרני הוא קוסם ואמן חושים שמופיע בפני ילדים, משפחות, מוסדות וחברות. המופעים שלו בנויים סביב הקהל ומחברים בין הומור, הפתעה והשתתפות אמיתית.</p><p>מעבר לבמה, עמית ציין שהוא חבר בהנהלת אגודת הקוסמים, מעביר סדנאות והרצאות לחברי האגודה, מייעץ לקוסמים ולמפעילים ויוצר תוכן שיווקי לעסקים באמצעות קסמים ואמנות חושים.</p>
-          <div class="facts"><div class="fact"><b>מופע חי ומשתף</b><span>הקהל נמצא בתוך ההתרחשות</span></div><div class="fact"><b>למגוון קהלים</b><span>מילדים ועד אירועים עסקיים</span></div><div class="fact"><b>ידע מקצועי</b><span>סדנאות, הרצאות וייעוץ</span></div><div class="fact"><b>תוכן לעסקים</b><span>קסם שמחובר למסר שיווקי</span></div></div>
+        <div class="about-copy"><div class="kicker">הסיפור של עמית</div><h2 class="section-title">קסם הוא לא טריק. הוא דרך ליצור חיבור</h2><p>עמית מיטרני הוא קוסם ואמן חושים שמופיע בפני ילדים, משפחות, מוסדות וחברות. המופעים שלו בנויים סביב הקהל ומחברים בין הומור, הפתעה והשתתפות אמיתית.</p><p>לצד המופעים עמית פעיל במסגרת אגודת הקוסמים ומפתח חוויות קסם לקהלים ולרגעים שונים.</p>
+          <div class="facts"><div class="fact"><b>מופע חי ומשתף</b><span>הקהל נמצא בתוך ההתרחשות</span></div><div class="fact"><b>למגוון קהלים</b><span>מילדים ועד אירועים עסקיים</span></div><div class="fact"><b>התאמה לאירוע</b><span>גיל, מקום, קהל ולוח זמנים</span></div><div class="fact"><b>קסם לעסקים</b><span>חוויה שמתחברת למוצר או למסר</span></div></div>
         </div>
         <div class="about-photo"><img src="assets/optimized/amit-cards-1200.webp" alt="עמית מיטרני אמן חושים עם קלפים" loading="lazy"></div>
       </div>
@@ -1466,7 +1460,7 @@
             <div><button type="button">כמה זמן נמשך המופע?<span>+</span></button><p class="faq-answer">משך המופע והפעילות משתנה לפי סוג האירוע והחבילה. לוח הזמנים המוצג באתר הוא דוגמה ולא התחייבות קבועה.</p></div>
             <div><button type="button">האם ניתן להתאים את המופע לקהל גדול?<span>+</span></button><p class="faq-answer">כן. לעמית יש מסלולים לקייטנות, מוסדות, רשויות, חברות וארגונים. יש לבדוק מראש את גודל הקהל, הבמה, ההגברה והמיקום.</p></div>
             <div><button type="button">מה צריך להכין במקום האירוע?<span>+</span></button><p class="faq-answer">לאחר בחירת המופע מתקבלת רשימת הכנות מסודרת בהתאם למקום, לקהל ולציוד שנדרש בפועל.</p></div>
-            <div><button type="button">האם עמית מופיע גם באירועים עסקיים?<span>+</span></button><p class="faq-answer">כן. ניתן להתאים קטעי אמנות חושים, תוכן שיווקי וסדנאות לאירועי חברה, רווחה, השקות וימי תוכן.</p></div>
+            <div><button type="button">האם עמית מופיע גם באירועים עסקיים?<span>+</span></button><p class="faq-answer">כן. אפשר לבדוק התאמה של מופע, קטע אמנות חושים או קסמי קבלת פנים לאירוע חברה, רווחה, השקה או הרמת כוסית.</p></div>
             <div><button type="button">איך יעבדו הקורסים והמוצרים הדיגיטליים?<span>+</span></button><p class="faq-answer">לאחר רכישה מאובטחת המשתמש יקבל חשבון אישי וגישה לתוכן שרכש. המחירים, הספקים ותנאי השימוש ייקבעו לאחר אפיון ואישור.</p></div>
           </div>
         </div>
@@ -1476,12 +1470,14 @@
 
     <section class="section" id="contact">
       <div class="shell contact">
-        <div><div class="kicker">הצעד הבא</div><h2>מה תרצו ליצור עם עמית?</h2><p>מופע, קורס, סדנה, ייעוץ או תוכן לעסק. ממלאים כמה פרטים והאתר פותח הודעת וואטסאפ מסודרת ישירות לעמית.</p><div class="contact-details"><a href="tel:+972523416151"><small>טלפון</small><strong>052-341-6151</strong></a><span><small>אזור</small><strong>ראשון לציון והופעות ברחבי הארץ</strong></span></div><div class="hero-actions"><a class="btn btn-gold" href="https://wa.me/972523416151" target="_blank" rel="noopener">שיחה בוואטסאפ</a><a class="btn btn-dark" href="#worlds">בחירת מסלול</a></div></div>
+        <div><div class="kicker">הצעד הבא</div><h2>איזו פנייה תרצו להעביר לעמית?</h2><p>בוחרים סוג אירוע או קורס, מוסיפים מקום, כמות משתתפים ותאריך, והאתר מכין הודעת וואטסאפ ברורה לעמית.</p><div class="contact-details"><a href="tel:+972523416151"><small>טלפון</small><strong>052-341-6151</strong></a><span><small>אזור</small><strong>ראשון לציון והופעות ברחבי הארץ</strong></span></div><div class="hero-actions"><a class="btn btn-gold" href="https://wa.me/972523416151" target="_blank" rel="noopener">שיחה בוואטסאפ</a><a class="btn btn-dark" href="#worlds">בחירת מסלול</a></div></div>
         <form id="lead-form" novalidate>
           <label><span>שם מלא</span><input name="name" autocomplete="name" placeholder="שם מלא" required></label>
           <label><span>טלפון</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="טלפון" required></label>
-          <label><span>מה מעניין אתכם?</span><select name="interest" required><option value="">בחירת נושא</option><option>מופע לאירוע</option><option>קורס דיגיטלי</option><option>סדנה או ייעוץ</option><option>תוכן לעסק</option></select></label>
+          <label><span>סוג הפנייה או האירוע</span><select name="interest" required><option value="">בחירת סוג פנייה</option><option>יום הולדת לילדים</option><option>אירוע חברה או רווחה</option><option>קבלת פנים</option><option>בר או בת מצווה</option><option>ברית או בריתה</option><option>מסיבת מבוגרים או אירוע משפחתי</option><option>קייטנה, בית ספר או מוסד</option><option>אירוע בחו״ל לדוברי עברית</option><option>קורס קסמים</option><option>קסם מותאם למוצר או למסר עסקי</option><option>מופע או אירוע, עדיין לא בטוחים</option><option>פנייה אחרת</option></select></label>
           <label><span>תאריך משוער</span><input name="date" type="date"></label>
+          <label><span>עיר או מקום האירוע</span><input name="city" placeholder="לדוגמה: ראשון לציון"></label>
+          <label><span>מספר משתתפים משוער</span><input name="participants" type="number" min="1" inputmode="numeric" placeholder="לדוגמה: 40"></label>
           <label class="full-field"><span>פרטים נוספים</span><textarea name="message" placeholder="כמה מילים על האירוע או על מה שתרצו ליצור"></textarea></label>
           <button class="consent-toggle full-field" id="consent-toggle" type="button" aria-pressed="false">אני מאשר או מאשרת להעביר לעמית את הפרטים שמילאתי כדי שיוכל לחזור אליי.</button>
           <p class="consent-note full-field">הפרטים אינם נשמרים באתר. בלחיצה תיפתח הודעת וואטסאפ, ורק אתם מחליטים אם לשלוח אותה לעמית.</p>
@@ -1493,7 +1489,7 @@
     </section>
   </main>
 
-  <footer><div class="shell"><div class="footer-seo-home"><a href="shows-for-kids.html">קוסם ליום הולדת לילדים</a><a href="mentalist-adult-parties.html">אמן חושים למסיבת מבוגרים</a><a href="magician-bar-bat-mitzvah.html">קוסם לבר ובת מצווה</a><a href="magician-brit-brita.html">קוסם לברית או בריתה</a><a href="magician-purim-events.html">קוסם לאירועי פורים</a><a href="close-up-magic-receptions.html">קוסם לקבלת פנים</a><a href="shows-for-companies.html">אמן חושים לאירוע חברה</a><a href="shows-for-institutions.html">קוסם לקייטנות ובתי ספר</a><a href="shows-for-families.html">מופע קסמים למשפחות</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל לדוברי עברית</a><a href="magic-courses.html">קורסי קסמים אונליין</a><a href="business-magic.html">קסם ותוכן שיווקי לעסקים</a></div><div class="footer-row"><div><strong>עמית מיטרני</strong><br>קוסם ואמן חושים</div><div class="footer-links"><button type="button" data-privacy-open>פרטיות</button><button type="button" data-terms-open>תקנון האתר</button><button type="button" data-accessibility-statement>הצהרת נגישות</button><a href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener">אינסטגרם</a><a href="https://www.facebook.com/amitgic/" target="_blank" rel="noopener">פייסבוק</a><a href="#faq">שאלות</a><a href="#contact">יצירת קשר</a></div></div></div></footer>
+  <footer><div class="shell"><div class="footer-seo-home"><a href="shows-for-kids.html">קוסם ליום הולדת לילדים</a><a href="mentalist-adult-parties.html">אמן חושים למסיבת מבוגרים</a><a href="magician-bar-bat-mitzvah.html">קוסם לבר ובת מצווה</a><a href="magician-brit-brita.html">קוסם לברית או בריתה</a><a href="magician-purim-events.html">קוסם לאירועי פורים</a><a href="close-up-magic-receptions.html">קוסם לקבלת פנים</a><a href="shows-for-companies.html">אמן חושים לאירוע חברה</a><a href="shows-for-institutions.html">קוסם לקייטנות ובתי ספר</a><a href="shows-for-families.html">מופע קסמים למשפחות</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל לדוברי עברית</a><a href="magic-courses.html">קורסי קסמים אונליין</a><a href="business-magic.html">קסם מותאם למסר עסקי</a></div><div class="social-links" aria-label="הערוצים של עמית"><a class="social-link" href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener" aria-label="אינסטגרם של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.7" r="1"></circle></svg><span>אינסטגרם</span></a><a class="social-link" href="https://www.facebook.com/amitgic/" target="_blank" rel="noopener" aria-label="פייסבוק של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3.5l.5-4h-4V9c0-.7.3-1 1-1z"></path></svg><span>פייסבוק</span></a><a class="social-link" href="https://www.tiktok.com/@amit_miteranii" target="_blank" rel="noopener" aria-label="טיקטוק של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3c.5 2.8 2.1 4.4 5 4.8v4c-1.9-.1-3.5-.7-5-1.8v6.2a6.2 6.2 0 1 1-5.4-6.1v4.1a2.3 2.3 0 1 0 1.4 2.1V3h4z"></path></svg><span>טיקטוק</span></a><a class="social-link" href="https://wa.me/972523416151" target="_blank" rel="noopener" aria-label="וואטסאפ של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.6A10 10 0 0 0 4.8 15.7L3.4 21l5.4-1.4A10 10 0 0 0 20.5 3.6zM12 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.2.8.9-3.1-.2-.3A8 8 0 1 1 12 18zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-1.5-.7-2.5-1.4-3.5-3-.2-.3 0-.4.1-.5l.6-.7c.1-.1.2-.3.2-.5s0-.3-.1-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.8-1.1 1.7-1.1 2.8 0 1.7 1.2 3.4 1.4 3.6 1.7 2.6 4.2 4 6.9 4.8.8.2 1.7.1 2.3-.2.7-.4 1.2-1.1 1.4-1.9.1-.2.1-.4 0-.5-.1-.1-.3-.2-.5-.3z"></path></svg><span>וואטסאפ</span></a></div><div class="footer-row"><div><strong>עמית מיטרני</strong><br>קוסם ואמן חושים</div><div class="footer-links"><button type="button" data-privacy-open>פרטיות</button><button type="button" data-terms-open>תקנון האתר</button><button type="button" data-accessibility-statement>הצהרת נגישות</button><a href="#faq">שאלות</a><a href="#contact">יצירת קשר</a></div></div></div></footer>
   <div class="floating-tools"><a class="floating-tool whatsapp" href="https://wa.me/message/VM3WK3GE2KNYL1" target="_blank" rel="noopener">וואטסאפ</a><button class="floating-tool" id="accessibility" type="button">נגישות</button></div>
   <div class="mobile-sticky"><a href="#contact">בדיקת התאמה</a><a href="https://wa.me/message/VM3WK3GE2KNYL1" target="_blank" rel="noopener">וואטסאפ</a></div>
   <div class="toast" id="toast" role="status"></div>
@@ -1519,7 +1515,7 @@
   </div>
   <div class="site-modal" id="email-preview-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="email-preview-title">
     <div class="modal-backdrop" data-email-close></div>
-    <div class="modal-card legal-modal-card"><button class="modal-close" type="button" data-email-close aria-label="סגירה">×</button><h2 id="email-preview-title">תצוגת המייל שיקבל עמית</h2><p>המייל אינו נשלח כרגע. כתובת עסקית ושירות שליחה יחוברו לאחר אישור עמית.</p><div class="email-card"><div class="email-head"><small>אל: כתובת המייל העסקית של עמית, לאחר אישור</small><strong id="email-subject">פנייה חדשה מהאתר</strong></div><div class="email-body"><div class="email-row"><b>שם</b><span id="email-name">לא הוזן</span></div><div class="email-row"><b>טלפון</b><span id="email-phone">לא הוזן</span></div><div class="email-row"><b>נושא</b><span id="email-interest">לא נבחר</span></div><div class="email-row"><b>תאריך</b><span id="email-date">לא צוין</span></div><div class="email-row"><b>הודעה</b><span id="email-message">לא נכתבה הודעה</span></div></div></div></div>
+    <div class="modal-card legal-modal-card"><button class="modal-close" type="button" data-email-close aria-label="סגירה">×</button><h2 id="email-preview-title">תצוגת המייל שיקבל עמית</h2><p>המייל אינו נשלח כרגע. כתובת עסקית ושירות שליחה יחוברו לאחר אישור עמית.</p><div class="email-card"><div class="email-head"><small>אל: כתובת המייל העסקית של עמית, לאחר אישור</small><strong id="email-subject">פנייה חדשה מהאתר</strong></div><div class="email-body"><div class="email-row"><b>שם</b><span id="email-name">לא הוזן</span></div><div class="email-row"><b>טלפון</b><span id="email-phone">לא הוזן</span></div><div class="email-row"><b>סוג הפנייה או האירוע</b><span id="email-interest">לא נבחר</span></div><div class="email-row"><b>תאריך</b><span id="email-date">לא צוין</span></div><div class="email-row"><b>עיר או מקום</b><span id="email-city">לא צוין</span></div><div class="email-row"><b>משתתפים</b><span id="email-participants">לא צוין</span></div><div class="email-row"><b>הודעה</b><span id="email-message">לא נכתבה הודעה</span></div></div></div></div>
   </div>
   <div class="site-modal world-modal" id="world-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="world-title">
     <div class="modal-backdrop" data-world-close></div>
@@ -2030,6 +2026,7 @@
     const inviteStyleLabel = document.querySelector("#invite-style-label");
     const inviteEyebrow = document.querySelector("#invite-eyebrow");
     const inviteArtImg = document.querySelector("#invite-art-img");
+    const invitePhotoUpload = document.querySelector("#invite-photo-upload");
     const inviteDetails = document.querySelector("#invite-details");
     const inviteDateCopy = document.querySelector("#invite-date-copy");
     const inviteTimeCopy = document.querySelector("#invite-time-copy");
@@ -2044,7 +2041,7 @@
         eyebrow: "אתם מוזמנים לחוויה בלתי נשכחת",
         title: (name) => "יום ההולדת הקסום של " + name,
         details: "הזמנה שובבה עם אישורי הגעה ושיתוף מהיר",
-        art: "assets/optimized/amit-time-machine-700.webp",
+        art: "assets/optimized/invitation-honoree-1200.webp",
         share: (name) => "הזמנה קסומה ליום ההולדת של " + name
       },
       celebration: {
@@ -2052,7 +2049,7 @@
         eyebrow: "משפחה, חברים ורגע אחד שזוכרים",
         title: (name) => "חוגגים באהבה עם " + name,
         details: "עיצוב חם למשפחה, חברים ואירועים פרטיים",
-        art: "assets/optimized/amit-golden-800.webp",
+        art: "assets/optimized/invitation-honoree-1200.webp",
         share: (name) => "מצטרפים לחגיגה של " + name
       },
       corporate: {
@@ -2060,7 +2057,7 @@
         eyebrow: "ערב שמחבר אנשים ויוצר שיחה",
         title: (name) => "חוויה בלתי צפויה עם " + name,
         details: "הזמנה מדויקת לעובדים, לקוחות ואירועים עסקיים",
-        art: "assets/optimized/amit-mentalism-1200.webp",
+        art: "assets/optimized/invitation-honoree-1200.webp",
         share: (name) => "הזמנה לאירוע החברה של " + name
       },
       elegant: {
@@ -2068,11 +2065,44 @@
         eyebrow: "קסם, סטייל ורגעים שלא ניתן להסביר",
         title: (name) => "ערב מיוחד עם " + name,
         details: "עיצוב יוקרתי לקבלת פנים, ערב פרטי או אירוע בוטיק",
-        art: "assets/optimized/amit-cards-1200.webp",
+        art: "assets/optimized/invitation-honoree-1200.webp",
         share: (name) => "נפגשים לערב מיוחד עם " + name
+      },
+      mitzvah: {
+        label: "בר ובת מצווה",
+        eyebrow: "רגע גדול שמספר מי אתם",
+        title: (name) => "חוגגים את " + name,
+        details: "עיצוב צעיר שמעמיד את חתן או כלת השמחה במרכז",
+        art: "assets/optimized/invitation-honoree-1200.webp",
+        share: (name) => "הזמנה לחגיגה של " + name
+      },
+      wedding: {
+        label: "זוגות ואירוסין",
+        eyebrow: "שני אנשים, סיפור אחד ורגע מיוחד",
+        title: (name) => "חוגגים אהבה עם " + name,
+        details: "עיצוב זוגי שבו השמות והתמונה מקבלים את מרכז הבמה",
+        art: "assets/optimized/invitation-honoree-1200.webp",
+        share: (name) => "מוזמנים לחגוג אהבה עם " + name
+      },
+      reception: {
+        label: "קבלת פנים",
+        eyebrow: "האירוע מתחיל עוד לפני שנכנסים",
+        title: (name) => "נפגשים אצל " + name,
+        details: "עיצוב מודרני שמרכז את פרטי האירוע ואת אישור ההגעה",
+        art: "assets/optimized/invitation-honoree-1200.webp",
+        share: (name) => "הזמנה לקבלת הפנים של " + name
+      },
+      abroad: {
+        label: "אירוע בחו״ל",
+        eyebrow: "חוויה ישראלית במקום מיוחד",
+        title: (name) => "חוגגים בחו״ל עם " + name,
+        details: "עיצוב שמחבר בין החוגגים, היעד וכל המידע למוזמנים",
+        art: "assets/optimized/invitation-honoree-1200.webp",
+        share: (name) => "הזמנה לאירוע של " + name + " בחו״ל"
       }
     };
     let rsvpApproved = false;
+    let customInvitePhoto = "";
     const formatInviteDate = (value) => {
       if (!value) return "התאריך יישלח למוזמנים";
       return new Intl.DateTimeFormat("he-IL", { weekday: "long", day: "numeric", month: "long" }).format(new Date(value + "T12:00:00"));
@@ -2086,7 +2116,7 @@
       inviteStyleLabel.textContent = template.label;
       inviteEyebrow.textContent = template.eyebrow;
       inviteTitle.textContent = template.title(name);
-      inviteArtImg.src = template.art;
+      inviteArtImg.src = customInvitePhoto || template.art;
       inviteDateCopy.textContent = dateCopy;
       inviteTimeCopy.textContent = timeCopy;
       inviteLocationCopy.textContent = locationCopy;
@@ -2106,6 +2136,27 @@
     };
     document.querySelector("#invite-demo").addEventListener("click", () => updateInvite(true));
     [inviteName, inviteDate, inviteTime, inviteLocation].forEach((control) => control.addEventListener("input", () => updateInvite(false)));
+    invitePhotoUpload.addEventListener("change", () => {
+      const file = invitePhotoUpload.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        invitePhotoUpload.value = "";
+        showToast("אפשר לבחור קובץ תמונה בלבד.");
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        invitePhotoUpload.value = "";
+        showToast("התמונה גדולה מדי להמחשה. אפשר לבחור תמונה עד 8MB.");
+        return;
+      }
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        customInvitePhoto = String(reader.result || "");
+        inviteArtImg.alt = "התמונה שבחרתם להזמנה";
+        updateInvite(true);
+      });
+      reader.readAsDataURL(file);
+    });
     inviteTheme.addEventListener("change", () => updateInvite(true));
     document.querySelectorAll("[data-template]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -2126,6 +2177,9 @@
       inviteTime.value = "17:00";
       inviteTheme.value = "magic";
       inviteLocation.value = "המיקום יישלח למוזמנים";
+      invitePhotoUpload.value = "";
+      customInvitePhoto = "";
+      inviteArtImg.alt = "תמונת המחשה של החוגגים";
       rsvpApproved = false;
       rsvpCopy.textContent = "עדיין לא אושרה הגעה";
       rsvpCount.textContent = "0 אישורים";
@@ -2136,7 +2190,7 @@
       button.addEventListener("click", () => {
         const feature = button.dataset.inviteFeature;
         if (feature === "theme") {
-          const themes = ["magic", "celebration", "corporate", "elegant"];
+          const themes = ["magic", "celebration", "corporate", "elegant", "mitzvah", "wedding", "reception", "abroad"];
           inviteTheme.value = themes[(themes.indexOf(inviteTheme.value) + 1) % themes.length];
           updateInvite(true);
         }
@@ -2175,12 +2229,14 @@
       error.textContent = "";
       const data = new FormData(form);
       const message = [
-        "היי עמית, הגעתי דרך האתר ורציתי לקבל פרטים.",
+        "היי עמית, פנייה חדשה מהאתר.",
+        "סוג הפנייה או האירוע: " + data.get("interest"),
         "",
         "שם: " + data.get("name"),
         "טלפון: " + data.get("phone"),
-        "נושא: " + data.get("interest"),
         data.get("date") ? "תאריך משוער: " + data.get("date") : "",
+        data.get("city") ? "עיר או מקום: " + data.get("city") : "",
+        data.get("participants") ? "משתתפים: " + data.get("participants") : "",
         data.get("message") ? "פרטים נוספים: " + data.get("message") : ""
       ].filter(Boolean).join("\n");
       const url = "https://wa.me/972523416151?text=" + encodeURIComponent(message);
@@ -2260,6 +2316,8 @@
       document.querySelector("#email-phone").textContent = String(data.get("phone") || "").trim() || "לא הוזן";
       document.querySelector("#email-interest").textContent = interest || "לא נבחר";
       document.querySelector("#email-date").textContent = String(data.get("date") || "").trim() || "לא צוין";
+      document.querySelector("#email-city").textContent = String(data.get("city") || "").trim() || "לא צוין";
+      document.querySelector("#email-participants").textContent = String(data.get("participants") || "").trim() || "לא צוין";
       document.querySelector("#email-message").textContent = String(data.get("message") || "").trim() || "לא נכתבה הודעה";
     };
     document.querySelector("#email-preview-trigger").addEventListener("click", () => {
