@@ -898,6 +898,12 @@
     .story-step span { color: var(--muted); font-size: 13px; line-height: 1.6; }
     .story-source { margin-top: 15px; color: var(--muted); font-size: 12px; }
     .story-source a { color: var(--gold); text-decoration: underline; }
+    .global-banner { overflow: hidden; position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center; margin-top: 20px; padding: 32px; border: 1px solid rgba(139,104,255,.38); border-radius: 25px; background: radial-gradient(circle at 15% 20%, rgba(139,104,255,.28), transparent 32%), linear-gradient(145deg, #171421, #0d0c13); }
+    .global-banner::after { content: "TLV  ✦  WORLD"; position: absolute; left: 30px; bottom: 18px; color: rgba(255,255,255,.08); font-size: 56px; font-weight: 900; letter-spacing: .08em; }
+    .global-banner h3 { margin: 7px 0 9px; font-size: 30px; }
+    .global-banner p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .global-points { display: grid; grid-template-columns: repeat(2,1fr); gap: 9px; position: relative; z-index: 1; }
+    .global-points span { padding: 13px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.035); font-size: 13px; font-weight: 800; }
     .cookie-banner { position: fixed; right: 20px; bottom: 20px; left: 20px; z-index: 70; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; max-width: 980px; margin: auto; padding: 18px; border: 1px solid rgba(237,192,105,.28); border-radius: 18px; background: rgba(17,16,25,.97); box-shadow: 0 22px 70px rgba(0,0,0,.55); backdrop-filter: blur(14px); }
     .cookie-banner[hidden] { display: none; }
     .cookie-banner strong { display: block; margin-bottom: 4px; }
@@ -932,6 +938,9 @@
       .story-photo { min-height: 430px; }
       .story-step { grid-template-columns: 47px 1fr; }
       .story-step strong { width: 47px; }
+      .global-banner { grid-template-columns: 1fr; padding: 23px; }
+      .global-banner::after { font-size: 30px; }
+      .global-points { grid-template-columns: 1fr; }
     }
 
   </style>
@@ -1024,6 +1033,10 @@
           <article class="service-card"><span class="number">02</span><h3>משפחות ואירועים פרטיים</h3><p>מופע שמחבר בין ילדים ומבוגרים, עם הומור, הפתעות ורגעים שכל המשפחה חווה יחד.</p></article>
           <article class="service-card"><span class="number">03</span><h3>קייטנות ומוסדות</h3><p>מופע קצבי וחזותי לקבוצות גדולות, המתאים לקייטנות, בתי ספר, מתנ"סים ורשויות.</p></article>
           <article class="service-card"><span class="number">04</span><h3>חברות וארגונים</h3><p>אמנות חושים והשתתפות קהל לערבי חברה, אירועי רווחה, עובדים ואירועים חגיגיים.</p></article>
+        </div>
+        <div class="global-banner">
+          <div><div class="kicker">הקסם עובר גבולות</div><h3>אירועים בחו״ל לקהילות ודוברי עברית</h3><p>משפחות ישראליות, קהילות וחברות יכולות לפתוח הזמנה מסודרת לפי מדינה, עיר, תאריך ותנאי הפקה.</p><div class="hero-actions"><a class="btn btn-gold" href="shows-abroad-hebrew.html">פתיחת העולם הבינלאומי</a></div></div>
+          <div class="global-points"><span>מופע בעברית</span><span>משפחות וקהילות</span><span>אירועים עסקיים</span><span>תיאום הפקה מלא</span></div>
         </div>
       </div>
     </section>
@@ -1357,7 +1370,7 @@
     </section>
   </main>
 
-  <footer><div class="shell footer-row"><div><strong>עמית מיטרני</strong><br>קוסם ואמן חושים</div><div class="footer-links"><button type="button" data-privacy-open>פרטיות</button><button type="button" data-terms-open>תקנון האתר</button><button type="button" data-accessibility-statement>הצהרת נגישות</button><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">חברות וארגונים</a><a href="magic-courses.html">קורסים</a><a href="business-magic.html">תוכן לעסקים</a><a href="#faq">שאלות</a><a href="#contact">יצירת קשר</a></div></div></footer>
+  <footer><div class="shell footer-row"><div><strong>עמית מיטרני</strong><br>קוסם ואמן חושים</div><div class="footer-links"><button type="button" data-privacy-open>פרטיות</button><button type="button" data-terms-open>תקנון האתר</button><button type="button" data-accessibility-statement>הצהרת נגישות</button><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">חברות וארגונים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="magic-courses.html">קורסים</a><a href="business-magic.html">תוכן לעסקים</a><a href="#faq">שאלות</a><a href="#contact">יצירת קשר</a></div></div></footer>
   <div class="floating-tools"><a class="floating-tool whatsapp" href="https://wa.me/message/VM3WK3GE2KNYL1" target="_blank" rel="noopener">וואטסאפ</a><button class="floating-tool" id="accessibility" type="button">נגישות</button></div>
   <div class="mobile-sticky"><a href="#contact">בדיקת התאמה</a><a href="https://wa.me/message/VM3WK3GE2KNYL1" target="_blank" rel="noopener">וואטסאפ</a></div>
   <div class="toast" id="toast" role="status"></div>
