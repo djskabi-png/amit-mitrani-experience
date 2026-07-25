@@ -719,7 +719,7 @@
     .venue-option small { width:max-content; padding:4px 7px; border-radius:999px; background:rgba(237,192,105,.1); color:var(--gold); font-size:9px; font-weight:900; }
     .venue-option b { color:white; }
     .venue-option span { color:var(--muted); font-size:11px; line-height:1.5; }
-    .venue-option a { color:var(--gold); font-size:11px; font-weight:800; text-decoration:underline; text-underline-offset:3px; }
+    .venue-option .venue-note { color:var(--gold); font-size:11px; font-weight:800; }
     .planner-source-note { margin:11px 0 0; color:var(--muted); font-size:10px; line-height:1.5; }
     .business-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .business-card { min-height: 230px; padding: 25px; border: 1px solid var(--line); border-radius: 23px; background: linear-gradient(145deg, #171622, #101016); }
@@ -1448,14 +1448,14 @@
             <div class="story-step"><strong>צה"ל</strong><div><b>קסם גם בשירות</b><span>במהלך השירות פעל כקוסם צבאי והתנדב להופיע בפני חיילים.</span></div></div>
             <div class="story-step"><strong>לב</strong><div><b>להגשים חלום באמצעות קסם</b><span>עמית סיפר כיצד הצטרף לחזי דין כדי לשמח את אורי בבית החולים ולהגשים לו חלום של ריחוף ביום הולדתו.</span></div></div>
           </div>
-          <p class="story-source">הציר מבוסס על דברים שסיפר עמית בריאיון שפורסם ב<a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">צומת השרון</a> ועל <a href="https://www.facebook.com/reel/569930207127340/" target="_blank" rel="noopener">סיפור שפרסם בעמוד הפייסבוק שלו</a>.</p>
+          <p class="story-source">הציר מבוסס על דברים שסיפר עמית בריאיון ועל <a href="https://www.facebook.com/reel/569930207127340/" target="_blank" rel="noopener">סיפור שפרסם בעמוד הפייסבוק שלו</a>.</p>
         </div>
       </div>
     </section>
 
     <section class="section" id="about">
       <div class="shell about">
-        <div class="about-copy"><div class="kicker">הסיפור של עמית</div><h2 class="section-title">קסם הוא לא טריק. הוא דרך ליצור חיבור</h2><p>עמית מיטרני הוא קוסם ואמן חושים שמופיע בפני ילדים, משפחות, מוסדות וחברות. המופעים שלו בנויים סביב הקהל ומחברים בין הומור, הפתעה והשתתפות אמיתית.</p><p>לצד המופעים עמית פעיל במסגרת אגודת הקוסמים ומפתח חוויות קסם לקהלים ולרגעים שונים.</p>
+        <div class="about-copy"><div class="kicker">הסיפור של עמית</div><h2 class="section-title">קסם הוא לא טריק. הוא דרך ליצור חיבור</h2><p>עמית מיטרני הוא קוסם ואמן חושים שמופיע בפני ילדים, משפחות, מוסדות וחברות. המופעים שלו בנויים סביב הקהל ומחברים בין הומור, הפתעה והשתתפות אמיתית.</p><p>לצד המופעים עמית הוא אחד ממנהלי אגודת הקוסמים. התפקיד מחבר אותו לעשייה המקצועית, לקהילת הקוסמים ולהתפתחות המתמשכת של התחום בישראל.</p>
           <div class="facts"><div class="fact"><b>מופע חי ומשתף</b><span>הקהל נמצא בתוך ההתרחשות</span></div><div class="fact"><b>למגוון קהלים</b><span>מילדים ועד אירועים עסקיים</span></div><div class="fact"><b>התאמה לאירוע</b><span>גיל, מקום, קהל ולוח זמנים</span></div><div class="fact"><b>קסם לעסקים</b><span>חוויה שמתחברת למוצר או למסר</span></div></div>
         </div>
         <div class="about-photo"><img src="assets/optimized/amit-cards-1200.webp" alt="עמית מיטרני אמן חושים עם קלפים" loading="lazy"></div>
@@ -1847,13 +1847,11 @@
           name: "מרכז הקיימות העירוני",
           fit: "יום הולדת קטן או בינוני",
           copy: "חללים בגדלים שונים ומחירון עירוני גלוי, כולל מסלולים לימי הולדת. כדאי לבדוק את האולם הגדול ואת תנאי ההשכרה המעודכנים.",
-          href: "https://www.tel-aviv.gov.il/Residents/Environment/Pages/MuniSustainabilityCenter.aspx?IccID=267"
         },
         {
           name: "מרכז קהילתי בית דני",
           fit: "אירוע משפחתי או קהילתי",
           copy: "מרכז עירוני שמפרסם אפשרות להשכרת חללים. מתאים ככיוון לבדיקה לאירוע קהילתי או משפחתי.",
-          href: "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/BeitDani.aspx"
         }
       ],
       herzliya: [
@@ -1861,7 +1859,6 @@
           name: "מרכז אגדה",
           fit: "יום הולדת לילדים",
           copy: "מרחב עירוני שמוצע במפורש לימי הולדת, עם ציוד לילדים, מטבח, קישוטים ואיש צוות מלווה.",
-          href: "https://www.herzliya.muni.il/ימי-הולדת-באגדה/"
         }
       ],
       jerusalem: [
@@ -1869,13 +1866,11 @@
           name: "מינהל קהילתי לב העיר",
           fit: "משפחה, קבוצה או אירוע חברה קטן",
           copy: "מציע חדרים, חצר ואולם נגיש בגדלים שונים בנחלאות. כדאי להתאים את החלל למספר האורחים ולמבנה המופע.",
-          href: "https://www.levhair.org.il/page.php?ht=&id=4002&m=46&type=page"
         },
         {
           name: "המרכז למוסיקה ירושלים",
           fit: "אירוע חברה או קהל גדול",
           copy: "מרכז שמפרסם אודיטוריום וחללים להשכרה, עם במה, הגברה ותאורה. מתאים לבדיקה כאשר האירוע דורש מעטפת הפקה.",
-          href: "https://www.jmc.org.il/space-rentals/"
         }
       ],
       haifa: [
@@ -1883,13 +1878,11 @@
           name: "בית לגדול טוב",
           fit: "משפחות וילדים עד גיל 8",
           copy: "מרכז קהילתי עירוני למשפחות ולילדים צעירים. לפני תכנון אירוע פרטי צריך לבדוק מול המרכז אם החלל פנוי ומתאים להשכרה.",
-          href: "https://www.haifa.muni.il/place/home-to-grow-good/"
         },
         {
           name: "מרכז קהילתי נווה דוד",
           fit: "אירוע משפחתי או קהילתי",
           copy: "מרכז קהילתי עם פעילות לילדים, משפחות ואירועי תרבות. מומלץ לבדוק ישירות אפשרות להשכרת חלל ותנאי במה.",
-          href: "https://www.haifa.muni.il/place/neve-david-center/"
         }
       ],
       netanya: [
@@ -1897,13 +1890,11 @@
           name: "מרכז קהילתי רבין",
           fit: "יום הולדת לילדים",
           copy: "מקור עירוני מתייחס במפורש לחדר יום הולדת במרכז. כדאי לבדוק מול המרכז את ההצעה העדכנית, הציוד, הקיבולת והשעות.",
-          href: "https://www.netanya.muni.il/News/Pages/article1386.aspx"
         },
         {
           name: "מרכז קהילתי דורה",
           fit: "משפחה או קבוצה גדולה",
           copy: "מרכז קהילתי שמארח פעילויות משפחתיות ואירועים. יש לבדוק ישירות אם קיימת השכרה פרטית ומהם תנאי המקום.",
-          href: "https://www.netanya.muni.il/City/Events/Pages/event9264.aspx"
         }
       ],
       "kfar-saba": [
@@ -1911,15 +1902,13 @@
           name: "מועדון מג'יק",
           fit: "יום הולדת לילדים",
           copy: "חלל פרטי שמפרסם השכרה לימי הולדת, עם אזור לילדים ואזור למבוגרים. המחיר והתנאים מחייבים אימות ישיר ועדכני.",
-          href: "https://www.magic-club.co.il/"
         }
       ],
       rishon: [
         {
           name: "הכפר הקסום",
           fit: "יום הולדת, בר או בת מצווה",
-          copy: "מתחם שמציג אפשרויות לימי הולדת ולאירועים משפחתיים. כדאי לבדוק התאמה למופע, עונתיות, כמות אורחים ומה כלול.",
-          href: "https://www.hakfar.net/"
+          copy: "מתחם שמציג אפשרויות לימי הולדת ולאירועים משפחתיים. כדאי לבדוק התאמה למופע, עונתיות, כמות אורחים ומה כלול."
         }
       ],
       other: [
@@ -1927,7 +1916,6 @@
           name: "איך לבחור מקום בעיר אחרת",
           fit: "צ'ק ליסט לפני שסוגרים",
           copy: "חפשו מרכז קהילתי או אולם עירוני קרוב, ובדקו מטבח, חניה, נגישות, רעש, שעת סיום, מרחק מהקהל ומקום מוגן לפי ההנחיות.",
-          href: "https://www.google.com/maps/search/מרכז+קהילתי+להשכרה+יום+הולדת"
         }
       ]
     };
@@ -1949,7 +1937,7 @@
         button.setAttribute("aria-pressed", String(active));
       });
       venueList.innerHTML = (venueOptions[plannerCity.value] || venueOptions.other).map((venue) => `
-        <div class="venue-option"><small>${venue.fit}</small><b>${venue.name}</b><span>${venue.copy}</span><a href="${venue.href}" target="_blank" rel="noopener">בדיקת פרטים במקור</a></div>
+        <div class="venue-option"><small>${venue.fit}</small><b>${venue.name}</b><span>${venue.copy}</span><span class="venue-note">מומלץ לבדוק זמינות ותנאים ישירות מול המקום</span></div>
       `).join("");
     };
     const updatePizza = () => {
