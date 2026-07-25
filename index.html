@@ -2057,22 +2057,25 @@
     };
     document.querySelectorAll(".service-card, .course-card, .tool-card, .business-card").forEach((card) => {
       const type = card.classList.contains("service-card") ? "service" : card.classList.contains("course-card") ? "course" : card.classList.contains("tool-card") ? "tool" : "business";
-      const action = document.createElement("button");
+      const title = card.querySelector("h3").textContent;
+      const servicePages = {
+        "ימי הולדת לילדים": "shows-for-kids.html",
+        "משפחות ואירועים פרטיים": "shows-for-families.html",
+        "קייטנות ומוסדות": "shows-for-institutions.html",
+        "חברות וארגונים": "shows-for-companies.html"
+      };
+      const destination = type === "service" ? servicePages[title] : type === "business" ? "business-magic.html" : "magic-courses.html";
+      const action = document.createElement("a");
       action.className = "card-cta";
-      action.type = "button";
-      action.textContent = type === "course" ? "פתיחת הקורס" : type === "service" ? "כניסה לעולם המופע" : type === "tool" ? "פתיחת המוצר" : "פתיחת השירות";
-      action.dataset.world = type;
+      action.href = destination;
+      action.textContent = type === "course" ? "לעמוד הקורסים" : type === "service" ? "לעמוד המופע" : type === "tool" ? "לעמוד המוצרים והקורסים" : "לעמוד השירות העסקי";
       card.appendChild(action);
     });
     document.querySelectorAll("[data-world-close]").forEach((item) => item.addEventListener("click", () => closeModal(worldModal)));
-    document.querySelector("[data-world-hub]").addEventListener("click", () => openWorld("course", "האקדמיה של עמית", "מסלולי לימוד קצרים ומעשיים שנפתחים באזור אישי וממשיכים משיעור לשיעור."));
+    document.querySelector("[data-world-hub]").addEventListener("click", () => {
+      window.location.href = "magic-courses.html";
+    });
     document.addEventListener("click", (event) => {
-      const worldTrigger = event.target.closest("[data-world]");
-      if (worldTrigger) {
-        const card = worldTrigger.closest("article");
-        openWorld(worldTrigger.dataset.world, card.querySelector("h3").textContent, card.querySelector("p").textContent);
-        return;
-      }
       const trigger = event.target.closest("[data-interest]");
       if (!trigger) return;
       interestSelect.value = trigger.dataset.interest;

@@ -102,6 +102,24 @@
     .commerce-close { position:absolute; top:14px; left:14px; width:42px; height:42px; border:1px solid var(--line); border-radius:12px; color:white; background:rgba(255,255,255,.05); font-size:24px; cursor:pointer; }
     .commerce-card h2 { margin:8px 0; font-size:36px; }
     .commerce-card > p { margin:0 0 20px; color:var(--muted); line-height:1.7; }
+    .payment-flow { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:18px 0 22px; }
+    .payment-step { min-height:115px; padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.028); }
+    .payment-step span { width:28px; height:28px; display:grid; place-items:center; margin-bottom:9px; border-radius:9px; color:#16111c; background:var(--gold); font-weight:900; }
+    .payment-step b { display:block; margin-bottom:4px; font-size:13px; }
+    .payment-step small { color:var(--muted); line-height:1.5; }
+    .deposit-note { margin:0 0 20px; padding:14px; border:1px solid rgba(101,212,169,.25); border-radius:13px; color:#c9f2e1; background:rgba(101,212,169,.07); font-size:12px; line-height:1.65; }
+    .purchase-summary { margin:0 0 20px; overflow:hidden; border:1px solid rgba(139,104,255,.3); border-radius:17px; background:rgba(139,104,255,.055); }
+    .summary-head { display:flex; justify-content:space-between; gap:15px; align-items:center; padding:15px 17px; border-bottom:1px solid var(--line); background:rgba(139,104,255,.08); }
+    .summary-head b { font-size:17px; }
+    .summary-head span { color:var(--gold); font-size:12px; font-weight:900; }
+    .summary-grid { display:grid; grid-template-columns:repeat(2,1fr); }
+    .summary-item { min-height:82px; padding:13px 17px; border-bottom:1px solid var(--line); }
+    .summary-item:nth-child(odd) { border-left:1px solid var(--line); }
+    .summary-item small { display:block; margin-bottom:5px; color:var(--muted); }
+    .summary-item strong { display:block; line-height:1.5; }
+    .summary-price { display:flex; justify-content:space-between; gap:15px; align-items:center; padding:16px 17px; }
+    .summary-price small { color:var(--muted); }
+    .summary-price strong { color:var(--gold); font-size:21px; }
     .commerce-form { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
     .commerce-form label { display:grid; gap:6px; color:#d9d5df; font-size:12px; font-weight:800; }
     .commerce-form input,.commerce-form select,.commerce-form textarea { width:100%; min-height:48px; padding:11px 12px; border:1px solid var(--line); border-radius:11px; color:white; background:#0b0a10; }
@@ -132,6 +150,9 @@
       .commerce-card { padding:24px 17px; }
       .commerce-form { grid-template-columns:1fr; }
       .commerce-form .full,.demo-payment,.commerce-error { grid-column:auto; }
+      .payment-flow { grid-template-columns:1fr 1fr; }
+      .summary-grid { grid-template-columns:1fr; }
+      .summary-item:nth-child(odd) { border-left:0; }
       .cta { padding:24px; }
       .footer-row { flex-direction:column; }
     }
@@ -163,6 +184,22 @@
       <div class="kicker">רכישה עצמאית באתר</div>
       <h2 id="commerce-title">בחירת קורס ופתיחת גישה</h2>
       <p>בחרו מסלול והשלימו את רכישת ההדגמה. לאחר חיבור הסליקה האמיתית, אותו תהליך יפתח את הקורס באזור האישי.</p>
+      <div class="payment-flow">
+        <div class="payment-step"><span>1</span><b>בוחרים קורס</b><small>מסלול שמתאים לגיל ולמטרה.</small></div><div class="payment-step"><span>2</span><b>משלמים באתר</b><small>תשלום מלא ומאובטח לפי המחיר שיוצג.</small></div><div class="payment-step"><span>3</span><b>הגישה נפתחת</b><small>הקורס מופיע מיד באזור האישי.</small></div><div class="payment-step"><span>4</span><b>מתקדמים ולומדים</b><small>שיעורים, תרגול ומעקב התקדמות.</small></div>
+      </div>
+      <div class="deposit-note">בקורס דיגיטלי אין מקדמה. התשלום המלא מתבצע ברכישה והגישה נפתחת לאחר אישור התשלום.</div>
+      <div class="purchase-summary">
+        <div class="summary-head"><b>סיכום הקורס לפני רכישה</b><span id="summary-status">בחרו קורס</span></div>
+        <div class="summary-grid">
+          <div class="summary-item"><small>המוצר</small><strong id="summary-name">טרם נבחר קורס</strong></div>
+          <div class="summary-item"><small>מה מקבלים</small><strong id="summary-includes">הפרטים יוצגו לאחר בחירת מסלול</strong></div>
+          <div class="summary-item"><small>למי מתאים</small><strong id="summary-audience">הפרטים יוצגו לאחר בחירת מסלול</strong></div>
+          <div class="summary-item"><small>מועד פתיחת הגישה</small><strong id="summary-delivery">מיד לאחר אישור התשלום</strong></div>
+          <div class="summary-item"><small>מספר שיעורים ומשך גישה</small><strong id="summary-access">ממתין לקביעה ולאישור של עמית</strong></div>
+          <div class="summary-item"><small>ביטול ותמיכה</small><strong id="summary-support">התנאים יופיעו לפני הרכישה הסופית</strong></div>
+        </div>
+        <div class="summary-price"><small>מחיר לתשלום, כולל מע״מ אם חל</small><strong id="summary-price">ממתין לאישור עמית</strong></div>
+      </div>
       <form class="commerce-form" id="commerce-form" novalidate>
         <label class="full">בחירת קורס<select name="product" required><option value="">בחירת מסלול</option><option>הקוסם הצעיר</option><option>לשבור את הקרח</option><option>קסמים למשפחה</option><option>קוסם שעובד נכון</option></select></label>
         <label>שם מלא<input name="name" autocomplete="name" required></label>
@@ -194,6 +231,20 @@
     document.querySelectorAll("[data-commerce-open]").forEach(button => button.addEventListener("click", openCommerce));
     document.querySelectorAll("[data-commerce-close]").forEach(button => button.addEventListener("click", closeCommerce));
     document.addEventListener("keydown", event => { if (event.key === "Escape") closeCommerce(); });
+    const courseDetails = {
+      "הקוסם הצעיר": { includes: "שיעורי וידאו, תרגול מודרך וקסמים למתחילים", audience: "ילדים ומתחילים שרוצים לבנות ביטחון מול קהל", access: "מספר השיעורים ומשך הגישה ממתינים לאישור עמית" },
+      "לשבור את הקרח": { includes: "קסמים חברתיים קצרים והדרכה להצגה טבעית", audience: "חברים, דייטים ומפגשים חברתיים", access: "מספר השיעורים ומשך הגישה ממתינים לאישור עמית" },
+      "קסמים למשפחה": { includes: "קסמים שאפשר לבצע בבית, בחג או ביום הולדת", audience: "הורים, סבים ובני משפחה ללא ניסיון קודם", access: "מספר השיעורים ומשך הגישה ממתינים לאישור עמית" },
+      "קוסם שעובד נכון": { includes: "תוכן על מופע, שירות, שיווק וחשיבה עסקית", audience: "קוסמים ומפעילים שרוצים לעבוד בצורה מקצועית", access: "היקף התוכן ומשך הגישה ממתינים לאישור עמית" }
+    };
+    commerceForm.elements.product.addEventListener("change", event => {
+      const details = courseDetails[event.target.value];
+      document.querySelector("#summary-status").textContent = details ? "המסלול נבחר" : "בחרו קורס";
+      document.querySelector("#summary-name").textContent = event.target.value || "טרם נבחר קורס";
+      document.querySelector("#summary-includes").textContent = details?.includes || "הפרטים יוצגו לאחר בחירת מסלול";
+      document.querySelector("#summary-audience").textContent = details?.audience || "הפרטים יוצגו לאחר בחירת מסלול";
+      document.querySelector("#summary-access").textContent = details?.access || "ממתין לקביעה ולאישור של עמית";
+    });
     commerceForm.addEventListener("submit", event => {
       event.preventDefault();
       if (!commerceForm.checkValidity()) {

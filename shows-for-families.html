@@ -102,6 +102,24 @@
     .commerce-close { position:absolute; top:14px; left:14px; width:42px; height:42px; border:1px solid var(--line); border-radius:12px; color:white; background:rgba(255,255,255,.05); font-size:24px; cursor:pointer; }
     .commerce-card h2 { margin:8px 0; font-size:36px; }
     .commerce-card > p { margin:0 0 20px; color:var(--muted); line-height:1.7; }
+    .payment-flow { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:18px 0 22px; }
+    .payment-step { min-height:115px; padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.028); }
+    .payment-step span { width:28px; height:28px; display:grid; place-items:center; margin-bottom:9px; border-radius:9px; color:#16111c; background:var(--gold); font-weight:900; }
+    .payment-step b { display:block; margin-bottom:4px; font-size:13px; }
+    .payment-step small { color:var(--muted); line-height:1.5; }
+    .deposit-note { margin:0 0 20px; padding:14px; border:1px solid rgba(101,212,169,.25); border-radius:13px; color:#c9f2e1; background:rgba(101,212,169,.07); font-size:12px; line-height:1.65; }
+    .purchase-summary { margin:0 0 20px; overflow:hidden; border:1px solid rgba(139,104,255,.3); border-radius:17px; background:rgba(139,104,255,.055); }
+    .summary-head { display:flex; justify-content:space-between; gap:15px; align-items:center; padding:15px 17px; border-bottom:1px solid var(--line); background:rgba(139,104,255,.08); }
+    .summary-head b { font-size:17px; }
+    .summary-head span { color:var(--gold); font-size:12px; font-weight:900; }
+    .summary-grid { display:grid; grid-template-columns:repeat(2,1fr); }
+    .summary-item { min-height:82px; padding:13px 17px; border-bottom:1px solid var(--line); }
+    .summary-item:nth-child(odd) { border-left:1px solid var(--line); }
+    .summary-item small { display:block; margin-bottom:5px; color:var(--muted); }
+    .summary-item strong { display:block; line-height:1.5; }
+    .summary-price { display:flex; justify-content:space-between; gap:15px; align-items:center; padding:16px 17px; }
+    .summary-price small { color:var(--muted); }
+    .summary-price strong { color:var(--gold); font-size:21px; }
     .commerce-form { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
     .commerce-form label { display:grid; gap:6px; color:#d9d5df; font-size:12px; font-weight:800; }
     .commerce-form input,.commerce-form select,.commerce-form textarea { width:100%; min-height:48px; padding:11px 12px; border:1px solid var(--line); border-radius:11px; color:white; background:#0b0a10; }
@@ -132,6 +150,9 @@
       .commerce-card { padding:24px 17px; }
       .commerce-form { grid-template-columns:1fr; }
       .commerce-form .full,.demo-payment,.commerce-error { grid-column:auto; }
+      .payment-flow { grid-template-columns:1fr 1fr; }
+      .summary-grid { grid-template-columns:1fr; }
+      .summary-item:nth-child(odd) { border-left:0; }
       .cta { padding:24px; }
       .footer-row { flex-direction:column; }
     }
@@ -163,6 +184,22 @@
       <div class="kicker">הזמנה ישירה באתר</div>
       <h2 id="commerce-title">מתחילים לבנות את האירוע</h2>
       <p>מלאו את הפרטים וקבלו מספר הזמנה מסודר. ההזמנה מאושרת רק לאחר אישור זמינות ותנאים מצד עמית.</p>
+      <div class="payment-flow">
+        <div class="payment-step"><span>1</span><b>יוצרים הזמנה</b><small>ממלאים את פרטי האירוע ללא חיוב.</small></div><div class="payment-step"><span>2</span><b>עמית מאשר</b><small>זמינות, התאמה והצעה סופית.</small></div><div class="payment-step"><span>3</span><b>משלמים מקדמה</b><small>רק אחרי האישור, כדי לשמור את התאריך.</small></div><div class="payment-step"><span>4</span><b>משלימים יתרה</b><small>לפי התנאים שיופיעו בהזמנה המאושרת.</small></div>
+      </div>
+      <div class="deposit-note">יצירת ההזמנה אינה מחייבת ואינה מחייבת כרטיס. סכום המקדמה, המועד לתשלום היתרה ותנאי הביטול יוצגו בהצעה הסופית לאחר אישור עמית. הנתונים המדויקים יפורסמו רק לאחר שעמית יאשר את מדיניות התשלום.</div>
+      <div class="purchase-summary">
+        <div class="summary-head"><b>סיכום ההזמנה לפני שליחה</b><span id="summary-status">ללא חיוב בשלב זה</span></div>
+        <div class="summary-grid">
+          <div class="summary-item"><small>סוג האירוע</small><strong id="summary-name">אירועים פרטיים</strong></div>
+          <div class="summary-item"><small>מה מקבלים</small><strong id="summary-includes">תיאום, התאמת מופע וביצוע לפי ההצעה שתאושר</strong></div>
+          <div class="summary-item"><small>מה עדיין דורש אישור</small><strong id="summary-audience">זמינות, מיקום, משך, ציוד ותנאי הפקה</strong></div>
+          <div class="summary-item"><small>מועד המקדמה</small><strong id="summary-delivery">רק לאחר אישור זמינות והצעה סופית</strong></div>
+          <div class="summary-item"><small>תשלום היתרה</small><strong id="summary-access">לפי המועד והתנאים בהזמנה המאושרת</strong></div>
+          <div class="summary-item"><small>ביטול ותמיכה</small><strong id="summary-support">תנאי הביטול והסיוע יופיעו בהצעה הסופית</strong></div>
+        </div>
+        <div class="summary-price"><small>מחיר האירוע וסכום המקדמה</small><strong id="summary-price">ייקבעו בהצעה הסופית</strong></div>
+      </div>
       <form class="commerce-form" id="commerce-form" novalidate>
         <label>סוג האירוע<select name="product" required><option value="">בחירת סוג</option><option>אירועים פרטיים</option><option>מופע מותאם אחר</option></select></label><label>תאריך משוער<input name="date" type="date" required></label><label>מדינה<input name="country" value="ישראל" placeholder="מדינה" required></label><label>עיר<input name="city" placeholder="עיר" required></label><label>מספר משתתפים<input name="participants" type="number" min="1" placeholder="מספר משוער" required></label>
         <label>שם מלא<input name="name" autocomplete="name" required></label>
@@ -194,6 +231,7 @@
     document.querySelectorAll("[data-commerce-open]").forEach(button => button.addEventListener("click", openCommerce));
     document.querySelectorAll("[data-commerce-close]").forEach(button => button.addEventListener("click", closeCommerce));
     document.addEventListener("keydown", event => { if (event.key === "Escape") closeCommerce(); });
+    
     commerceForm.addEventListener("submit", event => {
       event.preventDefault();
       if (!commerceForm.checkValidity()) {
@@ -219,7 +257,7 @@
         data.get("notes") ? "פרטים: " + data.get("notes") : ""
       ].filter(Boolean).join("\n");
       document.querySelector("#order-number").textContent = orderId;
-      document.querySelector("#success-message").textContent = "ההזמנה נוצרה ומוכנה לאישור מול עמית";
+      document.querySelector("#success-message").textContent = "ההזמנה נוצרה ללא חיוב ומוכנה לאישור מול עמית";
       document.querySelector("#order-whatsapp").href = "https://wa.me/972523416151?text=" + encodeURIComponent(message);
       commerceForm.hidden = true;
       orderSuccess.classList.add("show");
