@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>קוסם ואמן חושים לאירועים בחו״ל לדוברי עברית | עמית מיטרני</title>
   <meta name="description" content="בדיקת התאמה למופע קסמים ואמנות חושים בחו״ל עבור קהילות ישראליות, משפחות, חברות ואירועים לדוברי עברית.">
+
   <meta name="theme-color" content="#08080d">
   <link rel="canonical" href="https://djskabi-png.github.io/amit-mitrani-experience/shows-abroad-hebrew.html">
   <meta property="og:title" content="קוסם ואמן חושים לאירועים בחו״ל לדוברי עברית | עמית מיטרני">
@@ -21,6 +22,8 @@
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--white); background:radial-gradient(circle at 82% 5%,rgba(139,104,255,.19),transparent 28rem),radial-gradient(circle at 8% 42%,rgba(237,192,105,.08),transparent 25rem),var(--bg); font-family:"Heebo",Arial,sans-serif; }
+    .skip-link { position:fixed; top:10px; right:10px; z-index:100; padding:10px 14px; border-radius:10px; color:#000; background:#fff; transform:translateY(-150%); }
+    .skip-link:focus { transform:none; }
     a { color:inherit; text-decoration:none; }
     button,input,select,textarea { font:inherit; }
     .shell { width:min(1120px,calc(100% - 40px)); margin:auto; }
@@ -29,6 +32,13 @@
     .brand { font-size:21px; font-weight:900; }
     .brand span { color:var(--gold); }
     .nav-links { display:flex; gap:18px; align-items:center; color:#ddd9e4; font-size:14px; }
+    .nav-links a,.brand { min-height:44px; display:inline-flex; align-items:center; }
+    .mobile-nav { display:none; position:relative; }
+    .mobile-nav summary { min-width:44px; min-height:44px; display:grid; place-items:center; border:1px solid var(--line); border-radius:12px; cursor:pointer; list-style:none; }
+    .mobile-nav summary::-webkit-details-marker { display:none; }
+    .mobile-nav-panel { position:absolute; top:50px; left:0; z-index:40; display:grid; width:min(270px,calc(100vw - 34px)); padding:10px; border:1px solid var(--line); border-radius:15px; background:#171620; box-shadow:0 22px 60px rgba(0,0,0,.55); }
+    .mobile-nav-panel a { min-height:44px; display:flex; align-items:center; padding:8px 10px; border-bottom:1px solid var(--line); }
+    .mobile-nav-panel a:last-child { border-bottom:0; }
     .btn { display:inline-flex; min-height:48px; align-items:center; justify-content:center; padding:12px 20px; border:1px solid var(--line); border-radius:13px; font-weight:800; }
     .btn-gold { color:#18121c; border-color:var(--gold); background:var(--gold); }
     .hero { min-height:640px; display:grid; grid-template-columns:1.05fr .95fr; gap:55px; align-items:center; padding:60px 0; }
@@ -117,6 +127,7 @@
     .cta p { margin:0; color:#cbc6d3; }
     footer { padding:45px 0 35px; border-top:1px solid var(--line); color:var(--muted); }
     .footer-seo { display:grid; grid-template-columns:repeat(3,1fr); gap:9px 20px; margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--line); }
+    .footer-seo a,.legal-links a,.breadcrumbs a { min-height:44px; display:inline-flex; align-items:center; }
     .footer-seo a { color:#d8d4df; font-size:13px; }
     .footer-seo a:hover { color:var(--gold); }
     .footer-row { display:flex; justify-content:space-between; gap:20px; }
@@ -196,6 +207,9 @@
     body.modal-open { overflow:hidden; }
     @media(max-width:760px) {
       .nav-links a:not(.btn) { display:none; }
+      .mobile-nav { display:block; }
+      .hero h1 { font-size:clamp(38px,11vw,54px); line-height:1.02; }
+      .lead { font-size:17px; line-height:1.65; }
       .hero { grid-template-columns:1fr; min-height:0; padding:42px 0; }
       .hero-image { min-height:390px; }
       .grid,.related,.cta,.experience,.mentions,.example-grid,.testimonial-row { grid-template-columns:1fr; }
@@ -226,8 +240,9 @@
   </style>
 </head>
 <body>
-  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div></nav></header>
-  <main>
+  <a class="skip-link" href="#main-content">דילוג לתוכן המרכזי</a>
+  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div><details class="mobile-nav"><summary aria-label="פתיחת תפריט">☰</summary><div class="mobile-nav-panel"><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">אירועים לחברות</a><a href="close-up-magic-receptions.html">קסמים בקבלת פנים</a><a href="magic-courses.html">קורסים דיגיטליים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="index.html#contact">יצירת קשר</a></div></details></nav></header>
+  <main id="main-content">
     <div class="shell breadcrumbs"><a href="index.html">עמוד הבית</a> / אירועים בחו״ל</div>
     <section class="hero shell">
       <div><div class="kicker">אירועים בחו״ל</div><h1>חוויה ישראלית בעברית, גם כשהאירוע מתקיים בחו״ל</h1><p class="lead">קהילה ישראלית, משפחה שחוגגת בחו״ל או חברה שמפיקה אירוע בינלאומי יכולות לבדוק התאמה למופע בעברית. ההזמנה אוספת מראש מדינה, עיר, תאריך, סוג קהל ותנאי הפקה כדי שעמית יוכל לאשר היתכנות בצורה מסודרת.</p><div class="hero-actions"><button class="btn btn-gold" type="button" data-commerce-open>הזמנת האירוע באתר</button><a class="btn" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%A2%D7%9E%D7%95%D7%93%20%D7%90%D7%99%D7%A8%D7%95%D7%A2%D7%99%D7%9D%20%D7%91%D7%97%D7%95%D7%B4%D7%9C%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." target="_blank" rel="noopener">שאלה לעמית בוואטסאפ</a></div></div>
@@ -239,7 +254,7 @@
     <section><div class="shell"><div class="section-head"><div class="kicker">איך זה עובד</div><h2>מה מקבלים במסלול הזה</h2><p>כל פרט נסגר רק לאחר שיחה ישירה עם עמית. העמוד מסביר את דרך ההתאמה ואינו מבטיח זמינות, מחיר או היקף קבוע.</p></div><div class="grid"><article class="card"><b>עברית שמרגישה בבית</b><p>המופע פונה לקהל ישראלי ודובר עברית, עם שפה, קצב והומור שמחברים את החדר.</p></article><article class="card"><b>הזמנה בינלאומית מסודרת</b><p>הטופס אוסף מדינה, עיר, תאריך, סוג אירוע ומספר משתתפים.</p></article><article class="card"><b>בדיקת הפקה</b><p>בוחנים מראש טיסות, לינה, ציוד, במה, הגברה ולוחות זמנים.</p></article><article class="card"><b>משפחות, קהילות וחברות</b><p>הכיוון יכול להתאים לחגיגות פרטיות, אירועי קהילה ואירועים עסקיים בעברית.</p></article></div></div></section>
     
     <section><div class="shell"><div class="section-head"><div class="kicker">דוגמאות מוחשיות</div><h2>מה עמית יכול ליצור בעולם הזה</h2><p>הדוגמאות ממחישות את הכיוון. המבנה הסופי נקבע לפי הקהל, המטרה והמסלול שנבחר.</p></div><div class="example-grid"><article class="example-card"><span>01</span><h3>אירוע קהילה ישראלית</h3><p>מופע בעברית שמחבר משפחות וילדים סביב חוויה משותפת.</p></article><article class="example-card"><span>02</span><h3>חגיגה משפחתית בחו״ל</h3><p>יום הולדת או אירוע פרטי עם תוכן שמרגיש טבעי לקהל ישראלי.</p></article><article class="example-card"><span>03</span><h3>אירוע חברה בינלאומי</h3><p>מופע לעובדים ולשותפים דוברי עברית, בתיאום עם ההפקה המקומית.</p></article></div></div></section>
-    <section><div class="shell"><div class="section-head"><div class="kicker">אמון שנשען על מקורות</div><h2>מה אומרים ומפרסמים על עמית</h2><p>ההמלצות והאזכורים כאן מבוססים על מקורות חיצוניים נגישים, ולא על טקסטים שהומצאו עבור האתר.</p></div><div class="mentions"><article class="mention"><small>כרטיס העסק של עמית</small><h3>הזמנה שמתחילה בפרטים</h3><p>כרטיס העסק הציבורי מרכז את דרכי הקשר ואת סוגי המופעים של עמית, בסיס לתיאום הפקה גם מחוץ לישראל.</p><a href="https://greenbook.co.il/card/4905/1304" target="_blank" rel="noopener">לצפייה במקור</a></article><article class="mention"><small>אגודת הקוסמים</small><h3>ניסיון בפרויקטים מיוחדים</h3><p>באתר אגודת הקוסמים עמית מוצג בתחום הפרויקטים המיוחדים, מסגרת רלוונטית לאירועים שדורשים התאמה והפקה.</p><a href="https://www.magic.org.il/הקוסם-בשבילך/" target="_blank" rel="noopener">לצפייה במקור</a></article></div><div class="testimonial-row"><article class="testimonial"><blockquote>אמן חושים מדהים, אדם מקסים שיוצר כימייה עם הקהל</blockquote><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקוח שצוטט בפרופיל בצומת השרון</a></article><article class="testimonial"><blockquote>אחד האנשים החזקים בתעשייה</blockquote><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקוח שצוטט בפרופיל בצומת השרון</a></article></div></div></section>
+    <section><div class="shell"><div class="section-head"><div class="kicker">אמון שנשען על מקורות</div><h2>מה אומרים ומפרסמים על עמית</h2><p>האזכורים והפרפרזות כאן מבוססים על מקורות חיצוניים נגישים. הקישור בכל כרטיס מוביל לנוסח המלא במקור.</p></div><div class="mentions"><article class="mention"><small>כרטיס העסק של עמית</small><h3>הזמנה שמתחילה בפרטים</h3><p>כרטיס העסק הציבורי מרכז את דרכי הקשר ואת סוגי המופעים של עמית, בסיס לתיאום הפקה גם מחוץ לישראל.</p><a href="https://greenbook.co.il/card/4905/1304" target="_blank" rel="noopener">לצפייה במקור</a></article><article class="mention"><small>אגודת הקוסמים</small><h3>עמית באתר אגודת הקוסמים</h3><p>עמית מיטרני מופיע בעמוד הקוסמים באתר האגודה.</p><a href="https://www.magic.org.il/הקוסם-בשבילך/" target="_blank" rel="noopener">לצפייה במקור</a></article></div><div class="testimonial-row"><article class="testimonial"><p>לקוחות שפורסמו בפרופיל מתארים את עמית כאמן חושים מרשים, אדם נעים ובעל חיבור טוב לקהל.</p><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקריאת הנוסח המלא בצומת השרון</a></article><article class="testimonial"><p>באותו פרופיל פורסמה גם הערכה למעמדו המקצועי בתעשייה.</p><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקריאת הנוסח המלא בצומת השרון</a></article></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">שאלות ותשובות</div><h2>מה כדאי לדעת לפני שפונים</h2></div><div class="faq"><details><summary>האם אפשר להזמין את עמית לאירוע בחו״ל?</summary><p>אפשר לשלוח הזמנה מסודרת לבדיקת התאמה. האישור תלוי במדינה, בתאריך, בהפקה ובתנאי הנסיעה.</p></details><details><summary>לאילו קהלים העמוד מתאים?</summary><p>למשפחות ישראליות, קהילות יהודיות ודוברות עברית, חברות וארגונים שמפיקים אירוע בעברית.</p></details><details><summary>מה צריך למסור בהזמנה?</summary><p>מדינה, עיר, תאריך, מספר משתתפים, טווח גילאים, סוג המקום ואיש קשר מקומי.</p></details><details><summary>האם אפשר להזמין ישירות באתר?</summary><p>כן. ממלאים הזמנה מפורטת באתר ומקבלים מספר הזמנה. היא הופכת למחייבת רק לאחר אישור זמינות ותנאי ההפקה מצד עמית.</p></details></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">המשך הדרך</div><h2>עולמות נוספים באתר</h2></div><div class="related"><a href="shows-for-companies.html">חברות וארגונים</a><a href="shows-for-families.html">משפחות ואירועים</a><a href="shows-for-kids.html">מופעים לילדים</a></div></div></section>
     <section><div class="shell"><div class="cta"><div><h2>לא צריך להמתין כדי להתחיל הזמנה</h2><p>ממלאים את כל פרטי האירוע, מקבלים מספר הזמנה ושולחים לעמית לאישור זמינות ותנאים.</p></div><button class="btn btn-gold" type="button" data-commerce-open>פתיחת הזמנה ישירה</button></div></div></section>

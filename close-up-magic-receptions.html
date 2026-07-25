@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>קוסם לקבלת פנים באירוע פרטי או עסקי | עמית מיטרני</title>
   <meta name="description" content="קסמי קלוז אפ לקבלת פנים, כאשר עמית מיטרני עובר בין האורחים ויוצר רגעים קצרים ומפתיעים באירועים פרטיים ועסקיים.">
+
   <meta name="theme-color" content="#08080d">
   <link rel="canonical" href="https://djskabi-png.github.io/amit-mitrani-experience/close-up-magic-receptions.html">
   <meta property="og:title" content="קוסם לקבלת פנים באירוע פרטי או עסקי | עמית מיטרני">
@@ -21,6 +22,8 @@
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--white); background:radial-gradient(circle at 82% 5%,rgba(139,104,255,.19),transparent 28rem),radial-gradient(circle at 8% 42%,rgba(237,192,105,.08),transparent 25rem),var(--bg); font-family:"Heebo",Arial,sans-serif; }
+    .skip-link { position:fixed; top:10px; right:10px; z-index:100; padding:10px 14px; border-radius:10px; color:#000; background:#fff; transform:translateY(-150%); }
+    .skip-link:focus { transform:none; }
     a { color:inherit; text-decoration:none; }
     button,input,select,textarea { font:inherit; }
     .shell { width:min(1120px,calc(100% - 40px)); margin:auto; }
@@ -29,6 +32,13 @@
     .brand { font-size:21px; font-weight:900; }
     .brand span { color:var(--gold); }
     .nav-links { display:flex; gap:18px; align-items:center; color:#ddd9e4; font-size:14px; }
+    .nav-links a,.brand { min-height:44px; display:inline-flex; align-items:center; }
+    .mobile-nav { display:none; position:relative; }
+    .mobile-nav summary { min-width:44px; min-height:44px; display:grid; place-items:center; border:1px solid var(--line); border-radius:12px; cursor:pointer; list-style:none; }
+    .mobile-nav summary::-webkit-details-marker { display:none; }
+    .mobile-nav-panel { position:absolute; top:50px; left:0; z-index:40; display:grid; width:min(270px,calc(100vw - 34px)); padding:10px; border:1px solid var(--line); border-radius:15px; background:#171620; box-shadow:0 22px 60px rgba(0,0,0,.55); }
+    .mobile-nav-panel a { min-height:44px; display:flex; align-items:center; padding:8px 10px; border-bottom:1px solid var(--line); }
+    .mobile-nav-panel a:last-child { border-bottom:0; }
     .btn { display:inline-flex; min-height:48px; align-items:center; justify-content:center; padding:12px 20px; border:1px solid var(--line); border-radius:13px; font-weight:800; }
     .btn-gold { color:#18121c; border-color:var(--gold); background:var(--gold); }
     .hero { min-height:640px; display:grid; grid-template-columns:1.05fr .95fr; gap:55px; align-items:center; padding:60px 0; }
@@ -117,6 +127,7 @@
     .cta p { margin:0; color:#cbc6d3; }
     footer { padding:45px 0 35px; border-top:1px solid var(--line); color:var(--muted); }
     .footer-seo { display:grid; grid-template-columns:repeat(3,1fr); gap:9px 20px; margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--line); }
+    .footer-seo a,.legal-links a,.breadcrumbs a { min-height:44px; display:inline-flex; align-items:center; }
     .footer-seo a { color:#d8d4df; font-size:13px; }
     .footer-seo a:hover { color:var(--gold); }
     .footer-row { display:flex; justify-content:space-between; gap:20px; }
@@ -196,6 +207,9 @@
     body.modal-open { overflow:hidden; }
     @media(max-width:760px) {
       .nav-links a:not(.btn) { display:none; }
+      .mobile-nav { display:block; }
+      .hero h1 { font-size:clamp(38px,11vw,54px); line-height:1.02; }
+      .lead { font-size:17px; line-height:1.65; }
       .hero { grid-template-columns:1fr; min-height:0; padding:42px 0; }
       .hero-image { min-height:390px; }
       .grid,.related,.cta,.experience,.mentions,.example-grid,.testimonial-row { grid-template-columns:1fr; }
@@ -226,8 +240,9 @@
   </style>
 </head>
 <body>
-  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div></nav></header>
-  <main>
+  <a class="skip-link" href="#main-content">דילוג לתוכן המרכזי</a>
+  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div><details class="mobile-nav"><summary aria-label="פתיחת תפריט">☰</summary><div class="mobile-nav-panel"><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">אירועים לחברות</a><a href="close-up-magic-receptions.html">קסמים בקבלת פנים</a><a href="magic-courses.html">קורסים דיגיטליים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="index.html#contact">יצירת קשר</a></div></details></nav></header>
+  <main id="main-content">
     <div class="shell breadcrumbs"><a href="index.html">עמוד הבית</a> / קסמים לקבלת פנים</div>
     <section class="hero shell">
       <div><div class="kicker">קסמים לקבלת פנים</div><h1>קסמים שקורים בידיים של האורחים כבר בקבלת הפנים</h1><p class="lead">בזמן שהאורחים מגיעים, מחפשים את המקום שלהם ומתחילים לדבר, עמית עובר בין קבוצות קטנות ויוצר קסמים מקרוב. אין במה ואין צורך לעצור את כל האירוע. בכל פעם נוצרת התקהלות קטנה, צחוק ושיחה שמחברים בין אנשים.</p><div class="hero-actions"><button class="btn btn-gold" type="button" data-commerce-open>הזמנת האירוע באתר</button><a class="btn" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%A2%D7%9E%D7%95%D7%93%20%D7%A7%D7%A1%D7%9E%D7%99%D7%9D%20%D7%9C%D7%A7%D7%91%D7%9C%D7%AA%20%D7%A4%D7%A0%D7%99%D7%9D%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." target="_blank" rel="noopener">שאלה לעמית בוואטסאפ</a></div></div>
@@ -239,7 +254,7 @@
     <section><div class="shell"><div class="section-head"><div class="kicker">איך זה עובד</div><h2>מה מקבלים במסלול הזה</h2><p>כל פרט נסגר רק לאחר שיחה ישירה עם עמית. העמוד מסביר את דרך ההתאמה ואינו מבטיח זמינות, מחיר או היקף קבוע.</p></div><div class="grid"><article class="card"><b>עמית עובר בין האורחים</b><p>הקסמים מתרחשים בקבוצות קטנות, במרחק קצר ובקצב טבעי לקבלת הפנים.</p></article><article class="card"><b>שובר את הקרח</b><p>החוויה נותנת לאנשים סיבה לדבר, לצחוק ולהכיר עוד לפני שהחלק המרכזי מתחיל.</p></article><article class="card"><b>מתאים לפרטי ולעסקי</b><p>אפשר לבדוק התאמה לחתונה, בר או בת מצווה, אירוע חברה, כנס או השקה.</p></article><article class="card"><b>משתלב בלי לעצור את האירוע</b><p>הפעילות מתקיימת לצד ההגעה, הצילום והכיבוד, בתיאום עם המפיק או מנהל האירוע.</p></article></div></div></section>
     
     <section><div class="shell"><div class="section-head"><div class="kicker">דוגמאות מוחשיות</div><h2>מה עמית יכול ליצור בעולם הזה</h2><p>הדוגמאות ממחישות את הכיוון. המבנה הסופי נקבע לפי הקהל, המטרה והמסלול שנבחר.</p></div><div class="example-grid"><article class="example-card"><span>01</span><h3>קסם בידיים של האורח</h3><p>חפץ קטן, בחירה או מחשבה הופכים להפתעה במרחק של צעד.</p></article><article class="example-card"><span>02</span><h3>מעגל קטן שנוצר לבד</h3><p>כמה אורחים מתקבצים, מגיבים ומיד מזמינים חברים נוספים לראות.</p></article><article class="example-card"><span>03</span><h3>שבירת קרח טבעית</h3><p>הקסם נותן לאנשים שלא מכירים נושא משותף לשיחה כבר בתחילת האירוע.</p></article></div></div></section>
-    <section><div class="shell"><div class="section-head"><div class="kicker">אמון שנשען על מקורות</div><h2>מה אומרים ומפרסמים על עמית</h2><p>ההמלצות והאזכורים כאן מבוססים על מקורות חיצוניים נגישים, ולא על טקסטים שהומצאו עבור האתר.</p></div><div class="mentions"><article class="mention"><small>כרטיס העסק של עמית</small><h3>פעילות גם מול קהל עסקי</h3><p>כרטיס העסק הציבורי של עמית מציין הופעות לחברות, ועדי עובדים והופעות שיווקיות.</p><a href="https://greenbook.co.il/card/4905/1304" target="_blank" rel="noopener">לצפייה במקור</a></article><article class="mention"><small>אגודת הקוסמים</small><h3>פרויקטים מיוחדים</h3><p>באתר אגודת הקוסמים עמית מוצג כאחראי פרויקטים מיוחדים, תחום שמתחבר לפיתוח חוויות מותאמות.</p><a href="https://www.magic.org.il/הקוסם-בשבילך/" target="_blank" rel="noopener">לצפייה במקור</a></article></div><div class="testimonial-row"><article class="testimonial"><blockquote>אמן חושים מדהים, אדם מקסים שיוצר כימייה עם הקהל</blockquote><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקוח שצוטט בפרופיל בצומת השרון</a></article><article class="testimonial"><blockquote>אחד האנשים החזקים בתעשייה</blockquote><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקוח שצוטט בפרופיל בצומת השרון</a></article></div><div class="section-head" style="margin-top:55px"><div class="kicker">ניסיון מול ארגונים</div><h2>מבין הארגונים וסוגי הלקוחות שעמית ציין</h2><p>הקיר מבוסס על המידע שמסר עמית ועל כרטיס העסק הציבורי. הוא אינו מוצג כהמלצה רשמית מטעם הארגונים.</p></div><div class="brand-wall" id="brand-wall"><div class="brand-mark">בנק הפועלים</div><div class="brand-mark">בנק דיסקונט</div><div class="brand-mark">Amdocs</div><div class="brand-mark">Coca-Cola</div><div class="brand-mark">קשת 12</div><div class="brand-mark">רשת 13</div><div class="brand-mark">Cellcom</div><div class="brand-mark">Partner</div><div class="brand-mark">Pelephone</div><div class="brand-mark">בזק בינלאומי</div><div class="brand-mark">חברת החשמל</div><div class="brand-mark">אסם</div><div class="brand-mark">Cinema City</div><div class="brand-mark">צה״ל</div><div class="brand-mark">רשויות מקומיות</div><div class="brand-mark">ועדי עובדים</div><div class="brand-mark">קניונים</div><div class="brand-mark">מתנ״סים</div><div class="brand-mark">מוסדות חינוך</div><div class="brand-mark">קהילות</div></div><button class="brand-more" id="brand-more" type="button" aria-expanded="false">הצגת ארגונים נוספים</button><p class="brand-note">המותגים מוצגים בשלב זה כשמות מעוצבים. שימוש בלוגואים הרשמיים ייעשה רק לאחר אישור עמית לזכות ההצגה ולנוסח.</p></div></section>
+    <section><div class="shell"><div class="section-head"><div class="kicker">אמון שנשען על מקורות</div><h2>מה אומרים ומפרסמים על עמית</h2><p>האזכורים והפרפרזות כאן מבוססים על מקורות חיצוניים נגישים. הקישור בכל כרטיס מוביל לנוסח המלא במקור.</p></div><div class="mentions"><article class="mention"><small>כרטיס העסק של עמית</small><h3>פעילות גם מול קהל עסקי</h3><p>כרטיס העסק הציבורי של עמית מציין הופעות לחברות, ועדי עובדים והופעות שיווקיות.</p><a href="https://greenbook.co.il/card/4905/1304" target="_blank" rel="noopener">לצפייה במקור</a></article><article class="mention"><small>אגודת הקוסמים</small><h3>עמית באתר אגודת הקוסמים</h3><p>עמית מיטרני מופיע בעמוד הקוסמים באתר האגודה.</p><a href="https://www.magic.org.il/הקוסם-בשבילך/" target="_blank" rel="noopener">לצפייה במקור</a></article></div><div class="testimonial-row"><article class="testimonial"><p>לקוחות שפורסמו בפרופיל מתארים את עמית כאמן חושים מרשים, אדם נעים ובעל חיבור טוב לקהל.</p><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקריאת הנוסח המלא בצומת השרון</a></article><article class="testimonial"><p>באותו פרופיל פורסמה גם הערכה למעמדו המקצועי בתעשייה.</p><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקריאת הנוסח המלא בצומת השרון</a></article></div><div class="section-head" style="margin-top:55px"><div class="kicker">סוגי לקוחות עסקיים</div><h2>התאמה למגוון מסגרות ארגוניות</h2><p>עד לקבלת רשימת לקוחות מאושרת וזכויות הצגה, מוצגות כאן קטגוריות בלבד ולא שמות או לוגואים של חברות.</p></div><div class="brand-wall" id="brand-wall"><div class="brand-mark">חברות וארגונים</div><div class="brand-mark">ועדי עובדים</div><div class="brand-mark">כנסים והשקות</div><div class="brand-mark">רשויות מקומיות</div><div class="brand-mark">מוסדות חינוך</div><div class="brand-mark">קניונים ומרכזים מסחריים</div><div class="brand-mark">קהילות ומתנ״סים</div><div class="brand-mark">אירועי רווחה</div></div><p class="brand-note">שמות ולוגואים יתווספו רק לאחר אישור מפורש של עמית וזכות הצגה מתאימה.</p></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">שאלות ותשובות</div><h2>מה כדאי לדעת לפני שפונים</h2></div><div class="faq"><details><summary>מה זה קסמי קלוז אפ?</summary><p>קסמים שמתרחשים מקרוב, מול קבוצה קטנה ובידיים של המשתתפים, בלי צורך בבמה מרכזית.</p></details><details><summary>כמה זמן עמית מסתובב בין האורחים?</summary><p>המשך נקבע לפי כמות האורחים, זמן קבלת הפנים והמסלול שעמית מאשר.</p></details><details><summary>זה מתאים גם לאירוע חברה?</summary><p>כן. אפשר לבדוק התאמה לכנס, השקה, ערב חברה או מפגש לקוחות.</p></details><details><summary>מה צריך להכין?</summary><p>נדרש תיאום עם איש הקשר לגבי זמני כניסה, מרחבי תנועה, מוזיקה, צילום וכמות האורחים.</p></details></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">המשך הדרך</div><h2>עולמות נוספים באתר</h2></div><div class="related"><a href="shows-for-companies.html">חברות וארגונים</a><a href="mentalist-adult-parties.html">אירועים למבוגרים</a><a href="magician-bar-bat-mitzvah.html">בר ובת מצווה</a></div></div></section>
     <section><div class="shell"><div class="cta"><div><h2>לא צריך להמתין כדי להתחיל הזמנה</h2><p>ממלאים את כל פרטי האירוע, מקבלים מספר הזמנה ושולחים לעמית לאישור זמינות ותנאים.</p></div><button class="btn btn-gold" type="button" data-commerce-open>פתיחת הזמנה ישירה</button></div></div></section>

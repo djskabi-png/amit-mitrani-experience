@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="עמית מיטרני, קוסם ואמן חושים למופעים, אירועים, קורסים דיגיטליים, סדנאות ותוכן לעסקים.">
+  <meta name="description" content="עמית מיטרני, קוסם ואמן חושים למופעים לילדים, למשפחות, לאירועים עסקיים ולקבלות פנים, לצד חוויות דיגיטליות בהמחשה.">
   <meta name="theme-color" content="#08080d">
   <meta property="og:title" content="עמית מיטרני, הקסם מתחיל עוד לפני המופע">
   <meta property="og:description" content="מופעים, לימוד, כלים דיגיטליים וחוויות אינטראקטיביות במקום אחד.">
@@ -24,8 +24,9 @@
       "url": "https://djskabi-png.github.io/amit-mitrani-experience/",
       "telephone": "+972-52-341-6151",
       "sameAs": [
-        "https://msha.ke/amitgic.co.il/",
-        "https://www.instagram.com/reel/DBqYN9uNbON/"
+        "https://www.instagram.com/amitmiterani_magic/",
+        "https://www.facebook.com/amitgic/",
+        "https://www.tiktok.com/@amit_miteranii"
       ],
       "knowsAbout": ["קסמים", "אמנות חושים", "מופעים לילדים", "מופעים לאירועים עסקיים", "קסם מותאם למסר עסקי"]
     }
@@ -81,8 +82,8 @@
     .brand-mark::after { content: "AM"; font-size: 13px; font-weight: 900; }
     .nav-links { display: flex; gap: 28px; color: #d0cdd8; font-size: 14px; font-weight: 600; }
     .nav-tools { display: flex; align-items: center; gap: 10px; }
+    .language-control { position: relative; }
     .language-switcher {
-      position: relative;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -168,6 +169,7 @@
     .time-card p { color: var(--muted); margin: 0; font-size: 13px; line-height: 1.6; }
     .invite-box { padding: 35px; border-radius: 28px; border: 1px solid rgba(139,104,255,.28); background: radial-gradient(circle at 8% 20%, rgba(139,104,255,.22), transparent 18rem), linear-gradient(135deg, #171324, #0f0e16); display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
     .invite-ui { border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.05); padding: 22px; }
+    .demo-note { margin: 0 0 14px; padding: 12px 14px; border: 1px solid rgba(237,192,105,.28); border-radius: 12px; color: #ddd7c8; background: rgba(237,192,105,.07); font-size: 12px; line-height: 1.6; }
     .invite-ui .screen { min-height: 440px; border-radius: 16px; background: linear-gradient(150deg, #2b1762, #8b68ff); padding: 24px; display: grid; grid-template-rows: auto 1fr auto auto; gap: 16px; }
     .invite-ui .screen b { font-size: 23px; }
     .invite-ui .screen small { color: rgba(255,255,255,.75); }
@@ -763,7 +765,7 @@
       .language-switcher { min-width: 58px; width: 58px; height: 39px; padding: 0 10px; justify-content: center; font-size: 12px; }
       .language-switcher .language-label { display: none; }
       .language-switcher::after { margin: 0; }
-      .language-menu { display: none; }
+      .language-menu { right: auto; left: 0; }
       .mobile-menu { display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid var(--line); border-radius: 11px; }
       .hero { min-height: 0; display: flex; flex-direction: column; gap: 28px; padding: 31px 0 44px; }
       .hero-media { order: -1; width: 100%; min-height: 330px; }
@@ -811,6 +813,7 @@
       .mini-video b { font-size: 16px; }
       .invite-controls { grid-template-columns: 1fr; }
       .invite-template-picker { grid-template-columns: 1fr 1fr; }
+      .invite-theme-select { display: none; }
       .invite-controls label:first-child { grid-column: auto; }
       .invite-controls label.wide { grid-column: auto; }
       .invite-ui .screen { min-height: 500px; padding: 18px; }
@@ -859,6 +862,7 @@
       .mobile-sticky a { padding: 11px; border-radius: 10px; text-align: center; font-size: 12px; font-weight: 800; }
       .mobile-sticky a:first-child { color: #151019; background: var(--gold); }
       .mobile-sticky a:last-child { border: 1px solid var(--line); background: #181720; }
+      .footer-seo-home a, .footer-links a, .footer-links button { min-height: 44px; display: inline-flex; align-items: center; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -873,7 +877,7 @@
     .skip-link { position: fixed; top: 10px; right: 10px; z-index: 100; padding: 10px 14px; border-radius: 10px; background: white; color: black; transform: translateY(-150%); }
     .skip-link:focus { transform: none; }
     .language-switcher { cursor: pointer; text-align: right; }
-    .language-switcher.open .language-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .language-control.open .language-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .language-menu { transform: translateY(-6px); transition: .2s ease; }
     .language-menu a { display: block; padding: 9px 10px; border-radius: 8px; color: #d5d2dc; }
     .language-menu a:hover, .language-menu a:focus { background: rgba(237,192,105,.12); color: var(--gold); }
@@ -1054,24 +1058,24 @@
 
   </style>
 </head>
-<body>
+<body id="top">
   <a class="skip-link" href="#main-content">דילוג לתוכן המרכזי</a>
   <header>
     <nav class="shell">
-      <a class="brand" href="#worlds"><span class="brand-mark"></span><span>עמית מיטרני</span></a>
-      <div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a></div>
+      <a class="brand" href="#top"><span class="brand-mark"></span><span>עמית מיטרני</span></a>
+      <div class="nav-links" id="primary-nav"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a></div>
       <div class="nav-tools">
-        <button class="language-switcher" type="button" aria-expanded="false" aria-controls="language-menu">
-          <span>HE</span><span class="language-label">עברית</span>
-          <span class="language-menu" id="language-menu">
+        <div class="language-control">
+          <button class="language-switcher" type="button" aria-expanded="false" aria-controls="language-menu" aria-label="שפה ותרגום אוטומטי"><span>HE</span><span class="language-label">עברית</span></button>
+          <div class="language-menu" id="language-menu">
             <a href="./" lang="he">עברית</a>
-            <a href="https://translate.google.com/translate?sl=he&amp;tl=en&amp;u=https%3A%2F%2Fdjskabi-png.github.io%2Famit-mitrani-experience%2F" lang="en">English</a>
-            <a href="https://translate.google.com/translate?sl=he&amp;tl=ru&amp;u=https%3A%2F%2Fdjskabi-png.github.io%2Famit-mitrani-experience%2F" lang="ru">Русский</a>
-            <a href="https://translate.google.com/translate?sl=he&amp;tl=fr&amp;u=https%3A%2F%2Fdjskabi-png.github.io%2Famit-mitrani-experience%2F" lang="fr">Français</a>
-          </span>
-        </button>
+            <a href="https://translate.google.com/translate?sl=he&amp;tl=en&amp;u=https%3A%2F%2Fdjskabi-png.github.io%2Famit-mitrani-experience%2F" lang="en">English, תרגום אוטומטי</a>
+            <a href="https://translate.google.com/translate?sl=he&amp;tl=ru&amp;u=https%3A%2F%2Fdjskabi-png.github.io%2Famit-mitrani-experience%2F" lang="ru">Русский, תרגום אוטומטי</a>
+            <a href="https://translate.google.com/translate?sl=he&amp;tl=fr&amp;u=https%3A%2F%2Fdjskabi-png.github.io%2Famit-mitrani-experience%2F" lang="fr">Français, תרגום אוטומטי</a>
+          </div>
+        </div>
         <a class="btn btn-gold" href="#contact">בדיקת תאריך פנוי</a>
-        <button class="mobile-menu" type="button" aria-label="פתיחת תפריט">☰</button>
+        <button class="mobile-menu" type="button" aria-label="פתיחת תפריט" aria-controls="primary-nav" aria-expanded="false">☰</button>
       </div>
     </nav>
   </header>
@@ -1190,10 +1194,10 @@
             <h2 class="section-title">המסך שלכם עומד לעשות קסם</h2>
             <p>לא קוראים כאן הסבר על קסמים. בוחרים חוויה, משתתפים בה ורואים משהו שלא אמור לקרות. הפעילו צליל לחוויה מלאה.</p>
           </div>
-          <div class="magic-tabs" role="tablist" aria-label="בחירת קסם">
-            <button class="magic-tab active" type="button" role="tab" aria-selected="true" data-trick="cards">קלף נעלם</button>
-            <button class="magic-tab" type="button" role="tab" aria-selected="false" data-trick="number">קריאת מספר</button>
-            <button class="magic-tab" type="button" role="tab" aria-selected="false" data-trick="symbol">תחזית סגורה</button>
+          <div class="magic-tabs" aria-label="בחירת קסם">
+            <button class="magic-tab active" type="button" aria-pressed="true" data-trick="cards">קלף נעלם</button>
+            <button class="magic-tab" type="button" aria-pressed="false" data-trick="number">קריאת מספר</button>
+            <button class="magic-tab" type="button" aria-pressed="false" data-trick="symbol">תחזית סגורה</button>
           </div>
         </div>
         <div class="magic-stage" aria-live="polite">
@@ -1316,18 +1320,19 @@
             <label>שם החוגג, המשפחה או האירוע<input id="invite-name" value="נועה" maxlength="32"></label>
             <label>תאריך<input id="invite-date" type="date"></label>
             <label>שעה<input id="invite-time" type="time" value="17:00"></label>
-            <label>ערכת עיצוב<select id="invite-theme"><option value="magic">קסומה לילדים</option><option value="celebration">חגיגית למשפחה</option><option value="corporate">חברה ועסק</option><option value="elegant">ערב אלגנטי</option><option value="mitzvah">בר ובת מצווה</option><option value="wedding">זוגות ואירוסין</option><option value="reception">קבלת פנים</option><option value="abroad">אירוע בחו״ל</option></select></label>
+            <label class="invite-theme-select">ערכת עיצוב<select id="invite-theme"><option value="magic">קסומה לילדים</option><option value="celebration">חגיגית למשפחה</option><option value="corporate">חברה ועסק</option><option value="elegant">ערב אלגנטי</option><option value="mitzvah">בר ובת מצווה</option><option value="wedding">זוגות ואירוסין</option><option value="reception">קבלת פנים</option><option value="abroad">אירוע בחו״ל</option></select></label>
             <label class="wide">מיקום<input id="invite-location" value="המיקום יישלח למוזמנים" maxlength="42"></label>
             <label class="wide">תמונת החוגגים או העסק<input id="invite-photo-upload" type="file" accept="image/png,image/jpeg,image/webp"></label>
           </div>
           <div class="invite-features">
             <button type="button" data-invite-feature="theme">החלפת עיצוב</button>
-            <button type="button" data-invite-feature="share">שיתוף מהיר בוואטסאפ</button>
-            <button type="button" data-invite-feature="rsvp">אישור הגעה פעיל</button>
+            <button type="button" data-invite-feature="share">המחשת שיתוף בוואטסאפ</button>
+            <button type="button" data-invite-feature="rsvp">המחשת אישור הגעה</button>
             <button type="button" data-invite-feature="details">עריכת פרטי האירוע</button>
           </div>
         </div>
         <div class="invite-ui">
+          <p class="demo-note" id="invite-demo-note">זהו אב טיפוס אינטראקטיבי. השיתוף שולח טקסט לדוגמה ואישור ההגעה נשמר במכשיר בלבד. הפצה אמיתית וסנכרון אישורים יחוברו רק לאחר הקמת מערכת מאובטחת ואישור עמית.</p>
           <div class="screen theme-magic" id="invite-screen">
             <div class="invite-brandline"><span id="invite-style-label">הזמנה קסומה</span><small class="amit-seal">חוויה אינטראקטיבית מבית <b>עמית מיטרני</b></small></div>
             <div class="invite-main">
@@ -1343,8 +1348,8 @@
             <div class="rsvp-status"><span id="rsvp-copy">עדיין לא אושרה הגעה</span><span id="rsvp-count">0 אישורים</span></div>
             <div class="invite-preview-actions">
               <button type="button" id="invite-demo">עדכון ההזמנה</button>
-              <button type="button" id="invite-rsvp">אישור הגעה</button>
-              <a id="invite-share" href="#" target="_blank" rel="noopener">שיתוף בוואטסאפ</a>
+              <button type="button" id="invite-rsvp" aria-describedby="invite-demo-note">בדיקת אישור הגעה</button>
+              <a id="invite-share" href="#" target="_blank" rel="noopener" aria-describedby="invite-demo-note">שיתוף טקסט לדוגמה</a>
               <button type="button" id="invite-reset">איפוס</button>
             </div>
           </div>
@@ -1461,7 +1466,7 @@
             <div><button type="button">האם ניתן להתאים את המופע לקהל גדול?<span>+</span></button><p class="faq-answer">כן. לעמית יש מסלולים לקייטנות, מוסדות, רשויות, חברות וארגונים. יש לבדוק מראש את גודל הקהל, הבמה, ההגברה והמיקום.</p></div>
             <div><button type="button">מה צריך להכין במקום האירוע?<span>+</span></button><p class="faq-answer">לאחר בחירת המופע מתקבלת רשימת הכנות מסודרת בהתאם למקום, לקהל ולציוד שנדרש בפועל.</p></div>
             <div><button type="button">האם עמית מופיע גם באירועים עסקיים?<span>+</span></button><p class="faq-answer">כן. אפשר לבדוק התאמה של מופע, קטע אמנות חושים או קסמי קבלת פנים לאירוע חברה, רווחה, השקה או הרמת כוסית.</p></div>
-            <div><button type="button">איך יעבדו הקורסים והמוצרים הדיגיטליים?<span>+</span></button><p class="faq-answer">לאחר רכישה מאובטחת המשתמש יקבל חשבון אישי וגישה לתוכן שרכש. המחירים, הספקים ותנאי השימוש ייקבעו לאחר אפיון ואישור.</p></div>
+            <div><button type="button">איך יעבדו הקורסים והמוצרים הדיגיטליים?<span>+</span></button><p class="faq-answer">לאחר אישור עמית וחיבור עתידי של סליקה ואזור אישי, המשתמש יוכל לרכוש ולקבל גישה לתוכן. כרגע מוצגת המחשה בלבד, ללא חיוב וללא פתיחת קורס.</p></div>
           </div>
         </div>
         <aside class="lang-box"><div class="kicker">שירות ישיר ונוח</div><h3>מתחילים מכמה פרטים קצרים</h3><p>לא צריך לדעת מראש איזו חבילה לבחור. מספרים מי הקהל, היכן מתקיים האירוע ומה התאריך המשוער, ועמית חוזר כדי להתאים את הכיוון.</p><div class="contact-quick"><a href="tel:+972523416151">052-341-6151</a><a href="https://wa.me/972523416151" target="_blank" rel="noopener">פתיחת וואטסאפ</a></div></aside>
@@ -1603,7 +1608,7 @@
       tab.addEventListener("click", () => {
         document.querySelectorAll(".magic-tab").forEach((item) => {
           item.classList.toggle("active", item === tab);
-          item.setAttribute("aria-selected", item === tab ? "true" : "false");
+          item.setAttribute("aria-pressed", item === tab ? "true" : "false");
         });
         document.querySelectorAll("[data-panel]").forEach((panel) => {
           panel.classList.toggle("active", panel.dataset.panel === tab.dataset.trick);
@@ -2246,14 +2251,14 @@
 
 
     const languageSwitcher = document.querySelector(".language-switcher");
+    const languageControl = document.querySelector(".language-control");
     languageSwitcher.addEventListener("click", (event) => {
-      if (event.target.closest("a")) return;
-      const isOpen = languageSwitcher.classList.toggle("open");
+      const isOpen = languageControl.classList.toggle("open");
       languageSwitcher.setAttribute("aria-expanded", String(isOpen));
     });
     document.addEventListener("click", (event) => {
-      if (!event.target.closest(".language-switcher")) {
-        languageSwitcher.classList.remove("open");
+      if (!event.target.closest(".language-control")) {
+        languageControl.classList.remove("open");
         languageSwitcher.setAttribute("aria-expanded", "false");
       }
     });
@@ -2567,7 +2572,9 @@
     const navLinks = document.querySelector(".nav-links");
     mobileMenu.addEventListener("click", () => {
       navLinks.classList.toggle("mobile-open");
-      mobileMenu.setAttribute("aria-expanded", navLinks.classList.contains("mobile-open"));
+      const open = navLinks.classList.contains("mobile-open");
+      mobileMenu.setAttribute("aria-expanded", String(open));
+      mobileMenu.setAttribute("aria-label", open ? "סגירת תפריט" : "פתיחת תפריט");
     });
     navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => navLinks.classList.remove("mobile-open")));
 

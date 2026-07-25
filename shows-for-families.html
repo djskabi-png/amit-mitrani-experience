@@ -4,16 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>אמן חושים לאירוע משפחתי | עמית מיטרני</title>
-  <meta name="description" content="מופע קסמים ואמנות חושים לברית או בריתה, בר או בת מצווה, חגיגה משפחתית ואירוע פרטי, בהתאמה לילדים ולמבוגרים.">
+  <meta name="description" content="מופע קסמים ואמנות חושים לחגיגה משפחתית ולאירוע פרטי עם קהל רב גילאי, בהתאמה לילדים ולמבוגרים.">
+
   <meta name="theme-color" content="#08080d">
   <link rel="canonical" href="https://djskabi-png.github.io/amit-mitrani-experience/shows-for-families.html">
   <meta property="og:title" content="אמן חושים לאירוע משפחתי | עמית מיטרני">
-  <meta property="og:description" content="מופע קסמים ואמנות חושים לברית או בריתה, בר או בת מצווה, חגיגה משפחתית ואירוע פרטי, בהתאמה לילדים ולמבוגרים.">
+  <meta property="og:description" content="מופע קסמים ואמנות חושים לחגיגה משפחתית ולאירוע פרטי עם קהל רב גילאי, בהתאמה לילדים ולמבוגרים.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="he_IL">
   <meta property="og:url" content="https://djskabi-png.github.io/amit-mitrani-experience/shows-for-families.html">
   <meta property="og:image" content="https://djskabi-png.github.io/amit-mitrani-experience/assets/optimized/amit-thinking-1200.webp">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"חוויה משפחתית שגם הילדים וגם המבוגרים נכנסים אליה","description":"מופע קסמים ואמנות חושים לברית או בריתה, בר או בת מצווה, חגיגה משפחתית ואירוע פרטי, בהתאמה לילדים ולמבוגרים.","provider":{"@type":"Person","name":"עמית מיטרני","url":"https://djskabi-png.github.io/amit-mitrani-experience/"},"url":"https://djskabi-png.github.io/amit-mitrani-experience/shows-for-families.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"חוויה משפחתית שגם הילדים וגם המבוגרים נכנסים אליה","description":"מופע קסמים ואמנות חושים לחגיגה משפחתית ולאירוע פרטי עם קהל רב גילאי, בהתאמה לילדים ולמבוגרים.","provider":{"@type":"Person","name":"עמית מיטרני","url":"https://djskabi-png.github.io/amit-mitrani-experience/"},"url":"https://djskabi-png.github.io/amit-mitrani-experience/shows-for-families.html"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"האם המופע מתאים לקהל מעורב?","acceptedAnswer":{"@type":"Answer","text":"זה בדיוק תפקיד ההתאמה. עמית בודק את טווח הגילאים ואת אופי המשפחה ומתאים את סגנון המופע."}},{"@type":"Question","name":"אפשר לקיים את המופע בבית?","acceptedAnswer":{"@type":"Answer","text":"האפשרות תלויה בשטח, במספר המשתתפים ובתנאי המקום. עמית מאשר התאמה לאחר קבלת הפרטים."}},{"@type":"Question","name":"האם הקהל משתתף?","acceptedAnswer":{"@type":"Answer","text":"כן. ההשתתפות היא חלק מרכזי מהחוויה ונעשית בצורה שמתאימה לקהל ולסיטואציה."}},{"@type":"Question","name":"אפשר להתאים את המופע לברית או לבר מצווה?","acceptedAnswer":{"@type":"Answer","text":"אפשר לשלוח את סוג האירוע, טווח הגילאים, מספר המשתתפים ולוח הזמנים. עמית בודק את ההתאמה ומציע מבנה שמתאים לחגיגה."}},{"@type":"Question","name":"איך מקבלים הצעה?","acceptedAnswer":{"@type":"Answer","text":"שולחים תאריך, מקום, מספר משתתפים וטווח גילאים. עמית חוזר עם שאלות והצעה מתאימה."}}]}</script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
@@ -21,6 +22,8 @@
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--white); background:radial-gradient(circle at 82% 5%,rgba(139,104,255,.19),transparent 28rem),radial-gradient(circle at 8% 42%,rgba(237,192,105,.08),transparent 25rem),var(--bg); font-family:"Heebo",Arial,sans-serif; }
+    .skip-link { position:fixed; top:10px; right:10px; z-index:100; padding:10px 14px; border-radius:10px; color:#000; background:#fff; transform:translateY(-150%); }
+    .skip-link:focus { transform:none; }
     a { color:inherit; text-decoration:none; }
     button,input,select,textarea { font:inherit; }
     .shell { width:min(1120px,calc(100% - 40px)); margin:auto; }
@@ -29,6 +32,13 @@
     .brand { font-size:21px; font-weight:900; }
     .brand span { color:var(--gold); }
     .nav-links { display:flex; gap:18px; align-items:center; color:#ddd9e4; font-size:14px; }
+    .nav-links a,.brand { min-height:44px; display:inline-flex; align-items:center; }
+    .mobile-nav { display:none; position:relative; }
+    .mobile-nav summary { min-width:44px; min-height:44px; display:grid; place-items:center; border:1px solid var(--line); border-radius:12px; cursor:pointer; list-style:none; }
+    .mobile-nav summary::-webkit-details-marker { display:none; }
+    .mobile-nav-panel { position:absolute; top:50px; left:0; z-index:40; display:grid; width:min(270px,calc(100vw - 34px)); padding:10px; border:1px solid var(--line); border-radius:15px; background:#171620; box-shadow:0 22px 60px rgba(0,0,0,.55); }
+    .mobile-nav-panel a { min-height:44px; display:flex; align-items:center; padding:8px 10px; border-bottom:1px solid var(--line); }
+    .mobile-nav-panel a:last-child { border-bottom:0; }
     .btn { display:inline-flex; min-height:48px; align-items:center; justify-content:center; padding:12px 20px; border:1px solid var(--line); border-radius:13px; font-weight:800; }
     .btn-gold { color:#18121c; border-color:var(--gold); background:var(--gold); }
     .hero { min-height:640px; display:grid; grid-template-columns:1.05fr .95fr; gap:55px; align-items:center; padding:60px 0; }
@@ -117,6 +127,7 @@
     .cta p { margin:0; color:#cbc6d3; }
     footer { padding:45px 0 35px; border-top:1px solid var(--line); color:var(--muted); }
     .footer-seo { display:grid; grid-template-columns:repeat(3,1fr); gap:9px 20px; margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--line); }
+    .footer-seo a,.legal-links a,.breadcrumbs a { min-height:44px; display:inline-flex; align-items:center; }
     .footer-seo a { color:#d8d4df; font-size:13px; }
     .footer-seo a:hover { color:var(--gold); }
     .footer-row { display:flex; justify-content:space-between; gap:20px; }
@@ -196,6 +207,9 @@
     body.modal-open { overflow:hidden; }
     @media(max-width:760px) {
       .nav-links a:not(.btn) { display:none; }
+      .mobile-nav { display:block; }
+      .hero h1 { font-size:clamp(38px,11vw,54px); line-height:1.02; }
+      .lead { font-size:17px; line-height:1.65; }
       .hero { grid-template-columns:1fr; min-height:0; padding:42px 0; }
       .hero-image { min-height:390px; }
       .grid,.related,.cta,.experience,.mentions,.example-grid,.testimonial-row { grid-template-columns:1fr; }
@@ -226,11 +240,12 @@
   </style>
 </head>
 <body>
-  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div></nav></header>
-  <main>
+  <a class="skip-link" href="#main-content">דילוג לתוכן המרכזי</a>
+  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div><details class="mobile-nav"><summary aria-label="פתיחת תפריט">☰</summary><div class="mobile-nav-panel"><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">אירועים לחברות</a><a href="close-up-magic-receptions.html">קסמים בקבלת פנים</a><a href="magic-courses.html">קורסים דיגיטליים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="index.html#contact">יצירת קשר</a></div></details></nav></header>
+  <main id="main-content">
     <div class="shell breadcrumbs"><a href="index.html">עמוד הבית</a> / אירועים פרטיים</div>
     <section class="hero shell">
-      <div><div class="kicker">אירועים פרטיים</div><h1>חוויה משפחתית שגם הילדים וגם המבוגרים נכנסים אליה</h1><p class="lead">בברית או בריתה, בר או בת מצווה וחגיגה משפחתית הקהל מגוון. המופע צריך לעבוד מול כמה גילאים באותו חדר, בלי להפוך לילדותי מדי ובלי להשאיר את הילדים מאחור. לכן ההתאמה מתחילה בהרכב הקהל, בסוג האירוע ובמה שכבר מתוכנן סביב המופע.</p><div class="hero-actions"><button class="btn btn-gold" type="button" data-commerce-open>הזמנת האירוע באתר</button><a class="btn" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%A2%D7%9E%D7%95%D7%93%20%D7%90%D7%99%D7%A8%D7%95%D7%A2%D7%99%D7%9D%20%D7%A4%D7%A8%D7%98%D7%99%D7%99%D7%9D%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." target="_blank" rel="noopener">שאלה לעמית בוואטסאפ</a></div></div>
+      <div><div class="kicker">אירועים פרטיים</div><h1>חוויה משפחתית שגם הילדים וגם המבוגרים נכנסים אליה</h1><p class="lead">בחגיגה משפחתית הקהל מגוון. המופע צריך לעבוד מול כמה גילאים באותו חדר, בלי להפוך לילדותי מדי ובלי להשאיר את הילדים מאחור. לכן ההתאמה מתחילה בהרכב הקהל, בסוג האירוע ובמה שכבר מתוכנן סביב המופע. לברית, בריתה, בר או בת מצווה קיימים באתר עמודים ייעודיים.</p><div class="hero-actions"><button class="btn btn-gold" type="button" data-commerce-open>הזמנת האירוע באתר</button><a class="btn" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%A2%D7%9E%D7%95%D7%93%20%D7%90%D7%99%D7%A8%D7%95%D7%A2%D7%99%D7%9D%20%D7%A4%D7%A8%D7%98%D7%99%D7%99%D7%9D%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." target="_blank" rel="noopener">שאלה לעמית בוואטסאפ</a></div></div>
       <div class="hero-image"><img src="assets/optimized/amit-thinking-1200.webp" alt="עמית מיטרני באמנות חושים" width="1200" height="900"></div>
     </section>
     <section id="answers"><div class="shell"><div class="answer"><h2>התשובה הקצרה</h2><p>המסלול מיועד לאירועים פרטיים שבהם רוצים פעילות משותפת לילדים ולמבוגרים. עמית מתאים את הקצב, ההומור וסוג ההשתתפות לפי האירוע, הרכב המשפחה והמקום.</p></div></div></section>
@@ -239,7 +254,7 @@
     <section><div class="shell"><div class="section-head"><div class="kicker">איך זה עובד</div><h2>מה מקבלים במסלול הזה</h2><p>כל פרט נסגר רק לאחר שיחה ישירה עם עמית. העמוד מסביר את דרך ההתאמה ואינו מבטיח זמינות, מחיר או היקף קבוע.</p></div><div class="grid"><article class="card"><b>כמה דורות בחוויה אחת</b><p>המופע נבנה כך שילדים ומבוגרים יוכלו ליהנות ולהשתתף יחד.</p></article><article class="card"><b>הומור והפתעה</b><p>הקסם משרת את החיבור בחדר ולא עומד בפני עצמו.</p></article><article class="card"><b>התאמה לאירוע</b><p>ברית או בריתה, בר או בת מצווה ומפגש משפחתי מקבלים קצב ומבנה שונים.</p></article><article class="card"><b>תיאום ברור</b><p>מגדירים מראש מי הקהל, היכן מתקיים האירוע ומה חשוב למשפחה.</p></article></div></div></section>
     
     <section><div class="shell"><div class="section-head"><div class="kicker">דוגמאות מוחשיות</div><h2>מה עמית יכול ליצור בעולם הזה</h2><p>הדוגמאות ממחישות את הכיוון. המבנה הסופי נקבע לפי הקהל, המטרה והמסלול שנבחר.</p></div><div class="example-grid"><article class="example-card"><span>01</span><h3>קריאת מחשבות בין דורות</h3><p>ילד, הורה וסבא או סבתא משתתפים באותו קטע מזוויות שונות.</p></article><article class="example-card"><span>02</span><h3>סוד משפחתי על הבמה</h3><p>בחירה של אחד מבני המשפחה הופכת לרגע מפתיע שמחבר את כולם.</p></article><article class="example-card"><span>03</span><h3>סיום עם כל החדר</h3><p>רגע שכולם יכולים לעקוב אחריו ולהגיב אליו יחד.</p></article></div></div></section>
-    <section><div class="shell"><div class="section-head"><div class="kicker">אמון שנשען על מקורות</div><h2>מה אומרים ומפרסמים על עמית</h2><p>ההמלצות והאזכורים כאן מבוססים על מקורות חיצוניים נגישים, ולא על טקסטים שהומצאו עבור האתר.</p></div><div class="mentions"><article class="mention"><small>אשדוד נט</small><h3>מופע לכל המשפחה</h3><p>בפרסום חיצוני לקראת אירוע פורים הוצג עמית כקוסם ואמן חושים במופע משפחתי משתף.</p><a href="https://ashdodnet.com/תרבות-ובידור/חוגגים-פורים-בקניון-סימול-500335" target="_blank" rel="noopener">לצפייה במקור</a></article></div><div class="testimonial-row"><article class="testimonial"><blockquote>אמן חושים מדהים, אדם מקסים שיוצר כימייה עם הקהל</blockquote><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקוח שצוטט בפרופיל בצומת השרון</a></article><article class="testimonial"><blockquote>אחד האנשים החזקים בתעשייה</blockquote><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקוח שצוטט בפרופיל בצומת השרון</a></article></div></div></section>
+    <section><div class="shell"><div class="section-head"><div class="kicker">אמון שנשען על מקורות</div><h2>מה אומרים ומפרסמים על עמית</h2><p>האזכורים והפרפרזות כאן מבוססים על מקורות חיצוניים נגישים. הקישור בכל כרטיס מוביל לנוסח המלא במקור.</p></div><div class="mentions"><article class="mention"><small>אשדוד נט</small><h3>מופע לכל המשפחה</h3><p>בפרסום חיצוני לקראת אירוע פורים הוצג עמית כקוסם ואמן חושים במופע משפחתי משתף.</p><a href="https://ashdodnet.com/תרבות-ובידור/חוגגים-פורים-בקניון-סימול-500335" target="_blank" rel="noopener">לצפייה במקור</a></article></div><div class="testimonial-row"><article class="testimonial"><p>לקוחות שפורסמו בפרופיל מתארים את עמית כאמן חושים מרשים, אדם נעים ובעל חיבור טוב לקהל.</p><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקריאת הנוסח המלא בצומת השרון</a></article><article class="testimonial"><p>באותו פרופיל פורסמה גם הערכה למעמדו המקצועי בתעשייה.</p><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקריאת הנוסח המלא בצומת השרון</a></article></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">שאלות ותשובות</div><h2>מה כדאי לדעת לפני שפונים</h2></div><div class="faq"><details><summary>האם המופע מתאים לקהל מעורב?</summary><p>זה בדיוק תפקיד ההתאמה. עמית בודק את טווח הגילאים ואת אופי המשפחה ומתאים את סגנון המופע.</p></details><details><summary>אפשר לקיים את המופע בבית?</summary><p>האפשרות תלויה בשטח, במספר המשתתפים ובתנאי המקום. עמית מאשר התאמה לאחר קבלת הפרטים.</p></details><details><summary>האם הקהל משתתף?</summary><p>כן. ההשתתפות היא חלק מרכזי מהחוויה ונעשית בצורה שמתאימה לקהל ולסיטואציה.</p></details><details><summary>אפשר להתאים את המופע לברית או לבר מצווה?</summary><p>אפשר לשלוח את סוג האירוע, טווח הגילאים, מספר המשתתפים ולוח הזמנים. עמית בודק את ההתאמה ומציע מבנה שמתאים לחגיגה.</p></details><details><summary>איך מקבלים הצעה?</summary><p>שולחים תאריך, מקום, מספר משתתפים וטווח גילאים. עמית חוזר עם שאלות והצעה מתאימה.</p></details></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">המשך הדרך</div><h2>עולמות נוספים באתר</h2></div><div class="related"><a href="shows-for-kids.html">ימי הולדת לילדים</a><a href="shows-for-companies.html">חברות וארגונים</a><a href="index.html">האתר הראשי</a></div></div></section>
     <section><div class="shell"><div class="cta"><div><h2>לא צריך להמתין כדי להתחיל הזמנה</h2><p>ממלאים את כל פרטי האירוע, מקבלים מספר הזמנה ושולחים לעמית לאישור זמינות ותנאים.</p></div><button class="btn btn-gold" type="button" data-commerce-open>פתיחת הזמנה ישירה</button></div></div></section>

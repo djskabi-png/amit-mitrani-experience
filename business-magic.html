@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>קסם מותאם לעסקים | עמית מיטרני</title>
   <meta name="description" content="קסמים ואמנות חושים שמותאמים למוצר, למסר, לצילום או לרגע בתוך אירוע עסקי, לפי בריף ואישור עמית.">
+
   <meta name="theme-color" content="#08080d">
   <link rel="canonical" href="https://djskabi-png.github.io/amit-mitrani-experience/business-magic.html">
   <meta property="og:title" content="קסם מותאם לעסקים | עמית מיטרני">
@@ -21,6 +22,8 @@
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--white); background:radial-gradient(circle at 82% 5%,rgba(139,104,255,.19),transparent 28rem),radial-gradient(circle at 8% 42%,rgba(237,192,105,.08),transparent 25rem),var(--bg); font-family:"Heebo",Arial,sans-serif; }
+    .skip-link { position:fixed; top:10px; right:10px; z-index:100; padding:10px 14px; border-radius:10px; color:#000; background:#fff; transform:translateY(-150%); }
+    .skip-link:focus { transform:none; }
     a { color:inherit; text-decoration:none; }
     button,input,select,textarea { font:inherit; }
     .shell { width:min(1120px,calc(100% - 40px)); margin:auto; }
@@ -29,6 +32,13 @@
     .brand { font-size:21px; font-weight:900; }
     .brand span { color:var(--gold); }
     .nav-links { display:flex; gap:18px; align-items:center; color:#ddd9e4; font-size:14px; }
+    .nav-links a,.brand { min-height:44px; display:inline-flex; align-items:center; }
+    .mobile-nav { display:none; position:relative; }
+    .mobile-nav summary { min-width:44px; min-height:44px; display:grid; place-items:center; border:1px solid var(--line); border-radius:12px; cursor:pointer; list-style:none; }
+    .mobile-nav summary::-webkit-details-marker { display:none; }
+    .mobile-nav-panel { position:absolute; top:50px; left:0; z-index:40; display:grid; width:min(270px,calc(100vw - 34px)); padding:10px; border:1px solid var(--line); border-radius:15px; background:#171620; box-shadow:0 22px 60px rgba(0,0,0,.55); }
+    .mobile-nav-panel a { min-height:44px; display:flex; align-items:center; padding:8px 10px; border-bottom:1px solid var(--line); }
+    .mobile-nav-panel a:last-child { border-bottom:0; }
     .btn { display:inline-flex; min-height:48px; align-items:center; justify-content:center; padding:12px 20px; border:1px solid var(--line); border-radius:13px; font-weight:800; }
     .btn-gold { color:#18121c; border-color:var(--gold); background:var(--gold); }
     .hero { min-height:640px; display:grid; grid-template-columns:1.05fr .95fr; gap:55px; align-items:center; padding:60px 0; }
@@ -117,6 +127,7 @@
     .cta p { margin:0; color:#cbc6d3; }
     footer { padding:45px 0 35px; border-top:1px solid var(--line); color:var(--muted); }
     .footer-seo { display:grid; grid-template-columns:repeat(3,1fr); gap:9px 20px; margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--line); }
+    .footer-seo a,.legal-links a,.breadcrumbs a { min-height:44px; display:inline-flex; align-items:center; }
     .footer-seo a { color:#d8d4df; font-size:13px; }
     .footer-seo a:hover { color:var(--gold); }
     .footer-row { display:flex; justify-content:space-between; gap:20px; }
@@ -196,6 +207,9 @@
     body.modal-open { overflow:hidden; }
     @media(max-width:760px) {
       .nav-links a:not(.btn) { display:none; }
+      .mobile-nav { display:block; }
+      .hero h1 { font-size:clamp(38px,11vw,54px); line-height:1.02; }
+      .lead { font-size:17px; line-height:1.65; }
       .hero { grid-template-columns:1fr; min-height:0; padding:42px 0; }
       .hero-image { min-height:390px; }
       .grid,.related,.cta,.experience,.mentions,.example-grid,.testimonial-row { grid-template-columns:1fr; }
@@ -226,8 +240,9 @@
   </style>
 </head>
 <body>
-  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div></nav></header>
-  <main>
+  <a class="skip-link" href="#main-content">דילוג לתוכן המרכזי</a>
+  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div><details class="mobile-nav"><summary aria-label="פתיחת תפריט">☰</summary><div class="mobile-nav-panel"><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">אירועים לחברות</a><a href="close-up-magic-receptions.html">קסמים בקבלת פנים</a><a href="magic-courses.html">קורסים דיגיטליים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="index.html#contact">יצירת קשר</a></div></details></nav></header>
+  <main id="main-content">
     <div class="shell breadcrumbs"><a href="index.html">עמוד הבית</a> / קסם לעסקים</div>
     <section class="hero shell">
       <div><div class="kicker">קסם לעסקים</div><h1>כשהמסר העסקי הופך לחלק מהקסם</h1><p class="lead">קסם יכול להיות יותר מקטע בידורי. הוא יכול להמחיש רעיון, להכניס מוצר אל תוך סיפור וליצור רגע שהקהל רוצה לשתף. כל פרויקט כזה דורש בריף, פיתוח רעיון ואישור לפני הפקה.</p><div class="hero-actions"><button class="btn btn-gold" type="button" data-commerce-open>הזמנת האירוע באתר</button><a class="btn" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%A2%D7%9E%D7%95%D7%93%20%D7%A7%D7%A1%D7%9D%20%D7%9C%D7%A2%D7%A1%D7%A7%D7%99%D7%9D%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." target="_blank" rel="noopener">שאלה לעמית בוואטסאפ</a></div></div>
@@ -239,7 +254,7 @@
     <section><div class="shell"><div class="section-head"><div class="kicker">איך זה עובד</div><h2>מה מקבלים במסלול הזה</h2><p>כל פרט נסגר רק לאחר שיחה ישירה עם עמית. העמוד מסביר את דרך ההתאמה ואינו מבטיח זמינות, מחיר או היקף קבוע.</p></div><div class="grid"><article class="card"><b>מוצר או מסר</b><p>פיתוח רעיון שבו המוצר או המסר נכנסים באופן טבעי אל תוך ההפתעה.</p></article><article class="card"><b>צילום ותוכן</b><p>בחינת התאמה לקטע מצולם שבו עמית והקסם נמצאים במרכז.</p></article><article class="card"><b>אירוע עסקי</b><p>קטע לבמה, להשקה, להרמת כוסית או לקבלת פנים, לפי הקהל ולוח הזמנים.</p></article></div></div></section>
     
     <section><div class="shell"><div class="section-head"><div class="kicker">דוגמאות מוחשיות</div><h2>מה עמית יכול ליצור בעולם הזה</h2><p>הדוגמאות ממחישות את הכיוון. המבנה הסופי נקבע לפי הקהל, המטרה והמסלול שנבחר.</p></div><div class="example-grid"><article class="example-card"><span>01</span><h3>מוצר שנחשף בקסם</h3><p>המוצר נכנס לתוך סיפור ומופיע ברגע השיא במקום להיות רק מוצג למצלמה.</p></article><article class="example-card"><span>02</span><h3>סרטון שמזמין תגובה</h3><p>קטע קצר שנבנה לרשתות וגורם לצופה לעצור ולנסות להבין מה קרה.</p></article><article class="example-card"><span>03</span><h3>רגע מותאם באירוע</h3><p>קטע קצר שמתחבר ללוח הזמנים, לקהל ולמסר של האירוע העסקי.</p></article></div></div></section>
-    <section><div class="shell"><div class="section-head"><div class="kicker">אמון שנשען על מקורות</div><h2>מה אומרים ומפרסמים על עמית</h2><p>ההמלצות והאזכורים כאן מבוססים על מקורות חיצוניים נגישים, ולא על טקסטים שהומצאו עבור האתר.</p></div><div class="mentions"><article class="mention"><small>כרטיס העסק של עמית</small><h3>הופעות שיווקיות</h3><p>כרטיס העסק הציבורי של עמית מציין במפורש פעילות של הופעות שיווקיות לצד מופעים לחברות ולוועדי עובדים.</p><a href="https://greenbook.co.il/card/4905/1304" target="_blank" rel="noopener">לצפייה במקור</a></article><article class="mention"><small>אגודת הקוסמים</small><h3>פרויקטים מיוחדים</h3><p>אגודת הקוסמים מציגה את עמית בתחום הפרויקטים המיוחדים, בסיס מתאים לפיתוח רעיונות שאינם מופע מדף.</p><a href="https://www.magic.org.il/הקוסם-בשבילך/" target="_blank" rel="noopener">לצפייה במקור</a></article></div><div class="testimonial-row"><article class="testimonial"><blockquote>אמן חושים מדהים, אדם מקסים שיוצר כימייה עם הקהל</blockquote><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקוח שצוטט בפרופיל בצומת השרון</a></article><article class="testimonial"><blockquote>אחד האנשים החזקים בתעשייה</blockquote><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקוח שצוטט בפרופיל בצומת השרון</a></article></div></div></section>
+    <section><div class="shell"><div class="section-head"><div class="kicker">אמון שנשען על מקורות</div><h2>מה אומרים ומפרסמים על עמית</h2><p>האזכורים והפרפרזות כאן מבוססים על מקורות חיצוניים נגישים. הקישור בכל כרטיס מוביל לנוסח המלא במקור.</p></div><div class="mentions"><article class="mention"><small>כרטיס העסק של עמית</small><h3>הופעות שיווקיות</h3><p>כרטיס העסק הציבורי של עמית מציין במפורש פעילות של הופעות שיווקיות לצד מופעים לחברות ולוועדי עובדים.</p><a href="https://greenbook.co.il/card/4905/1304" target="_blank" rel="noopener">לצפייה במקור</a></article><article class="mention"><small>אגודת הקוסמים</small><h3>עמית באתר אגודת הקוסמים</h3><p>עמית מיטרני מופיע בעמוד הקוסמים באתר האגודה.</p><a href="https://www.magic.org.il/הקוסם-בשבילך/" target="_blank" rel="noopener">לצפייה במקור</a></article></div><div class="testimonial-row"><article class="testimonial"><p>לקוחות שפורסמו בפרופיל מתארים את עמית כאמן חושים מרשים, אדם נעים ובעל חיבור טוב לקהל.</p><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקריאת הנוסח המלא בצומת השרון</a></article><article class="testimonial"><p>באותו פרופיל פורסמה גם הערכה למעמדו המקצועי בתעשייה.</p><a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">לקריאת הנוסח המלא בצומת השרון</a></article></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">שאלות ותשובות</div><h2>מה כדאי לדעת לפני שפונים</h2></div><div class="faq"><details><summary>איך מתחיל פרויקט תוכן מסחרי?</summary><p>מתחילים בבריף שמגדיר מוצר, קהל, מסר, פלטפורמה ולוח זמנים. לאחר מכן עמית בודק התאמה.</p></details><details><summary>אפשר להזמין סרטון בודד?</summary><p>אפשר להציג את הצורך, אך ההיקף והתוצר נקבעים רק לאחר בדיקה ואישור ישיר של עמית.</p></details><details><summary>האם אפשר לשלב את הקסם באירוע חברה?</summary><p>כן. אפשר לבדוק התאמה לבמה, לקבלת פנים, להשקה או לרגע קצר בתוך האירוע.</p></details><details><summary>איך מקבלים הצעה?</summary><p>שולחים תיאור קצר של העסק, המטרה, הקהל והפלטפורמה. עמית חוזר להשלמת בריף.</p></details></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">המשך הדרך</div><h2>עולמות נוספים באתר</h2></div><div class="related"><a href="shows-for-companies.html">אירועים לחברות</a><a href="magic-courses.html">קורסים דיגיטליים</a><a href="index.html#contact">יצירת קשר</a></div></div></section>
     <section><div class="shell"><div class="cta"><div><h2>לא צריך להמתין כדי להתחיל הזמנה</h2><p>ממלאים את כל פרטי האירוע, מקבלים מספר הזמנה ושולחים לעמית לאישור זמינות ותנאים.</p></div><button class="btn btn-gold" type="button" data-commerce-open>פתיחת הזמנה ישירה</button></div></div></section>
