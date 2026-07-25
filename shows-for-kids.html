@@ -26,6 +26,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
     :root { --bg:#08080d; --panel:#12111a; --line:rgba(255,255,255,.12); --gold:#edc069; --purple:#8b68ff; --muted:#aaa7b7; --white:#fff; }
     * { box-sizing:border-box; }
+    .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--white); background:radial-gradient(circle at 82% 5%,rgba(139,104,255,.19),transparent 28rem),radial-gradient(circle at 8% 42%,rgba(237,192,105,.08),transparent 25rem),var(--bg); font-family:"Heebo",Arial,sans-serif; }
     .skip-link { position:fixed; top:10px; right:10px; z-index:100; padding:10px 14px; border-radius:10px; color:#000; background:#fff; transform:translateY(-150%); }
@@ -129,6 +130,24 @@
     .feedback-card h3 { margin:9px 0 7px; font-size:20px; }
     .feedback-card p { margin:0; color:var(--muted); line-height:1.7; }
     .feedback-source { display:inline-block; margin-top:14px; color:var(--gold); font-size:12px; font-weight:900; text-decoration:underline; text-underline-offset:3px; }
+    .review-gallery { margin-top:34px; padding:24px; border:1px solid rgba(237,192,105,.24); border-radius:24px; background:linear-gradient(145deg,rgba(237,192,105,.06),rgba(139,104,255,.07)); }
+    .review-gallery-head { display:flex; align-items:end; justify-content:space-between; gap:18px; margin-bottom:16px; }
+    .review-gallery-head h3 { margin:5px 0 0; font-size:clamp(25px,3vw,36px); }
+    .review-gallery-head p { margin:0; color:var(--muted); line-height:1.6; }
+    .review-controls { display:flex; gap:8px; direction:ltr; }
+    .review-control { width:48px; height:48px; display:grid; place-items:center; border:1px solid rgba(237,192,105,.35); border-radius:50%; color:white; background:#17141f; font-size:25px; cursor:pointer; }
+    .review-control:hover,.review-control:focus-visible { color:#17111d; background:var(--gold); }
+    .review-control:focus-visible { outline:3px solid white; outline-offset:3px; }
+    .review-track { display:flex; gap:16px; overflow-x:auto; padding:4px 4px 14px; direction:ltr; scroll-snap-type:x mandatory; scroll-padding-inline:4px; overscroll-behavior-inline:contain; scrollbar-color:var(--gold) rgba(255,255,255,.08); }
+    .review-slide { flex-grow:0; flex-shrink:0; flex-basis:min(640px,84vw); margin:0; overflow:hidden; border:1px solid rgba(255,255,255,.14); border-radius:20px; direction:rtl; scroll-snap-align:center; background:#0c0b11; box-shadow:0 16px 45px rgba(0,0,0,.28); }
+    .review-slide a { display:block; color:white; }
+    .review-slide img { width:100%; height:auto; aspect-ratio:4 / 3; display:block; object-fit:cover; object-position:center top; background:#f3f4f6; }
+    .review-slide figcaption { display:grid; gap:5px; padding:17px 19px 20px; }
+    .review-slide figcaption strong { color:var(--gold); font-size:17px; }
+    .review-slide figcaption span { color:#d6d1dc; line-height:1.55; }
+    .review-slide a:hover img,.review-slide a:focus-visible img { filter:brightness(1.05); }
+    .review-slide a:focus-visible { outline:3px solid var(--gold); outline-offset:-3px; }
+    .review-gallery-note { margin:10px 4px 0; color:var(--muted); font-size:12px; line-height:1.6; }
     .more-media { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:18px; }
     .media-preview { position:relative; min-height:280px; overflow:hidden; border:1px solid rgba(237,192,105,.3); border-radius:22px; color:white; background:#11101a; box-shadow:0 18px 50px rgba(0,0,0,.24); isolation:isolate; }
     .media-preview img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .45s ease,filter .45s ease; }
@@ -240,6 +259,10 @@
     .order-number { color:var(--gold); font-weight:900; direction:ltr; }
     body.modal-open { overflow:hidden; }
     @media(max-width:760px) {
+      .review-gallery { padding:17px; }
+      .review-gallery-head { align-items:start; flex-direction:column; }
+      .review-controls { align-self:flex-end; }
+      .review-slide { flex-basis:92%; }
       .more-media { grid-template-columns:1fr; }
       .media-preview { min-height:245px; }
       .nav-links a:not(.btn) { display:none; }
@@ -289,6 +312,7 @@
       <div class="hero-image"><img src="assets/optimized/amit-golden-1600.webp" alt="עמית מיטרני במופע קסמים לילדים" width="1200" height="900"></div>
     </section>
     <section id="answers"><div class="shell"><div class="answer"><h2>התשובה הקצרה</h2><p>המופע מתאים למשפחות שמחפשות פעילות מרכזית ליום הולדת לילדים. לפני שסוגרים בודקים גילאים, מספר משתתפים, מקום ותאריך, ורק אז מתאימים את מבנה המופע.</p></div></div></section>
+    <section id="review-gallery"><div class="shell"><div class="review-gallery" data-review-carousel><div class="review-gallery-head"><div><div class="kicker">הורים משתפים מהאירוע</div><h3>צילומי המלצות ממופעי ילדים וימי הולדת</h3><p>גוררים ימינה או שמאלה, או משתמשים בכפתורים. לחיצה על צילום פותחת את הפרסום המקורי.</p></div><div class="review-controls"><button class="review-control" type="button" data-review-prev aria-label="המלצה קודמת" title="מעבר להמלצה הקודמת">‹</button><button class="review-control" type="button" data-review-next aria-label="המלצה הבאה" title="מעבר להמלצה הבאה">›</button></div></div><div class="review-track" data-review-track tabindex="0" role="list" aria-label="צילומי המלצות על מופעי ילדים"><figure class="review-slide" role="listitem" data-review-slide><a href="https://www.facebook.com/mor.shemesh.16/posts/pfbid02ewBwchyctKZVyHrMs9HqeVTjSzG55H8r5BW2aYFKmTa2w9rFwQfhGEqz4ssV8TTMl" target="_blank" rel="noopener" title="המלצת מור שמש על מופע יום הולדת לילדים עם עמית מיטרני, פתיחת המקור בפייסבוק"><img src="assets/reviews/facebook-mor-shemesh.jpg" alt="צילום מסך של המלצת מור שמש בפייסבוק על מופע יום הולדת לילדים עם עמית מיטרני" title="המלצת מור שמש על מופע יום הולדת לילדים עם עמית מיטרני" loading="lazy" width="1904" height="888"><figcaption><strong>מור שמש</strong><span>הילדים היו מרותקים, והחוגג קיבל מקום מרכזי במופע.</span></figcaption></a></figure><figure class="review-slide" role="listitem" data-review-slide><a href="https://www.facebook.com/sveta.bachar/posts/pfbid0XaQ15uNYFNi6ngtJRzthZmyzU43aNwwXe8v2aA8GNAsJTzPKkw47dYC4hJxQjPwxl" target="_blank" rel="noopener" title="המלצת סבטה בכר על מופע יום הולדת לילדים עם עמית מיטרני, פתיחת המקור בפייסבוק"><img src="assets/reviews/facebook-sveta-bachar.jpg" alt="צילום מסך של המלצת סבטה בכר בפייסבוק על מופע יום הולדת לילדים עם עמית מיטרני" title="המלצת סבטה בכר על מופע יום הולדת לילדים עם עמית מיטרני" loading="lazy" width="1904" height="888"><figcaption><strong>סבטה בכר</strong><span>כשלושים ילדים נשארו מרותקים, וגם ההורים נהנו מהחוויה.</span></figcaption></a></figure><figure class="review-slide" role="listitem" data-review-slide><a href="https://www.facebook.com/amir.eldar.9/posts/pfbid0FrpXNzxdJpRZFFH8ohxUCRWm1uQFCWaiUokSxZqFcuRoqb1zPcmXBrTBBXuCR6uEl" target="_blank" rel="noopener" title="המלצת אמיר אלדר על עמית מיטרני מול ילדים ומבוגרים, פתיחת המקור בפייסבוק"><img src="assets/reviews/facebook-amir-eldar.jpg" alt="צילום מסך של המלצת אמיר אלדר בפייסבוק על היכולת של עמית מיטרני לרתק ילדים ומבוגרים" title="המלצת אמיר אלדר על עמית מיטרני מול ילדים ומבוגרים" loading="lazy" width="1904" height="888"><figcaption><strong>אמיר אלדר</strong><span>מופע שמצליח לחבר ילדים צעירים, בני נוער ומבוגרים.</span></figcaption></a></figure></div><p class="review-gallery-note">הצילומים נלקחו מפרסומים פומביים בעמוד ההמלצות של עמית. הטקסט הקריא נשאר גם ב-HTML לטובת נגישות ומנועי חיפוש.</p><p class="sr-only" data-review-status aria-live="polite">מוצגת המלצה 1 מתוך 3</p></div></div></section>
     
     <section><div class="shell"><div class="event-story"><div class="event-story-visual"><img src="assets/optimized/invitation-kids-1200.webp" alt="ילדים חוגגים יחד באירוע יום הולדת" loading="lazy" width="1200" height="900"></div><div class="event-story-copy"><div class="kicker">החוגגים במרכז התמונה</div><h2>הילד או הילדה לא עומדים ליד הקסם. הם מובילים אותו</h2><p>החוויה נבנית סביב החוגגים, החברים והמשפחה. עמית מוביל את הקצב, אבל רגעי השיא שייכים לילדים שעל הבמה ולקהל שמגיב יחד איתם.</p><div class="event-steps"><div class="event-step"><b>לפני המופע</b><span>מכירים את גיל החוגגים, מספר המשתתפים, המקום והאופי של הקבוצה.</span></div><div class="event-step"><b>בפתיחה</b><span>אוספים את תשומת הלב בהדרגה ויוצרים תחושת ביטחון גם לילדים שלא אוהבים להיות במרכז.</span></div><div class="event-step"><b>ברגע השיא</b><span>החוגגים מקבלים תפקיד משמעותי בתוך הקסם, בלי להביך ובלי לקחת מהם את הבמה.</span></div><div class="event-step"><b>בסיום</b><span>משאירים זמן למחיאות כפיים, צילום ורגע משותף שהמשפחה יכולה לזכור.</span></div></div></div></div><div class="section-head" style="margin-top:45px"><div class="kicker">הורים מספרים על החוויה</div><h2>המלצות אמיתיות מאירועי יום הולדת</h2><p>בעמוד הפייסבוק הרשמי של עמית מוצגים 100% המלצה על בסיס 26 ביקורות, נכון לבדיקה ב-25 ביולי 2026. השמות והנוסח שלפניכם נבדקו מול הפרסום הפומבי.</p></div><div class="public-feedback"><article class="feedback-card"><small>המלצה פומבית</small><h3>מור שמש</h3><p>כיף לראות מפעיל שמכבד את הקהל הצעיר שלו, מעצים ילדים ברגישות ונותן מקום נכבד במופע לחוגג או לחוגגת.</p><a class="feedback-source" href="https://www.facebook.com/amitgic/reviews" target="_blank" rel="noopener">המלצה פומבית בפייסבוק</a></article><article class="feedback-card"><small>המלצה פומבית</small><h3>סבטה בכר</h3><p>עמית החזיק כ-30 ילדים מרותקים לאורך כל המופע, וההורים היו מרותקים לא פחות.</p><a class="feedback-source" href="https://www.facebook.com/amitgic/reviews" target="_blank" rel="noopener">המלצה פומבית בפייסבוק</a></article><article class="feedback-card"><small>המלצה פומבית</small><h3>ארז ורשה</h3><p>פרפורמר סוחף שמכניס את האנשים והילדים אל תוך המופע.</p><a class="feedback-source" href="https://www.facebook.com/amitgic/reviews" target="_blank" rel="noopener">המלצה פומבית בפייסבוק</a></article><article class="feedback-card"><small>המלצה פומבית</small><h3>המלצות נוספות מהורים</h3><p>עמית ריכז בעמוד האינסטגרם הרשמי המלצות נוספות ממופעי ילדים וימי הולדת. קישור ישיר נשלח ואומת מול עמית.</p><a class="feedback-source" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTY3NjE1MTM5MjM1ODc5?story_media_id=1996349804657339925&igsh=NnRzcWp6aTcxZm13" target="_blank" rel="noopener">לצפייה בהמלצות באינסטגרם</a></article></div><div class="more-media"><a class="media-preview" href="https://www.youtube.com/watch?v=E2VPaIrOU8s" target="_blank" rel="noopener" aria-label="מופע ילדים נוסף ביוטיוב, פתיחת הסרטון בחלון חדש"><img src="assets/optimized/amit-time-machine-700.webp" alt="" loading="lazy" width="800" height="600"><span class="media-preview-content"><span class="media-play" aria-hidden="true">▶</span><span class="media-preview-copy"><strong>מופע ילדים נוסף ביוטיוב</strong><span>קטע נוסף מעולם מופעי הילדים של עמית</span></span></span></a><a class="media-preview" href="https://www.facebook.com/reel/1693679147451638/" target="_blank" rel="noopener" aria-label="עמית מופיע מול קהל ילדים, פתיחת הסרטון בחלון חדש"><img src="assets/optimized/amit-golden-800.webp" alt="" loading="lazy" width="800" height="600"><span class="media-preview-content"><span class="media-play" aria-hidden="true">▶</span><span class="media-preview-copy"><strong>עמית מופיע מול קהל ילדים</strong><span>תיעוד וידאו מהעמוד הרשמי של עמית בפייסבוק</span></span></span></a></div></div></section>
     <section><div class="shell"><div class="experience"><div class="video-stage"><iframe src="https://www.youtube-nocookie.com/embed/192kb8VAwjU?rel=0" title="מופע יום הולדת עם עמית מיטרני" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="video-copy"><div class="kicker">לראות את עמית בפעולה</div><h2>מופע יום הולדת עם עמית מיטרני</h2><p>כך נראית האנרגיה כשהילדים, החוגג והקסם נפגשים באותו רגע.</p><div class="hero-actions"><a class="btn btn-gold" href="https://www.youtube.com/watch?v=192kb8VAwjU" target="_blank" rel="noopener">פתיחת הסרטון</a><a class="btn" href="index.html#contact">בדיקת התאמה</a></div></div></div><div class="gallery"><figure><img src="assets/optimized/amit-golden-1600.webp" alt="עמית מיטרני ברגע מתוך מופע" loading="lazy" width="900" height="700"><figcaption>עמית מיטרני ברגע מתוך מופע</figcaption></figure><figure><img src="assets/optimized/amit-time-machine-700.webp" alt="קסם חזותי מתוך המופע" loading="lazy" width="900" height="700"><figcaption>קסם חזותי מתוך המופע</figcaption></figure><figure><img src="assets/optimized/amit-cards-1200.webp" alt="עמית מיטרני עם קלפים" loading="lazy" width="900" height="700"><figcaption>עמית מיטרני עם קלפים</figcaption></figure></div></div></section>
@@ -406,6 +430,26 @@
       const expanded = wall.classList.toggle("expanded");
       brandMore.setAttribute("aria-expanded", String(expanded));
       brandMore.textContent = expanded ? "הצגת פחות ארגונים" : "הצגת ארגונים נוספים";
+    });
+    document.querySelectorAll("[data-review-carousel]").forEach(carousel => {
+      const track = carousel.querySelector("[data-review-track]");
+      const slides = [...carousel.querySelectorAll("[data-review-slide]")];
+      const status = carousel.querySelector("[data-review-status]");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let activeIndex = 0;
+      const showSlide = nextIndex => {
+        activeIndex = (nextIndex + slides.length) % slides.length;
+        slides[activeIndex].scrollIntoView({ behavior:reducedMotion ? "auto" : "smooth", block:"nearest", inline:"center" });
+        status.textContent = `מוצגת המלצה ${activeIndex + 1} מתוך ${slides.length}`;
+      };
+      carousel.querySelector("[data-review-prev]").addEventListener("click", () => showSlide(activeIndex - 1));
+      carousel.querySelector("[data-review-next]").addEventListener("click", () => showSlide(activeIndex + 1));
+      track.addEventListener("keydown", event => {
+        if (event.key === "ArrowLeft") { event.preventDefault(); showSlide(activeIndex + 1); }
+        if (event.key === "ArrowRight") { event.preventDefault(); showSlide(activeIndex - 1); }
+        if (event.key === "Home") { event.preventDefault(); showSlide(0); }
+        if (event.key === "End") { event.preventDefault(); showSlide(slides.length - 1); }
+      });
     });
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {

@@ -26,6 +26,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
     :root { --bg:#08080d; --panel:#12111a; --line:rgba(255,255,255,.12); --gold:#edc069; --purple:#8b68ff; --muted:#aaa7b7; --white:#fff; }
     * { box-sizing:border-box; }
+    .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--white); background:radial-gradient(circle at 82% 5%,rgba(139,104,255,.19),transparent 28rem),radial-gradient(circle at 8% 42%,rgba(237,192,105,.08),transparent 25rem),var(--bg); font-family:"Heebo",Arial,sans-serif; }
     .skip-link { position:fixed; top:10px; right:10px; z-index:100; padding:10px 14px; border-radius:10px; color:#000; background:#fff; transform:translateY(-150%); }
@@ -128,7 +129,37 @@
     .feedback-card small { color:var(--gold); font-weight:900; }
     .feedback-card h3 { margin:9px 0 7px; font-size:20px; }
     .feedback-card p { margin:0; color:var(--muted); line-height:1.7; }
-    .more-media { margin-top:15px; }
+    .feedback-source { display:inline-block; margin-top:14px; color:var(--gold); font-size:12px; font-weight:900; text-decoration:underline; text-underline-offset:3px; }
+    .review-gallery { margin-top:34px; padding:24px; border:1px solid rgba(237,192,105,.24); border-radius:24px; background:linear-gradient(145deg,rgba(237,192,105,.06),rgba(139,104,255,.07)); }
+    .review-gallery-head { display:flex; align-items:end; justify-content:space-between; gap:18px; margin-bottom:16px; }
+    .review-gallery-head h3 { margin:5px 0 0; font-size:clamp(25px,3vw,36px); }
+    .review-gallery-head p { margin:0; color:var(--muted); line-height:1.6; }
+    .review-controls { display:flex; gap:8px; direction:ltr; }
+    .review-control { width:48px; height:48px; display:grid; place-items:center; border:1px solid rgba(237,192,105,.35); border-radius:50%; color:white; background:#17141f; font-size:25px; cursor:pointer; }
+    .review-control:hover,.review-control:focus-visible { color:#17111d; background:var(--gold); }
+    .review-control:focus-visible { outline:3px solid white; outline-offset:3px; }
+    .review-track { display:flex; gap:16px; overflow-x:auto; padding:4px 4px 14px; direction:ltr; scroll-snap-type:x mandatory; scroll-padding-inline:4px; overscroll-behavior-inline:contain; scrollbar-color:var(--gold) rgba(255,255,255,.08); }
+    .review-slide { flex-grow:0; flex-shrink:0; flex-basis:min(640px,84vw); margin:0; overflow:hidden; border:1px solid rgba(255,255,255,.14); border-radius:20px; direction:rtl; scroll-snap-align:center; background:#0c0b11; box-shadow:0 16px 45px rgba(0,0,0,.28); }
+    .review-slide a { display:block; color:white; }
+    .review-slide img { width:100%; height:auto; aspect-ratio:4 / 3; display:block; object-fit:cover; object-position:center top; background:#f3f4f6; }
+    .review-slide figcaption { display:grid; gap:5px; padding:17px 19px 20px; }
+    .review-slide figcaption strong { color:var(--gold); font-size:17px; }
+    .review-slide figcaption span { color:#d6d1dc; line-height:1.55; }
+    .review-slide a:hover img,.review-slide a:focus-visible img { filter:brightness(1.05); }
+    .review-slide a:focus-visible { outline:3px solid var(--gold); outline-offset:-3px; }
+    .review-gallery-note { margin:10px 4px 0; color:var(--muted); font-size:12px; line-height:1.6; }
+    .more-media { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:18px; }
+    .media-preview { position:relative; min-height:280px; overflow:hidden; border:1px solid rgba(237,192,105,.3); border-radius:22px; color:white; background:#11101a; box-shadow:0 18px 50px rgba(0,0,0,.24); isolation:isolate; }
+    .media-preview img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .45s ease,filter .45s ease; }
+    .media-preview::after { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg,rgba(8,7,13,.08),rgba(8,7,13,.25) 38%,rgba(8,7,13,.96)); }
+    .media-preview-content { position:absolute; inset:auto 0 0; z-index:2; display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center; padding:22px; }
+    .media-preview-copy { min-width:0; }
+    .media-preview-copy strong,.media-preview-copy span { display:block; }
+    .media-preview-copy strong { margin-bottom:4px; font-size:20px; line-height:1.25; }
+    .media-preview-copy span { color:#ded9e6; font-size:13px; line-height:1.5; }
+    .media-play { width:58px; height:58px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.55); border-radius:50%; color:#17111d; background:var(--gold); box-shadow:0 0 0 8px rgba(237,192,105,.14),0 10px 30px rgba(0,0,0,.35); font-size:23px; line-height:1; }
+    .media-preview:hover img,.media-preview:focus-visible img { transform:scale(1.045); filter:saturate(1.12); }
+    .media-preview:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
     .course-catalog { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; }
     .course-product { padding:24px; border:1px solid rgba(139,104,255,.32); border-radius:22px; background:linear-gradient(150deg,rgba(139,104,255,.14),rgba(237,192,105,.055)); }
     .course-product .course-audience { color:var(--gold); font-size:12px; font-weight:900; }
@@ -228,6 +259,12 @@
     .order-number { color:var(--gold); font-weight:900; direction:ltr; }
     body.modal-open { overflow:hidden; }
     @media(max-width:760px) {
+      .review-gallery { padding:17px; }
+      .review-gallery-head { align-items:start; flex-direction:column; }
+      .review-controls { align-self:flex-end; }
+      .review-slide { flex-basis:92%; }
+      .more-media { grid-template-columns:1fr; }
+      .media-preview { min-height:245px; }
       .nav-links a:not(.btn) { display:none; }
       .mobile-nav { display:block; }
       .hero h1 { font-size:clamp(38px,11vw,54px); line-height:1.02; }
@@ -275,6 +312,7 @@
       <div class="hero-image"><img src="assets/optimized/amit-mentalism-1200.webp" alt="עמית מיטרני אמן חושים באירוע עסקי" width="1200" height="900"></div>
     </section>
     <section id="answers"><div class="shell"><div class="answer"><h2>התשובה הקצרה</h2><p>המסלול מתאים לימי גיבוש, ערבי חברה, הרמות כוסית, כנסים, אירועי הנהלה, השקות ופעילויות רווחה. לפני הצעה מגדירים את הרגע שהארגון רוצה ליצור, מי נמצא בקהל, כמה זמן עומד לרשות המופע ומה כבר מתוכנן סביבו.</p></div></div></section>
+    <section id="review-gallery"><div class="shell"><div class="review-gallery" data-review-carousel><div class="review-gallery-head"><div><div class="kicker">הקהל מספר על עמית</div><h3>צילומי המלצות על הנוכחות והמקצועיות של עמית</h3><p>המלצות פומביות שנבחרו לפי רלוונטיות לנוכחות מול קהל. הן אינן מוצגות כהמלצה מטעם חברה מסוימת.</p></div><div class="review-controls"><button class="review-control" type="button" data-review-prev aria-label="המלצה קודמת" title="מעבר להמלצה הקודמת">‹</button><button class="review-control" type="button" data-review-next aria-label="המלצה הבאה" title="מעבר להמלצה הבאה">›</button></div></div><div class="review-track" data-review-track tabindex="0" role="list" aria-label="צילומי המלצות הרלוונטיים לאירועים עסקיים"><figure class="review-slide" role="listitem" data-review-slide><a href="https://www.facebook.com/erez.warsha/posts/pfbid0aeX31DhraUtqCdkAnsAL12jCbYTT91BqwLCYU1SH98dMkeshePLcAm5qmpzuT58Vl" target="_blank" rel="noopener" title="המלצת ארז ורשה על הנוכחות של עמית מיטרני מול קהל, פתיחת המקור בפייסבוק"><img src="assets/reviews/facebook-erez-warsha.jpg" alt="צילום מסך של המלצת ארז ורשה בפייסבוק על הנוכחות הבימתית והיכולת של עמית מיטרני לסחוף קהל" title="המלצת ארז ורשה על הנוכחות של עמית מיטרני מול קהל" loading="lazy" width="1904" height="888"><figcaption><strong>ארז ורשה</strong><span>פרפורמר שסוחף את האנשים ומשאיר את הקהל בתוך החוויה.</span></figcaption></a></figure><figure class="review-slide" role="listitem" data-review-slide><a href="https://www.facebook.com/amir.eldar.9/posts/pfbid0FrpXNzxdJpRZFFH8ohxUCRWm1uQFCWaiUokSxZqFcuRoqb1zPcmXBrTBBXuCR6uEl" target="_blank" rel="noopener" title="המלצת אמיר אלדר על מופע עמית מיטרני לקהל מגוון, פתיחת המקור בפייסבוק"><img src="assets/reviews/facebook-amir-eldar.jpg" alt="צילום מסך של המלצת אמיר אלדר בפייסבוק על מופע עמית מיטרני לקהלים בגילים שונים" title="המלצת אמיר אלדר על מופע עמית מיטרני לקהל מגוון" loading="lazy" width="1904" height="888"><figcaption><strong>אמיר אלדר</strong><span>נוכחות שמצליחה לעבוד מול קהל צעיר, בני נוער ומבוגרים.</span></figcaption></a></figure><figure class="review-slide" role="listitem" data-review-slide><a href="https://www.facebook.com/yosi.sages/posts/pfbid0c31MZpardJbnSFQQtrqXkXJ79cgHNPyvBkkaF4TvBQ1Xku1anaC7zPFggVMHScBLl" target="_blank" rel="noopener" title="המלצת Yosi Sages על המקצועיות של עמית מיטרני, פתיחת המקור בפייסבוק"><img src="assets/reviews/facebook-yosi-sages.jpg" alt="צילום מסך של המלצת Yosi Sages בפייסבוק על עמית מיטרני כאמן מקצועי" title="המלצת Yosi Sages על המקצועיות של עמית מיטרני" loading="lazy" width="1904" height="888"><figcaption><strong>Yosi Sages</strong><span>המלצה פומבית על עמית כאמן מהשורה הראשונה.</span></figcaption></a></figure></div><p class="review-gallery-note">הצילומים נלקחו מפרסומים פומביים בעמוד ההמלצות של עמית. הטקסט הקריא נשאר גם ב-HTML לטובת נגישות ומנועי חיפוש.</p><p class="sr-only" data-review-status aria-live="polite">מוצגת המלצה 1 מתוך 3</p></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">בוחרים את הרגע הנכון</div><h2>ארבע דרכים להפוך את האירוע העסקי לחוויה</h2><p>לא כל אירוע צריך אותו פורמט. בוחרים לפי מטרת האירוע, הקהל, המקום והזמן שעומד לרשותכם.</p></div><div class="company-formats"><article class="company-format"><small>מסלול 01</small><h3>מופע מרכזי</h3><p>חוויה בימתית לערב חברה, יום גיבוש או הרמת כוסית, עם קהל פעיל ורגע שיא משותף.</p></article><article class="company-format"><small>מסלול 02</small><h3>קסמי קלוז אפ בקבלת פנים</h3><p>עמית עובר בין קבוצות האורחים, שובר את הקרח ויוצר הפתעות מקרוב בלי לעצור את האירוע.</p></article><article class="company-format"><small>מסלול 03</small><h3>פתיחת כנס או מעבר בין תכנים</h3><p>קטע ממוקד שמרכז את תשומת הלב ומכניס את הקהל לאנרגיה לפני הדובר או החלק הבא.</p></article><article class="company-format"><small>מסלול 04</small><h3>תוכן מותאם למסר</h3><p>בריף נפרד שבו בודקים כיצד ערך, מוצר או מסר ארגוני יכולים להפוך לחלק מההפתעה.</p></article></div><div class="producer-checklist"><div><b>קהל</b><span>כמות, תפקידים, שפות והרכב גילאים</span></div><div><b>מטרה</b><span>גיבוש, הוקרה, השקה או פתיחת כנס</span></div><div><b>לוח זמנים</b><span>קבלת פנים, אוכל, דוברים והסעות</span></div><div><b>מקום</b><span>במה, הגברה, תאורה ומרחקי צפייה</span></div></div><div class="hero-actions"><a class="btn btn-gold" href="close-up-magic-receptions.html">קסמים לקבלת פנים</a><button class="btn" type="button" data-commerce-open>בניית הצעה לאירוע</button></div></div></section>
     <section><div class="shell"><div class="event-story"><div class="event-story-visual"><img src="assets/optimized/invitation-corporate-1200.webp" alt="אורחים באירוע חברה מעוצב" loading="lazy" width="1200" height="900"></div><div class="event-story-copy"><div class="kicker">רואים את האירוע לפני שסוגרים</div><h2>כך החוויה משתלבת בתוך אירוע עסקי אמיתי</h2><p>העובדים והאורחים הם הסיפור. עמית משתלב בלוח הזמנים, בוחר את הפורמט לפי מטרת האירוע ויוצר רגעים שאנשים ממשיכים לדבר עליהם גם אחרי שחוזרים לעבודה.</p><div class="event-steps"><div class="event-step"><b>לפני האירוע</b><span>מגדירים קהל, מטרה, שפה, לוח זמנים, תנאי מקום ומסר שחשוב למארגנים.</span></div><div class="event-step"><b>בקבלת הפנים</b><span>עמית יכול לעבור בין קבוצות, לשבור את הקרח ולחבר בין אנשים בלי לעצור את הזרימה.</span></div><div class="event-step"><b>במופע המרכזי</b><span>הקהל משתתף, ההנהלה יכולה לקבל מקום מתאים ורגע השיא נבנה סביב האנשים בחדר.</span></div><div class="event-step"><b>אחרי המופע</b><span>האירוע ממשיך בקצב שלו, עם חוויה משותפת שנותנת לאורחים נושא טבעי לשיחה.</span></div></div></div></div><div class="section-head" style="margin-top:45px"><div class="kicker">מה כבר פורסם על החוויה</div><h2>משובים ותיעוד שמתאימים לעולם האירוע</h2><p>הכרטיסים הבאים מסכמים מקורות פומביים שנבדקו. הם אינם מוצגים כציטוט ישיר ואינם מייחסים המלצה לאדם שלא זוהה.</p></div><div class="public-feedback"><article class="feedback-card"><small>מידע פומבי שנבדק</small><h3>פעילות מול ארגונים</h3><p>כרטיס העסק הציבורי של עמית מציין הופעות לחברות, ועדי עובדים והופעות שיווקיות. זו התאמה ישירה לעולמות הרווחה, הכנסים והאירועים העסקיים.</p></article><article class="feedback-card"><small>מידע פומבי שנבדק</small><h3>המלצה על הנוכחות מול קהל</h3><p>בפרופיל ציבורי לקוחות מתארים את עמית כמרשים, מקצועי ונעים. באתר לא מוצגים שמות חברות או לוגואים שלא אושרו במפורש.</p></article></div><div class="more-media"><a class="btn btn-gold" href="https://www.instagram.com/reel/DBqYN9uNbON/" target="_blank" rel="noopener">צפייה בסרטון נוסף של עמית</a></div></div></section>
     <section><div class="shell"><div class="experience"><div class="video-stage"><a class="video-poster" href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener"><img src="assets/optimized/amit-mentalism-1200.webp" alt="מופע במה ואמנות חושים" width="900" height="700"><span>לסרטונים הרשמיים של עמית</span></a></div><div class="video-copy"><div class="kicker">לראות את עמית בפעולה</div><h2>מופע במה ואמנות חושים</h2><p>טעימה מהנוכחות הבימתית ומהאופן שבו הקהל נכנס אל תוך ההתרחשות.</p><div class="hero-actions"><a class="btn btn-gold" href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener">צפייה בסרטונים</a><a class="btn" href="index.html#contact">בדיקת התאמה</a></div></div></div><div class="gallery"><figure><img src="assets/optimized/amit-mentalism-1200.webp" alt="עמית מיטרני באמנות חושים" loading="lazy" width="900" height="700"><figcaption>עמית מיטרני באמנות חושים</figcaption></figure><figure><img src="assets/optimized/amit-thinking-1200.webp" alt="רגע של מחשבה והפתעה" loading="lazy" width="900" height="700"><figcaption>רגע של מחשבה והפתעה</figcaption></figure><figure><img src="assets/optimized/amit-golden-1600.webp" alt="עמית מיטרני במופע במה" loading="lazy" width="900" height="700"><figcaption>עמית מיטרני במופע במה</figcaption></figure></div></div></section>
@@ -392,6 +430,26 @@
       const expanded = wall.classList.toggle("expanded");
       brandMore.setAttribute("aria-expanded", String(expanded));
       brandMore.textContent = expanded ? "הצגת פחות ארגונים" : "הצגת ארגונים נוספים";
+    });
+    document.querySelectorAll("[data-review-carousel]").forEach(carousel => {
+      const track = carousel.querySelector("[data-review-track]");
+      const slides = [...carousel.querySelectorAll("[data-review-slide]")];
+      const status = carousel.querySelector("[data-review-status]");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let activeIndex = 0;
+      const showSlide = nextIndex => {
+        activeIndex = (nextIndex + slides.length) % slides.length;
+        slides[activeIndex].scrollIntoView({ behavior:reducedMotion ? "auto" : "smooth", block:"nearest", inline:"center" });
+        status.textContent = `מוצגת המלצה ${activeIndex + 1} מתוך ${slides.length}`;
+      };
+      carousel.querySelector("[data-review-prev]").addEventListener("click", () => showSlide(activeIndex - 1));
+      carousel.querySelector("[data-review-next]").addEventListener("click", () => showSlide(activeIndex + 1));
+      track.addEventListener("keydown", event => {
+        if (event.key === "ArrowLeft") { event.preventDefault(); showSlide(activeIndex + 1); }
+        if (event.key === "ArrowRight") { event.preventDefault(); showSlide(activeIndex - 1); }
+        if (event.key === "Home") { event.preventDefault(); showSlide(0); }
+        if (event.key === "End") { event.preventDefault(); showSlide(slides.length - 1); }
+      });
     });
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
