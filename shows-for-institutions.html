@@ -60,6 +60,10 @@
     .experience { display:grid; grid-template-columns:1.08fr .92fr; gap:20px; align-items:stretch; }
     .video-stage { min-height:460px; overflow:hidden; position:relative; border:1px solid var(--line); border-radius:26px; background:#0d0c13; }
     .video-stage iframe { width:100%; height:100%; position:absolute; inset:0; border:0; }
+    .video-poster { display:block; width:100%; height:100%; position:absolute; inset:0; color:white; }
+    .video-poster img { width:100%; height:100%; object-fit:cover; object-position:50% 20%; }
+    .video-poster::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 42%,rgba(7,6,12,.82)); }
+    .video-poster span { position:absolute; z-index:1; right:26px; bottom:24px; padding:11px 15px; border:1px solid rgba(255,255,255,.34); border-radius:999px; background:rgba(10,9,16,.72); font-weight:900; }
     .video-copy { display:flex; flex-direction:column; justify-content:center; padding:34px; border:1px solid rgba(139,104,255,.3); border-radius:26px; background:linear-gradient(145deg,rgba(139,104,255,.18),rgba(237,192,105,.06)); }
     .video-copy h2 { margin:8px 0 12px; font-size:36px; line-height:1.15; }
     .video-copy p { margin:0; color:#cbc6d4; line-height:1.75; }
