@@ -426,11 +426,12 @@
       color: #18131c;
       background: linear-gradient(145deg, #fffdf7, #e9e3d6);
       box-shadow: 0 16px 30px rgba(0,0,0,.35);
-      cursor: pointer;
+      cursor: default;
       transform-style: preserve-3d;
       transition: transform .35s ease, opacity .35s ease, box-shadow .35s ease;
     }
-    .playing-card:hover, .playing-card:focus-visible { transform: translateY(-9px) rotate(-1deg); box-shadow: 0 22px 40px rgba(0,0,0,.5), 0 0 0 2px var(--gold); }
+    .card-deck.is-ready .playing-card { animation: cardBreathe 2.8s ease-in-out infinite alternate; }
+    .card-deck.is-ready .playing-card:nth-child(even) { animation-delay: .35s; }
     .playing-card.selected { transform: translateY(-18px) scale(1.05); box-shadow: 0 25px 55px rgba(0,0,0,.55), 0 0 0 3px var(--gold), 0 0 34px rgba(237,192,105,.58); animation: selectedCardPulse 1.25s ease-in-out infinite; }
     .playing-card .corner { position: absolute; top: 10px; left: 11px; font-size: 22px; font-weight: 900; line-height: .9; }
     .playing-card .corner.bottom { inset: auto 11px 10px auto; transform: rotate(180deg); }
@@ -649,11 +650,72 @@
     .symbol-picker { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; direction: ltr; }
     .symbol-picker button { width: 54px; height: 54px; border: 1px solid var(--line); border-radius: 50%; color: #fff; background: rgba(255,255,255,.05); font-size: 23px; cursor: pointer; transition: .25s ease; }
     .symbol-picker button:hover, .symbol-picker button.selected { color: #16111d; border-color: var(--gold); background: var(--gold); transform: translateY(-4px); }
+    .illusion-stage {
+      min-height: 390px;
+      display: grid;
+      grid-template-columns: minmax(190px, 260px) minmax(170px, 230px);
+      gap: 28px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .illusion-disc-wrap { position: relative; display: grid; place-items: center; }
+    .illusion-disc {
+      width: min(250px, 62vw);
+      aspect-ratio: 1;
+      border: 2px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      background:
+        repeating-radial-gradient(circle, transparent 0 8px, rgba(255,255,255,.86) 9px 13px, transparent 14px 22px),
+        repeating-conic-gradient(from 0deg, #f0c569 0 7deg, #6f4bd8 7deg 14deg, #0a0910 14deg 21deg);
+      box-shadow: inset 0 0 45px rgba(0,0,0,.55), 0 0 48px rgba(139,104,255,.28);
+      transform: translateZ(0);
+    }
+    .illusion-disc.running { animation: illusionIn 1.15s linear infinite; }
+    .illusion-disc.running.reverse { animation-name: illusionOut; }
+    .illusion-count {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 76px;
+      height: 76px;
+      border: 1px solid rgba(237,192,105,.55);
+      border-radius: 50%;
+      color: #17111d;
+      background: rgba(255,249,231,.93);
+      box-shadow: 0 12px 35px rgba(0,0,0,.35);
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .illusion-target {
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+      color: #ddd6e6;
+    }
+    .illusion-target img {
+      width: 168px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      object-position: 50% 22%;
+      border: 1px solid rgba(237,192,105,.4);
+      border-radius: 50%;
+      box-shadow: 0 18px 45px rgba(0,0,0,.42);
+    }
+    .illusion-target.reveal img { animation: targetReveal .75s ease both; }
+    .illusion-note { display: block; margin: 12px 0 16px; color: #aeb7c8; font-size: 12px; line-height: 1.55; }
+    .illusion-controls { display: flex; flex-wrap: wrap; gap: 9px; }
+    .illusion-controls .btn { min-width: 0; }
+    .magic-footer-actions { position: relative; z-index: 2; display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
     .spark-field { position: absolute; inset: 0; z-index: 10; overflow: hidden; pointer-events: none; }
     .spark { position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 13px var(--gold); animation: sparkFly .9s ease-out forwards; }
     @keyframes auraSpin { to { transform: rotate(360deg); } }
     @keyframes stageIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes cardBreathe { from { transform: translateY(0) rotate(-.35deg); } to { transform: translateY(-4px) rotate(.35deg); } }
     @keyframes cardShuffle { 0% { transform: none; } 32% { transform: translateX(var(--shuffle-x, 0)) translateY(-52px) rotate(var(--shuffle-r, 0)) scale(1.03); } 65% { transform: translateX(calc(var(--shuffle-x, 0) * -.45)) translateY(22px) rotate(calc(var(--shuffle-r, 0) * -1.6)) scale(.88); filter: brightness(1.35); } 100% { transform: none; } }
+    @keyframes illusionIn { to { transform: rotate(360deg) scale(.93); } }
+    @keyframes illusionOut { to { transform: rotate(-360deg) scale(1.07); } }
+    @keyframes targetReveal { 0% { opacity: .35; filter: blur(8px); transform: scale(.82); } 100% { opacity: 1; filter: blur(0); transform: scale(1); } }
     @keyframes portalReveal { 0% { opacity: 0; transform: scale(.4) rotate(-20deg); } 45% { opacity: 1; transform: scale(1.16) rotate(8deg); } 100% { opacity: .9; transform: scale(1) rotate(0); } }
     @keyframes selectedCardPulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.2); } }
     @keyframes sealedSense { from { transform: translateY(-3px) rotate(-1deg); } to { transform: translateY(3px) rotate(1deg); } }
@@ -790,14 +852,17 @@
       .portal-card small { margin-bottom: 35px; }
       .magic-lab { padding: 20px; }
       .magic-intro { grid-template-columns: 1fr; gap: 18px; margin-bottom: 20px; }
-      .magic-tabs { justify-content: flex-start; display: grid; grid-template-columns: repeat(3, 1fr); }
+      .magic-tabs { justify-content: flex-start; display: grid; grid-template-columns: repeat(2, 1fr); }
       .magic-tab { min-height: 42px; padding: 8px 6px; font-size: 11px; }
       .magic-stage, .trick-panel { min-height: 700px; }
       .trick-panel { grid-template-columns: 1fr; align-content: start; gap: 10px; padding: 22px 16px; }
       .trick-copy { text-align: center; }
       .trick-copy p { min-height: 0; }
       .trick-action { width: 100%; }
-      .card-table, .number-stage, .prediction-stage { min-height: 350px; }
+      .card-table, .number-stage, .prediction-stage, .illusion-stage { min-height: 350px; }
+      .illusion-stage { grid-template-columns: 1fr; gap: 18px; }
+      .illusion-target img { width: 126px; }
+      .illusion-controls, .magic-footer-actions { display: grid; grid-template-columns: 1fr; }
       .card-deck { grid-template-columns: repeat(3, 78px); gap: 11px; }
       .playing-card { width: 78px; border-radius: 11px; }
       .playing-card .corner { top: 7px; left: 8px; font-size: 16px; }
@@ -866,6 +931,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .illusion-disc.running { animation: none !important; }
     }
 
     :root { --blue: #4aa8ff; --pink: #ef5bbd; --cyan: #45e2d1; }
@@ -1198,6 +1264,7 @@
             <button class="magic-tab active" type="button" aria-pressed="true" data-trick="cards">קלף נעלם</button>
             <button class="magic-tab" type="button" aria-pressed="false" data-trick="number">קריאת מספר</button>
             <button class="magic-tab" type="button" aria-pressed="false" data-trick="symbol">תחזית סגורה</button>
+            <button class="magic-tab" type="button" aria-pressed="false" data-trick="illusion">אשליית ראייה</button>
           </div>
         </div>
         <div class="magic-stage" aria-live="polite">
@@ -1207,29 +1274,21 @@
             <div class="trick-copy">
               <span class="trick-step">קסם ראשון</span>
               <h3>הקלף שנעלם</h3>
-              <p id="card-instruction">בחרו קלף אחד. הביטו בו לשנייה, זכרו אותו ולחצו עליו. עמית ינסה להעלים רק אותו.</p>
-              <button class="btn btn-gold trick-action" id="card-action" type="button" hidden>עמית, תעלים אותו</button>
+              <p id="card-instruction">בחרו קלף אחד בעיניים בלבד. אל תלחצו עליו ואל תספרו לאף אחד. זכרו אותו היטב.</p>
+              <button class="btn btn-gold trick-action" id="card-action" type="button">זכרתי קלף</button>
               <div class="effect-status" id="card-status"></div>
             </div>
             <div class="card-table" id="card-table">
               <div class="mystic-portal" aria-hidden="true"></div>
               <div class="magic-beam" aria-hidden="true"></div>
               <div class="magic-smoke" aria-hidden="true"><i style="--smoke-x:-115px;--smoke-y:-75px"></i><i style="--smoke-x:105px;--smoke-y:-95px"></i><i style="--smoke-x:35px;--smoke-y:110px"></i></div>
-              <div class="sealed-prediction" id="sealed-prediction" aria-live="polite">
-                <small>נחתם לפני הבחירה</small>
-                <div class="sealed-card">
-                  <div class="sealed-card-back"><span>AM</span><i>✦</i></div>
-                  <div class="sealed-card-face" id="sealed-card-face"><b id="sealed-card-value">?</b><span id="sealed-card-suit">✦</span></div>
-                </div>
-                <strong id="sealed-caption">התחזית נעולה</strong>
-              </div>
-              <div class="card-deck" id="card-deck" aria-label="בחרו קלף">
-                <button class="playing-card red" type="button" data-card="Q♥" aria-label="מלכה לב"><span class="corner">Q<br>♥</span><span class="suit">♥</span><span class="corner bottom">Q<br>♥</span></button>
-                <button class="playing-card" type="button" data-card="7♠" aria-label="שבע עלה"><span class="corner">7<br>♠</span><span class="suit">♠</span><span class="corner bottom">7<br>♠</span></button>
-                <button class="playing-card red" type="button" data-card="A♦" aria-label="אס יהלום"><span class="corner">A<br>♦</span><span class="suit">♦</span><span class="corner bottom">A<br>♦</span></button>
-                <button class="playing-card" type="button" data-card="K♣" aria-label="מלך תלתן"><span class="corner">K<br>♣</span><span class="suit">♣</span><span class="corner bottom">K<br>♣</span></button>
-                <button class="playing-card red" type="button" data-card="10♥" aria-label="עשר לב"><span class="corner">10<br>♥</span><span class="suit">♥</span><span class="corner bottom">10<br>♥</span></button>
-                <button class="playing-card" type="button" data-card="3♠" aria-label="שלוש עלה"><span class="corner">3<br>♠</span><span class="suit">♠</span><span class="corner bottom">3<br>♠</span></button>
+              <div class="card-deck is-ready" id="card-deck" aria-label="שישה קלפים לבחירה במחשבה בלבד">
+                <span class="playing-card red" role="img" aria-label="מלכה לב"><span class="corner">Q<br>♥</span><span class="suit">♥</span><span class="corner bottom">Q<br>♥</span></span>
+                <span class="playing-card" role="img" aria-label="שבע עלה"><span class="corner">7<br>♠</span><span class="suit">♠</span><span class="corner bottom">7<br>♠</span></span>
+                <span class="playing-card red" role="img" aria-label="אס יהלום"><span class="corner">A<br>♦</span><span class="suit">♦</span><span class="corner bottom">A<br>♦</span></span>
+                <span class="playing-card" role="img" aria-label="מלך תלתן"><span class="corner">K<br>♣</span><span class="suit">♣</span><span class="corner bottom">K<br>♣</span></span>
+                <span class="playing-card red" role="img" aria-label="עשר לב"><span class="corner">10<br>♥</span><span class="suit">♥</span><span class="corner bottom">10<br>♥</span></span>
+                <span class="playing-card" role="img" aria-label="שלוש עלה"><span class="corner">3<br>♠</span><span class="suit">♠</span><span class="corner bottom">3<br>♠</span></span>
               </div>
               <div class="vanish-mark" id="vanish-mark"><span>✦</span><small>נשאר רק זיכרון של הקלף</small></div>
             </div>
@@ -1285,6 +1344,33 @@
               </div>
             </div>
           </div>
+
+          <div class="trick-panel" data-panel="illusion">
+            <div class="trick-copy">
+              <span class="trick-step">חוויה רביעית</span>
+              <h3>העולם עומד לשנות גודל</h3>
+              <p id="illusion-copy">הביטו במרכז המעגל במשך 15 שניות. כשהספירה מסתיימת, העבירו מיד את המבט לכף היד שלכם או לפנים של עמית.</p>
+              <span class="illusion-note">החוויה כוללת תנועה חזותית. אם תנועה, הבהובים או סחרחורת אינם נוחים לכם, דלגו עליה. במצב הפחתת תנועה החוויה אינה מופעלת.</span>
+              <div class="illusion-controls">
+                <button class="btn btn-gold trick-action" id="illusion-start" type="button">להתחיל 15 שניות</button>
+                <button class="btn btn-dark" id="illusion-direction" type="button">מצב: העולם יגדל</button>
+              </div>
+              <div class="effect-status" id="illusion-status" aria-live="polite"></div>
+            </div>
+            <div class="illusion-stage">
+              <div class="illusion-disc-wrap" aria-hidden="true">
+                <div class="illusion-disc" id="illusion-disc"></div>
+                <div class="illusion-count" id="illusion-count">15</div>
+              </div>
+              <div class="illusion-target" id="illusion-target">
+                <img src="assets/optimized/amit-headshot-720.webp" alt="פניו של עמית מיטרני, נקודת מבט לאחר האשליה" loading="lazy">
+                <strong>בסיום, הביטו כאן או בכף היד</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="magic-footer-actions">
+          <button class="btn btn-dark" id="magic-share" type="button">לשתף את הבמה הדיגיטלית</button>
         </div>
       </div>
     </section>
@@ -1609,51 +1695,52 @@
       });
     });
 
-    const cards = Array.from(document.querySelectorAll(".playing-card"));
     const cardAction = document.querySelector("#card-action");
     const cardDeck = document.querySelector("#card-deck");
     const cardInstruction = document.querySelector("#card-instruction");
     const cardStatus = document.querySelector("#card-status");
-    const vanishMark = document.querySelector("#vanish-mark");
     const cardTable = document.querySelector("#card-table");
-    const sealedPrediction = document.querySelector("#sealed-prediction");
-    const sealedCardFace = document.querySelector("#sealed-card-face");
-    const sealedCardValue = document.querySelector("#sealed-card-value");
-    const sealedCardSuit = document.querySelector("#sealed-card-suit");
-    const sealedCaption = document.querySelector("#sealed-caption");
-    let selectedCard;
+    const cardTrickSets = [
+      {
+        opening: [["Q","♥","מלכה לב"],["7","♠","שבע עלה"],["A","♦","אס יהלום"],["K","♣","מלך תלתן"],["10","♥","עשר לב"],["3","♠","שלוש עלה"]],
+        reveal: [["J","♣","נסיך תלתן"],["K","♦","מלך יהלום"],["9","♥","תשע לב"],["Q","♠","מלכה עלה"],["A","♣","אס תלתן"]]
+      },
+      {
+        opening: [["K","♥","מלך לב"],["J","♠","נסיך עלה"],["Q","♦","מלכה יהלום"],["A","♣","אס תלתן"],["8","♥","שמונה לב"],["4","♠","ארבע עלה"]],
+        reveal: [["Q","♣","מלכה תלתן"],["A","♦","אס יהלום"],["10","♥","עשר לב"],["K","♠","מלך עלה"],["J","♣","נסיך תלתן"]]
+      },
+      {
+        opening: [["A","♥","אס לב"],["K","♠","מלך עלה"],["J","♦","נסיך יהלום"],["Q","♣","מלכה תלתן"],["9","♥","תשע לב"],["5","♠","חמש עלה"]],
+        reveal: [["K","♣","מלך תלתן"],["Q","♦","מלכה יהלום"],["10","♥","עשר לב"],["A","♠","אס עלה"],["J","♣","נסיך תלתן"]]
+      }
+    ];
+    let activeCardSet = cardTrickSets[0];
     let cardVanished = false;
-    cards.forEach((card, index) => {
-      card.style.setProperty("--shuffle-x", (index % 2 === 0 ? 52 : -52) + "px");
-      card.style.setProperty("--shuffle-r", (index % 2 === 0 ? 9 : -9) + "deg");
-      card.addEventListener("click", () => {
-        if (cardVanished) return;
-        cards.forEach((item) => item.classList.remove("selected"));
-        card.classList.add("selected");
-        selectedCard = card;
-        cardTable.classList.add("charged");
-        cardAction.hidden = false;
-        cardAction.disabled = false;
-        cardStatus.textContent = "הבחירה ננעלה. עמית לא יכול לראות את הקלף.";
-        playMagicTone(430, .12);
+    const renderCardSet = (cardData, label) => {
+      cardDeck.replaceChildren();
+      cardDeck.setAttribute("aria-label", label);
+      cardData.forEach(([value, suit, ariaLabel], index) => {
+        const card = document.createElement("span");
+        const isRed = suit === "♥" || suit === "♦";
+        card.className = "playing-card" + (isRed ? " red" : "");
+        card.setAttribute("role", "img");
+        card.setAttribute("aria-label", ariaLabel);
+        card.style.setProperty("--shuffle-x", (index % 2 === 0 ? 52 : -52) + "px");
+        card.style.setProperty("--shuffle-r", (index % 2 === 0 ? 9 : -9) + "deg");
+        card.innerHTML = '<span class="corner">' + value + "<br>" + suit + '</span><span class="suit">' + suit + '</span><span class="corner bottom">' + value + "<br>" + suit + "</span>";
+        cardDeck.appendChild(card);
       });
-    });
+    };
     const resetCards = () => {
       cardVanished = false;
-      selectedCard = undefined;
-      cards.forEach((card) => card.classList.remove("selected", "vanished"));
+      activeCardSet = cardTrickSets[Math.floor(Math.random() * cardTrickSets.length)];
+      renderCardSet(activeCardSet.opening, "שישה קלפים לבחירה במחשבה בלבד");
       cardDeck.classList.remove("is-shuffling", "mind-locked");
-      cardTable.classList.remove("charged", "performing");
-      vanishMark.classList.remove("show");
-      sealedPrediction.classList.remove("sensing", "revealed");
-      sealedCardFace.classList.remove("red");
-      sealedCardValue.textContent = "?";
-      sealedCardSuit.textContent = "✦";
-      sealedCaption.textContent = "התחזית נעולה";
-      cardAction.hidden = true;
+      cardDeck.classList.add("is-ready");
+      cardTable.classList.remove("performing");
       cardAction.disabled = false;
-      cardAction.textContent = "עמית, תעלים אותו";
-      cardInstruction.textContent = "בחרו קלף אחד. הביטו בו לשנייה, זכרו אותו ולחצו עליו. עמית ינסה להעלים רק אותו.";
+      cardAction.textContent = "זכרתי קלף";
+      cardInstruction.textContent = "בחרו קלף אחד בעיניים בלבד. אל תלחצו עליו ואל תספרו לאף אחד. זכרו אותו היטב.";
       cardStatus.textContent = "";
     };
     cardAction.addEventListener("click", () => {
@@ -1661,33 +1748,24 @@
         resetCards();
         return;
       }
-      if (!selectedCard) return;
       cardAction.disabled = true;
-      cardInstruction.textContent = "זכרו את הקלף. עכשיו כל הקלפים נסגרים, ואף אחד לא יכול לדעת איפה הוא.";
-      cardStatus.textContent = "אל תורידו את העיניים מהתחזית הסגורה...";
+      cardInstruction.textContent = "החזיקו את הקלף בראש. אל תגידו אותו ואל תגעו במסך.";
+      cardStatus.textContent = "עמית מוחק קלף אחד מהמחשבה...";
+      cardDeck.classList.remove("is-ready");
       cardDeck.classList.add("mind-locked");
       cardDeck.classList.add("is-shuffling");
       cardTable.classList.add("performing");
-      sealedPrediction.classList.add("sensing");
       playMagicTone(170, .55);
       window.setTimeout(() => {
-        const chosen = selectedCard.dataset.card;
-        const suit = chosen.slice(-1);
-        const value = chosen.slice(0, -1);
-        sealedCardValue.textContent = value;
-        sealedCardSuit.textContent = suit;
-        sealedCardFace.classList.toggle("red", selectedCard.classList.contains("red"));
+        renderCardSet(activeCardSet.reveal, "חמישה קלפים לאחר קריאת המחשבה");
         cardDeck.classList.remove("mind-locked");
-        selectedCard.classList.add("vanished");
-        selectedCard.classList.remove("selected");
-        vanishMark.classList.add("show");
-        sealedPrediction.classList.remove("sensing");
-        sealedPrediction.classList.add("revealed");
-        sealedCaption.textContent = "הקלף היה כאן כל הזמן";
+        cardDeck.classList.remove("is-shuffling");
+        cardDeck.classList.add("is-ready");
+        cardTable.classList.remove("performing");
         cardVanished = true;
-        cardInstruction.textContent = "בדקו את השולחן, ואז את הקלף שהיה חתום בצד עוד לפני שבחרתם.";
-        cardStatus.textContent = "הקלף נעלם מהחבילה והופיע בתוך התחזית.";
-        cardAction.textContent = "להחזיר את הקלף ולנסות שוב";
+        cardInstruction.textContent = "בדקו את כל הקלפים. הקלף שרק חשבתם עליו כבר לא נמצא כאן.";
+        cardStatus.textContent = "לא לחצתם על דבר. ובכל זאת, הקלף שלכם נעלם.";
+        cardAction.textContent = "איך הוא ידע? לנסות שוב";
         cardAction.disabled = false;
         burstMagic(34);
         playMagicTone(620, .18);
@@ -1810,6 +1888,96 @@
       burstMagic(32);
       playMagicTone(570, .18);
       playMagicTone(870, .32, .11);
+    });
+
+    const illusionDisc = document.querySelector("#illusion-disc");
+    const illusionCount = document.querySelector("#illusion-count");
+    const illusionStart = document.querySelector("#illusion-start");
+    const illusionDirection = document.querySelector("#illusion-direction");
+    const illusionStatus = document.querySelector("#illusion-status");
+    const illusionCopy = document.querySelector("#illusion-copy");
+    const illusionTarget = document.querySelector("#illusion-target");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let illusionTimer;
+    let illusionGrows = true;
+    const stopIllusion = () => {
+      window.clearInterval(illusionTimer);
+      illusionDisc.classList.remove("running");
+      illusionStart.disabled = false;
+    };
+    const syncIllusionAccessibility = () => {
+      if (reducedMotion.matches) {
+        stopIllusion();
+        illusionStart.disabled = true;
+        illusionStatus.textContent = "החוויה נעצרה כי במכשיר מופעלת הפחתת תנועה.";
+      } else if (!illusionDisc.classList.contains("running")) {
+        illusionStart.disabled = false;
+        illusionStatus.textContent = "";
+      }
+    };
+    reducedMotion.addEventListener?.("change", syncIllusionAccessibility);
+    syncIllusionAccessibility();
+    illusionDirection.addEventListener("click", () => {
+      if (illusionDisc.classList.contains("running")) return;
+      illusionGrows = !illusionGrows;
+      illusionDisc.classList.toggle("reverse", !illusionGrows);
+      illusionDirection.textContent = illusionGrows ? "מצב: העולם יגדל" : "מצב: העולם יתכווץ";
+      illusionCopy.textContent = illusionGrows
+        ? "הביטו במרכז המעגל במשך 15 שניות. בסיום העבירו מיד את המבט לכף היד או לפנים של עמית."
+        : "הכיוון התהפך. הביטו במרכז במשך 15 שניות, ואז העבירו מיד את המבט לכף היד או לפנים של עמית.";
+    });
+    illusionStart.addEventListener("click", () => {
+      if (reducedMotion.matches) return;
+      if (illusionDisc.classList.contains("running")) {
+        stopIllusion();
+        illusionCount.textContent = "15";
+        illusionStart.textContent = "להתחיל מחדש";
+        illusionStatus.textContent = "החוויה נעצרה.";
+        return;
+      }
+      let secondsLeft = 15;
+      illusionCount.textContent = secondsLeft;
+      illusionTarget.classList.remove("reveal");
+      illusionDisc.classList.toggle("reverse", !illusionGrows);
+      illusionDisc.classList.add("running");
+      illusionStart.disabled = false;
+      illusionStart.textContent = "לעצור את האשליה";
+      illusionStatus.textContent = "הביטו רק בנקודה שבמרכז. אפשר לעצור בכל רגע אם לא נוח.";
+      playMagicTone(260, .18);
+      illusionTimer = window.setInterval(() => {
+        secondsLeft -= 1;
+        illusionCount.textContent = secondsLeft;
+        if (secondsLeft > 0) return;
+        stopIllusion();
+        illusionTarget.classList.add("reveal");
+        illusionStatus.textContent = illusionGrows
+          ? "עכשיו הביטו מיד בכף היד או בפניו של עמית. האם הם גדלים?"
+          : "עכשיו הביטו מיד בכף היד או בפניו של עמית. האם הם מתכווצים?";
+        illusionStart.textContent = "לעשות את זה שוב";
+        burstMagic(20);
+        playMagicTone(640, .22);
+      }, 1000);
+    });
+
+    document.querySelector("#magic-share").addEventListener("click", async () => {
+      const shareUrl = new URL(window.location.href);
+      shareUrl.hash = "magic";
+      shareUrl.search = "";
+      const shareData = {
+        title: "הבמה הדיגיטלית של עמית מיטרני",
+        text: "נסו קסם אינטראקטיבי דרך המסך, בלי לגלות לעמית מה בחרתם.",
+        url: shareUrl.toString()
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          return;
+        }
+        await navigator.clipboard.writeText(shareData.url);
+        showToast("הקישור לבמה הדיגיטלית הועתק.");
+      } catch (error) {
+        if (error?.name !== "AbortError") showToast("אפשר לשתף את כתובת העמוד ישירות מהדפדפן.");
+      }
     });
 
     const kidsRange = document.querySelector("#kids-range");
