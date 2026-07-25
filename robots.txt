@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://djskabi-png.github.io/amit-mitrani-experience/sitemap.xml
+Sitemap: https://amitgic.co.il/sitemap.xml
