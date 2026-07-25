@@ -686,7 +686,11 @@
     .planner-advice-card h3 { margin:0 0 12px; font-size:19px; }
     .planner-advice-card ul { display:grid; gap:8px; margin:0; padding:0 18px 0 0; color:#c7c3cf; font-size:13px; line-height:1.55; }
     .venue-list { display:grid; gap:9px; }
+    .venue-city-picker { display:flex; flex-wrap:wrap; gap:7px; margin:0 0 12px; }
+    .venue-city-picker button { min-height:36px; padding:8px 12px; border:1px solid rgba(255,255,255,.12); border-radius:999px; background:rgba(255,255,255,.035); color:#d8d4df; font:inherit; font-size:11px; font-weight:800; cursor:pointer; }
+    .venue-city-picker button.active { border-color:rgba(237,192,105,.75); background:var(--gold); color:#151118; }
     .venue-option { display:grid; gap:4px; padding:11px; border:1px solid rgba(255,255,255,.1); border-radius:11px; background:rgba(255,255,255,.03); }
+    .venue-option small { width:max-content; padding:4px 7px; border-radius:999px; background:rgba(237,192,105,.1); color:var(--gold); font-size:9px; font-weight:900; }
     .venue-option b { color:white; }
     .venue-option span { color:var(--muted); font-size:11px; line-height:1.5; }
     .venue-option a { color:var(--gold); font-size:11px; font-weight:800; text-decoration:underline; text-underline-offset:3px; }
@@ -1335,7 +1339,7 @@
         <div class="calculator">
           <div class="planner-selects">
             <label>סוג האירוע<select id="planner-event-type"><option value="birthday">יום הולדת לילדים</option><option value="family">אירוע משפחתי</option><option value="corporate">אירוע חברה</option></select></label>
-            <label>עיר<select id="planner-city"><option value="telaviv">תל אביב יפו</option><option value="herzliya">הרצליה</option><option value="other">עיר אחרת</option></select></label>
+            <label>עיר<select id="planner-city"><option value="telaviv">תל אביב יפו</option><option value="herzliya">הרצליה</option><option value="jerusalem">ירושלים</option><option value="haifa">חיפה</option><option value="netanya">נתניה</option><option value="kfar-saba">כפר סבא</option><option value="rishon">ראשון לציון</option><option value="other">עיר אחרת</option></select></label>
           </div>
           <label for="kids-range" id="guest-count-label">כמה ילדים מגיעים?</label>
           <input id="kids-range" type="range" min="5" max="60" value="20">
@@ -1353,7 +1357,7 @@
         </div>
         <div class="planner-advice">
           <article class="planner-advice-card"><h3>מה כדאי להוסיף לשולחן</h3><ul id="planner-additions"></ul></article>
-          <article class="planner-advice-card"><h3>מקומות שכדאי לבדוק בעיר</h3><div class="venue-list" id="venue-list"></div><p class="planner-source-note">ההצעות מבוססות על מקורות עירוניים. זמינות, התאמה ומחיר חייבים לוודא ישירות מול המקום לפני שסוגרים.</p></article>
+          <article class="planner-advice-card"><h3 id="venue-city-title">רעיונות למקומות בתל אביב יפו</h3><div class="venue-city-picker" id="venue-city-picker" aria-label="בחירת עיר לרעיונות למקומות"><button type="button" data-city="telaviv" class="active">תל אביב</button><button type="button" data-city="herzliya">הרצליה</button><button type="button" data-city="jerusalem">ירושלים</button><button type="button" data-city="haifa">חיפה</button><button type="button" data-city="netanya">נתניה</button><button type="button" data-city="kfar-saba">כפר סבא</button><button type="button" data-city="rishon">ראשון לציון</button><button type="button" data-city="other">עיר אחרת</button></div><div class="venue-list" id="venue-list"></div><p class="planner-source-note">אלה כיוונים לבדיקה, לא הבטחה לזמינות או למחיר. לפני שסוגרים מוודאים ישירות מול המקום התאמה למספר האורחים, נגישות, חניה, רעש ותנאי השכרה.</p></article>
         </div>
       </div>
     </section>
@@ -1823,17 +1827,21 @@
     const plannerSummary = document.querySelector("#planner-summary");
     const plannerAdditions = document.querySelector("#planner-additions");
     const venueList = document.querySelector("#venue-list");
+    const venueCityTitle = document.querySelector("#venue-city-title");
+    const venueCityPicker = document.querySelector("#venue-city-picker");
     const foodPreferences = { gluten: false, vegan: false, nuts: false };
     let parentsEat = false;
     const venueOptions = {
       telaviv: [
         {
           name: "מרכז הקיימות העירוני",
+          fit: "יום הולדת קטן או בינוני",
           copy: "חללים בגדלים שונים ומחירון עירוני גלוי, כולל מסלולים לימי הולדת. כדאי לבדוק את האולם הגדול ואת תנאי ההשכרה המעודכנים.",
           href: "https://www.tel-aviv.gov.il/Residents/Environment/Pages/MuniSustainabilityCenter.aspx?IccID=267"
         },
         {
           name: "מרכז קהילתי בית דני",
+          fit: "אירוע משפחתי או קהילתי",
           copy: "מרכז עירוני שמפרסם אפשרות להשכרת חללים. מתאים ככיוון לבדיקה לאירוע קהילתי או משפחתי.",
           href: "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/BeitDani.aspx"
         }
@@ -1841,21 +1849,97 @@
       herzliya: [
         {
           name: "מרכז אגדה",
+          fit: "יום הולדת לילדים",
           copy: "מרחב עירוני שמוצע במפורש לימי הולדת, עם ציוד לילדים, מטבח, קישוטים ואיש צוות מלווה.",
           href: "https://www.herzliya.muni.il/ימי-הולדת-באגדה/"
         }
       ],
+      jerusalem: [
+        {
+          name: "מינהל קהילתי לב העיר",
+          fit: "משפחה, קבוצה או אירוע חברה קטן",
+          copy: "מציע חדרים, חצר ואולם נגיש בגדלים שונים בנחלאות. כדאי להתאים את החלל למספר האורחים ולמבנה המופע.",
+          href: "https://www.levhair.org.il/page.php?ht=&id=4002&m=46&type=page"
+        },
+        {
+          name: "המרכז למוסיקה ירושלים",
+          fit: "אירוע חברה או קהל גדול",
+          copy: "מרכז שמפרסם אודיטוריום וחללים להשכרה, עם במה, הגברה ותאורה. מתאים לבדיקה כאשר האירוע דורש מעטפת הפקה.",
+          href: "https://www.jmc.org.il/space-rentals/"
+        }
+      ],
+      haifa: [
+        {
+          name: "בית לגדול טוב",
+          fit: "משפחות וילדים עד גיל 8",
+          copy: "מרכז קהילתי עירוני למשפחות ולילדים צעירים. לפני תכנון אירוע פרטי צריך לבדוק מול המרכז אם החלל פנוי ומתאים להשכרה.",
+          href: "https://www.haifa.muni.il/place/home-to-grow-good/"
+        },
+        {
+          name: "מרכז קהילתי נווה דוד",
+          fit: "אירוע משפחתי או קהילתי",
+          copy: "מרכז קהילתי עם פעילות לילדים, משפחות ואירועי תרבות. מומלץ לבדוק ישירות אפשרות להשכרת חלל ותנאי במה.",
+          href: "https://www.haifa.muni.il/place/neve-david-center/"
+        }
+      ],
+      netanya: [
+        {
+          name: "מרכז קהילתי רבין",
+          fit: "יום הולדת לילדים",
+          copy: "מקור עירוני מתייחס במפורש לחדר יום הולדת במרכז. כדאי לבדוק מול המרכז את ההצעה העדכנית, הציוד, הקיבולת והשעות.",
+          href: "https://www.netanya.muni.il/News/Pages/article1386.aspx"
+        },
+        {
+          name: "מרכז קהילתי דורה",
+          fit: "משפחה או קבוצה גדולה",
+          copy: "מרכז קהילתי שמארח פעילויות משפחתיות ואירועים. יש לבדוק ישירות אם קיימת השכרה פרטית ומהם תנאי המקום.",
+          href: "https://www.netanya.muni.il/City/Events/Pages/event9264.aspx"
+        }
+      ],
+      "kfar-saba": [
+        {
+          name: "מועדון מג'יק",
+          fit: "יום הולדת לילדים",
+          copy: "חלל פרטי שמפרסם השכרה לימי הולדת, עם אזור לילדים ואזור למבוגרים. המחיר והתנאים מחייבים אימות ישיר ועדכני.",
+          href: "https://www.magic-club.co.il/"
+        }
+      ],
+      rishon: [
+        {
+          name: "הכפר הקסום",
+          fit: "יום הולדת, בר או בת מצווה",
+          copy: "מתחם שמציג אפשרויות לימי הולדת ולאירועים משפחתיים. כדאי לבדוק התאמה למופע, עונתיות, כמות אורחים ומה כלול.",
+          href: "https://www.hakfar.net/"
+        }
+      ],
       other: [
         {
-          name: "מרכז קהילתי או אולם עירוני",
-          copy: "מומלץ להתחיל בחלל עירוני קרוב לבית ולבדוק מטבח, חניה, נגישות, רעש ושעת סיום לפני שסוגרים.",
+          name: "איך לבחור מקום בעיר אחרת",
+          fit: "צ'ק ליסט לפני שסוגרים",
+          copy: "חפשו מרכז קהילתי או אולם עירוני קרוב, ובדקו מטבח, חניה, נגישות, רעש, שעת סיום, מרחק מהקהל ומקום מוגן לפי ההנחיות.",
           href: "https://www.google.com/maps/search/מרכז+קהילתי+להשכרה+יום+הולדת"
         }
       ]
     };
+    const cityLabels = {
+      telaviv: "תל אביב יפו",
+      herzliya: "הרצליה",
+      jerusalem: "ירושלים",
+      haifa: "חיפה",
+      netanya: "נתניה",
+      "kfar-saba": "כפר סבא",
+      rishon: "ראשון לציון",
+      other: "עיר אחרת"
+    };
     const renderVenues = () => {
+      venueCityTitle.textContent = plannerCity.value === "other" ? "איך למצוא מקום בעיר שלכם" : `רעיונות למקומות ב${cityLabels[plannerCity.value]}`;
+      venueCityPicker.querySelectorAll("[data-city]").forEach((button) => {
+        const active = button.dataset.city === plannerCity.value;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
       venueList.innerHTML = (venueOptions[plannerCity.value] || venueOptions.other).map((venue) => `
-        <div class="venue-option"><b>${venue.name}</b><span>${venue.copy}</span><a href="${venue.href}" target="_blank" rel="noopener">בדיקת פרטים במקור</a></div>
+        <div class="venue-option"><small>${venue.fit}</small><b>${venue.name}</b><span>${venue.copy}</span><a href="${venue.href}" target="_blank" rel="noopener">בדיקת פרטים במקור</a></div>
       `).join("");
     };
     const updatePizza = () => {
@@ -1923,6 +2007,12 @@
       updatePizza();
     });
     plannerCity.addEventListener("change", renderVenues);
+    venueCityPicker.querySelectorAll("[data-city]").forEach((button) => {
+      button.addEventListener("click", () => {
+        plannerCity.value = button.dataset.city;
+        renderVenues();
+      });
+    });
     renderVenues();
     updatePizza();
 
