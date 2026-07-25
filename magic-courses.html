@@ -21,11 +21,12 @@
   <meta property="og:url" content="https://djskabi-png.github.io/amit-mitrani-experience/magic-courses.html">
   <meta property="og:image" content="https://djskabi-png.github.io/amit-mitrani-experience/assets/optimized/amit-cards-1200.webp">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"לומדים קסם בקצב שלכם, מהיסוד ועד לביצוע","description":"המחשה לשלושה מסלולי קורסי קסמים מתוכננים של עמית מיטרני, לילדים, למשפחות, לנוער ולמבוגרים.","provider":{"@type":"Person","name":"עמית מיטרני","url":"https://djskabi-png.github.io/amit-mitrani-experience/"},"url":"https://djskabi-png.github.io/amit-mitrani-experience/magic-courses.html"}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"איך רוכשים קורס?","acceptedAnswer":{"@type":"Answer","text":"בוחרים מסלול, פותחים את מסך הרכישה ומשלימים תשלום באתר. בגרסת ההמחשה אין חיוב אמיתי ואין להזין פרטי כרטיס אמיתי."}},{"@type":"Question","name":"למי מיועדים הקורסים?","acceptedAnswer":{"@type":"Answer","text":"שלושת המסלולים המתוכננים מיועדים לילדים ומתחילים, לנוער ומבוגרים ולמשפחות."}},{"@type":"Question","name":"איך מקבלים גישה?","acceptedAnswer":{"@type":"Answer","text":"בגרסה הנוכחית לא מתקבלת גישה אמיתית. לאחר חיבור סליקה ואזור אישי, הרכישה המאושרת תפתח את הקורס שנבחר."}},{"@type":"Question","name":"אפשר גם לדבר עם עמית?","acceptedAnswer":{"@type":"Answer","text":"כן. אפשר לפנות לעמית בכל שאלה. מכירה עצמאית מלאה תיפתח רק לאחר אישור התוכן, המחיר והתנאים."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"איך מצטרפים לקורס?","acceptedAnswer":{"@type":"Answer","text":"בוחרים את המסלול שמעניין אתכם ושולחים לעמית בקשה מסודרת. מחיר, תוכן, מועד ומשך גישה נמסרים רק לאחר אישור עמית."}},{"@type":"Question","name":"למי מיועדים הקורסים?","acceptedAnswer":{"@type":"Answer","text":"שלושת המסלולים המתוכננים מיועדים לילדים ומתחילים, לנוער ומבוגרים ולמשפחות."}},{"@type":"Question","name":"איך מקבלים גישה?","acceptedAnswer":{"@type":"Answer","text":"לאחר אישור המסלול והתנאים על ידי עמית יישלחו פרטי ההצטרפות והגישה המתאימים."}},{"@type":"Question","name":"אפשר גם לדבר עם עמית?","acceptedAnswer":{"@type":"Answer","text":"כן. אפשר לשלוח לעמית את המסלול שמעניין אתכם ולקבל תשובה אישית לפני כל התחייבות."}}]}</script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
     :root { --bg:#08080d; --panel:#12111a; --line:rgba(255,255,255,.12); --gold:#edc069; --purple:#8b68ff; --muted:#aaa7b7; --white:#fff; }
     * { box-sizing:border-box; }
+    .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--white); background:radial-gradient(circle at 82% 5%,rgba(139,104,255,.19),transparent 28rem),radial-gradient(circle at 8% 42%,rgba(237,192,105,.08),transparent 25rem),var(--bg); font-family:"Heebo",Arial,sans-serif; }
     .skip-link { position:fixed; top:10px; right:10px; z-index:100; padding:10px 14px; border-radius:10px; color:#000; background:#fff; transform:translateY(-150%); }
@@ -112,6 +113,53 @@
     .producer-checklist div { padding:17px; border:1px solid var(--line); border-radius:15px; background:rgba(255,255,255,.03); }
     .producer-checklist b { display:block; margin-bottom:5px; color:white; }
     .producer-checklist span { color:var(--muted); font-size:12px; line-height:1.5; }
+    .event-story { display:grid; grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr); gap:26px; align-items:stretch; padding:26px; border:1px solid rgba(237,192,105,.24); border-radius:28px; background:radial-gradient(circle at 12% 8%,rgba(139,104,255,.2),transparent 40%),linear-gradient(145deg,#15121f,#0d0c12); }
+    .event-story-visual { min-height:520px; position:relative; overflow:hidden; border:1px solid var(--line); border-radius:22px; background:var(--panel); }
+    .event-story-visual img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; }
+    .event-story-visual::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 52%,rgba(7,6,12,.72)); pointer-events:none; }
+    .event-story-copy { display:flex; flex-direction:column; justify-content:center; padding:14px 8px; }
+    .event-story-copy h2 { margin:8px 0 14px; font-size:clamp(34px,4vw,52px); line-height:1.08; }
+    .event-story-copy > p { margin:0 0 23px; color:#cbc6d4; line-height:1.78; }
+    .event-steps { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .event-step { padding:17px; border:1px solid var(--line); border-radius:16px; background:rgba(255,255,255,.035); }
+    .event-step b { display:block; margin-bottom:5px; color:white; }
+    .event-step span { color:var(--muted); font-size:13px; line-height:1.55; }
+    .public-feedback { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:15px; }
+    .feedback-card { padding:22px; border:1px solid rgba(139,104,255,.26); border-radius:19px; background:linear-gradient(145deg,rgba(139,104,255,.11),rgba(255,255,255,.025)); }
+    .feedback-card small { color:var(--gold); font-weight:900; }
+    .feedback-card h3 { margin:9px 0 7px; font-size:20px; }
+    .feedback-card p { margin:0; color:var(--muted); line-height:1.7; }
+    .feedback-source { display:inline-block; margin-top:14px; color:var(--gold); font-size:12px; font-weight:900; text-decoration:underline; text-underline-offset:3px; }
+    .review-gallery { margin-top:34px; padding:24px; border:1px solid rgba(237,192,105,.24); border-radius:24px; background:linear-gradient(145deg,rgba(237,192,105,.06),rgba(139,104,255,.07)); }
+    .review-gallery-head { display:flex; align-items:end; justify-content:space-between; gap:18px; margin-bottom:16px; }
+    .review-gallery-head h3 { margin:5px 0 0; font-size:clamp(25px,3vw,36px); }
+    .review-gallery-head p { margin:0; color:var(--muted); line-height:1.6; }
+    .review-controls { display:flex; gap:8px; direction:ltr; }
+    .review-control { width:48px; height:48px; display:grid; place-items:center; border:1px solid rgba(237,192,105,.35); border-radius:50%; color:white; background:#17141f; font-size:25px; cursor:pointer; }
+    .review-control:hover,.review-control:focus-visible { color:#17111d; background:var(--gold); }
+    .review-control:focus-visible { outline:3px solid white; outline-offset:3px; }
+    .review-track { display:flex; gap:16px; overflow-x:auto; padding:4px 4px 14px; direction:ltr; scroll-snap-type:x mandatory; scroll-padding-inline:4px; overscroll-behavior-inline:contain; scrollbar-color:var(--gold) rgba(255,255,255,.08); }
+    .review-slide { flex-grow:0; flex-shrink:0; flex-basis:min(640px,84vw); margin:0; overflow:hidden; border:1px solid rgba(255,255,255,.14); border-radius:20px; direction:rtl; scroll-snap-align:center; background:#0c0b11; box-shadow:0 16px 45px rgba(0,0,0,.28); }
+    .review-slide a { display:block; color:white; }
+    .review-slide img { width:100%; height:auto; aspect-ratio:4 / 3; display:block; object-fit:cover; object-position:center top; background:#f3f4f6; }
+    .review-slide figcaption { display:grid; gap:5px; padding:17px 19px 20px; }
+    .review-slide figcaption strong { color:var(--gold); font-size:17px; }
+    .review-slide figcaption span { color:#d6d1dc; line-height:1.55; }
+    .review-slide a:hover img,.review-slide a:focus-visible img { filter:brightness(1.05); }
+    .review-slide a:focus-visible { outline:3px solid var(--gold); outline-offset:-3px; }
+    .review-gallery-note { margin:10px 4px 0; color:var(--muted); font-size:12px; line-height:1.6; }
+    .more-media { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:18px; }
+    .media-preview { position:relative; min-height:280px; overflow:hidden; border:1px solid rgba(237,192,105,.3); border-radius:22px; color:white; background:#11101a; box-shadow:0 18px 50px rgba(0,0,0,.24); isolation:isolate; }
+    .media-preview img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .45s ease,filter .45s ease; }
+    .media-preview::after { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg,rgba(8,7,13,.08),rgba(8,7,13,.25) 38%,rgba(8,7,13,.96)); }
+    .media-preview-content { position:absolute; inset:auto 0 0; z-index:2; display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center; padding:22px; }
+    .media-preview-copy { min-width:0; }
+    .media-preview-copy strong,.media-preview-copy span { display:block; }
+    .media-preview-copy strong { margin-bottom:4px; font-size:20px; line-height:1.25; }
+    .media-preview-copy span { color:#ded9e6; font-size:13px; line-height:1.5; }
+    .media-play { width:58px; height:58px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.55); border-radius:50%; color:#17111d; background:var(--gold); box-shadow:0 0 0 8px rgba(237,192,105,.14),0 10px 30px rgba(0,0,0,.35); font-size:23px; line-height:1; }
+    .media-preview:hover img,.media-preview:focus-visible img { transform:scale(1.045); filter:saturate(1.12); }
+    .media-preview:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
     .course-catalog { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; }
     .course-product { padding:24px; border:1px solid rgba(139,104,255,.32); border-radius:22px; background:linear-gradient(150deg,rgba(139,104,255,.14),rgba(237,192,105,.055)); }
     .course-product .course-audience { color:var(--gold); font-size:12px; font-weight:900; }
@@ -211,6 +259,12 @@
     .order-number { color:var(--gold); font-weight:900; direction:ltr; }
     body.modal-open { overflow:hidden; }
     @media(max-width:760px) {
+      .review-gallery { padding:17px; }
+      .review-gallery-head { align-items:start; flex-direction:column; }
+      .review-controls { align-self:flex-end; }
+      .review-slide { flex-basis:92%; }
+      .more-media { grid-template-columns:1fr; }
+      .media-preview { min-height:245px; }
       .nav-links a:not(.btn) { display:none; }
       .mobile-nav { display:block; }
       .hero h1 { font-size:clamp(38px,11vw,54px); line-height:1.02; }
@@ -231,6 +285,10 @@
       .brand-more[hidden] { display:none; }
       .company-formats,.course-catalog { grid-template-columns:1fr; }
       .producer-checklist { grid-template-columns:1fr 1fr; }
+      .event-story { grid-template-columns:1fr; padding:17px; }
+      .event-story-visual { min-height:0; aspect-ratio:4 / 3; }
+      .event-story-copy { padding:7px 2px 2px; }
+      .event-steps,.public-feedback { grid-template-columns:1fr; }
       .footer-seo { grid-template-columns:1fr 1fr; }
       .commerce-card { padding:24px 17px; }
       .commerce-form { grid-template-columns:1fr; }
@@ -250,19 +308,21 @@
   <main id="main-content">
     <div class="shell breadcrumbs"><a href="index.html">עמוד הבית</a> / קורסים דיגיטליים</div>
     <section class="hero shell">
-      <div><div class="kicker">קורסים דיגיטליים</div><h1>לומדים קסם בקצב שלכם, מהיסוד ועד לביצוע</h1><p class="lead">האקדמיה הדיגיטלית מתוכננת להפוך ידע למסלול ברור. בעמוד הנוכחי אפשר לבחור קורס ולעבור הדמיית רכישה ללא חיוב. סליקה, אזור אישי, שמירת התקדמות וגישה לשיעורים עדיין אינם מחוברים.</p><div class="hero-actions"><button class="btn btn-gold" type="button" data-commerce-open>בחירת מסלול להמחשה</button><a class="btn" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%A2%D7%9E%D7%95%D7%93%20%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%9D%20%D7%93%D7%99%D7%92%D7%99%D7%98%D7%9C%D7%99%D7%99%D7%9D%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." target="_blank" rel="noopener">שאלה לעמית בוואטסאפ</a></div></div>
+      <div><div class="kicker">קורסים דיגיטליים</div><h1>לומדים קסם בקצב שלכם, מהיסוד ועד לביצוע</h1><p class="lead">האקדמיה הדיגיטלית נועדה להפוך ידע למסלול ברור. בוחרים את הקורס שמעניין אתכם ושולחים לעמית בקשה לקבלת תוכן, מחיר, מועדים ותנאי גישה.</p><div class="hero-actions"><button class="btn btn-gold" type="button" data-commerce-open>בחירת מסלול וקבלת פרטים</button><a class="btn" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%A2%D7%9E%D7%95%D7%93%20%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%9D%20%D7%93%D7%99%D7%92%D7%99%D7%98%D7%9C%D7%99%D7%99%D7%9D%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." target="_blank" rel="noopener">שאלה לעמית בוואטסאפ</a></div></div>
       <div class="hero-image"><img src="assets/optimized/amit-cards-1200.webp" alt="עמית מיטרני מחזיק קלפים בקורס קסמים" width="1200" height="900"></div>
     </section>
     <section id="answers"><div class="shell"><div class="answer"><h2>התשובה הקצרה</h2><p>העמוד מציג את מסלולי הקורסים המתוכננים ואת חוויית הרכישה הרצויה. פתיחת מכירה אמיתית תתבצע רק לאחר שעמית יאשר את תוכן הקורסים, המחירים והתנאים, ולאחר חיבור סליקה ואזור אישי.</p></div></div></section>
-    
+
+
+
     <section><div class="shell"><div class="experience"><div class="video-stage"><iframe src="https://www.youtube-nocookie.com/embed/h3L6zRwWqmA?rel=0" title="טעימה מלימוד קסמים" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="video-copy"><div class="kicker">לראות את עמית בפעולה</div><h2>טעימה מלימוד קסמים</h2><p>הקסם לא מתחיל בסוד. הוא מתחיל בהסבר ברור, תרגול והבנה של הדרך להציג אותו.</p><div class="hero-actions"><a class="btn btn-gold" href="https://www.youtube.com/watch?v=h3L6zRwWqmA" target="_blank" rel="noopener">פתיחת הסרטון</a><a class="btn" href="index.html#contact">בדיקת התאמה</a></div></div></div><div class="gallery"><figure><img src="assets/optimized/amit-cards-1200.webp" alt="עמית מיטרני מלמד עבודה עם קלפים" loading="lazy" width="900" height="700"><figcaption>עמית מיטרני מלמד עבודה עם קלפים</figcaption></figure><figure><img src="assets/optimized/amit-thinking-1200.webp" alt="חשיבה על בניית הקסם" loading="lazy" width="900" height="700"><figcaption>חשיבה על בניית הקסם</figcaption></figure><figure><img src="assets/optimized/cubes-amit-1200.webp" alt="קסם חזותי לתרגול" loading="lazy" width="900" height="700"><figcaption>קסם חזותי לתרגול</figcaption></figure></div></div></section>
-    <section><div class="shell"><div class="section-head"><div class="kicker">איך זה עובד</div><h2>מה מקבלים במסלול הזה</h2><p>העמוד מציג את מסלולי הקורסים ואת חוויית הרכישה המתוכננת. התוכן, המחירים, הסליקה והגישה ייפתחו רק לאחר אישור עמית וחיבור המערכות.</p></div><div class="grid"><article class="card"><b>מסלול לפי קהל</b><p>ילדים, משפחות, נוער ומבוגרים מקבלים תוכן אחר.</p></article><article class="card"><b>שיעורים קצרים</b><p>כל שיעור מתמקד ביכולת אחת שאפשר להבין ולתרגל.</p></article><article class="card"><b>אזור אישי מתוכנן</b><p>לאחר חיבור המערכת, התוכן ייפתח לפי הקורס שנרכש ותישמר התקדמות הלמידה.</p></article><article class="card"><b>רכישה בהמחשה</b><p>כרגע אפשר לבדוק את כל שלבי הבחירה והתשלום באמצעות פרטי בדיקה, ללא חיוב וללא פתיחת תוכן.</p></article></div></div></section>
-    <section><div class="shell"><div class="section-head"><div class="kicker">מוצרים מוצעים לאישור עמית</div><h2>שלושה קורסים עם מבנה, קצב ומחיר ברורים</h2><p>המודל מבוסס על קורסים דיגיטליים בישראל ובעולם: שיעורים קצרים, הדגמה מול קהל, הסבר, תרגול וגישה עצמאית. כל המחירים, הכמויות והתנאים בעמוד הם הצעה מסחרית בלבד וממתינים לאישור עמית.</p></div><div class="course-catalog"><article class="course-product"><span class="course-audience">ילדים ומתחילים</span><h3>הקוסם הצעיר</h3><div class="course-facts"><span>כמות<b>12 שיעורי וידאו</b></span><span>משך<b>7 עד 12 דקות לשיעור</b></span><span>איפה ומתי<b>אונליין, בקצב אישי</b></span><span>גישה<b>גישה מוצעת ל-6 חודשים</b></span><span>מה כלול<b>תרגול מודרך, דפי משימה וקסמים מחפצים שיש בבית</b></span></div><div class="course-price"><strong>149 ₪</strong><small>מחיר ומבנה מוצעים, ממתינים לאישור עמית</small></div><button class="btn btn-gold" type="button" data-course-open="הקוסם הצעיר">בחירת מסלול להמחשה</button></article><article class="course-product"><span class="course-audience">נוער ומבוגרים</span><h3>לשבור את הקרח</h3><div class="course-facts"><span>כמות<b>10 שיעורי וידאו</b></span><span>משך<b>5 עד 10 דקות לשיעור</b></span><span>איפה ומתי<b>אונליין, בקצב אישי</b></span><span>גישה<b>גישה מוצעת ל-6 חודשים</b></span><span>מה כלול<b>קסמים קצרים לחברים, דייטים ומפגשים חברתיים</b></span></div><div class="course-price"><strong>129 ₪</strong><small>מחיר ומבנה מוצעים, ממתינים לאישור עמית</small></div><button class="btn btn-gold" type="button" data-course-open="לשבור את הקרח">בחירת מסלול להמחשה</button></article><article class="course-product"><span class="course-audience">הורים, ילדים וסבים</span><h3>קסמים למשפחה</h3><div class="course-facts"><span>כמות<b>14 שיעורי וידאו</b></span><span>משך<b>8 עד 12 דקות לשיעור</b></span><span>איפה ומתי<b>אונליין, בקצב אישי</b></span><span>גישה<b>גישה מוצעת ל-12 חודשים</b></span><span>מה כלול<b>קסמים לערב משפחתי, חג ויום הולדת, כולל מופע ביתי קצר</b></span></div><div class="course-price"><strong>179 ₪</strong><small>מחיר ומבנה מוצעים, ממתינים לאישור עמית</small></div><button class="btn btn-gold" type="button" data-course-open="קסמים למשפחה">בחירת מסלול להמחשה</button></article></div></div></section>
+    <section><div class="shell"><div class="section-head"><div class="kicker">איך זה עובד</div><h2>מה מקבלים במסלול הזה</h2><p>העמוד מציג את מסלולי הקורסים ואת חוויית הרכישה המתוכננת. התוכן, המחירים, הסליקה והגישה ייפתחו רק לאחר אישור עמית וחיבור המערכות.</p></div><div class="grid"><article class="card"><b>מסלול לפי קהל</b><p>ילדים, משפחות, נוער ומבוגרים מקבלים תוכן אחר.</p></article><article class="card"><b>שיעורים קצרים</b><p>כל שיעור מתמקד ביכולת אחת שאפשר להבין ולתרגל.</p></article><article class="card"><b>אזור אישי מתוכנן</b><p>לאחר חיבור המערכת, התוכן ייפתח לפי הקורס שנרכש ותישמר התקדמות הלמידה.</p></article><article class="card"><b>הצטרפות מסודרת</b><p>בוחרים מסלול ושולחים לעמית בקשה. תוכן, מחיר, מועדים ותנאי גישה נמסרים לפני כל התחייבות.</p></article></div></div></section>
+    <section><div class="shell"><div class="section-head"><div class="kicker">מסלולי לימוד</div><h2>בוחרים כיוון ומקבלים מעמית את כל הפרטים</h2><p>אפשר לבחור את המסלול שמעניין אתכם ולשלוח בקשה מסודרת. תוכן, כמות שיעורים, מחיר, מועד ומשך גישה יימסרו לפני כל התחייבות.</p></div><div class="course-catalog"><article class="course-product"><span class="course-audience">ילדים ומתחילים</span><h3>הקוסם הצעיר</h3><div class="course-facts"><span>כמות<b>יימסר לאחר אישור עמית</b></span><span>משך<b>יימסר לפני ההצטרפות</b></span><span>איפה ומתי<b>לפי פרטי המסלול שיאושרו</b></span><span>גישה<b>יימסר לפני ההצטרפות</b></span><span>מה כלול<b>תוכן המסלול יימסר לאחר אישור עמית</b></span></div><div class="course-price"><strong>מחיר יימסר בפנייה</strong><small>הצטרפות רק לאחר קבלת כל הפרטים</small></div><button class="btn btn-gold" type="button" data-course-open="הקוסם הצעיר">בחירת מסלול וקבלת פרטים</button></article><article class="course-product"><span class="course-audience">נוער ומבוגרים</span><h3>לשבור את הקרח</h3><div class="course-facts"><span>כמות<b>יימסר לאחר אישור עמית</b></span><span>משך<b>יימסר לפני ההצטרפות</b></span><span>איפה ומתי<b>לפי פרטי המסלול שיאושרו</b></span><span>גישה<b>יימסר לפני ההצטרפות</b></span><span>מה כלול<b>תוכן המסלול יימסר לאחר אישור עמית</b></span></div><div class="course-price"><strong>מחיר יימסר בפנייה</strong><small>הצטרפות רק לאחר קבלת כל הפרטים</small></div><button class="btn btn-gold" type="button" data-course-open="לשבור את הקרח">בחירת מסלול וקבלת פרטים</button></article><article class="course-product"><span class="course-audience">הורים, ילדים וסבים</span><h3>קסמים למשפחה</h3><div class="course-facts"><span>כמות<b>יימסר לאחר אישור עמית</b></span><span>משך<b>יימסר לפני ההצטרפות</b></span><span>איפה ומתי<b>לפי פרטי המסלול שיאושרו</b></span><span>גישה<b>יימסר לפני ההצטרפות</b></span><span>מה כלול<b>תוכן המסלול יימסר לאחר אישור עמית</b></span></div><div class="course-price"><strong>מחיר יימסר בפנייה</strong><small>הצטרפות רק לאחר קבלת כל הפרטים</small></div><button class="btn btn-gold" type="button" data-course-open="קסמים למשפחה">בחירת מסלול וקבלת פרטים</button></article></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">דוגמאות מוחשיות</div><h2>מה אפשר ללמוד במסלולים</h2><p>הדוגמאות ממחישות את הכיוון. המבנה הסופי נקבע לפי הקהל, המטרה והמסלול שנבחר.</p></div><div class="example-grid"><article class="example-card"><span>01</span><h3>הקוסם הצעיר</h3><p>יסודות בטוחים, הצגה מול קהל וקסמים שאפשר לתרגל בבית.</p></article><article class="example-card"><span>02</span><h3>לשבור את הקרח</h3><p>קסמים קצרים לחברים, דייטים ומפגשים חברתיים בלי ציוד מורכב.</p></article><article class="example-card"><span>03</span><h3>קסמים למשפחה</h3><p>רעיונות שאפשר לתרגל ולהציג בבית, בחג או ביום הולדת.</p></article></div></div></section>
-    <section><div class="shell"><div class="section-head"><div class="kicker">ניסיון, מקצועיות וחיבור לקהל</div><h2>למה עמית מתאים לקורסים דיגיטליים</h2><p>כל המידע נשאר באתר. אין צורך לעבור לכרטיס עסק ישן או לאתר חיצוני כדי להבין מי עמית, מה הניסיון שלו ואיך נראית ההתאמה לאירוע.</p></div><div class="mentions"><article class="mention"><small>המלצות על עמית</small><h3>נוכחות מרשימה ויחס נעים לקהל</h3><p>במשובים פומביים על עמית חוזרים החיבור הטוב לקהל, המקצועיות והאופי הנעים. באירוע מהסוג הזה, החוויה נבנית סביב האנשים בחדר ולא סביב רצף קבוע של טריקים.</p></article><article class="mention"><small>התאמה לעולם הזה</small><h3>מסלול לפי קהל</h3><p>ילדים, משפחות, נוער ומבוגרים מקבלים תוכן אחר.</p></article></div><div class="testimonial-row"><article class="testimonial"><small>אגודת הקוסמים</small><h3>אחד ממנהלי אגודת הקוסמים</h3><p>עמית פעיל באגודת הקוסמים ונמנה עם מנהליה. התפקיד מחבר אותו לעשייה המקצועית, לקהילת הקוסמים ולהתפתחות המתמשכת של התחום בישראל.</p></article><article class="testimonial"><small>תכנון אחראי</small><h3>רכישה בהמחשה</h3><p>כרגע אפשר לבדוק את כל שלבי הבחירה והתשלום באמצעות פרטי בדיקה, ללא חיוב וללא פתיחת תוכן.</p></article></div></div></section>
-    <section><div class="shell"><div class="section-head"><div class="kicker">שאלות ותשובות</div><h2>מה כדאי לדעת לפני שפונים</h2></div><div class="faq"><details><summary>איך רוכשים קורס?</summary><p>בוחרים מסלול, פותחים את מסך הרכישה ומשלימים תשלום באתר. בגרסת ההמחשה אין חיוב אמיתי ואין להזין פרטי כרטיס אמיתי.</p></details><details><summary>למי מיועדים הקורסים?</summary><p>שלושת המסלולים המתוכננים מיועדים לילדים ומתחילים, לנוער ומבוגרים ולמשפחות.</p></details><details><summary>איך מקבלים גישה?</summary><p>בגרסה הנוכחית לא מתקבלת גישה אמיתית. לאחר חיבור סליקה ואזור אישי, הרכישה המאושרת תפתח את הקורס שנבחר.</p></details><details><summary>אפשר גם לדבר עם עמית?</summary><p>כן. אפשר לפנות לעמית בכל שאלה. מכירה עצמאית מלאה תיפתח רק לאחר אישור התוכן, המחיר והתנאים.</p></details></div></div></section>
+    <section><div class="shell"><div class="section-head"><div class="kicker">ניסיון, מקצועיות וחיבור לקהל</div><h2>למה עמית מתאים לקורסים דיגיטליים</h2><p>כל המידע נשאר באתר. אין צורך לעבור לכרטיס עסק ישן או לאתר חיצוני כדי להבין מי עמית, מה הניסיון שלו ואיך נראית ההתאמה לאירוע.</p></div><div class="mentions"><article class="mention"><small>המלצות על עמית</small><h3>נוכחות מרשימה ויחס נעים לקהל</h3><p>במשובים פומביים על עמית חוזרים החיבור הטוב לקהל, המקצועיות והאופי הנעים. באירוע מהסוג הזה, החוויה נבנית סביב האנשים בחדר ולא סביב רצף קבוע של טריקים.</p></article><article class="mention"><small>התאמה לעולם הזה</small><h3>מסלול לפי קהל</h3><p>ילדים, משפחות, נוער ומבוגרים מקבלים תוכן אחר.</p></article></div><div class="testimonial-row"><article class="testimonial"><small>אגודת הקוסמים</small><h3>אחד ממנהלי אגודת הקוסמים</h3><p>עמית פעיל באגודת הקוסמים ונמנה עם מנהליה. התפקיד מחבר אותו לעשייה המקצועית, לקהילת הקוסמים ולהתפתחות המתמשכת של התחום בישראל.</p></article><article class="testimonial"><small>תכנון אחראי</small><h3>הצטרפות מסודרת</h3><p>בוחרים מסלול ושולחים לעמית בקשה. תוכן, מחיר, מועדים ותנאי גישה נמסרים לפני כל התחייבות.</p></article></div></div></section>
+    <section><div class="shell"><div class="section-head"><div class="kicker">שאלות ותשובות</div><h2>מה כדאי לדעת לפני שפונים</h2></div><div class="faq"><details><summary>איך מצטרפים לקורס?</summary><p>בוחרים את המסלול שמעניין אתכם ושולחים לעמית בקשה מסודרת. מחיר, תוכן, מועד ומשך גישה נמסרים רק לאחר אישור עמית.</p></details><details><summary>למי מיועדים הקורסים?</summary><p>שלושת המסלולים המתוכננים מיועדים לילדים ומתחילים, לנוער ומבוגרים ולמשפחות.</p></details><details><summary>איך מקבלים גישה?</summary><p>לאחר אישור המסלול והתנאים על ידי עמית יישלחו פרטי ההצטרפות והגישה המתאימים.</p></details><details><summary>אפשר גם לדבר עם עמית?</summary><p>כן. אפשר לשלוח לעמית את המסלול שמעניין אתכם ולקבל תשובה אישית לפני כל התחייבות.</p></details></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">המשך הדרך</div><h2>עולמות נוספים באתר</h2></div><div class="related"><a href="shows-for-kids.html">מופעים לילדים</a><a href="business-magic.html">תוכן עסקי</a><a href="index.html#academy">האקדמיה בדף הבית</a></div></div></section>
-    <section><div class="shell"><div class="cta"><div><h2>בוחרים קורס ובודקים את מסלול הרכישה</h2><p>בגרסה הנוכחית זו הדמיה ללא חיוב וללא פתיחת תוכן. מכירה וגישה אמיתיות יחוברו בהמשך.</p></div><button class="btn btn-gold" type="button" data-commerce-open>פתיחת הדמיית רכישה</button></div></div></section>
+    <section><div class="shell"><div class="cta"><div><h2>בוחרים קורס ומקבלים מידע מלא</h2><p>בוחרים מסלול, משאירים פרטים ושולחים לעמית בקשה. מצטרפים רק אחרי קבלת תוכן, מחיר ותנאים.</p></div><button class="btn btn-gold" type="button" data-commerce-open>בחירת מסלול</button></div></div></section>
   </main>
   <footer><div class="shell"><div class="footer-seo"><a href="shows-for-kids.html">קוסם ליום הולדת לילדים</a><a href="mentalist-adult-parties.html">אמן חושים למסיבת מבוגרים</a><a href="magician-bar-bat-mitzvah.html">קוסם לבר ובת מצווה</a><a href="magician-brit-brita.html">קוסם לברית או בריתה</a><a href="magician-purim-events.html">קוסם לאירועי פורים</a><a href="close-up-magic-receptions.html">קוסם לקבלת פנים</a><a href="shows-for-companies.html">אמן חושים לאירוע חברה</a><a href="shows-for-institutions.html">קוסם לקייטנות ובתי ספר</a><a href="shows-for-families.html">מופע קסמים למשפחות</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל לדוברי עברית</a><a href="magic-courses.html">קורסי קסמים אונליין</a><a href="business-magic.html">קסם מותאם למסר עסקי</a></div><div class="social-links" aria-label="הערוצים של עמית"><a class="social-link" href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener" aria-label="אינסטגרם של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.7" r="1"></circle></svg><span>אינסטגרם</span></a><a class="social-link" href="https://www.facebook.com/amitgic/" target="_blank" rel="noopener" aria-label="פייסבוק של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3.5l.5-4h-4V9c0-.7.3-1 1-1z"></path></svg><span>פייסבוק</span></a><a class="social-link" href="https://www.tiktok.com/@amit_miteranii" target="_blank" rel="noopener" aria-label="טיקטוק של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3c.5 2.8 2.1 4.4 5 4.8v4c-1.9-.1-3.5-.7-5-1.8v6.2a6.2 6.2 0 1 1-5.4-6.1v4.1a2.3 2.3 0 1 0 1.4 2.1V3h4z"></path></svg><span>טיקטוק</span></a><a class="social-link" href="https://wa.me/972523416151" target="_blank" rel="noopener" aria-label="וואטסאפ של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.6A10 10 0 0 0 4.8 15.7L3.4 21l5.4-1.4A10 10 0 0 0 20.5 3.6zM12 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.2.8.9-3.1-.2-.3A8 8 0 1 1 12 18zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-1.5-.7-2.5-1.4-3.5-3-.2-.3 0-.4.1-.5l.6-.7c.1-.1.2-.3.2-.5s0-.3-.1-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.8-1.1 1.7-1.1 2.8 0 1.7 1.2 3.4 1.4 3.6 1.7 2.6 4.2 4 6.9 4.8.8.2 1.7.1 2.3-.2.7-.4 1.2-1.1 1.4-1.9.1-.2.1-.4 0-.5-.1-.1-.3-.2-.5-.3z"></path></svg><span>וואטסאפ</span></a></div><div class="footer-row"><span>עמית מיטרני, קוסם ואמן חושים</span><span class="legal-links"><a href="index.html">עמוד הבית</a><a href="index.html#contact">יצירת קשר</a><a href="index.html?modal=privacy">פרטיות</a><a href="index.html?modal=terms">תקנון האתר</a><a href="index.html?modal=accessibility-statement">הצהרת נגישות</a></span></div></div></footer>
   <button class="a11y-trigger" id="a11y-trigger" type="button" aria-expanded="false" aria-controls="a11y-panel">נגישות</button>
@@ -274,13 +334,13 @@
     <div class="commerce-backdrop" data-commerce-close></div>
     <div class="commerce-card">
       <button class="commerce-close" type="button" data-commerce-close aria-label="סגירה">×</button>
-      <div class="kicker">הדמיית רכישה באתר</div>
-      <h2 id="commerce-title">בחירת קורס ובדיקת התהליך</h2>
-      <p>בחרו מסלול ועברו את רכישת ההדגמה. אין חיוב, אין שמירת עסקה ואין פתיחת קורס. לאחר אישור עמית וחיבור סליקה ואזור אישי, התהליך האמיתי יוכל לפתוח גישה.</p>
+      <div class="kicker">בקשת הצטרפות לקורס</div>
+      <h2 id="commerce-title">בוחרים מסלול ושולחים בקשה</h2>
+      <p>בחרו את המסלול שמעניין אתכם ושלחו לעמית את הפרטים. עמית יחזור אליכם עם התוכן, המחיר, מועד הפתיחה ותנאי הגישה לפני כל התחייבות.</p>
       <div class="payment-flow">
-        <div class="payment-step"><span>1</span><b>בוחרים קורס</b><small>מסלול שמתאים לגיל ולמטרה.</small></div><div class="payment-step"><span>2</span><b>בודקים את הטופס</b><small>משתמשים בפרטי ההדגמה בלבד, ללא חיוב.</small></div><div class="payment-step"><span>3</span><b>מקבלים סיכום</b><small>מספר ההדגמה נוצר בדפדפן ואינו נשמר.</small></div><div class="payment-step"><span>4</span><b>פונים לעמית</b><small>אפשר לשלוח שאלה לפני שהמכירה האמיתית תיפתח.</small></div>
+        <div class="payment-step"><span>1</span><b>בוחרים קורס</b><small>מסלול שמתאים לגיל ולמטרה.</small></div><div class="payment-step"><span>2</span><b>משאירים פרטים</b><small>שם, טלפון ודוא״ל לחזרה.</small></div><div class="payment-step"><span>3</span><b>מקבלים מידע</b><small>עמית מאשר תוכן, מחיר ומועד.</small></div><div class="payment-step"><span>4</span><b>מצטרפים</b><small>רק לאחר שקיבלתם ואישרתם את כל התנאים.</small></div>
       </div>
-      <div class="deposit-note">זהו מסך הדגמה בלבד. המחיר, תנאי הביטול, אופן התשלום, משך הגישה ותוכן הקורסים טרם אושרו. אין להזין פרטי כרטיס אמיתי.</div>
+      <div class="deposit-note">הבקשה אינה רכישה ואינה מחייבת. מחיר, תוכן, מועדים, תנאי ביטול ומשך גישה יימסרו רק לאחר אישור עמית.</div>
       <div class="course-choice-step"><small>שלב 1, בחירת מסלול</small><h3>איזה קורס מעניין אתכם?</h3><p>רק אחרי הבחירה יוצגו התוכן, קהל היעד, הגישה והתנאים של המסלול שבחרתם.</p><label>בחירת קורס<select id="course-choice" name="product" form="commerce-form" required><option value="">בחרו מסלול כדי לראות את הפרטים</option><option>הקוסם הצעיר</option><option>לשבור את הקרח</option><option>קסמים למשפחה</option></select></label></div>
       <div class="purchase-summary" id="purchase-summary" hidden>
         <div class="summary-head"><b>שלב 2, בודקים מה מקבלים</b><span id="summary-status">המסלול נבחר</span></div>
@@ -296,17 +356,17 @@
       </div>
       <form class="commerce-form" id="commerce-form" novalidate>
         <div class="commerce-fields" id="commerce-fields" hidden>
-        <div class="checkout-section-title"><b>שלב 3, פרטים והדמיית תשלום</b><small>ממשיכים רק אחרי שבחרתם מסלול וקראתם מה הוא כולל.</small></div>
+        <div class="checkout-section-title"><b>שלב 3, פרטים לחזרה</b><small>ממשיכים רק אחרי שבחרתם את המסלול שמעניין אתכם.</small></div>
         <label>שם מלא<input name="name" autocomplete="name" required></label>
         <label>טלפון<input name="phone" type="tel" autocomplete="tel" required></label>
         <label>דוא״ל<input name="email" type="email" autocomplete="email" required></label>
-        <div class="demo-payment"><p>סביבת המחשה בלבד. אין להזין כרטיס אמיתי. פרטי הבדיקה הם:</p><div class="demo-codes"><code>12341234</code><code>1234</code><code>123</code></div></div><label class="full">מספר כרטיס בדיקה<input name="card" inputmode="numeric" maxlength="8" placeholder="12341234" required></label><label>תוקף בדיקה<input name="expiry" inputmode="numeric" maxlength="4" placeholder="1234" required></label><label>3 ספרות<input name="cvv" inputmode="numeric" maxlength="3" placeholder="123" required></label>
+        <label class="full">מה חשוב לכם ללמוד?<textarea name="notes" placeholder="ספרו בקצרה למי מיועד הקורס ומה הייתם רוצים לדעת"></textarea></label>
         <label class="consent-field"><input name="consent" type="checkbox" required><span>אני מאשר או מאשרת להשתמש בפרטים שמילאתי כדי להכין פנייה לעמית. הפרטים אינם נשמרים באתר, והם יועברו רק אם אבחר לשלוח את הודעת הוואטסאפ.</span></label>
         <p class="commerce-error" id="commerce-error" role="alert"></p>
-        <button class="btn btn-gold full" type="submit">השלמת רכישת הדגמה</button>
+        <button class="btn btn-gold full" type="submit">הכנת פנייה לעמית</button>
         </div>
       </form>
-      <div class="order-success" id="order-success"><span>הפעולה הושלמה בהמחשה</span><strong id="success-message"></strong><p>מספר פעולה: <span class="order-number" id="order-number"></span></p><a class="btn btn-gold" id="order-whatsapp" href="#" target="_blank" rel="noopener">שאלה לעמית על הקורס</a></div>
+      <div class="order-success" id="order-success"><span>הפנייה מוכנה</span><strong id="success-message"></strong><p>מספר פנייה: <span class="order-number" id="order-number"></span></p><a class="btn btn-gold" id="order-whatsapp" href="#" target="_blank" rel="noopener">שליחת הפנייה לעמית</a></div>
     </div>
   </div>
   <script>
@@ -371,6 +431,26 @@
       brandMore.setAttribute("aria-expanded", String(expanded));
       brandMore.textContent = expanded ? "הצגת פחות ארגונים" : "הצגת ארגונים נוספים";
     });
+    document.querySelectorAll("[data-review-carousel]").forEach(carousel => {
+      const track = carousel.querySelector("[data-review-track]");
+      const slides = [...carousel.querySelectorAll("[data-review-slide]")];
+      const status = carousel.querySelector("[data-review-status]");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let activeIndex = 0;
+      const showSlide = nextIndex => {
+        activeIndex = (nextIndex + slides.length) % slides.length;
+        slides[activeIndex].scrollIntoView({ behavior:reducedMotion ? "auto" : "smooth", block:"nearest", inline:"center" });
+        status.textContent = `מוצגת המלצה ${activeIndex + 1} מתוך ${slides.length}`;
+      };
+      carousel.querySelector("[data-review-prev]").addEventListener("click", () => showSlide(activeIndex - 1));
+      carousel.querySelector("[data-review-next]").addEventListener("click", () => showSlide(activeIndex + 1));
+      track.addEventListener("keydown", event => {
+        if (event.key === "ArrowLeft") { event.preventDefault(); showSlide(activeIndex + 1); }
+        if (event.key === "ArrowRight") { event.preventDefault(); showSlide(activeIndex - 1); }
+        if (event.key === "Home") { event.preventDefault(); showSlide(0); }
+        if (event.key === "End") { event.preventDefault(); showSlide(slides.length - 1); }
+      });
+    });
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         if (commerceModal.classList.contains("open")) closeCommerce();
@@ -386,9 +466,9 @@
       }
     });
     const courseDetails = {
-      "הקוסם הצעיר": { includes: "12 שיעורי וידאו, תרגול מודרך, דפי משימה וקסמים מחפצים שיש בבית", audience: "ילדים ומתחילים שרוצים לבנות ביטחון מול קהל", delivery: "אונליין באזור אישי, בקצב עצמאי", access: "גישה מוצעת ל-6 חודשים", price: "149 ₪, מוצע לאישור עמית" },
-      "לשבור את הקרח": { includes: "10 שיעורי וידאו עם קסמים חברתיים קצרים והדרכה להצגה טבעית", audience: "נוער, חברים, דייטים ומפגשים חברתיים", delivery: "אונליין באזור אישי, בקצב עצמאי", access: "גישה מוצעת ל-6 חודשים", price: "129 ₪, מוצע לאישור עמית" },
-      "קסמים למשפחה": { includes: "14 שיעורי וידאו ותרגול למופע ביתי קצר למשפחה", audience: "הורים, ילדים, סבים ובני משפחה ללא ניסיון קודם", delivery: "אונליין באזור אישי, בקצב עצמאי", access: "גישה מוצעת ל-12 חודשים", price: "179 ₪, מוצע לאישור עמית" }
+      "הקוסם הצעיר": { includes: "תוכן המסלול יימסר לאחר אישור עמית", audience: "ילדים ומתחילים, בכפוף להתאמה ואישור עמית", delivery: "אופן הלימוד יימסר לפני ההצטרפות", access: "משך הגישה יימסר לפני ההצטרפות", price: "מחיר יימסר לאחר אישור עמית" },
+      "לשבור את הקרח": { includes: "תוכן המסלול יימסר לאחר אישור עמית", audience: "נוער ומבוגרים, בכפוף להתאמה ואישור עמית", delivery: "אופן הלימוד יימסר לפני ההצטרפות", access: "משך הגישה יימסר לפני ההצטרפות", price: "מחיר יימסר לאחר אישור עמית" },
+      "קסמים למשפחה": { includes: "תוכן המסלול יימסר לאחר אישור עמית", audience: "משפחות, בכפוף להתאמה ואישור עמית", delivery: "אופן הלימוד יימסר לפני ההצטרפות", access: "משך הגישה יימסר לפני ההצטרפות", price: "מחיר יימסר לאחר אישור עמית" }
     };
     const purchaseSummary = document.querySelector("#purchase-summary");
     const commerceFields = document.querySelector("#commerce-fields");
@@ -413,7 +493,6 @@
         return;
       }
       const data = new FormData(commerceForm);
-      if (String(data.get("card")).replace(/\D/g,"") !== "12341234" || String(data.get("expiry")).replace(/\D/g,"") !== "1234" || String(data.get("cvv")).replace(/\D/g,"") !== "123") { commerceError.textContent = "פרטי ההדגמה אינם תואמים לפרטים שמופיעים בטופס."; return; }
       commerceError.textContent = "";
       const orderId = "COURSE-" + Date.now().toString().slice(-7);
       const message = [
@@ -431,7 +510,7 @@
         data.get("notes") ? "פרטים: " + data.get("notes") : ""
       ].filter(Boolean).join("\n");
       document.querySelector("#order-number").textContent = orderId;
-      document.querySelector("#success-message").textContent = "הדמיית הרכישה הושלמה ללא חיוב. לא נרכש או נפתח קורס.";
+      document.querySelector("#success-message").textContent = "הפנייה מוכנה לשליחה לעמית. לא בוצעה רכישה ולא נוצר חיוב.";
       document.querySelector("#order-whatsapp").href = "https://wa.me/972523416151?text=" + encodeURIComponent(message);
       commerceForm.hidden = true;
       orderSuccess.classList.add("show");

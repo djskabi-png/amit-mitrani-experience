@@ -26,6 +26,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
     :root { --bg:#08080d; --panel:#12111a; --line:rgba(255,255,255,.12); --gold:#edc069; --purple:#8b68ff; --muted:#aaa7b7; --white:#fff; }
     * { box-sizing:border-box; }
+    .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--white); background:radial-gradient(circle at 82% 5%,rgba(139,104,255,.19),transparent 28rem),radial-gradient(circle at 8% 42%,rgba(237,192,105,.08),transparent 25rem),var(--bg); font-family:"Heebo",Arial,sans-serif; }
     .skip-link { position:fixed; top:10px; right:10px; z-index:100; padding:10px 14px; border-radius:10px; color:#000; background:#fff; transform:translateY(-150%); }
@@ -112,6 +113,53 @@
     .producer-checklist div { padding:17px; border:1px solid var(--line); border-radius:15px; background:rgba(255,255,255,.03); }
     .producer-checklist b { display:block; margin-bottom:5px; color:white; }
     .producer-checklist span { color:var(--muted); font-size:12px; line-height:1.5; }
+    .event-story { display:grid; grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr); gap:26px; align-items:stretch; padding:26px; border:1px solid rgba(237,192,105,.24); border-radius:28px; background:radial-gradient(circle at 12% 8%,rgba(139,104,255,.2),transparent 40%),linear-gradient(145deg,#15121f,#0d0c12); }
+    .event-story-visual { min-height:520px; position:relative; overflow:hidden; border:1px solid var(--line); border-radius:22px; background:var(--panel); }
+    .event-story-visual img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; }
+    .event-story-visual::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 52%,rgba(7,6,12,.72)); pointer-events:none; }
+    .event-story-copy { display:flex; flex-direction:column; justify-content:center; padding:14px 8px; }
+    .event-story-copy h2 { margin:8px 0 14px; font-size:clamp(34px,4vw,52px); line-height:1.08; }
+    .event-story-copy > p { margin:0 0 23px; color:#cbc6d4; line-height:1.78; }
+    .event-steps { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .event-step { padding:17px; border:1px solid var(--line); border-radius:16px; background:rgba(255,255,255,.035); }
+    .event-step b { display:block; margin-bottom:5px; color:white; }
+    .event-step span { color:var(--muted); font-size:13px; line-height:1.55; }
+    .public-feedback { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:15px; }
+    .feedback-card { padding:22px; border:1px solid rgba(139,104,255,.26); border-radius:19px; background:linear-gradient(145deg,rgba(139,104,255,.11),rgba(255,255,255,.025)); }
+    .feedback-card small { color:var(--gold); font-weight:900; }
+    .feedback-card h3 { margin:9px 0 7px; font-size:20px; }
+    .feedback-card p { margin:0; color:var(--muted); line-height:1.7; }
+    .feedback-source { display:inline-block; margin-top:14px; color:var(--gold); font-size:12px; font-weight:900; text-decoration:underline; text-underline-offset:3px; }
+    .review-gallery { margin-top:34px; padding:24px; border:1px solid rgba(237,192,105,.24); border-radius:24px; background:linear-gradient(145deg,rgba(237,192,105,.06),rgba(139,104,255,.07)); }
+    .review-gallery-head { display:flex; align-items:end; justify-content:space-between; gap:18px; margin-bottom:16px; }
+    .review-gallery-head h3 { margin:5px 0 0; font-size:clamp(25px,3vw,36px); }
+    .review-gallery-head p { margin:0; color:var(--muted); line-height:1.6; }
+    .review-controls { display:flex; gap:8px; direction:ltr; }
+    .review-control { width:48px; height:48px; display:grid; place-items:center; border:1px solid rgba(237,192,105,.35); border-radius:50%; color:white; background:#17141f; font-size:25px; cursor:pointer; }
+    .review-control:hover,.review-control:focus-visible { color:#17111d; background:var(--gold); }
+    .review-control:focus-visible { outline:3px solid white; outline-offset:3px; }
+    .review-track { display:flex; gap:16px; overflow-x:auto; padding:4px 4px 14px; direction:ltr; scroll-snap-type:x mandatory; scroll-padding-inline:4px; overscroll-behavior-inline:contain; scrollbar-color:var(--gold) rgba(255,255,255,.08); }
+    .review-slide { flex-grow:0; flex-shrink:0; flex-basis:min(640px,84vw); margin:0; overflow:hidden; border:1px solid rgba(255,255,255,.14); border-radius:20px; direction:rtl; scroll-snap-align:center; background:#0c0b11; box-shadow:0 16px 45px rgba(0,0,0,.28); }
+    .review-slide a { display:block; color:white; }
+    .review-slide img { width:100%; height:auto; aspect-ratio:4 / 3; display:block; object-fit:cover; object-position:center top; background:#f3f4f6; }
+    .review-slide figcaption { display:grid; gap:5px; padding:17px 19px 20px; }
+    .review-slide figcaption strong { color:var(--gold); font-size:17px; }
+    .review-slide figcaption span { color:#d6d1dc; line-height:1.55; }
+    .review-slide a:hover img,.review-slide a:focus-visible img { filter:brightness(1.05); }
+    .review-slide a:focus-visible { outline:3px solid var(--gold); outline-offset:-3px; }
+    .review-gallery-note { margin:10px 4px 0; color:var(--muted); font-size:12px; line-height:1.6; }
+    .more-media { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:18px; }
+    .media-preview { position:relative; min-height:280px; overflow:hidden; border:1px solid rgba(237,192,105,.3); border-radius:22px; color:white; background:#11101a; box-shadow:0 18px 50px rgba(0,0,0,.24); isolation:isolate; }
+    .media-preview img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .45s ease,filter .45s ease; }
+    .media-preview::after { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg,rgba(8,7,13,.08),rgba(8,7,13,.25) 38%,rgba(8,7,13,.96)); }
+    .media-preview-content { position:absolute; inset:auto 0 0; z-index:2; display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center; padding:22px; }
+    .media-preview-copy { min-width:0; }
+    .media-preview-copy strong,.media-preview-copy span { display:block; }
+    .media-preview-copy strong { margin-bottom:4px; font-size:20px; line-height:1.25; }
+    .media-preview-copy span { color:#ded9e6; font-size:13px; line-height:1.5; }
+    .media-play { width:58px; height:58px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.55); border-radius:50%; color:#17111d; background:var(--gold); box-shadow:0 0 0 8px rgba(237,192,105,.14),0 10px 30px rgba(0,0,0,.35); font-size:23px; line-height:1; }
+    .media-preview:hover img,.media-preview:focus-visible img { transform:scale(1.045); filter:saturate(1.12); }
+    .media-preview:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
     .course-catalog { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; }
     .course-product { padding:24px; border:1px solid rgba(139,104,255,.32); border-radius:22px; background:linear-gradient(150deg,rgba(139,104,255,.14),rgba(237,192,105,.055)); }
     .course-product .course-audience { color:var(--gold); font-size:12px; font-weight:900; }
@@ -211,6 +259,12 @@
     .order-number { color:var(--gold); font-weight:900; direction:ltr; }
     body.modal-open { overflow:hidden; }
     @media(max-width:760px) {
+      .review-gallery { padding:17px; }
+      .review-gallery-head { align-items:start; flex-direction:column; }
+      .review-controls { align-self:flex-end; }
+      .review-slide { flex-basis:92%; }
+      .more-media { grid-template-columns:1fr; }
+      .media-preview { min-height:245px; }
       .nav-links a:not(.btn) { display:none; }
       .mobile-nav { display:block; }
       .hero h1 { font-size:clamp(38px,11vw,54px); line-height:1.02; }
@@ -231,6 +285,10 @@
       .brand-more[hidden] { display:none; }
       .company-formats,.course-catalog { grid-template-columns:1fr; }
       .producer-checklist { grid-template-columns:1fr 1fr; }
+      .event-story { grid-template-columns:1fr; padding:17px; }
+      .event-story-visual { min-height:0; aspect-ratio:4 / 3; }
+      .event-story-copy { padding:7px 2px 2px; }
+      .event-steps,.public-feedback { grid-template-columns:1fr; }
       .footer-seo { grid-template-columns:1fr 1fr; }
       .commerce-card { padding:24px 17px; }
       .commerce-form { grid-template-columns:1fr; }
@@ -250,19 +308,21 @@
   <main id="main-content">
     <div class="shell breadcrumbs"><a href="index.html">עמוד הבית</a> / קסמים לקבלת פנים</div>
     <section class="hero shell">
-      <div><div class="kicker">קסמים לקבלת פנים</div><h1>קסמים שקורים בידיים של האורחים כבר בקבלת הפנים</h1><p class="lead">בזמן שהאורחים מגיעים, מחפשים את המקום שלהם ומתחילים לדבר, עמית עובר בין קבוצות קטנות ויוצר קסמים מקרוב. אין במה ואין צורך לעצור את כל האירוע. בכל פעם נוצרת התקהלות קטנה, צחוק ושיחה שמחברים בין אנשים.</p><div class="hero-actions"><button class="btn btn-gold" type="button" data-commerce-open>הזמנת האירוע באתר</button><a class="btn" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%A2%D7%9E%D7%95%D7%93%20%D7%A7%D7%A1%D7%9E%D7%99%D7%9D%20%D7%9C%D7%A7%D7%91%D7%9C%D7%AA%20%D7%A4%D7%A0%D7%99%D7%9D%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." target="_blank" rel="noopener">שאלה לעמית בוואטסאפ</a></div></div>
+      <div><div class="kicker">קסמים לקבלת פנים</div><h1>קסמים שקורים בידיים של האורחים כבר בקבלת הפנים</h1><p class="lead">בזמן שהאורחים מגיעים, מחפשים את המקום שלהם ומתחילים לדבר, עמית עובר בין קבוצות קטנות ויוצר קסמים מקרוב. אין במה ואין צורך לעצור את כל האירוע. בכל פעם נוצרת התקהלות קטנה, צחוק ושיחה שמחברים בין אנשים.</p><div class="hero-actions"><button class="btn btn-gold" type="button" data-commerce-open>בקשת הזמנה לאירוע</button><a class="btn" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%A2%D7%9E%D7%95%D7%93%20%D7%A7%D7%A1%D7%9E%D7%99%D7%9D%20%D7%9C%D7%A7%D7%91%D7%9C%D7%AA%20%D7%A4%D7%A0%D7%99%D7%9D%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." target="_blank" rel="noopener">שאלה לעמית בוואטסאפ</a></div></div>
       <div class="hero-image"><img src="assets/optimized/amit-cards-1200.webp" alt="עמית מיטרני מבצע קסמי קלוז אפ בקבלת פנים" width="1200" height="900"></div>
     </section>
     <section id="answers"><div class="shell"><div class="answer"><h2>התשובה הקצרה</h2><p>המסלול מתאים לקבלות פנים באירועים פרטיים ועסקיים, לפני ארוחה, מופע, טקס או כנס. משך הפעילות, מספר האורחים, אופי המקום והמעבר בין הקבוצות נקבעים מראש מול עמית.</p></div></div></section>
-    
+
+
+
     <section><div class="shell"><div class="experience"><div class="video-stage"><a class="video-poster" href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener"><img src="assets/optimized/amit-mentalism-1200.webp" alt="מופע במה ואמנות חושים" width="900" height="700"><span>לסרטונים הרשמיים של עמית</span></a></div><div class="video-copy"><div class="kicker">לראות את עמית בפעולה</div><h2>מופע במה ואמנות חושים</h2><p>טעימה מהנוכחות הבימתית ומהאופן שבו הקהל נכנס אל תוך ההתרחשות.</p><div class="hero-actions"><a class="btn btn-gold" href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener">צפייה בסרטונים</a><a class="btn" href="index.html#contact">בדיקת התאמה</a></div></div></div><div class="gallery"><figure><img src="assets/optimized/amit-mentalism-1200.webp" alt="עמית מיטרני באמנות חושים" loading="lazy" width="900" height="700"><figcaption>עמית מיטרני באמנות חושים</figcaption></figure><figure><img src="assets/optimized/amit-thinking-1200.webp" alt="רגע של מחשבה והפתעה" loading="lazy" width="900" height="700"><figcaption>רגע של מחשבה והפתעה</figcaption></figure><figure><img src="assets/optimized/amit-golden-1600.webp" alt="עמית מיטרני במופע במה" loading="lazy" width="900" height="700"><figcaption>עמית מיטרני במופע במה</figcaption></figure></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">איך זה עובד</div><h2>מה מקבלים במסלול הזה</h2><p>כל פרט נסגר רק לאחר שיחה ישירה עם עמית. העמוד מסביר את דרך ההתאמה ואינו מבטיח זמינות, מחיר או היקף קבוע.</p></div><div class="grid"><article class="card"><b>עמית עובר בין האורחים</b><p>הקסמים מתרחשים בקבוצות קטנות, במרחק קצר ובקצב טבעי לקבלת הפנים.</p></article><article class="card"><b>שובר את הקרח</b><p>החוויה נותנת לאנשים סיבה לדבר, לצחוק ולהכיר עוד לפני שהחלק המרכזי מתחיל.</p></article><article class="card"><b>מתאים לפרטי ולעסקי</b><p>אפשר לבדוק התאמה לחתונה, בר או בת מצווה, אירוע חברה, כנס או השקה.</p></article><article class="card"><b>משתלב בלי לעצור את האירוע</b><p>הפעילות מתקיימת לצד ההגעה, הצילום והכיבוד, בתיאום עם המפיק או מנהל האירוע.</p></article></div></div></section>
-    
+
     <section><div class="shell"><div class="section-head"><div class="kicker">דוגמאות מוחשיות</div><h2>מה עמית יכול ליצור בעולם הזה</h2><p>הדוגמאות ממחישות את הכיוון. המבנה הסופי נקבע לפי הקהל, המטרה והמסלול שנבחר.</p></div><div class="example-grid"><article class="example-card"><span>01</span><h3>קסם בידיים של האורח</h3><p>חפץ קטן, בחירה או מחשבה הופכים להפתעה במרחק של צעד.</p></article><article class="example-card"><span>02</span><h3>מעגל קטן שנוצר לבד</h3><p>כמה אורחים מתקבצים, מגיבים ומיד מזמינים חברים נוספים לראות.</p></article><article class="example-card"><span>03</span><h3>שבירת קרח טבעית</h3><p>הקסם נותן לאנשים שלא מכירים נושא משותף לשיחה כבר בתחילת האירוע.</p></article></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">ניסיון, מקצועיות וחיבור לקהל</div><h2>למה עמית מתאים לקסמים לקבלת פנים</h2><p>כל המידע נשאר באתר. אין צורך לעבור לכרטיס עסק ישן או לאתר חיצוני כדי להבין מי עמית, מה הניסיון שלו ואיך נראית ההתאמה לאירוע.</p></div><div class="mentions"><article class="mention"><small>המלצות על עמית</small><h3>נוכחות מרשימה ויחס נעים לקהל</h3><p>במשובים פומביים על עמית חוזרים החיבור הטוב לקהל, המקצועיות והאופי הנעים. באירוע מהסוג הזה, החוויה נבנית סביב האנשים בחדר ולא סביב רצף קבוע של טריקים.</p></article><article class="mention"><small>התאמה לעולם הזה</small><h3>עמית עובר בין האורחים</h3><p>הקסמים מתרחשים בקבוצות קטנות, במרחק קצר ובקצב טבעי לקבלת הפנים.</p></article></div><div class="testimonial-row"><article class="testimonial"><small>אגודת הקוסמים</small><h3>אחד ממנהלי אגודת הקוסמים</h3><p>עמית פעיל באגודת הקוסמים ונמנה עם מנהליה. התפקיד מחבר אותו לעשייה המקצועית, לקהילת הקוסמים ולהתפתחות המתמשכת של התחום בישראל.</p></article><article class="testimonial"><small>תכנון אחראי</small><h3>משתלב בלי לעצור את האירוע</h3><p>הפעילות מתקיימת לצד ההגעה, הצילום והכיבוד, בתיאום עם המפיק או מנהל האירוע.</p></article></div><div class="section-head" style="margin-top:55px"><div class="kicker">סוגי לקוחות עסקיים</div><h2>התאמה למגוון מסגרות ארגוניות</h2><p>עד לקבלת רשימת לקוחות מאושרת וזכויות הצגה, מוצגות כאן קטגוריות בלבד ולא שמות או לוגואים של חברות.</p></div><div class="brand-wall" id="brand-wall"><div class="brand-mark">חברות וארגונים</div><div class="brand-mark">ועדי עובדים</div><div class="brand-mark">כנסים והשקות</div><div class="brand-mark">רשויות מקומיות</div><div class="brand-mark">מוסדות חינוך</div><div class="brand-mark">קניונים ומרכזים מסחריים</div><div class="brand-mark">קהילות ומתנ״סים</div><div class="brand-mark">אירועי רווחה</div></div><p class="brand-note">שמות ולוגואים יתווספו רק לאחר אישור מפורש של עמית וזכות הצגה מתאימה.</p></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">שאלות ותשובות</div><h2>מה כדאי לדעת לפני שפונים</h2></div><div class="faq"><details><summary>מה זה קסמי קלוז אפ?</summary><p>קסמים שמתרחשים מקרוב, מול קבוצה קטנה ובידיים של המשתתפים, בלי צורך בבמה מרכזית.</p></details><details><summary>כמה זמן עמית מסתובב בין האורחים?</summary><p>המשך נקבע לפי כמות האורחים, זמן קבלת הפנים והמסלול שעמית מאשר.</p></details><details><summary>זה מתאים גם לאירוע חברה?</summary><p>כן. אפשר לבדוק התאמה לכנס, השקה, ערב חברה או מפגש לקוחות.</p></details><details><summary>מה צריך להכין?</summary><p>נדרש תיאום עם איש הקשר לגבי זמני כניסה, מרחבי תנועה, מוזיקה, צילום וכמות האורחים.</p></details></div></div></section>
     <section><div class="shell"><div class="section-head"><div class="kicker">המשך הדרך</div><h2>עולמות נוספים באתר</h2></div><div class="related"><a href="shows-for-companies.html">חברות וארגונים</a><a href="mentalist-adult-parties.html">אירועים למבוגרים</a><a href="magician-bar-bat-mitzvah.html">בר ובת מצווה</a></div></div></section>
-    <section><div class="shell"><div class="cta"><div><h2>לא צריך להמתין כדי להתחיל הזמנה</h2><p>ממלאים את כל פרטי האירוע, מקבלים מספר הזמנה ושולחים לעמית לאישור זמינות ותנאים.</p></div><button class="btn btn-gold" type="button" data-commerce-open>פתיחת הזמנה ישירה</button></div></div></section>
+    <section><div class="shell"><div class="cta"><div><h2>לא צריך להמתין כדי להתחיל בקשת הזמנה</h2><p>ממלאים את פרטי האירוע ושולחים לעמית בקשה מסודרת לאישור זמינות ותנאים.</p></div><button class="btn btn-gold" type="button" data-commerce-open>פתיחת בקשת הזמנה</button></div></div></section>
   </main>
   <footer><div class="shell"><div class="footer-seo"><a href="shows-for-kids.html">קוסם ליום הולדת לילדים</a><a href="mentalist-adult-parties.html">אמן חושים למסיבת מבוגרים</a><a href="magician-bar-bat-mitzvah.html">קוסם לבר ובת מצווה</a><a href="magician-brit-brita.html">קוסם לברית או בריתה</a><a href="magician-purim-events.html">קוסם לאירועי פורים</a><a href="close-up-magic-receptions.html">קוסם לקבלת פנים</a><a href="shows-for-companies.html">אמן חושים לאירוע חברה</a><a href="shows-for-institutions.html">קוסם לקייטנות ובתי ספר</a><a href="shows-for-families.html">מופע קסמים למשפחות</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל לדוברי עברית</a><a href="magic-courses.html">קורסי קסמים אונליין</a><a href="business-magic.html">קסם מותאם למסר עסקי</a></div><div class="social-links" aria-label="הערוצים של עמית"><a class="social-link" href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener" aria-label="אינסטגרם של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.7" r="1"></circle></svg><span>אינסטגרם</span></a><a class="social-link" href="https://www.facebook.com/amitgic/" target="_blank" rel="noopener" aria-label="פייסבוק של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3.5l.5-4h-4V9c0-.7.3-1 1-1z"></path></svg><span>פייסבוק</span></a><a class="social-link" href="https://www.tiktok.com/@amit_miteranii" target="_blank" rel="noopener" aria-label="טיקטוק של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3c.5 2.8 2.1 4.4 5 4.8v4c-1.9-.1-3.5-.7-5-1.8v6.2a6.2 6.2 0 1 1-5.4-6.1v4.1a2.3 2.3 0 1 0 1.4 2.1V3h4z"></path></svg><span>טיקטוק</span></a><a class="social-link" href="https://wa.me/972523416151" target="_blank" rel="noopener" aria-label="וואטסאפ של עמית מיטרני"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.6A10 10 0 0 0 4.8 15.7L3.4 21l5.4-1.4A10 10 0 0 0 20.5 3.6zM12 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.2.8.9-3.1-.2-.3A8 8 0 1 1 12 18zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-1.5-.7-2.5-1.4-3.5-3-.2-.3 0-.4.1-.5l.6-.7c.1-.1.2-.3.2-.5s0-.3-.1-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.8-1.1 1.7-1.1 2.8 0 1.7 1.2 3.4 1.4 3.6 1.7 2.6 4.2 4 6.9 4.8.8.2 1.7.1 2.3-.2.7-.4 1.2-1.1 1.4-1.9.1-.2.1-.4 0-.5-.1-.1-.3-.2-.5-.3z"></path></svg><span>וואטסאפ</span></a></div><div class="footer-row"><span>עמית מיטרני, קוסם ואמן חושים</span><span class="legal-links"><a href="index.html">עמוד הבית</a><a href="index.html#contact">יצירת קשר</a><a href="index.html?modal=privacy">פרטיות</a><a href="index.html?modal=terms">תקנון האתר</a><a href="index.html?modal=accessibility-statement">הצהרת נגישות</a></span></div></div></footer>
   <button class="a11y-trigger" id="a11y-trigger" type="button" aria-expanded="false" aria-controls="a11y-panel">נגישות</button>
@@ -274,14 +334,14 @@
     <div class="commerce-backdrop" data-commerce-close></div>
     <div class="commerce-card">
       <button class="commerce-close" type="button" data-commerce-close aria-label="סגירה">×</button>
-      <div class="kicker">הזמנה ישירה באתר</div>
+      <div class="kicker">בקשת הזמנה ישירה</div>
       <h2 id="commerce-title">מתחילים לבנות את האירוע</h2>
-      <p>מלאו את הפרטים וקבלו מספר הזמנה מסודר. ההזמנה מאושרת רק לאחר אישור זמינות ותנאים מצד עמית.</p>
+      <p>מלאו את הפרטים וקבלו מספר פנייה מסודר. האירוע מאושר רק לאחר אישור זמינות ותנאים מצד עמית.</p>
       <div class="payment-flow">
-        <div class="payment-step"><span>1</span><b>יוצרים הזמנה</b><small>ממלאים את פרטי האירוע ללא חיוב.</small></div><div class="payment-step"><span>2</span><b>עמית מאשר</b><small>זמינות, התאמה והצעה סופית.</small></div><div class="payment-step"><span>3</span><b>משלמים מקדמה</b><small>רק אחרי האישור, כדי לשמור את התאריך.</small></div><div class="payment-step"><span>4</span><b>משלימים יתרה</b><small>לפי התנאים שיופיעו בהזמנה המאושרת.</small></div>
+        <div class="payment-step"><span>1</span><b>יוצרים בקשה</b><small>ממלאים את פרטי האירוע ללא חיוב.</small></div><div class="payment-step"><span>2</span><b>עמית מאשר</b><small>זמינות, התאמה והצעה סופית.</small></div><div class="payment-step"><span>3</span><b>מאשרים תנאים</b><small>רק אחרי קבלת הצעה מסודרת.</small></div><div class="payment-step"><span>4</span><b>שומרים את התאריך</b><small>בהתאם לתנאים שאושרו מול עמית.</small></div>
       </div>
-      <div class="deposit-note">יצירת ההזמנה אינה מחייבת ואינה מחייבת כרטיס. סכום המקדמה, המועד לתשלום היתרה ותנאי הביטול יוצגו בהצעה הסופית לאחר אישור עמית. הנתונים המדויקים יפורסמו רק לאחר שעמית יאשר את מדיניות התשלום.</div>
-      
+      <div class="deposit-note">שליחת הבקשה אינה מחייבת ואינה דורשת כרטיס. מחיר, אופן תשלום ותנאי ביטול יוצגו בהצעה הסופית לאחר אישור עמית.</div>
+
       <div class="purchase-summary" id="purchase-summary" >
         <div class="summary-head"><b>סיכום ההזמנה לפני שליחה</b><span id="summary-status">ללא חיוב בשלב זה</span></div>
         <div class="summary-grid">
@@ -303,10 +363,10 @@
         <label class="full">פרטים חשובים להפקה<textarea name="notes" placeholder="סוג קהל, גילאים, מקום וכל פרט שיעזור להבין את האירוע"></textarea></label>
         <label class="consent-field"><input name="consent" type="checkbox" required><span>אני מאשר או מאשרת להשתמש בפרטים שמילאתי כדי להכין פנייה לעמית. הפרטים אינם נשמרים באתר, והם יועברו רק אם אבחר לשלוח את הודעת הוואטסאפ.</span></label>
         <p class="commerce-error" id="commerce-error" role="alert"></p>
-        <button class="btn btn-gold full" type="submit">יצירת הזמנה</button>
+        <button class="btn btn-gold full" type="submit">הכנת בקשת הזמנה</button>
         </div>
       </form>
-      <div class="order-success" id="order-success"><span>הפעולה הושלמה בהמחשה</span><strong id="success-message"></strong><p>מספר פעולה: <span class="order-number" id="order-number"></span></p><a class="btn btn-gold" id="order-whatsapp" href="#" target="_blank" rel="noopener">שליחת ההזמנה לעמית</a></div>
+      <div class="order-success" id="order-success"><span>הפנייה מוכנה</span><strong id="success-message"></strong><p>מספר פנייה: <span class="order-number" id="order-number"></span></p><a class="btn btn-gold" id="order-whatsapp" href="#" target="_blank" rel="noopener">שליחת בקשת ההזמנה לעמית</a></div>
     </div>
   </div>
   <script>
@@ -371,6 +431,26 @@
       brandMore.setAttribute("aria-expanded", String(expanded));
       brandMore.textContent = expanded ? "הצגת פחות ארגונים" : "הצגת ארגונים נוספים";
     });
+    document.querySelectorAll("[data-review-carousel]").forEach(carousel => {
+      const track = carousel.querySelector("[data-review-track]");
+      const slides = [...carousel.querySelectorAll("[data-review-slide]")];
+      const status = carousel.querySelector("[data-review-status]");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let activeIndex = 0;
+      const showSlide = nextIndex => {
+        activeIndex = (nextIndex + slides.length) % slides.length;
+        slides[activeIndex].scrollIntoView({ behavior:reducedMotion ? "auto" : "smooth", block:"nearest", inline:"center" });
+        status.textContent = `מוצגת המלצה ${activeIndex + 1} מתוך ${slides.length}`;
+      };
+      carousel.querySelector("[data-review-prev]").addEventListener("click", () => showSlide(activeIndex - 1));
+      carousel.querySelector("[data-review-next]").addEventListener("click", () => showSlide(activeIndex + 1));
+      track.addEventListener("keydown", event => {
+        if (event.key === "ArrowLeft") { event.preventDefault(); showSlide(activeIndex + 1); }
+        if (event.key === "ArrowRight") { event.preventDefault(); showSlide(activeIndex - 1); }
+        if (event.key === "Home") { event.preventDefault(); showSlide(0); }
+        if (event.key === "End") { event.preventDefault(); showSlide(slides.length - 1); }
+      });
+    });
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         if (commerceModal.classList.contains("open")) closeCommerce();
@@ -385,7 +465,7 @@
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
       }
     });
-    
+
     commerceForm.addEventListener("submit", event => {
       event.preventDefault();
       if (!commerceForm.checkValidity()) {
@@ -394,7 +474,6 @@
         return;
       }
       const data = new FormData(commerceForm);
-      
       commerceError.textContent = "";
       const orderId = "EVENT-" + Date.now().toString().slice(-7);
       const message = [
@@ -412,7 +491,7 @@
         data.get("notes") ? "פרטים: " + data.get("notes") : ""
       ].filter(Boolean).join("\n");
       document.querySelector("#order-number").textContent = orderId;
-      document.querySelector("#success-message").textContent = "ההזמנה נוצרה ללא חיוב ומוכנה לאישור מול עמית";
+      document.querySelector("#success-message").textContent = "בקשת ההזמנה מוכנה לשליחה לעמית. האירוע יאושר רק לאחר בדיקת זמינות ותנאים.";
       document.querySelector("#order-whatsapp").href = "https://wa.me/972523416151?text=" + encodeURIComponent(message);
       commerceForm.hidden = true;
       orderSuccess.classList.add("show");
