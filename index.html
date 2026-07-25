@@ -79,13 +79,8 @@
       z-index: 20;
     }
     nav { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-    .brand { display: flex; align-items: center; gap: 13px; font-weight: 900; font-size: 23px; }
-    .brand-mark {
-      width: 41px; height: 41px; display: grid; place-items: center; border-radius: 13px;
-      color: #16111d; background: linear-gradient(145deg, #ffe09b, var(--gold));
-      box-shadow: 0 0 30px rgba(237,192,105,.19);
-    }
-    .brand-mark::after { content: "AM"; font-size: 13px; font-weight: 900; }
+    .brand { min-height:44px; display:inline-flex; align-items:center; font-weight:900; font-size:21px; }
+    .brand span { color:var(--gold); }
     .nav-links { display: flex; gap: 28px; color: #d0cdd8; font-size: 14px; font-weight: 600; }
     .nav-tools { display: flex; align-items: center; gap: 10px; }
     .language-control { position: relative; }
@@ -749,7 +744,6 @@
       .section-copy { font-size: 14px; }
       header { height: 70px; }
       .brand { font-size: 19px; }
-      .brand-mark { width: 38px; height: 38px; }
       .nav-links, .nav-tools > .btn { display: none; }
       .nav-links.mobile-open {
         position: fixed;
@@ -1068,7 +1062,7 @@
   <a class="skip-link" href="#main-content">דילוג לתוכן המרכזי</a>
   <header>
     <nav class="shell">
-      <a class="brand" href="#top"><span class="brand-mark"></span><span>עמית מיטרני</span></a>
+      <a class="brand" href="#top">עמית <span>מיטרני</span></a>
       <div class="nav-links" id="primary-nav"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a></div>
       <div class="nav-tools">
         <div class="language-control">
