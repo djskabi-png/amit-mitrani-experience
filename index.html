@@ -168,12 +168,43 @@
     .time-card p { color: var(--muted); margin: 0; font-size: 13px; line-height: 1.6; }
     .invite-box { padding: 35px; border-radius: 28px; border: 1px solid rgba(139,104,255,.28); background: radial-gradient(circle at 8% 20%, rgba(139,104,255,.22), transparent 18rem), linear-gradient(135deg, #171324, #0f0e16); display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
     .invite-ui { border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.05); padding: 22px; }
-    .invite-ui .screen { min-height: 270px; border-radius: 16px; background: linear-gradient(150deg, #2b1762, #8b68ff); padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
+    .invite-ui .screen { min-height: 440px; border-radius: 16px; background: linear-gradient(150deg, #2b1762, #8b68ff); padding: 24px; display: grid; grid-template-rows: auto 1fr auto auto; gap: 16px; }
     .invite-ui .screen b { font-size: 23px; }
     .invite-ui .screen small { color: rgba(255,255,255,.75); }
     .invite-ui .screen button { border: 0; border-radius: 10px; padding: 11px; font: inherit; font-weight: 800; }
     .invite-features { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-top: 22px; }
-    .invite-features div { border: 1px solid var(--line); border-radius: 13px; padding: 13px; color: #d4d1da; font-size: 13px; }
+    .invite-features button { border: 1px solid var(--line); border-radius: 13px; padding: 13px; color: #d4d1da; background: rgba(255,255,255,.025); font: inherit; font-size: 13px; cursor: pointer; }
+    .invite-features button:hover { border-color: var(--purple); color: white; background: rgba(139,104,255,.12); }
+    .invite-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-top: 22px; }
+    .invite-controls label { display: grid; gap: 6px; color: #d7d2e2; font-size: 12px; font-weight: 700; }
+    .invite-controls label:first-child { grid-column: 1 / -1; }
+    .invite-controls label.wide { grid-column: 1 / -1; }
+    .invite-controls input, .invite-controls select { padding: 11px 12px; }
+    .invite-ui .screen { position: relative; overflow: hidden; transition: .35s ease; }
+    .invite-ui .screen::before { content: "✦"; position: absolute; left: 22px; top: 16px; color: rgba(255,255,255,.28); font-size: 48px; animation: inviteTwinkle 2.4s ease-in-out infinite; }
+    .invite-ui .screen.theme-gold { background: linear-gradient(145deg, #5d3512, #d29b38); }
+    .invite-ui .screen.theme-blue { background: linear-gradient(145deg, #102d59, #356fd3); }
+    .invite-ui .screen.theme-purple { background: linear-gradient(150deg, #2b1762, #8b68ff); }
+    .invite-brandline { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .invite-brandline strong { font-size: 13px; }
+    .invite-brandline span { padding: 6px 9px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: rgba(255,255,255,.8); font-size: 10px; font-weight: 800; }
+    .invite-main { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr .72fr; align-items: center; min-height: 210px; }
+    .invite-main-copy { position: relative; z-index: 2; }
+    .invite-main-copy small { display: block; margin-bottom: 8px; }
+    .invite-main-copy b { display: block; max-width: 300px; font-size: clamp(25px, 3vw, 35px); line-height: 1.08; }
+    .invite-art { position: absolute; top: -26px; bottom: -24px; left: -18px; width: 47%; overflow: hidden; pointer-events: none; }
+    .invite-art img { width: 100%; height: 100%; object-fit: contain; object-position: left bottom; filter: drop-shadow(0 15px 24px rgba(0,0,0,.32)); }
+    .invite-detail-grid { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .invite-detail-grid span { display: grid; gap: 2px; padding: 9px; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; background: rgba(0,0,0,.17); }
+    .invite-detail-grid small { font-size: 9px; }
+    .invite-detail-grid strong { overflow: hidden; color: white; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+    .invite-preview-actions { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .invite-preview-actions button, .invite-preview-actions a { display: grid; place-items: center; min-height: 43px; border: 0; border-radius: 10px; color: #151019; background: white; font: inherit; font-size: 12px; font-weight: 900; cursor: pointer; }
+    .invite-preview-actions a { background: var(--green); }
+    .rsvp-status { position: relative; z-index: 2; display: flex; justify-content: space-between; gap: 10px; padding: 9px 11px; border-radius: 10px; background: rgba(0,0,0,.2); color: rgba(255,255,255,.88); font-size: 11px; }
+    .screen.invite-updated { animation: invitePop .55s ease both; }
+    @keyframes inviteTwinkle { 0%,100% { opacity: .25; transform: rotate(0) scale(.9); } 50% { opacity: .75; transform: rotate(18deg) scale(1.1); } }
+    @keyframes invitePop { 0% { transform: scale(.96); filter: brightness(.8); } 55% { transform: scale(1.02); filter: brightness(1.18); } 100% { transform: scale(1); filter: brightness(1); } }
     .quotes { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
     .quote { min-height: 240px; padding: 24px; background: var(--panel); border: 1px solid var(--line); border-radius: 21px; display: flex; flex-direction: column; justify-content: space-between; }
     .quote p { color: #d1ced7; line-height: 1.75; margin: 0; }
@@ -341,8 +372,8 @@
     .trick-action { min-width: 190px; justify-content: center; }
     .trick-action[hidden] { display: none; }
     .effect-status { min-height: 26px; margin-top: 13px; color: var(--gold); font-size: 12px; font-weight: 800; }
-    .card-table { position: relative; min-height: 390px; display: grid; place-items: center; perspective: 1000px; }
-    .card-deck { width: 100%; display: grid; grid-template-columns: repeat(3, 108px); gap: 15px; justify-content: center; direction: ltr; }
+    .card-table { position: relative; min-height: 390px; display: grid; place-items: center; perspective: 1000px; isolation: isolate; }
+    .card-deck { position: relative; z-index: 3; width: 100%; display: grid; grid-template-columns: repeat(3, 108px); gap: 15px; justify-content: center; direction: ltr; }
     .playing-card {
       position: relative;
       width: 108px;
@@ -358,18 +389,71 @@
       transition: transform .35s ease, opacity .35s ease, box-shadow .35s ease;
     }
     .playing-card:hover, .playing-card:focus-visible { transform: translateY(-9px) rotate(-1deg); box-shadow: 0 22px 40px rgba(0,0,0,.5), 0 0 0 2px var(--gold); }
-    .playing-card.selected { transform: translateY(-18px) scale(1.05); box-shadow: 0 25px 55px rgba(0,0,0,.55), 0 0 0 3px var(--gold), 0 0 34px rgba(237,192,105,.38); }
+    .playing-card.selected { transform: translateY(-18px) scale(1.05); box-shadow: 0 25px 55px rgba(0,0,0,.55), 0 0 0 3px var(--gold), 0 0 34px rgba(237,192,105,.58); animation: selectedCardPulse 1.25s ease-in-out infinite; }
     .playing-card .corner { position: absolute; top: 10px; left: 11px; font-size: 22px; font-weight: 900; line-height: .9; }
     .playing-card .corner.bottom { inset: auto 11px 10px auto; transform: rotate(180deg); }
     .playing-card .suit { display: grid; place-items: center; height: 100%; font-size: 46px; }
     .playing-card.red { color: #b02133; }
-    .card-deck.is-shuffling .playing-card { animation: cardShuffle .75s ease-in-out both; }
+    .card-deck.is-shuffling .playing-card { animation: cardShuffle 1.35s cubic-bezier(.68,-.55,.27,1.55) both; }
     .card-deck.is-shuffling .playing-card:nth-child(2) { animation-delay: .05s; }
     .card-deck.is-shuffling .playing-card:nth-child(3) { animation-delay: .1s; }
     .card-deck.is-shuffling .playing-card:nth-child(4) { animation-delay: .15s; }
     .card-deck.is-shuffling .playing-card:nth-child(5) { animation-delay: .2s; }
     .card-deck.is-shuffling .playing-card:nth-child(6) { animation-delay: .25s; }
-    .playing-card.vanished { opacity: 0; transform: scale(.2) rotate(35deg) translateY(-80px); pointer-events: none; }
+    .playing-card.vanished {
+      opacity: 1;
+      color: transparent;
+      border: 1px dashed rgba(237,192,105,.72);
+      background: radial-gradient(circle, rgba(237,192,105,.17), rgba(139,104,255,.1) 46%, transparent 72%);
+      box-shadow: inset 0 0 34px rgba(139,104,255,.24), 0 0 32px rgba(237,192,105,.22);
+      transform: none;
+      pointer-events: none;
+      animation: emptyCardReveal .8s ease both;
+    }
+    .playing-card.vanished > * { opacity: 0; }
+    .playing-card.vanished::after { content: "✦"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--gold); font-size: 38px; text-shadow: 0 0 16px var(--gold); animation: inviteTwinkle 1.4s ease-in-out infinite; }
+    .mystic-portal {
+      position: absolute;
+      z-index: 1;
+      width: 285px;
+      height: 285px;
+      border-radius: 50%;
+      opacity: .22;
+      background:
+        repeating-conic-gradient(from 0deg, rgba(237,192,105,.75) 0 2deg, transparent 2deg 21deg),
+        radial-gradient(circle, transparent 35%, rgba(139,104,255,.2) 36% 42%, transparent 43% 57%, rgba(69,226,209,.16) 58% 60%, transparent 61%);
+      filter: drop-shadow(0 0 18px rgba(139,104,255,.25));
+      animation: portalIdle 14s linear infinite;
+      pointer-events: none;
+    }
+    .mystic-portal::before, .mystic-portal::after {
+      content: "";
+      position: absolute;
+      inset: 32px;
+      border: 1px solid rgba(237,192,105,.34);
+      border-radius: 50%;
+      box-shadow: inset 0 0 35px rgba(139,104,255,.18), 0 0 35px rgba(69,226,209,.12);
+    }
+    .mystic-portal::after { inset: 68px; border-style: dashed; animation: portalReverse 9s linear infinite; }
+    .card-table.charged .mystic-portal { opacity: .6; filter: drop-shadow(0 0 28px rgba(237,192,105,.42)); }
+    .card-table.performing .mystic-portal { animation: portalSurge 1.45s ease-in-out both; }
+    .magic-beam {
+      position: absolute;
+      z-index: 5;
+      width: 8px;
+      height: 0;
+      border-radius: 999px;
+      opacity: 0;
+      background: linear-gradient(180deg, transparent, white 35%, var(--gold) 65%, transparent);
+      box-shadow: 0 0 14px white, 0 0 36px var(--gold), 0 0 70px var(--purple);
+      pointer-events: none;
+    }
+    .card-table.performing .magic-beam { animation: magicBeam 1.45s ease-in-out both; }
+    .magic-smoke { position: absolute; z-index: 2; inset: 18% 12%; pointer-events: none; }
+    .magic-smoke i { position: absolute; left: 50%; top: 50%; width: 70px; height: 70px; border-radius: 50%; opacity: 0; background: rgba(139,104,255,.22); filter: blur(18px); }
+    .card-table.performing .magic-smoke i { animation: smokeBloom 1.6s ease-out both; }
+    .card-table.performing .magic-smoke i:nth-child(2) { animation-delay: .18s; background: rgba(69,226,209,.18); }
+    .card-table.performing .magic-smoke i:nth-child(3) { animation-delay: .34s; background: rgba(237,192,105,.2); }
     .vanish-mark {
       position: absolute;
       display: grid;
@@ -385,7 +469,9 @@
       box-shadow: inset 0 0 36px rgba(237,192,105,.08), 0 0 50px rgba(139,104,255,.15);
       pointer-events: none;
     }
-    .vanish-mark.show { animation: portalReveal 1.1s ease both; }
+    .vanish-mark span { display: block; line-height: 1; }
+    .vanish-mark small { display: none; }
+    .vanish-mark.show { z-index: 6; animation: portalReveal 1.1s ease both; }
     .number-stage { min-height: 390px; display: grid; align-content: center; justify-items: center; text-align: center; }
     .number-orb {
       position: relative;
@@ -485,8 +571,15 @@
     .spark { position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 13px var(--gold); animation: sparkFly .9s ease-out forwards; }
     @keyframes auraSpin { to { transform: rotate(360deg); } }
     @keyframes stageIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes cardShuffle { 0% { transform: none; } 45% { transform: translateX(var(--shuffle-x, 0)) translateY(-35px) rotate(var(--shuffle-r, 0)); } 100% { transform: none; } }
+    @keyframes cardShuffle { 0% { transform: none; } 32% { transform: translateX(var(--shuffle-x, 0)) translateY(-52px) rotate(var(--shuffle-r, 0)) scale(1.03); } 65% { transform: translateX(calc(var(--shuffle-x, 0) * -.45)) translateY(22px) rotate(calc(var(--shuffle-r, 0) * -1.6)) scale(.88); filter: brightness(1.35); } 100% { transform: none; } }
     @keyframes portalReveal { 0% { opacity: 0; transform: scale(.4) rotate(-20deg); } 45% { opacity: 1; transform: scale(1.16) rotate(8deg); } 100% { opacity: .9; transform: scale(1) rotate(0); } }
+    @keyframes selectedCardPulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.2); } }
+    @keyframes emptyCardReveal { 0% { opacity: 0; transform: scale(.2) rotate(90deg); filter: blur(10px); } 65% { opacity: 1; transform: scale(1.08) rotate(-4deg); filter: blur(0); } 100% { transform: scale(1) rotate(0); } }
+    @keyframes portalIdle { to { transform: rotate(360deg); } }
+    @keyframes portalReverse { to { transform: rotate(-360deg); } }
+    @keyframes portalSurge { 0% { opacity: .5; transform: scale(.82) rotate(0); } 48% { opacity: 1; transform: scale(1.18) rotate(150deg); filter: drop-shadow(0 0 55px rgba(139,104,255,.8)); } 100% { opacity: .2; transform: scale(.7) rotate(300deg); } }
+    @keyframes magicBeam { 0% { height: 0; opacity: 0; transform: translateY(-170px); } 25% { height: 320px; opacity: 1; transform: translateY(-135px); } 72% { height: 320px; opacity: .95; transform: translateY(-135px) scaleX(2.2); } 100% { height: 0; opacity: 0; transform: translateY(20px) scaleX(.2); } }
+    @keyframes smokeBloom { 0% { opacity: 0; transform: translate(-50%,-50%) scale(.2); } 38% { opacity: .75; } 100% { opacity: 0; transform: translate(calc(-50% + var(--smoke-x, 80px)), calc(-50% + var(--smoke-y, -80px))) scale(2.4); } }
     @keyframes orbPulse { 0%, 100% { opacity: .25; transform: scale(.94); } 50% { opacity: .75; transform: scale(1.04); } }
     @keyframes sparkFly { to { opacity: 0; transform: translate(var(--spark-x), var(--spark-y)) scale(.2); } }
     @keyframes reveal { from { opacity: 0; transform: scale(.72) rotate(-4deg); filter: blur(8px); } to { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); } }
@@ -498,6 +591,15 @@
     .tool-card span { color: var(--gold); font-weight: 800; font-size: 12px; }
     .calculator-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
     .calculator { padding: 27px; border: 1px solid var(--line); border-radius: 24px; background: var(--panel); }
+    .pizza-copy { display: grid; align-content: center; }
+    .pizza-visual { position: relative; min-height: 270px; margin-top: 24px; overflow: hidden; border: 1px solid rgba(237,192,105,.24); border-radius: 26px; background: #17131f; }
+    .pizza-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .pizza-visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 35%, rgba(8,8,13,.62)); pointer-events: none; }
+    .pizza-visual-badge { position: absolute; z-index: 2; right: 18px; bottom: 18px; display: grid; place-items: center; min-width: 112px; min-height: 112px; padding: 14px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; background: rgba(12,10,16,.78); backdrop-filter: blur(10px); text-align: center; box-shadow: 0 0 35px rgba(237,192,105,.22); }
+    .pizza-visual-badge strong { display: block; color: var(--gold); font-size: 38px; line-height: 1; }
+    .pizza-visual-badge span { color: #eee8f3; font-size: 11px; font-weight: 800; }
+    .pizza-visual.pop .pizza-visual-badge { animation: pizzaCountPop .4s ease; }
+    @keyframes pizzaCountPop { 50% { transform: scale(1.12) rotate(-4deg); } }
     .calculator label { display: block; color: #d4d1dc; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
     .calculator input[type="range"] { padding: 0; accent-color: var(--gold); }
     .range-line { display: flex; justify-content: space-between; color: var(--muted); margin: 8px 0 22px; font-size: 12px; }
@@ -601,6 +703,15 @@
       .mini-stack { grid-template-columns: 1fr 1fr; }
       .mini-video { min-height: 150px; padding: 16px; }
       .mini-video b { font-size: 16px; }
+      .invite-controls { grid-template-columns: 1fr; }
+      .invite-controls label:first-child { grid-column: auto; }
+      .invite-controls label.wide { grid-column: auto; }
+      .invite-ui .screen { min-height: 500px; padding: 18px; }
+      .invite-main { grid-template-columns: 1fr; align-items: start; padding-top: 12px; }
+      .invite-main-copy b { max-width: 72%; font-size: 28px; }
+      .invite-art { top: 38px; width: 50%; height: 210px; }
+      .invite-detail-grid { grid-template-columns: 1fr; }
+      .pizza-visual { min-height: 230px; }
       .grid-4 { grid-template-columns: 1fr 1fr; }
       .service-card { min-height: 220px; padding: 18px; }
       .number { margin-bottom: 25px; }
@@ -683,7 +794,8 @@
     .service-card:nth-child(2), .course-card:nth-child(2), .business-card:nth-child(2) { background: linear-gradient(160deg, rgba(39,112,172,.24), var(--panel)); }
     .service-card:nth-child(3), .course-card:nth-child(3), .business-card:nth-child(3) { background: linear-gradient(160deg, rgba(139,104,255,.2), var(--panel)); }
     .service-card:nth-child(4), .course-card:nth-child(4), .business-card:nth-child(4) { background: linear-gradient(160deg, rgba(239,91,189,.16), var(--panel)); }
-    .card-cta { display: inline-flex; margin-top: 17px; color: var(--gold); font-weight: 800; font-size: 13px; background: none; border: 0; padding: 0; cursor: pointer; }
+    .card-cta { position: static; display: inline-flex; margin-top: 17px; color: var(--gold); font-weight: 800; font-size: 13px; background: none; border: 0; padding: 0; cursor: pointer; }
+    .card-cta::before { content: ""; position: absolute; inset: 0; z-index: 1; }
     .card-cta::after { content: "←"; margin-right: 7px; }
     .client-cloud span:nth-child(4n+1) { border-color: rgba(237,192,105,.3); background: rgba(237,192,105,.06); }
     .client-cloud span:nth-child(4n+2) { border-color: rgba(74,168,255,.3); background: rgba(74,168,255,.06); }
@@ -717,6 +829,83 @@
     .video-frame { min-height: 560px; margin: 18px 0; border-radius: 16px; overflow: hidden; background: #08080d; }
     .video-frame iframe { width: 100%; height: 600px; border: 0; }
     body.modal-open { overflow: hidden; }
+    .world-modal { align-items: stretch; padding: 0; }
+    .world-modal .modal-backdrop { background: rgba(3,3,7,.96); }
+    .world-shell { position: relative; z-index: 1; width: 100%; min-height: 100vh; padding: 34px max(24px, calc((100vw - 1180px) / 2)); overflow: auto; background: radial-gradient(circle at 85% 14%, rgba(139,104,255,.22), transparent 26rem), radial-gradient(circle at 12% 82%, rgba(69,226,209,.1), transparent 24rem), #08080d; }
+    .world-topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .world-topbar strong { font-size: 20px; }
+    .world-close { width: 46px; height: 46px; border: 1px solid var(--line); border-radius: 50%; color: white; background: rgba(255,255,255,.06); font-size: 28px; cursor: pointer; }
+    .world-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 38px; padding: 48px 0; align-items: start; }
+    .world-kicker { color: var(--gold); font-size: 13px; font-weight: 900; }
+    .world-copy h2 { max-width: 760px; margin: 12px 0 16px; font-size: clamp(42px, 6vw, 72px); line-height: 1; }
+    .world-copy > p { max-width: 700px; color: #b9b5c2; font-size: 18px; line-height: 1.8; }
+    .world-visual { position: relative; min-height: 300px; margin: 28px 0; overflow: hidden; border: 1px solid var(--line); border-radius: 26px; background: linear-gradient(145deg, rgba(139,104,255,.25), rgba(8,8,13,.7)), url("assets/optimized/amit-cards-1200.webp") center/cover; }
+    .world-visual::after { content: "✦"; position: absolute; left: 28px; top: 18px; color: var(--gold); font-size: 72px; text-shadow: 0 0 35px rgba(237,192,105,.55); animation: inviteTwinkle 2.2s ease-in-out infinite; }
+    .world-visual span { position: absolute; right: 24px; bottom: 22px; max-width: 330px; padding: 12px 15px; border: 1px solid var(--line); border-radius: 14px; background: rgba(8,8,13,.78); font-weight: 800; backdrop-filter: blur(10px); }
+    .world-bullets { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .world-bullets div { min-height: 112px; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.025); }
+    .world-bullets b { display: block; color: var(--gold); margin-bottom: 8px; }
+    .world-bullets span { color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .demo-checkout { position: sticky; top: 28px; padding: 26px; border: 1px solid rgba(237,192,105,.28); border-radius: 25px; background: rgba(17,16,25,.96); box-shadow: 0 28px 75px rgba(0,0,0,.35); }
+    .demo-checkout h3 { margin: 0 0 8px; font-size: 28px; }
+    .demo-checkout > p { color: var(--muted); line-height: 1.65; }
+    .demo-notice { padding: 12px 13px; border-radius: 12px; color: #baf3dc; background: rgba(101,212,169,.1); font-size: 12px; line-height: 1.55; }
+    .demo-credentials { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin: 14px 0; direction: ltr; }
+    .demo-credentials code { padding: 9px 6px; border: 1px dashed rgba(237,192,105,.35); border-radius: 9px; color: var(--gold); background: rgba(237,192,105,.05); text-align: center; }
+    .checkout-form { display: grid; gap: 11px; margin-top: 18px; }
+    .checkout-form label { display: grid; gap: 6px; color: #d8d4df; font-size: 12px; font-weight: 800; }
+    .checkout-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .checkout-error { min-height: 20px; margin: 0; color: #ff9fac; font-size: 12px; }
+    .purchase-success { display: none; padding: 24px 0 4px; text-align: center; }
+    .purchase-success.show { display: block; animation: reveal .5s ease both; }
+    .purchase-success strong { display: block; margin: 12px 0 8px; color: var(--green); font-size: 28px; }
+    .purchase-success span { display: grid; place-items: center; width: 74px; height: 74px; margin: auto; border-radius: 50%; color: #07160f; background: var(--green); font-size: 36px; font-weight: 900; }
+    .unlocked-content { display: none; margin-top: 16px; padding: 18px; border: 1px solid rgba(139,104,255,.35); border-radius: 16px; background: rgba(139,104,255,.1); text-align: right; }
+    .unlocked-content.show { display: block; }
+    .unlocked-content b { color: white; }
+    .unlocked-content p { margin-bottom: 0; color: #cbc5d7; font-size: 13px; line-height: 1.6; }
+    .consent-toggle { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; padding: 12px 13px; border: 1px solid var(--line); border-radius: 12px; color: #d6d2dc; background: rgba(255,255,255,.035); font: inherit; font-size: 12px; text-align: right; cursor: pointer; }
+    .consent-toggle::before { content: ""; flex: 0 0 auto; width: 20px; height: 20px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.35); border-radius: 6px; }
+    .consent-toggle[aria-pressed="true"] { border-color: var(--green); background: rgba(101,212,169,.08); color: white; }
+    .consent-toggle[aria-pressed="true"]::before { content: "✓"; color: #07160f; background: var(--green); border-color: var(--green); font-weight: 900; }
+    .email-preview-trigger { grid-column: 1 / -1; border: 0; color: var(--gold); background: transparent; font: inherit; font-size: 12px; font-weight: 800; text-decoration: underline; cursor: pointer; }
+    .legal-modal-card { width: min(780px, 100%); }
+    .legal-copy { display: grid; gap: 18px; color: #c8c4d0; line-height: 1.75; }
+    .legal-copy section { padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.025); }
+    .legal-copy h3 { margin: 0 0 7px; color: white; }
+    .legal-copy p { margin: 0; }
+    .accessibility-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin: 20px 0; }
+    .accessibility-grid button { min-height: 54px; border: 1px solid var(--line); border-radius: 12px; color: white; background: rgba(255,255,255,.045); font: inherit; font-weight: 800; cursor: pointer; }
+    .accessibility-grid button[aria-pressed="true"] { color: #111019; border-color: var(--gold); background: var(--gold); }
+    .email-card { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: white; color: #24212a; }
+    .email-head { padding: 18px; background: #f0edf4; border-bottom: 1px solid #ddd7e5; }
+    .email-head small { color: #746e7b; }
+    .email-head strong { display: block; margin-top: 8px; font-size: 20px; }
+    .email-body { display: grid; gap: 10px; padding: 20px; }
+    .email-row { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid #ebe7ee; }
+    .email-row b { color: #6b2fba; }
+    .story-intro { display: grid; grid-template-columns: .86fr 1.14fr; gap: 54px; align-items: center; }
+    .story-photo { min-height: 560px; overflow: hidden; position: relative; border: 1px solid var(--line); border-radius: 30px; background: radial-gradient(circle at 50% 20%, rgba(139,104,255,.4), transparent 44%), #12101d; }
+    .story-photo img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; object-position: 50% 20%; }
+    .story-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(8,8,13,.72)); }
+    .story-quote { position: absolute; right: 22px; bottom: 22px; left: 22px; z-index: 1; padding: 18px; border: 1px solid rgba(255,255,255,.16); border-radius: 18px; background: rgba(8,8,13,.82); backdrop-filter: blur(12px); }
+    .story-quote b { display: block; color: var(--gold); margin-bottom: 5px; }
+    .story-quote p { margin: 0; color: #e2dfe8; line-height: 1.65; }
+    .story-timeline { display: grid; gap: 11px; margin-top: 27px; }
+    .story-step { display: grid; grid-template-columns: 54px 1fr; gap: 14px; align-items: start; padding: 15px; border: 1px solid var(--line); border-radius: 17px; background: rgba(255,255,255,.025); }
+    .story-step strong { width: 54px; min-height: 43px; display: grid; place-items: center; color: #15101b; border-radius: 12px; background: var(--gold); }
+    .story-step b { display: block; margin: 1px 0 3px; font-size: 17px; }
+    .story-step span { color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .story-source { margin-top: 15px; color: var(--muted); font-size: 12px; }
+    .story-source a { color: var(--gold); text-decoration: underline; }
+    .cookie-banner { position: fixed; right: 20px; bottom: 20px; left: 20px; z-index: 70; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; max-width: 980px; margin: auto; padding: 18px; border: 1px solid rgba(237,192,105,.28); border-radius: 18px; background: rgba(17,16,25,.97); box-shadow: 0 22px 70px rgba(0,0,0,.55); backdrop-filter: blur(14px); }
+    .cookie-banner[hidden] { display: none; }
+    .cookie-banner strong { display: block; margin-bottom: 4px; }
+    .cookie-banner p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .cookie-actions { display: flex; gap: 8px; }
+    body.a11y-grayscale { filter: grayscale(1); }
+    body.a11y-links a { text-decoration: underline !important; text-underline-offset: 3px; }
+    body.a11y-readable { letter-spacing: .035em; line-height: 1.75; }
     @media (max-width: 760px) {
       .media-ribbon { grid-template-columns: 1fr 1fr; }
       .media-ribbon figure { min-height: 190px; }
@@ -727,6 +916,22 @@
       .video-frame { min-height: 480px; }
       .video-frame iframe { height: 520px; }
       .footer-links { gap: 11px; }
+      .world-shell { padding: 20px 16px 90px; }
+      .world-layout { grid-template-columns: 1fr; padding: 30px 0; }
+      .world-copy h2 { font-size: 44px; }
+      .world-copy > p { font-size: 15px; }
+      .world-bullets { grid-template-columns: 1fr; }
+      .demo-checkout { position: static; }
+      .demo-credentials { grid-template-columns: 1fr; }
+      .cookie-banner { right: 10px; bottom: 74px; left: 10px; grid-template-columns: 1fr; }
+      .cookie-actions { width: 100%; }
+      .cookie-actions .btn { flex: 1; }
+      .accessibility-grid { grid-template-columns: 1fr; }
+      .email-row { grid-template-columns: 1fr; gap: 3px; }
+      .story-intro { grid-template-columns: 1fr; }
+      .story-photo { min-height: 430px; }
+      .story-step { grid-template-columns: 47px 1fr; }
+      .story-step strong { width: 47px; }
     }
 
   </style>
@@ -830,7 +1035,7 @@
           <h2 class="section-title">קסם שאפשר ללמוד בקצב שלכם</h2>
           <p>הקורסים שבתכנון יהפכו את הידע של עמית למסלולי לימוד קצרים ומעשיים. אפשר להצטרף לרשימת העדכונים ולספר איזה מסלול מעניין אתכם.</p>
           <div class="academy-badges"><span>שיעורים קצרים</span><span>צפייה מכל מכשיר</span><span>תרגול מעשי</span><span>למידה בקצב אישי</span></div>
-          <a class="btn btn-gold" href="#contact">הצטרפות לרשימת העדכונים</a>
+          <button class="btn btn-gold" type="button" data-world-hub>כניסה לעולם הקורסים</button>
         </div>
         <div class="course-grid">
           <article class="course-card"><span class="tag">לילדים</span><h3>הקוסם הצעיר</h3><p>קסמים בטוחים, ברורים ומרשימים שאפשר לבצע בבית ולבנות איתם ביטחון מול קהל.</p><b>מסלול יסודות ותרגול</b></article>
@@ -881,7 +1086,10 @@
               <button class="btn btn-gold trick-action" id="card-action" type="button" hidden>עמית, תעלים אותו</button>
               <div class="effect-status" id="card-status"></div>
             </div>
-            <div class="card-table">
+            <div class="card-table" id="card-table">
+              <div class="mystic-portal" aria-hidden="true"></div>
+              <div class="magic-beam" aria-hidden="true"></div>
+              <div class="magic-smoke" aria-hidden="true"><i style="--smoke-x:-115px;--smoke-y:-75px"></i><i style="--smoke-x:105px;--smoke-y:-95px"></i><i style="--smoke-x:35px;--smoke-y:110px"></i></div>
               <div class="card-deck" id="card-deck" aria-label="בחרו קלף">
                 <button class="playing-card red" type="button" data-card="Q♥" aria-label="מלכה לב"><span class="corner">Q<br>♥</span><span class="suit">♥</span><span class="corner bottom">Q<br>♥</span></button>
                 <button class="playing-card" type="button" data-card="7♠" aria-label="שבע עלה"><span class="corner">7<br>♠</span><span class="suit">♠</span><span class="corner bottom">7<br>♠</span></button>
@@ -890,7 +1098,7 @@
                 <button class="playing-card red" type="button" data-card="10♥" aria-label="עשר לב"><span class="corner">10<br>♥</span><span class="suit">♥</span><span class="corner bottom">10<br>♥</span></button>
                 <button class="playing-card" type="button" data-card="3♠" aria-label="שלוש עלה"><span class="corner">3<br>♠</span><span class="suit">♠</span><span class="corner bottom">3<br>♠</span></button>
               </div>
-              <div class="vanish-mark" id="vanish-mark">✦</div>
+              <div class="vanish-mark" id="vanish-mark"><span>✦</span><small>נשאר רק זיכרון של הקלף</small></div>
             </div>
           </div>
 
@@ -961,22 +1169,56 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="invitation">
       <div class="shell invite-box">
         <div>
-          <div class="kicker">שירות משלים לאירועים</div><h2 class="section-title">הזמנה דיגיטלית ואישורי הגעה</h2><p class="section-copy">האתר יסביר שגם ארגון האירוע יכול להיות פשוט. ניתן להכין הזמנה אישית, לשלוח אותה בוואטסאפ ולקבל אישורי הגעה במקום אחד.</p>
-          <div class="invite-features"><div>הזמנה בעיצוב אישי</div><div>שיתוף מהיר בוואטסאפ</div><div>אישור הגעה מסודר</div><div>התאמה לפרטי האירוע</div></div>
+          <div class="kicker">שירות משלים לאירועים</div><h2 class="section-title">הזמנה דיגיטלית ואישורי הגעה</h2><p class="section-copy">בנו כאן הזמנה לדוגמה, החליפו עיצוב, אשרו הגעה ושלחו אותה בוואטסאפ. כל הכפתורים בהמחשה פעילים.</p>
+          <div class="invite-controls">
+            <label>שם החוגג או החוגגת<input id="invite-name" value="נועה" maxlength="24"></label>
+            <label>תאריך<input id="invite-date" type="date"></label>
+            <label>שעה<input id="invite-time" type="time" value="17:00"></label>
+            <label>עיצוב<select id="invite-theme"><option value="purple">סגול קסום</option><option value="gold">זהב חגיגי</option><option value="blue">כחול מסתורי</option></select></label>
+            <label class="wide">מיקום<input id="invite-location" value="המיקום יישלח למוזמנים" maxlength="42"></label>
+          </div>
+          <div class="invite-features">
+            <button type="button" data-invite-feature="theme">החלפת עיצוב</button>
+            <button type="button" data-invite-feature="share">שיתוף מהיר בוואטסאפ</button>
+            <button type="button" data-invite-feature="rsvp">אישור הגעה פעיל</button>
+            <button type="button" data-invite-feature="details">עריכת פרטי האירוע</button>
+          </div>
         </div>
-        <div class="invite-ui"><div class="screen"><small>הזמנה דיגיטלית קסומה</small><b id="invite-title">בואו לחגוג עם נועה יום הולדת קסום</b><small id="invite-details">יום חמישי, 17:00 | הפרטים המלאים יישלחו למוזמנים</small><button type="button" id="invite-demo">יצירת הזמנה לדוגמה</button></div></div>
+        <div class="invite-ui">
+          <div class="screen theme-purple" id="invite-screen">
+            <div class="invite-brandline"><strong>עמית מיטרני</strong><span>הזמנה קסומה</span></div>
+            <div class="invite-main">
+              <div class="invite-main-copy"><small>אתם מוזמנים לחוויה בלתי נשכחת</small><b id="invite-title">יום ההולדת הקסום של נועה</b></div>
+              <div class="invite-art"><img src="assets/optimized/amit-time-machine-700.webp" alt="" loading="lazy"></div>
+            </div>
+            <div class="invite-detail-grid">
+              <span><small>תאריך</small><strong id="invite-date-copy">התאריך יישלח למוזמנים</strong></span>
+              <span><small>שעה</small><strong id="invite-time-copy">17:00</strong></span>
+              <span><small>מיקום</small><strong id="invite-location-copy">המיקום יישלח למוזמנים</strong></span>
+            </div>
+            <small id="invite-details">כל הפרטים מתעדכנים ישירות בתוך ההזמנה</small>
+            <div class="rsvp-status"><span id="rsvp-copy">עדיין לא אושרה הגעה</span><span id="rsvp-count">0 אישורים</span></div>
+            <div class="invite-preview-actions">
+              <button type="button" id="invite-demo">עדכון ההזמנה</button>
+              <button type="button" id="invite-rsvp">אישור הגעה</button>
+              <a id="invite-share" href="#" target="_blank" rel="noopener">שיתוף בוואטסאפ</a>
+              <button type="button" id="invite-reset">איפוס</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="pizza-calculator">
       <div class="shell calculator-wrap">
-        <div>
+        <div class="pizza-copy">
           <div class="kicker">כלי קטן שמוריד כאב ראש גדול</div>
           <h2 class="section-title">כמה מגשי פיצה באמת צריך?</h2>
           <p class="section-copy">מחשבון מהיר להורים לפי מספר הילדים והאם גם המבוגרים אוכלים. כלי שימושי שמחזיר הורים לאתר גם אחרי שסגרו את האירוע.</p>
+          <div class="pizza-visual" id="pizza-visual"><img src="assets/optimized/pizza-party-900.webp" alt="פיצה חגיגית ליום הולדת" loading="lazy"><div class="pizza-visual-badge"><div><strong id="pizza-visual-count">6</strong><span>מגשים מומלצים</span></div></div></div>
         </div>
         <div class="calculator">
           <label for="kids-range">כמה ילדים מגיעים?</label>
@@ -1049,6 +1291,28 @@
       </div>
     </section>
 
+    <section class="section" id="story">
+      <div class="shell story-intro">
+        <div class="story-photo">
+          <img src="assets/optimized/amit-golden-1600.webp" alt="עמית מיטרני על הבמה" loading="lazy">
+          <div class="story-quote"><b>הקסם הפך לדרך להתחבר</b><p>בריאיון אישי עמית סיפר שכילד הקסם נתן לו מקום שבו הרגיש בטוח, טוב ומסוגל ליצור קשר עם אנשים.</p></div>
+        </div>
+        <div>
+          <div class="kicker">מאיפה הכול התחיל</div>
+          <h2 class="section-title">מטריק קטן בגיל חמש, לחיים שלמים על הבמה</h2>
+          <p class="section-copy">הסיפור של עמית לא התחיל באולם גדול. הוא התחיל ברגע קטן בבית, כשאביו הראה לו קסם עם טבעת. הסקרנות הפכה לתרגול, התרגול הפך להופעות, והקסם הפך לשפה שמחברת אותו לקהל.</p>
+          <div class="story-timeline">
+            <div class="story-step"><strong>5</strong><div><b>הניצוץ הראשון</b><span>אביו הראה לו קסם קטן עם טבעת, ועמית הבין שזה העולם שהוא רוצה להיכנס אליו.</span></div></div>
+            <div class="story-step"><strong>8</strong><div><b>הופעה ראשונה</b><span>עמית כבר הופיע לצד ליצן שהכיר והתחיל לחוות קהל אמיתי.</span></div></div>
+            <div class="story-step"><strong>10</strong><div><b>ימי הולדת ראשונים</b><span>הוא הופיע לילדי הלקוחות של אמו והפך את התחביב לעשייה עקבית.</span></div></div>
+            <div class="story-step"><strong>13</strong><div><b>הבמה המקצועית</b><span>בגיל צעיר החל להופיע באופן מקצועי ולבנות את הדרך שלו כאמן.</span></div></div>
+            <div class="story-step"><strong>צה"ל</strong><div><b>קסם גם בשירות</b><span>במהלך השירות פעל כקוסם צבאי והתנדב להופיע בפני חיילים.</span></div></div>
+          </div>
+          <p class="story-source">הציר מבוסס על דברים שסיפר עמית בריאיון שפורסם ב<a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">צומת השרון</a>.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="about">
       <div class="shell about">
         <div class="about-copy"><div class="kicker">הסיפור של עמית</div><h2 class="section-title">קסם הוא לא טריק. הוא דרך ליצור חיבור</h2><p>עמית מיטרני הוא קוסם ואמן חושים שמופיע בפני ילדים, משפחות, מוסדות וחברות. המופעים שלו בנויים סביב הקהל ומחברים בין הומור, הפתעה והשתתפות אמיתית.</p><p>מעבר לבמה, עמית ציין שהוא חבר בהנהלת אגודת הקוסמים, מעביר סדנאות והרצאות לחברי האגודה, מייעץ לקוסמים ולמפעילים ויוצר תוכן שיווקי לעסקים באמצעות קסמים ואמנות חושים.</p>
@@ -1083,15 +1347,17 @@
           <label><span>מה מעניין אתכם?</span><select name="interest" required><option value="">בחירת נושא</option><option>מופע לאירוע</option><option>קורס דיגיטלי</option><option>סדנה או ייעוץ</option><option>תוכן לעסק</option></select></label>
           <label><span>תאריך משוער</span><input name="date" type="date"></label>
           <label class="full-field"><span>פרטים נוספים</span><textarea name="message" placeholder="כמה מילים על האירוע או על מה שתרצו ליצור"></textarea></label>
+          <button class="consent-toggle full-field" id="consent-toggle" type="button" aria-pressed="false">אני מאשר או מאשרת להעביר לעמית את הפרטים שמילאתי כדי שיוכל לחזור אליי.</button>
           <p class="consent-note full-field">הפרטים אינם נשמרים באתר. בלחיצה תיפתח הודעת וואטסאפ, ורק אתם מחליטים אם לשלוח אותה לעמית.</p>
           <p class="form-error" id="form-error" role="alert"></p>
           <button class="btn btn-gold" type="submit">פתיחת הפנייה בוואטסאפ</button>
+          <button class="email-preview-trigger" id="email-preview-trigger" type="button">איך תיראה הודעת המייל לעמית?</button>
         </form>
       </div>
     </section>
   </main>
 
-  <footer><div class="shell footer-row"><div><strong>עמית מיטרני</strong><br>קוסם ואמן חושים</div><div class="footer-links"><button type="button" data-privacy-open onclick="document.querySelector('#privacy-modal').classList.add('open');document.querySelector('#privacy-modal').setAttribute('aria-hidden','false');document.body.classList.add('modal-open')">פרטיות</button><a href="#shows">מופעים</a><a href="#academy">אקדמיה</a><a href="#business">לעסקים</a><a href="#faq">שאלות</a><a href="#contact">יצירת קשר</a></div></div></footer>
+  <footer><div class="shell footer-row"><div><strong>עמית מיטרני</strong><br>קוסם ואמן חושים</div><div class="footer-links"><button type="button" data-privacy-open>פרטיות</button><button type="button" data-terms-open>תקנון האתר</button><button type="button" data-accessibility-statement>הצהרת נגישות</button><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">חברות וארגונים</a><a href="magic-courses.html">קורסים</a><a href="business-magic.html">תוכן לעסקים</a><a href="#faq">שאלות</a><a href="#contact">יצירת קשר</a></div></div></footer>
   <div class="floating-tools"><a class="floating-tool whatsapp" href="https://wa.me/message/VM3WK3GE2KNYL1" target="_blank" rel="noopener">וואטסאפ</a><button class="floating-tool" id="accessibility" type="button">נגישות</button></div>
   <div class="mobile-sticky"><a href="#contact">בדיקת התאמה</a><a href="https://wa.me/message/VM3WK3GE2KNYL1" target="_blank" rel="noopener">וואטסאפ</a></div>
   <div class="toast" id="toast" role="status"></div>
@@ -1101,7 +1367,61 @@
   </div>
   <div class="site-modal" id="privacy-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
     <div class="modal-backdrop" data-privacy-close></div>
-    <div class="modal-card"><button class="modal-close" type="button" data-privacy-close aria-label="סגירה">×</button><h2 id="privacy-title">פרטיות ושימוש בפרטים</h2><p>הפרטים שממלאים בטופס אינם נשמרים באתר. בלחיצה על כפתור השליחה נפתחת הודעת וואטסאפ עם הפרטים שהוזנו, ורק לאחר שליחה בוואטסאפ הם מועברים לעמית. אין להזין מידע אישי שאינו נחוץ לפנייה.</p><button class="btn btn-gold" type="button" data-privacy-close>הבנתי</button></div>
+    <div class="modal-card legal-modal-card"><button class="modal-close" type="button" data-privacy-close aria-label="סגירה">×</button><h2 id="privacy-title">פרטיות ושימוש בפרטים</h2><div class="legal-copy"><section><h3>מה קורה בטופס</h3><p>האתר מכין הודעת וואטסאפ מהפרטים שהוזנו. הפרטים מועברים לעמית רק אם המשתמש בוחר לשלוח את ההודעה בוואטסאפ.</p></section><section><h3>מה נשמר באתר</h3><p>הטופס אינו שומר פרטים בשרת. נשמרת במכשיר בלבד העדפת נגישות והאישור שקראתם את הודעת הפרטיות.</p></section><section><h3>מערכות חיצוניות</h3><p>פתיחת וואטסאפ, אינסטגרם או שירות תרגום מעבירה את המשתמש לשירות חיצוני הכפוף לתנאים שלו.</p></section><section><h3>יצירת קשר</h3><p>לבירור בנושא פרטיות אפשר לפנות לעמית בטלפון 052-341-6151.</p></section></div><button class="btn btn-gold" type="button" data-privacy-close>הבנתי</button></div>
+  </div>
+  <div class="site-modal" id="terms-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+    <div class="modal-backdrop" data-terms-close></div>
+    <div class="modal-card legal-modal-card"><button class="modal-close" type="button" data-terms-close aria-label="סגירה">×</button><h2 id="terms-title">תקנון ותנאי שימוש</h2><div class="legal-copy"><section><h3>מטרת האתר</h3><p>האתר מציג את פעילות עמית מיטרני, מאפשר להתנסות בחוויות דיגיטליות וליצור קשר בנוגע למופעים, קורסים ושירותים.</p></section><section><h3>הדגמות ורכישות</h3><p>מסכי הקורסים, המוצרים, ההזמנות והסליקה באתר זה הם הדגמה בלבד. אין חיוב אמיתי, אין אספקת מוצר ואין להזין פרטי כרטיס אמיתי. מחירים ותנאי רכישה יפורסמו רק לאחר אישור וחיבור מערכת סליקה.</p></section><section><h3>מידע ותיאום שירות</h3><p>זמינות, משך, מחיר ותנאי כל מופע או שירות נקבעים רק באישור ישיר ומפורש של עמית. אין לראות בהמחשה התחייבות להזמנה.</p></section><section><h3>קניין רוחני ושימוש הוגן</h3><p>אין להעתיק, להפיץ או לעשות שימוש מסחרי בתוכן, בתמונות או בחוויות שבאתר ללא אישור מראש מבעל הזכויות.</p></section><section><h3>אחריות ועדכונים</h3><p>נעשה מאמץ להציג מידע ברור ועדכני. אם נמצא אי דיוק אפשר לפנות לעמית בטלפון 052-341-6151. התקנון יעבור בדיקה משפטית לפני השקה מסחרית מלאה.</p></section></div></div>
+  </div>
+  <div class="site-modal" id="accessibility-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="accessibility-title">
+    <div class="modal-backdrop" data-accessibility-close></div>
+    <div class="modal-card legal-modal-card"><button class="modal-close" type="button" data-accessibility-close aria-label="סגירה">×</button><h2 id="accessibility-title">כלי נגישות</h2><p>בחרו את ההתאמות שנוחות לכם. ההעדפות נשמרות רק במכשיר שלכם.</p><div class="accessibility-grid"><button type="button" data-a11y="contrast" aria-pressed="false">ניגודיות גבוהה</button><button type="button" data-a11y="font-up" aria-pressed="false">הגדלת טקסט</button><button type="button" data-a11y="grayscale" aria-pressed="false">גווני אפור</button><button type="button" data-a11y="links" aria-pressed="false">הדגשת קישורים</button><button type="button" data-a11y="readable" aria-pressed="false">טקסט קריא ומרווח</button><button type="button" data-a11y="reset">איפוס התאמות</button></div><button class="btn btn-dark" type="button" data-accessibility-statement>קריאת הצהרת הנגישות</button></div>
+  </div>
+  <div class="site-modal" id="accessibility-statement-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="accessibility-statement-title">
+    <div class="modal-backdrop" data-accessibility-statement-close></div>
+    <div class="modal-card legal-modal-card"><button class="modal-close" type="button" data-accessibility-statement-close aria-label="סגירה">×</button><h2 id="accessibility-statement-title">הצהרת נגישות</h2><div class="legal-copy"><section><h3>מחויבות לנגישות</h3><p>נעשה מאמץ לאפשר שימוש נוח באתר באמצעות מקלדת, כותרות ברורות, תוויות לטפסים, ניגודיות, טקסט חלופי לתמונות ותמיכה בהפחתת תנועה.</p></section><section><h3>כלי התאמה</h3><p>תפריט הנגישות כולל הגדלת טקסט, ניגודיות גבוהה, גווני אפור, הדגשת קישורים וריווח קריא. ניתן לאפס את ההתאמות בכל עת.</p></section><section><h3>מגבלות ידועות</h3><p>תוכן שמוטמע מאינסטגרם ושירותים חיצוניים נשלט על ידי אותם ספקים. ייתכנו בו מגבלות שאינן בשליטת האתר.</p></section><section><h3>דיווח על בעיית נגישות</h3><p>אם נתקלתם בקושי, אפשר לפנות לעמית בטלפון 052-341-6151 ולציין באיזה עמוד, מכשיר ודפדפן הופיעה הבעיה.</p></section><section><h3>עדכון</h3><p>הצהרה זו עודכנה ביולי 2026 ותיבדק שוב לפני השקה מסחרית מלאה.</p></section></div></div>
+  </div>
+  <div class="site-modal" id="email-preview-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="email-preview-title">
+    <div class="modal-backdrop" data-email-close></div>
+    <div class="modal-card legal-modal-card"><button class="modal-close" type="button" data-email-close aria-label="סגירה">×</button><h2 id="email-preview-title">תצוגת המייל שיקבל עמית</h2><p>המייל אינו נשלח כרגע. כתובת עסקית ושירות שליחה יחוברו לאחר אישור עמית.</p><div class="email-card"><div class="email-head"><small>אל: כתובת המייל העסקית של עמית, לאחר אישור</small><strong id="email-subject">פנייה חדשה מהאתר</strong></div><div class="email-body"><div class="email-row"><b>שם</b><span id="email-name">לא הוזן</span></div><div class="email-row"><b>טלפון</b><span id="email-phone">לא הוזן</span></div><div class="email-row"><b>נושא</b><span id="email-interest">לא נבחר</span></div><div class="email-row"><b>תאריך</b><span id="email-date">לא צוין</span></div><div class="email-row"><b>הודעה</b><span id="email-message">לא נכתבה הודעה</span></div></div></div></div>
+  </div>
+  <div class="site-modal world-modal" id="world-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="world-title">
+    <div class="modal-backdrop" data-world-close></div>
+    <div class="world-shell">
+      <div class="world-topbar"><strong>עמית מיטרני, עולם שלם בכל לחיצה</strong><button class="world-close" type="button" data-world-close aria-label="סגירת העולם">×</button></div>
+      <div class="world-layout">
+        <div class="world-copy">
+          <div class="world-kicker" id="world-kicker">חוויה דיגיטלית</div>
+          <h2 id="world-title">העולם נפתח</h2>
+          <p id="world-description"></p>
+          <div class="world-visual"><span id="world-visual-copy"></span></div>
+          <div class="world-bullets" id="world-bullets"></div>
+          <a class="btn btn-dark" id="world-page-link" href="index.html">פתיחת העמוד המלא</a>
+        </div>
+        <aside class="demo-checkout">
+          <div id="checkout-start">
+            <h3 id="checkout-title">רכישת הדגמה</h3>
+            <p id="checkout-copy">השלימו את התהליך כדי לראות איך ההזמנה או הרכישה נפתחת מיד.</p>
+            <div class="demo-notice">זוהי סימולציה בלבד. אין חיוב, אין חיבור לסליקה והפרטים אינם נשמרים. אין להזין כרטיס אמיתי.</div>
+            <div class="demo-credentials" aria-label="פרטי בדיקה"><code>12341234</code><code>1234</code><code>123</code></div>
+            <form class="checkout-form" id="checkout-form" novalidate>
+              <label>מספר כרטיס בדיקה<input name="demo-card" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="12341234" required></label>
+              <div class="checkout-row">
+                <label>תוקף בדיקה<input name="demo-expiry" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="1234" required></label>
+                <label>3 ספרות<input name="demo-cvv" inputmode="numeric" autocomplete="off" maxlength="3" placeholder="123" required></label>
+              </div>
+              <p class="checkout-error" id="checkout-error" role="alert"></p>
+              <button class="btn btn-gold" id="checkout-submit" type="submit">השלמת רכישת הדגמה</button>
+            </form>
+          </div>
+          <div class="purchase-success" id="purchase-success"><span>✓</span><strong id="success-title">הרכישה הושלמה בהדגמה</strong><p>לא בוצע חיוב אמיתי ולא נשמרו פרטים.</p><button class="btn btn-gold" id="unlock-demo" type="button">פתיחת התוכן שנרכש</button><div class="unlocked-content" id="unlocked-content"><b id="unlocked-title"></b><p id="unlocked-copy"></p></div></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+  <div class="cookie-banner" id="cookie-banner">
+    <div><strong>פרטיות לפני הכול</strong><p>האתר אינו מפעיל כרגע כלי פרסום או מעקב. נשמרת במכשיר רק הבחירה לסגור הודעה זו והעדפות הנגישות.</p></div>
+    <div class="cookie-actions"><button class="btn btn-dark" type="button" data-privacy-open>מידע נוסף</button><button class="btn btn-gold" id="cookie-accept" type="button">אישור והמשך</button></div>
   </div>
   <script>
     const toast = document.querySelector("#toast");
@@ -1166,6 +1486,7 @@
     const cardInstruction = document.querySelector("#card-instruction");
     const cardStatus = document.querySelector("#card-status");
     const vanishMark = document.querySelector("#vanish-mark");
+    const cardTable = document.querySelector("#card-table");
     let selectedCard;
     let cardVanished = false;
     cards.forEach((card, index) => {
@@ -1176,6 +1497,7 @@
         cards.forEach((item) => item.classList.remove("selected"));
         card.classList.add("selected");
         selectedCard = card;
+        cardTable.classList.add("charged");
         cardAction.hidden = false;
         cardAction.disabled = false;
         cardStatus.textContent = "הבחירה ננעלה. עמית לא יכול לראות את הקלף.";
@@ -1187,6 +1509,7 @@
       selectedCard = undefined;
       cards.forEach((card) => card.classList.remove("selected", "vanished"));
       cardDeck.classList.remove("is-shuffling");
+      cardTable.classList.remove("charged", "performing");
       vanishMark.classList.remove("show");
       cardAction.hidden = true;
       cardAction.disabled = false;
@@ -1204,6 +1527,7 @@
       cardInstruction.textContent = "השאירו את העיניים על הקלף. הקלפים מתערבבים והמחשבה שלכם נשארת במקום.";
       cardStatus.textContent = "3... 2... 1...";
       cardDeck.classList.add("is-shuffling");
+      cardTable.classList.add("performing");
       playMagicTone(170, .55);
       window.setTimeout(() => {
         selectedCard.classList.add("vanished");
@@ -1217,7 +1541,7 @@
         burstMagic(34);
         playMagicTone(620, .18);
         playMagicTone(920, .3, .1);
-      }, 1050);
+      }, 1450);
     });
 
     const numberButtons = document.querySelectorAll(".number-picker button");
@@ -1340,6 +1664,8 @@
     const kidsRange = document.querySelector("#kids-range");
     const kidsCount = document.querySelector("#kids-count");
     const pizzaCount = document.querySelector("#pizza-count");
+    const pizzaVisualCount = document.querySelector("#pizza-visual-count");
+    const pizzaVisual = document.querySelector("#pizza-visual");
     let parentsEat = false;
     const updatePizza = () => {
       const kids = Number(kidsRange.value);
@@ -1347,6 +1673,10 @@
       const pizzas = Math.max(2, Math.ceil(eaters * 2.2 / 8));
       kidsCount.textContent = kids + " ילדים";
       pizzaCount.textContent = pizzas + " מגשים";
+      pizzaVisualCount.textContent = pizzas;
+      pizzaVisual.classList.remove("pop");
+      void pizzaVisual.offsetWidth;
+      pizzaVisual.classList.add("pop");
     };
     kidsRange.addEventListener("input", updatePizza);
     document.querySelectorAll("[data-parents]").forEach((button) => {
@@ -1359,25 +1689,108 @@
     });
     updatePizza();
 
-    const demoNames = ["נועה", "אורי", "מיה", "אדם"];
-    let inviteIndex = 0;
-    document.querySelector("#invite-demo").addEventListener("click", () => {
-      inviteIndex = (inviteIndex + 1) % demoNames.length;
-      document.querySelector("#invite-title").textContent = "בואו לחגוג עם " + demoNames[inviteIndex] + " יום הולדת קסום";
-      showToast("ההזמנה עודכנה. במערכת המלאה יופק גם סרטון אישי של עמית.");
+    const inviteName = document.querySelector("#invite-name");
+    const inviteDate = document.querySelector("#invite-date");
+    const inviteTime = document.querySelector("#invite-time");
+    const inviteTheme = document.querySelector("#invite-theme");
+    const inviteLocation = document.querySelector("#invite-location");
+    const inviteScreen = document.querySelector("#invite-screen");
+    const inviteTitle = document.querySelector("#invite-title");
+    const inviteDetails = document.querySelector("#invite-details");
+    const inviteDateCopy = document.querySelector("#invite-date-copy");
+    const inviteTimeCopy = document.querySelector("#invite-time-copy");
+    const inviteLocationCopy = document.querySelector("#invite-location-copy");
+    const inviteShare = document.querySelector("#invite-share");
+    const inviteRsvp = document.querySelector("#invite-rsvp");
+    const rsvpCopy = document.querySelector("#rsvp-copy");
+    const rsvpCount = document.querySelector("#rsvp-count");
+    let rsvpApproved = false;
+    const formatInviteDate = (value) => {
+      if (!value) return "התאריך יישלח למוזמנים";
+      return new Intl.DateTimeFormat("he-IL", { weekday: "long", day: "numeric", month: "long" }).format(new Date(value + "T12:00:00"));
+    };
+    const updateInvite = (announce = false) => {
+      const name = inviteName.value.trim() || "החוגג או החוגגת";
+      const dateCopy = formatInviteDate(inviteDate.value);
+      const timeCopy = inviteTime.value || "17:00";
+      const locationCopy = inviteLocation.value.trim() || "המיקום יישלח למוזמנים";
+      inviteTitle.textContent = "יום ההולדת הקסום של " + name;
+      inviteDateCopy.textContent = dateCopy;
+      inviteTimeCopy.textContent = timeCopy;
+      inviteLocationCopy.textContent = locationCopy;
+      inviteDetails.textContent = "הזמנה אישית עם אישורי הגעה ושיתוף מהיר";
+      inviteScreen.className = "screen theme-" + inviteTheme.value;
+      const shareText = [
+        "הזמנה קסומה ליום ההולדת של " + name,
+        dateCopy + " בשעה " + timeCopy,
+        "מיקום: " + locationCopy,
+        "נשמח לראות אתכם. אנא אשרו הגעה."
+      ].join("\n");
+      inviteShare.href = "https://wa.me/?text=" + encodeURIComponent(shareText);
+      inviteScreen.classList.add("invite-updated");
+      window.setTimeout(() => inviteScreen.classList.remove("invite-updated"), 600);
+      if (announce) showToast("ההזמנה עודכנה ומוכנה לשיתוף.");
+    };
+    document.querySelector("#invite-demo").addEventListener("click", () => updateInvite(true));
+    [inviteName, inviteDate, inviteTime, inviteLocation].forEach((control) => control.addEventListener("input", () => updateInvite(false)));
+    inviteTheme.addEventListener("change", () => updateInvite(true));
+    inviteRsvp.addEventListener("click", () => {
+      rsvpApproved = !rsvpApproved;
+      rsvpCopy.textContent = rsvpApproved ? "ההגעה אושרה בהצלחה" : "עדיין לא אושרה הגעה";
+      rsvpCount.textContent = rsvpApproved ? "אישור אחד" : "0 אישורים";
+      inviteRsvp.textContent = rsvpApproved ? "ביטול אישור" : "אישור הגעה";
+      showToast(rsvpApproved ? "אישור ההגעה נקלט בהמחשה." : "אישור ההגעה בוטל.");
     });
+    document.querySelector("#invite-reset").addEventListener("click", () => {
+      inviteName.value = "נועה";
+      inviteDate.value = "";
+      inviteTime.value = "17:00";
+      inviteTheme.value = "purple";
+      inviteLocation.value = "המיקום יישלח למוזמנים";
+      rsvpApproved = false;
+      rsvpCopy.textContent = "עדיין לא אושרה הגעה";
+      rsvpCount.textContent = "0 אישורים";
+      inviteRsvp.textContent = "אישור הגעה";
+      updateInvite(true);
+    });
+    document.querySelectorAll("[data-invite-feature]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const feature = button.dataset.inviteFeature;
+        if (feature === "theme") {
+          const themes = ["purple", "gold", "blue"];
+          inviteTheme.value = themes[(themes.indexOf(inviteTheme.value) + 1) % themes.length];
+          updateInvite(true);
+        }
+        if (feature === "share") inviteShare.click();
+        if (feature === "rsvp") inviteRsvp.click();
+        if (feature === "details") inviteName.focus();
+      });
+    });
+    updateInvite(false);
 
     document.querySelectorAll(".faq > div").forEach((item) => {
       item.querySelector("button").addEventListener("click", () => item.classList.toggle("open"));
     });
 
-    document.querySelector("#lead-form").addEventListener("submit", (event) => {
+    const leadForm = document.querySelector("#lead-form");
+    const consentToggle = document.querySelector("#consent-toggle");
+    consentToggle.addEventListener("click", () => {
+      const approved = consentToggle.getAttribute("aria-pressed") !== "true";
+      consentToggle.setAttribute("aria-pressed", String(approved));
+      document.querySelector("#form-error").textContent = "";
+    });
+    leadForm.addEventListener("submit", (event) => {
       event.preventDefault();
       const form = event.currentTarget;
       const error = document.querySelector("#form-error");
       if (!form.checkValidity()) {
         error.textContent = "צריך למלא שם, טלפון ולבחור נושא.";
         form.reportValidity();
+        return;
+      }
+      if (consentToggle.getAttribute("aria-pressed") !== "true") {
+        error.textContent = "כדי להכין את הפנייה צריך לאשר את העברת הפרטים לעמית.";
+        consentToggle.focus();
         return;
       }
       error.textContent = "";
@@ -1439,33 +1852,240 @@
     const privacyModal = document.querySelector("#privacy-modal");
     document.querySelectorAll("[data-privacy-open]").forEach((item) => item.addEventListener("click", () => openModal(privacyModal)));
     privacyModal.querySelectorAll("[data-privacy-close]").forEach((item) => item.addEventListener("click", () => closeModal(privacyModal)));
+    const termsModal = document.querySelector("#terms-modal");
+    document.querySelectorAll("[data-terms-open]").forEach((item) => item.addEventListener("click", () => openModal(termsModal)));
+    termsModal.querySelectorAll("[data-terms-close]").forEach((item) => item.addEventListener("click", () => closeModal(termsModal)));
+    const accessibilityModal = document.querySelector("#accessibility-modal");
+    const accessibilityStatementModal = document.querySelector("#accessibility-statement-modal");
+    document.querySelector("#accessibility").addEventListener("click", () => openModal(accessibilityModal));
+    accessibilityModal.querySelectorAll("[data-accessibility-close]").forEach((item) => item.addEventListener("click", () => closeModal(accessibilityModal)));
+    document.querySelectorAll("[data-accessibility-statement]").forEach((item) => item.addEventListener("click", () => {
+      closeModal(accessibilityModal);
+      openModal(accessibilityStatementModal);
+    }));
+    accessibilityStatementModal.querySelectorAll("[data-accessibility-statement-close]").forEach((item) => item.addEventListener("click", () => closeModal(accessibilityStatementModal)));
+    const emailPreviewModal = document.querySelector("#email-preview-modal");
+    const updateEmailPreview = () => {
+      const data = new FormData(leadForm);
+      const name = String(data.get("name") || "").trim();
+      const interest = String(data.get("interest") || "").trim();
+      document.querySelector("#email-subject").textContent = interest ? "פנייה חדשה מהאתר: " + interest : "פנייה חדשה מהאתר";
+      document.querySelector("#email-name").textContent = name || "לא הוזן";
+      document.querySelector("#email-phone").textContent = String(data.get("phone") || "").trim() || "לא הוזן";
+      document.querySelector("#email-interest").textContent = interest || "לא נבחר";
+      document.querySelector("#email-date").textContent = String(data.get("date") || "").trim() || "לא צוין";
+      document.querySelector("#email-message").textContent = String(data.get("message") || "").trim() || "לא נכתבה הודעה";
+    };
+    document.querySelector("#email-preview-trigger").addEventListener("click", () => {
+      updateEmailPreview();
+      openModal(emailPreviewModal);
+    });
+    emailPreviewModal.querySelectorAll("[data-email-close]").forEach((item) => item.addEventListener("click", () => closeModal(emailPreviewModal)));
+    const cookieBanner = document.querySelector("#cookie-banner");
+    try {
+      if (localStorage.getItem("amitPrivacyNotice") === "accepted") cookieBanner.hidden = true;
+    } catch (error) {}
+    document.querySelector("#cookie-accept").addEventListener("click", () => {
+      cookieBanner.hidden = true;
+      try { localStorage.setItem("amitPrivacyNotice", "accepted"); } catch (error) {}
+      showToast("הבחירה נשמרה במכשיר בלבד.");
+    });
+    const accessibilityState = {
+      contrast: false,
+      "font-up": false,
+      grayscale: false,
+      links: false,
+      readable: false
+    };
+    const applyAccessibilityState = () => {
+      document.documentElement.style.setProperty("--muted", accessibilityState.contrast ? "#ffffff" : "#aaa7b7");
+      document.documentElement.style.setProperty("--line", accessibilityState.contrast ? "rgba(255,255,255,.5)" : "rgba(255,255,255,.11)");
+      document.documentElement.style.fontSize = accessibilityState["font-up"] ? "112%" : "";
+      document.body.classList.toggle("a11y-grayscale", accessibilityState.grayscale);
+      document.body.classList.toggle("a11y-links", accessibilityState.links);
+      document.body.classList.toggle("a11y-readable", accessibilityState.readable);
+      document.querySelectorAll("[data-a11y][aria-pressed]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(Boolean(accessibilityState[button.dataset.a11y])));
+      });
+      try { localStorage.setItem("amitAccessibility", JSON.stringify(accessibilityState)); } catch (error) {}
+    };
+    try {
+      Object.assign(accessibilityState, JSON.parse(localStorage.getItem("amitAccessibility") || "{}"));
+    } catch (error) {}
+    applyAccessibilityState();
+    document.querySelectorAll("[data-a11y]").forEach((button) => button.addEventListener("click", () => {
+      const action = button.dataset.a11y;
+      if (action === "reset") {
+        Object.keys(accessibilityState).forEach((key) => accessibilityState[key] = false);
+        showToast("התאמות הנגישות אופסו.");
+      } else {
+        accessibilityState[action] = !accessibilityState[action];
+        showToast(button.textContent.trim() + (accessibilityState[action] ? " הופעל" : " בוטל"));
+      }
+      applyAccessibilityState();
+    }));
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
       document.querySelectorAll(".site-modal.open").forEach(closeModal);
     });
 
     const interestSelect = document.querySelector('[name="interest"]');
-    const interestBySection = {
-      "service-card": "מופע לאירוע",
-      "course-card": "קורס דיגיטלי",
-      "tool-card": "קורס דיגיטלי",
-      "business-card": "תוכן לעסק"
+    const worldModal = document.querySelector("#world-modal");
+    const worldTitle = document.querySelector("#world-title");
+    const worldKicker = document.querySelector("#world-kicker");
+    const worldDescription = document.querySelector("#world-description");
+    const worldVisual = document.querySelector(".world-visual");
+    const worldVisualCopy = document.querySelector("#world-visual-copy");
+    const worldBullets = document.querySelector("#world-bullets");
+    const checkoutTitle = document.querySelector("#checkout-title");
+    const checkoutSubmit = document.querySelector("#checkout-submit");
+    const checkoutForm = document.querySelector("#checkout-form");
+    const checkoutError = document.querySelector("#checkout-error");
+    const checkoutStart = document.querySelector("#checkout-start");
+    const purchaseSuccess = document.querySelector("#purchase-success");
+    const successTitle = document.querySelector("#success-title");
+    const unlockedContent = document.querySelector("#unlocked-content");
+    const unlockedTitle = document.querySelector("#unlocked-title");
+    const unlockedCopy = document.querySelector("#unlocked-copy");
+    const worldPageLink = document.querySelector("#world-page-link");
+    let activeWorld = {};
+    const worldTypes = {
+      service: {
+        kicker: "עולם המופעים",
+        action: "הזמנת מופע בהדגמה",
+        success: "הזמנת המופע הושלמה בהדגמה",
+        visual: "assets/optimized/amit-golden-1600.webp",
+        bullets: [
+          ["התאמה לקהל", "הגיל, גודל הקבוצה והמקום מגדירים את מבנה המופע."],
+          ["חוויה משתפת", "הקהל והחוגגים הופכים לחלק מהקסמים עצמם."],
+          ["הזמנה מסודרת", "בחירת מסלול, תאריך ותהליך הזמנה ברור."]
+        ],
+        unlocked: "מסך ההזמנה נפתח",
+        unlockedCopy: "כאן יוצגו פרטי האירוע, סטטוס ההזמנה, ההכנות והמקום לעדכונים מעמית."
+      },
+      course: {
+        kicker: "האקדמיה הדיגיטלית",
+        action: "רכישת קורס בהדגמה",
+        success: "הקורס נרכש ונפתח בהדגמה",
+        visual: "assets/optimized/amit-cards-1200.webp",
+        bullets: [
+          ["שיעורים קצרים", "כל פרק מתמקד ביכולת אחת שאפשר לתרגל מיד."],
+          ["מסלול מסודר", "עוברים מיסודות לביצוע מלא מול קהל."],
+          ["גישה אישית", "התוכן נפתח באזור האישי לאחר הרכישה."]
+        ],
+        unlocked: "שיעור ראשון: הסוד מתחיל לפני הטריק",
+        unlockedCopy: "טעימה מהקורס: איך מכינים את הקהל, בונים ציפייה ומציגים את הקסם כך שהרגע ירגיש גדול יותר."
+      },
+      tool: {
+        kicker: "חנות המוצרים הדיגיטליים",
+        action: "רכישת מוצר בהדגמה",
+        success: "המוצר נרכש ונפתח בהדגמה",
+        visual: "assets/optimized/amit-thinking-1200.webp",
+        bullets: [
+          ["גישה מיידית", "המוצר נפתח באזור האישי מיד לאחר הרכישה."],
+          ["תוכן מעשי", "קבצים, סרטונים וכלים שאפשר ליישם."],
+          ["המשך למידה", "המלצות לתוכן הבא לפי מה שכבר נרכש."]
+        ],
+        unlocked: "הספרייה האישית נפתחה",
+        unlockedCopy: "כאן יופיעו הסרטונים, הקבצים והכלים הכלולים במוצר שנבחר."
+      },
+      business: {
+        kicker: "עולם הקסם העסקי",
+        action: "הזמנת שירות בהדגמה",
+        success: "השירות הוזמן בהדגמה",
+        visual: "assets/optimized/amit-mentalism-1200.webp",
+        bullets: [
+          ["מסר שהופך לקסם", "המוצר או הרעיון העסקי נכנסים אל תוך ההפתעה."],
+          ["תהליך מקצועי", "בריף, פיתוח רעיון, תסריט והפקה מותאמת."],
+          ["תוצאה שנועדה לבלוט", "חוויה שמחברת בין בידור לבין יעד עסקי."]
+        ],
+        unlocked: "מסך הבריף נפתח",
+        unlockedCopy: "כאן מתחיל תהליך העבודה עם שאלות על המותג, הקהל, המסר, הפלטפורמה ולוח הזמנים."
+      }
+    };
+    const openWorld = (type, title, description) => {
+      const config = worldTypes[type] || worldTypes.course;
+      activeWorld = { type, title, ...config };
+      worldKicker.textContent = config.kicker;
+      worldTitle.textContent = title;
+      worldDescription.textContent = description;
+      worldVisual.style.backgroundImage = "linear-gradient(145deg, rgba(139,104,255,.25), rgba(8,8,13,.72)), url('" + config.visual + "')";
+      worldVisualCopy.textContent = type === "course" ? "הקורס נפתח כעמוד לימוד מלא, לא כטופס ליד." : "זהו עולם עצמאי עם תוכן ופעולה שמתאימים בדיוק לבחירה.";
+      worldBullets.replaceChildren();
+      config.bullets.forEach(([heading, copy]) => {
+        const item = document.createElement("div");
+        const bold = document.createElement("b");
+        const text = document.createElement("span");
+        bold.textContent = heading;
+        text.textContent = copy;
+        item.append(bold, text);
+        worldBullets.appendChild(item);
+      });
+      checkoutTitle.textContent = config.action;
+      checkoutSubmit.textContent = config.action;
+      successTitle.textContent = config.success;
+      unlockedTitle.textContent = config.unlocked;
+      unlockedCopy.textContent = config.unlockedCopy;
+      const worldPages = {
+        "ימי הולדת לילדים": "shows-for-kids.html",
+        "משפחות ואירועים פרטיים": "shows-for-families.html",
+        "קייטנות ומוסדות": "shows-for-institutions.html",
+        "חברות וארגונים": "shows-for-companies.html"
+      };
+      worldPageLink.href = worldPages[title] || (type === "course" ? "magic-courses.html" : type === "business" ? "business-magic.html" : "index.html#contact");
+      worldPageLink.textContent = type === "course" ? "לעמוד הקורסים המלא" : type === "business" ? "לעמוד העסקי המלא" : "לעמוד המופע המלא";
+      checkoutForm.reset();
+      checkoutError.textContent = "";
+      checkoutStart.style.display = "block";
+      purchaseSuccess.classList.remove("show");
+      unlockedContent.classList.remove("show");
+      openModal(worldModal);
+      worldModal.querySelector(".world-close").focus();
     };
     document.querySelectorAll(".service-card, .course-card, .tool-card, .business-card").forEach((card) => {
-      const kind = Object.keys(interestBySection).find((className) => card.classList.contains(className));
+      const type = card.classList.contains("service-card") ? "service" : card.classList.contains("course-card") ? "course" : card.classList.contains("tool-card") ? "tool" : "business";
       const action = document.createElement("button");
       action.className = "card-cta";
       action.type = "button";
-      action.textContent = kind === "service-card" ? "בדיקת התאמה" : "אני רוצה פרטים";
-      action.dataset.interest = interestBySection[kind];
+      action.textContent = type === "course" ? "פתיחת הקורס" : type === "service" ? "כניסה לעולם המופע" : type === "tool" ? "פתיחת המוצר" : "פתיחת השירות";
+      action.dataset.world = type;
       card.appendChild(action);
     });
+    document.querySelectorAll("[data-world-close]").forEach((item) => item.addEventListener("click", () => closeModal(worldModal)));
+    document.querySelector("[data-world-hub]").addEventListener("click", () => openWorld("course", "האקדמיה של עמית", "מסלולי לימוד קצרים ומעשיים שנפתחים באזור אישי וממשיכים משיעור לשיעור."));
     document.addEventListener("click", (event) => {
+      const worldTrigger = event.target.closest("[data-world]");
+      if (worldTrigger) {
+        const card = worldTrigger.closest("article");
+        openWorld(worldTrigger.dataset.world, card.querySelector("h3").textContent, card.querySelector("p").textContent);
+        return;
+      }
       const trigger = event.target.closest("[data-interest]");
       if (!trigger) return;
       interestSelect.value = trigger.dataset.interest;
       document.querySelector("#contact").scrollIntoView({ behavior: "smooth" });
       window.setTimeout(() => document.querySelector('[name="name"]').focus(), 550);
+    });
+    checkoutForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const card = checkoutForm.elements["demo-card"].value.replace(/\D/g, "");
+      const expiry = checkoutForm.elements["demo-expiry"].value.replace(/\D/g, "");
+      const cvv = checkoutForm.elements["demo-cvv"].value.replace(/\D/g, "");
+      if (card !== "12341234" || expiry !== "1234" || cvv !== "123") {
+        checkoutError.textContent = "פרטי ההדגמה אינם תואמים. השתמשו במספרים שמופיעים מעל הטופס.";
+        return;
+      }
+      checkoutError.textContent = "";
+      checkoutStart.style.display = "none";
+      purchaseSuccess.classList.add("show");
+      burstMagic(34);
+      playMagicTone(640, .16);
+      playMagicTone(960, .28, .12);
+    });
+    document.querySelector("#unlock-demo").addEventListener("click", () => {
+      unlockedContent.classList.add("show");
+      document.querySelector("#unlock-demo").textContent = "התוכן פתוח";
+      showToast("התוכן נפתח בהמחשה. לא בוצע חיוב אמיתי.");
     });
 
 
@@ -1477,13 +2097,6 @@
     });
     navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => navLinks.classList.remove("mobile-open")));
 
-    let contrastMode = false;
-    document.querySelector("#accessibility").addEventListener("click", () => {
-      contrastMode = !contrastMode;
-      document.documentElement.style.setProperty("--muted", contrastMode ? "#ffffff" : "#aaa7b7");
-      document.documentElement.style.setProperty("--line", contrastMode ? "rgba(255,255,255,.5)" : "rgba(255,255,255,.11)");
-      showToast(contrastMode ? "מצב ניגודיות גבוהה הופעל" : "מצב ניגודיות רגיל הופעל");
-    });
   </script>
 </body>
 </html>
