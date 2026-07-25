@@ -130,6 +130,23 @@
     .demo-codes { display:flex; gap:8px; direction:ltr; }
     .demo-codes code { padding:7px 9px; border:1px dashed rgba(237,192,105,.45); border-radius:8px; color:var(--gold); }
     .commerce-error { grid-column:1 / -1; min-height:20px; margin:0; color:#ff9eae; font-size:12px; }
+    .consent-field { grid-column:1 / -1; display:flex; align-items:flex-start; gap:10px; padding:13px; border:1px solid var(--line); border-radius:12px; color:#d7d3df; background:rgba(255,255,255,.035); }
+    .consent-field input { width:20px; height:20px; margin-top:2px; accent-color:var(--gold); }
+    .consent-field span { line-height:1.55; }
+    .legal-links { display:flex; flex-wrap:wrap; gap:14px; }
+    .legal-links a { text-decoration:underline; text-underline-offset:4px; }
+    .a11y-trigger { position:fixed; left:18px; bottom:18px; z-index:20; min-height:48px; padding:11px 16px; border:1px solid var(--line); border-radius:13px; color:white; background:#181722; cursor:pointer; font-weight:800; }
+    .a11y-panel { position:fixed; left:18px; bottom:78px; z-index:60; display:none; width:min(330px,calc(100% - 36px)); padding:20px; border:1px solid var(--line); border-radius:18px; background:#181722; box-shadow:0 24px 70px rgba(0,0,0,.55); }
+    .a11y-panel.open { display:block; }
+    .a11y-panel h2 { margin:0 0 14px; font-size:23px; }
+    .a11y-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .a11y-grid button { min-height:44px; padding:9px; border:1px solid var(--line); border-radius:10px; color:white; background:rgba(255,255,255,.05); cursor:pointer; }
+    .a11y-grid button[aria-pressed="true"] { color:#111019; border-color:var(--gold); background:var(--gold); }
+    body.a11y-contrast { --bg:#000; --panel:#000; --muted:#fff; background:#000; }
+    body.a11y-font { font-size:120%; }
+    body.a11y-links a { text-decoration:underline !important; text-decoration-thickness:2px !important; }
+    body.a11y-gray { filter:grayscale(1); }
+    :focus-visible { outline:3px solid #fff; outline-offset:4px; }
     .order-success { display:none; padding:25px; border:1px solid rgba(101,212,169,.3); border-radius:18px; background:rgba(101,212,169,.08); text-align:center; }
     .order-success.show { display:block; }
     .order-success strong { display:block; margin:10px 0; color:#75ddb4; font-size:28px; }
@@ -176,8 +193,13 @@
     <section><div class="shell"><div class="section-head"><div class="kicker">המשך הדרך</div><h2>עולמות נוספים באתר</h2></div><div class="related"><a href="shows-for-companies.html">אירועים לחברות</a><a href="magic-courses.html">קורסים דיגיטליים</a><a href="index.html#contact">יצירת קשר</a></div></div></section>
     <section><div class="shell"><div class="cta"><div><h2>לא צריך להמתין כדי להתחיל הזמנה</h2><p>ממלאים את כל פרטי האירוע, מקבלים מספר הזמנה ושולחים לעמית לאישור זמינות ותנאים.</p></div><button class="btn btn-gold" type="button" data-commerce-open>פתיחת הזמנה ישירה</button></div></div></section>
   </main>
-  <footer><div class="shell footer-row"><span>עמית מיטרני, קוסם ואמן חושים</span><span><a href="index.html">עמוד הבית</a> | <a href="index.html#contact">יצירת קשר</a></span></div></footer>
-  <div class="commerce-modal" id="commerce-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="commerce-title">
+  <footer><div class="shell footer-row"><span>עמית מיטרני, קוסם ואמן חושים</span><span class="legal-links"><a href="index.html">עמוד הבית</a><a href="index.html#contact">יצירת קשר</a><a href="index.html?modal=privacy">פרטיות</a><a href="index.html?modal=terms">תקנון האתר</a><a href="index.html?modal=accessibility-statement">הצהרת נגישות</a></span></div></footer>
+  <button class="a11y-trigger" id="a11y-trigger" type="button" aria-expanded="false" aria-controls="a11y-panel">נגישות</button>
+  <div class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="false" aria-labelledby="a11y-title" inert>
+    <h2 id="a11y-title">התאמות נגישות</h2>
+    <div class="a11y-grid"><button type="button" data-a11y="contrast" aria-pressed="false">ניגודיות גבוהה</button><button type="button" data-a11y="font" aria-pressed="false">הגדלת טקסט</button><button type="button" data-a11y="links" aria-pressed="false">הדגשת קישורים</button><button type="button" data-a11y="gray" aria-pressed="false">גווני אפור</button><button type="button" data-a11y-reset>איפוס</button><button type="button" data-a11y-close>סגירה</button></div>
+  </div>
+  <div class="commerce-modal" id="commerce-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="commerce-title" inert>
     <div class="commerce-backdrop" data-commerce-close></div>
     <div class="commerce-card">
       <button class="commerce-close" type="button" data-commerce-close aria-label="סגירה">×</button>
@@ -206,6 +228,7 @@
         <label>טלפון<input name="phone" type="tel" autocomplete="tel" required></label>
         <label>דוא״ל<input name="email" type="email" autocomplete="email" required></label>
         <label class="full">פרטים חשובים להפקה<textarea name="notes" placeholder="סוג קהל, גילאים, מקום וכל פרט שיעזור להבין את האירוע"></textarea></label>
+        <label class="consent-field"><input name="consent" type="checkbox" required><span>אני מאשר או מאשרת להשתמש בפרטים שמילאתי כדי להכין פנייה לעמית. הפרטים אינם נשמרים באתר, והם יועברו רק אם אבחר לשלוח את הודעת הוואטסאפ.</span></label>
         <p class="commerce-error" id="commerce-error" role="alert"></p>
         <button class="btn btn-gold full" type="submit">יצירת הזמנה</button>
       </form>
@@ -213,12 +236,41 @@
     </div>
   </div>
   <script>
+    const a11yTrigger = document.querySelector("#a11y-trigger");
+    const a11yPanel = document.querySelector("#a11y-panel");
+    const a11yClasses = { contrast: "a11y-contrast", font: "a11y-font", links: "a11y-links", gray: "a11y-gray" };
+    const closeA11y = () => {
+      a11yPanel.classList.remove("open");
+      a11yPanel.setAttribute("inert", "");
+      a11yTrigger.setAttribute("aria-expanded", "false");
+      a11yTrigger.focus();
+    };
+    a11yTrigger.addEventListener("click", () => {
+      a11yPanel.classList.add("open");
+      a11yPanel.removeAttribute("inert");
+      a11yTrigger.setAttribute("aria-expanded", "true");
+      a11yPanel.querySelector("button").focus();
+    });
+    a11yPanel.querySelector("[data-a11y-close]").addEventListener("click", closeA11y);
+    a11yPanel.querySelectorAll("[data-a11y]").forEach(button => button.addEventListener("click", () => {
+      const className = a11yClasses[button.dataset.a11y];
+      const active = !document.body.classList.contains(className);
+      document.body.classList.toggle(className, active);
+      button.setAttribute("aria-pressed", String(active));
+    }));
+    a11yPanel.querySelector("[data-a11y-reset]").addEventListener("click", () => {
+      Object.values(a11yClasses).forEach(className => document.body.classList.remove(className));
+      a11yPanel.querySelectorAll("[data-a11y]").forEach(button => button.setAttribute("aria-pressed", "false"));
+    });
     const commerceModal = document.querySelector("#commerce-modal");
     const commerceForm = document.querySelector("#commerce-form");
     const commerceError = document.querySelector("#commerce-error");
     const orderSuccess = document.querySelector("#order-success");
+    let commerceOpener = null;
     const openCommerce = () => {
+      commerceOpener = document.activeElement;
       commerceModal.classList.add("open");
+      commerceModal.removeAttribute("inert");
       commerceModal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
       commerceModal.querySelector("select, input").focus();
@@ -226,11 +278,26 @@
     const closeCommerce = () => {
       commerceModal.classList.remove("open");
       commerceModal.setAttribute("aria-hidden", "true");
+      commerceModal.setAttribute("inert", "");
       document.body.classList.remove("modal-open");
+      commerceOpener?.focus();
     };
     document.querySelectorAll("[data-commerce-open]").forEach(button => button.addEventListener("click", openCommerce));
     document.querySelectorAll("[data-commerce-close]").forEach(button => button.addEventListener("click", closeCommerce));
-    document.addEventListener("keydown", event => { if (event.key === "Escape") closeCommerce(); });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        if (commerceModal.classList.contains("open")) closeCommerce();
+        else if (a11yPanel.classList.contains("open")) closeA11y();
+      }
+      const activeDialog = commerceModal.classList.contains("open") ? commerceModal : (a11yPanel.classList.contains("open") ? a11yPanel : null);
+      if (event.key === "Tab" && activeDialog) {
+        const focusable = [...activeDialog.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')];
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
     
     commerceForm.addEventListener("submit", event => {
       event.preventDefault();

@@ -1836,7 +1836,11 @@
       }
     });
 
+    const modalOpeners = new WeakMap();
+    document.querySelectorAll(".site-modal").forEach((modal) => modal.setAttribute("inert", ""));
     const openModal = (modal) => {
+      modalOpeners.set(modal, document.activeElement);
+      modal.removeAttribute("inert");
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
@@ -1845,7 +1849,10 @@
     const closeModal = (modal) => {
       modal.classList.remove("open");
       modal.setAttribute("aria-hidden", "true");
+      modal.setAttribute("inert", "");
       document.body.classList.remove("modal-open");
+      const opener = modalOpeners.get(modal);
+      if (opener instanceof HTMLElement && opener.isConnected) opener.focus();
     };
     const videoModal = document.querySelector("#video-modal");
     const videoFrame = document.querySelector("#video-frame");
@@ -1894,6 +1901,17 @@
       openModal(emailPreviewModal);
     });
     emailPreviewModal.querySelectorAll("[data-email-close]").forEach((item) => item.addEventListener("click", () => closeModal(emailPreviewModal)));
+    const requestedModal = new URLSearchParams(location.search).get("modal");
+    const requestedModalMap = {
+      privacy: privacyModal,
+      terms: termsModal,
+      accessibility: accessibilityModal,
+      "accessibility-statement": accessibilityStatementModal
+    };
+    if (requestedModalMap[requestedModal]) {
+      openModal(requestedModalMap[requestedModal]);
+      history.replaceState({}, "", location.pathname + location.hash);
+    }
     const cookieBanner = document.querySelector("#cookie-banner");
     try {
       if (localStorage.getItem("amitPrivacyNotice") === "accepted") cookieBanner.hidden = true;
@@ -1938,8 +1956,24 @@
       applyAccessibilityState();
     }));
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
-      document.querySelectorAll(".site-modal.open").forEach(closeModal);
+      const activeModal = document.querySelector(".site-modal.open");
+      if (!activeModal) return;
+      if (event.key === "Escape") {
+        closeModal(activeModal);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = [...activeModal.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),iframe,[tabindex]:not([tabindex="-1"])')].filter((item) => !item.closest("[hidden]"));
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
 
     const interestSelect = document.querySelector('[name="interest"]');
