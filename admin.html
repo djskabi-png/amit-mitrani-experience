@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>מערכת הניהול | עמית מיטרני</title>
+  <meta name="description" content="מערכת ניהול הפניות והאירועים של עמית מיטרני">
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body>
+  <header class="admin-header">
+    <div class="admin-shell header-row">
+      <a class="brand" href="./">
+        <span class="brand-mark" aria-hidden="true">AM</span>
+        <span><strong>עמית מיטרני</strong><small>מערכת ניהול</small></span>
+      </a>
+      <div class="header-actions">
+        <span id="user-label"></span>
+        <a class="btn btn-quiet" href="./">לאתר</a>
+        <button class="btn btn-danger" id="logout-button" type="button" hidden>יציאה</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="login-screen" id="login-screen">
+      <div class="admin-shell">
+        <div class="login-card">
+          <span class="brand-mark" aria-hidden="true">AM</span>
+          <h1>העסק במקום אחד</h1>
+          <p>פניות מהאתר, סטטוס לקוחות, משימות והערות עבודה. הגישה מוגבלת לחשבון הניהול המאושר.</p>
+          <button class="btn btn-primary" id="login-button" type="button">כניסה מאובטחת עם Google</button>
+          <p class="login-note">הכניסה אינה פתוחה ללקוחות או לגולשים באתר.</p>
+          <p class="login-error" id="login-error" role="alert"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard" id="dashboard" hidden>
+      <div class="admin-shell">
+        <div class="welcome">
+          <div>
+            <h1>מרכז הפניות והאירועים</h1>
+            <p>כל פנייה חדשה מהאתר נכנסת לכאן בזמן אמת.</p>
+          </div>
+          <span class="live-pill"><span class="live-dot"></span>מחובר בזמן אמת</span>
+        </div>
+
+        <div class="stats" aria-label="סיכום פניות">
+          <article class="stat new"><small>פניות חדשות</small><strong id="stat-new">0</strong></article>
+          <article class="stat open"><small>בטיפול ובהצעה</small><strong id="stat-open">0</strong></article>
+          <article class="stat closed"><small>אירועים שנסגרו</small><strong id="stat-booked">0</strong></article>
+          <article class="stat"><small>כל הפניות</small><strong id="stat-total">0</strong></article>
+        </div>
+
+        <div class="workspace">
+          <section class="panel">
+            <div class="panel-head">
+              <h2>פניות</h2>
+              <div class="toolbar">
+                <input class="control search" id="lead-search" type="search" placeholder="חיפוש בשם, טלפון או אירוע" aria-label="חיפוש פניות">
+                <select class="control" id="status-filter" aria-label="סינון לפי סטטוס">
+                  <option value="all">כל הסטטוסים</option>
+                  <option value="new">חדש</option>
+                  <option value="contacted">נוצר קשר</option>
+                  <option value="quoted">נשלחה הצעה</option>
+                  <option value="booked">נסגר</option>
+                  <option value="closed">לא רלוונטי</option>
+                </select>
+                <button class="btn" id="export-button" type="button">יצוא CSV</button>
+                <button class="btn" id="demo-button" type="button">הוספת נתוני הדגמה</button>
+              </div>
+            </div>
+            <div class="lead-list" id="lead-list">
+              <div class="empty">טוען פניות...</div>
+            </div>
+          </section>
+
+          <aside class="side-stack">
+            <section class="panel detail" id="lead-detail">
+              <h3>פרטי הפנייה</h3>
+              <p class="empty">בחרו פנייה כדי לראות את כל הפרטים ולעדכן טיפול.</p>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head"><h2>משימות מהירות</h2></div>
+              <div class="quick-list" id="task-list"><p class="empty">אין משימות פתוחות.</p></div>
+              <form class="quick-form" id="task-form">
+                <input class="control" name="title" required maxlength="120" placeholder="משימה חדשה">
+                <button class="btn btn-primary" type="submit">הוספה</button>
+              </form>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="admin-toast" role="status"></div>
+  <script type="module" src="assets/admin.js?v=2"></script>
+</body>
+</html>
