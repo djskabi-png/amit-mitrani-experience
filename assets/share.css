@@ -1,6 +1,6 @@
 .page-share {
   position: fixed;
-  inset-inline-end: max(18px, env(safe-area-inset-right));
+  right: max(18px, env(safe-area-inset-right));
   bottom: max(92px, calc(env(safe-area-inset-bottom) + 18px));
   z-index: 55;
   display: grid;
@@ -122,7 +122,7 @@
 
 @media (max-width: 680px) {
   .page-share {
-    inset-inline-end: max(12px, env(safe-area-inset-right));
+    right: max(12px, env(safe-area-inset-right));
     bottom: max(84px, calc(env(safe-area-inset-bottom) + 12px));
   }
 

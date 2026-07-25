@@ -53,7 +53,11 @@
     || document.querySelector('meta[name="description"]')?.content
     || "";
   const canonical = document.querySelector('link[rel="canonical"]')?.href;
-  const currentUrl = window.location.hash ? window.location.href : (canonical || window.location.href);
+  const isShortGitHubAddress = window.location.hostname === "djskabi-png.github.io"
+    && window.location.pathname.startsWith("/amit/");
+  const currentUrl = isShortGitHubAddress || window.location.hash
+    ? window.location.href
+    : (canonical || window.location.href);
   const shareText = pageDescription ? `${pageTitle}\n${pageDescription}` : pageTitle;
   const panelId = "page-share-panel";
 
