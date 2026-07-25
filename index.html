@@ -180,11 +180,31 @@
     .invite-controls label:first-child { grid-column: 1 / -1; }
     .invite-controls label.wide { grid-column: 1 / -1; }
     .invite-controls input, .invite-controls select { padding: 11px 12px; }
+    .invite-template-picker { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 22px 0 4px; }
+    .invite-template-option { position: relative; min-height: 104px; overflow: hidden; padding: 13px; border: 1px solid var(--line); border-radius: 15px; color: white; background: #17151f; text-align: right; cursor: pointer; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+    .invite-template-option::before { content: ""; position: absolute; inset: 0; opacity: .8; pointer-events: none; }
+    .invite-template-option > * { position: relative; z-index: 1; display: block; }
+    .invite-template-option b { margin-top: 31px; font-size: 13px; }
+    .invite-template-option small { margin-top: 3px; color: rgba(255,255,255,.72); font-size: 10px; }
+    .invite-template-option[data-template="magic"]::before { background: radial-gradient(circle at 18% 15%,rgba(255,255,255,.24),transparent 24%),linear-gradient(135deg,#2b1762,#8458ec); }
+    .invite-template-option[data-template="celebration"]::before { background: radial-gradient(circle at 78% 12%,#ffe7a6 0 2px,transparent 3px),radial-gradient(circle at 22% 28%,#ffe7a6 0 2px,transparent 3px),linear-gradient(135deg,#711f45,#df7b5d); background-size:auto,auto,auto; }
+    .invite-template-option[data-template="corporate"]::before { background: linear-gradient(120deg,transparent 48%,rgba(90,219,198,.2) 49% 52%,transparent 53%),linear-gradient(135deg,#0c2440,#12636c); }
+    .invite-template-option[data-template="elegant"]::before { background: radial-gradient(circle at 20% 20%,rgba(237,192,105,.22),transparent 22%),linear-gradient(135deg,#171717,#49371f); }
+    .invite-template-option[aria-pressed="true"] { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(237,192,105,.18), 0 14px 35px rgba(0,0,0,.28); transform: translateY(-3px); }
     .invite-ui .screen { position: relative; overflow: hidden; transition: .35s ease; }
     .invite-ui .screen::before { content: "✦"; position: absolute; left: 22px; top: 16px; color: rgba(255,255,255,.28); font-size: 48px; animation: inviteTwinkle 2.4s ease-in-out infinite; }
-    .invite-ui .screen.theme-gold { background: linear-gradient(145deg, #5d3512, #d29b38); }
-    .invite-ui .screen.theme-blue { background: linear-gradient(145deg, #102d59, #356fd3); }
-    .invite-ui .screen.theme-purple { background: linear-gradient(150deg, #2b1762, #8b68ff); }
+    .invite-ui .screen::after { content: ""; position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+    .invite-ui .screen.theme-magic { background: radial-gradient(circle at 8% 18%,rgba(255,255,255,.16),transparent 14rem),linear-gradient(150deg,#2b1762,#8b68ff); }
+    .invite-ui .screen.theme-celebration { background: linear-gradient(145deg,#651a42,#d76c5a); }
+    .invite-ui .screen.theme-celebration::after { opacity: 1; background: radial-gradient(circle at 10% 18%,#ffd985 0 3px,transparent 4px),radial-gradient(circle at 74% 9%,#ffe9ad 0 3px,transparent 4px),radial-gradient(circle at 88% 35%,#ffd985 0 2px,transparent 3px),radial-gradient(circle at 42% 22%,#fff1c5 0 2px,transparent 3px); }
+    .invite-ui .screen.theme-corporate { background: linear-gradient(145deg,#091d34,#12616a); }
+    .invite-ui .screen.theme-corporate::before { content: "AM"; left: 24px; top: 22px; font-size: 28px; font-weight: 900; letter-spacing: -2px; animation: none; }
+    .invite-ui .screen.theme-corporate::after { opacity: 1; background: linear-gradient(120deg,transparent 58%,rgba(96,224,200,.16) 59% 61%,transparent 62%); }
+    .invite-ui .screen.theme-elegant { background: radial-gradient(circle at 12% 18%,rgba(237,192,105,.16),transparent 13rem),linear-gradient(145deg,#121212,#49371f); }
+    .invite-ui .screen.theme-elegant::before { content: "AM"; color: var(--gold); font-size: 24px; font-weight: 900; animation: none; }
+    .invite-ui .screen.theme-corporate .invite-preview-actions a { background: #62dac6; }
+    .invite-ui .screen.theme-celebration .invite-preview-actions a { background: #ffe1a1; }
+    .invite-ui .screen.theme-elegant .invite-preview-actions a { background: var(--gold); }
     .invite-brandline { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .invite-brandline strong { font-size: 13px; }
     .invite-brandline span { padding: 6px 9px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: rgba(255,255,255,.8); font-size: 10px; font-weight: 800; }
@@ -373,7 +393,7 @@
     .trick-action[hidden] { display: none; }
     .effect-status { min-height: 26px; margin-top: 13px; color: var(--gold); font-size: 12px; font-weight: 800; }
     .card-table { position: relative; min-height: 390px; display: grid; place-items: center; perspective: 1000px; isolation: isolate; }
-    .card-deck { position: relative; z-index: 3; width: 100%; display: grid; grid-template-columns: repeat(3, 108px); gap: 15px; justify-content: center; direction: ltr; }
+    .card-deck { position: relative; z-index: 3; width: 100%; display: grid; grid-template-columns: repeat(3, 108px); gap: 15px; justify-content: center; margin-top: 55px; direction: ltr; }
     .playing-card {
       position: relative;
       width: 108px;
@@ -400,6 +420,17 @@
     .card-deck.is-shuffling .playing-card:nth-child(4) { animation-delay: .15s; }
     .card-deck.is-shuffling .playing-card:nth-child(5) { animation-delay: .2s; }
     .card-deck.is-shuffling .playing-card:nth-child(6) { animation-delay: .25s; }
+    .card-deck.mind-locked .playing-card {
+      color: transparent;
+      border-color: rgba(139,104,255,.45);
+      background:
+        radial-gradient(circle at 50% 50%,rgba(237,192,105,.2),transparent 25%),
+        repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 4px,transparent 4px 9px),
+        linear-gradient(145deg,#241547,#0e0b19);
+      box-shadow: inset 0 0 0 5px rgba(255,255,255,.035), 0 18px 36px rgba(0,0,0,.42);
+    }
+    .card-deck.mind-locked .playing-card > * { opacity: 0; }
+    .card-deck.mind-locked .playing-card::before { content: "AM"; position:absolute; inset:0; display:grid; place-items:center; color:rgba(237,192,105,.82); font-size:20px; font-weight:900; letter-spacing:-1px; }
     .playing-card.vanished {
       opacity: 1;
       color: transparent;
@@ -472,6 +503,35 @@
     .vanish-mark span { display: block; line-height: 1; }
     .vanish-mark small { display: none; }
     .vanish-mark.show { z-index: 6; animation: portalReveal 1.1s ease both; }
+    .sealed-prediction {
+      position: absolute;
+      z-index: 8;
+      left: 2px;
+      top: 4px;
+      width: 118px;
+      display: grid;
+      justify-items: center;
+      gap: 7px;
+      color: rgba(255,255,255,.72);
+      text-align: center;
+      pointer-events: none;
+      transition: transform .35s ease, filter .35s ease;
+    }
+    .sealed-prediction > small { font-size: 9px; font-weight: 800; }
+    .sealed-prediction > strong { color: var(--gold); font-size: 10px; }
+    .sealed-card { position: relative; width: 76px; aspect-ratio: .7; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+    .sealed-card-back, .sealed-card-face { position: absolute; inset: 0; display: grid; place-items: center; border: 1px solid rgba(237,192,105,.55); border-radius: 11px; backface-visibility: hidden; box-shadow: 0 14px 30px rgba(0,0,0,.45); }
+    .sealed-card-back { color: var(--gold); background: radial-gradient(circle at 50% 50%,rgba(237,192,105,.22),transparent 24%),repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 4px,transparent 4px 9px),linear-gradient(145deg,#281950,#0d0a16); }
+    .sealed-card-back span { font-size: 17px; font-weight: 900; }
+    .sealed-card-back i { position: absolute; right: 8px; bottom: 6px; font-style: normal; }
+    .sealed-card-face { grid-template-rows: auto 1fr; padding: 9px; color: #19131d; background: linear-gradient(145deg,#fffdf7,#e9e3d6); transform: rotateY(180deg); }
+    .sealed-card-face b { justify-self: start; font-size: 22px; line-height: 1; }
+    .sealed-card-face span { font-size: 33px; }
+    .sealed-card-face.red { color: #b02133; }
+    .sealed-prediction.sensing { transform: translateY(-5px) scale(1.04); filter: drop-shadow(0 0 18px rgba(139,104,255,.6)); animation: sealedSense .7s ease-in-out infinite alternate; }
+    .sealed-prediction.revealed .sealed-card { transform: rotateY(180deg); }
+    .sealed-prediction.revealed { transform: scale(1.11); filter: drop-shadow(0 0 24px rgba(237,192,105,.55)); }
+    .card-table.performing::after { content: ""; position: absolute; z-index: 7; inset: 0; background: radial-gradient(circle at 50% 45%,rgba(255,255,255,.92),rgba(237,192,105,.45) 12%,rgba(139,104,255,.18) 30%,transparent 62%); opacity: 0; pointer-events: none; animation: impossibleFlash 1.5s ease both; }
     .number-stage { min-height: 390px; display: grid; align-content: center; justify-items: center; text-align: center; }
     .number-orb {
       position: relative;
@@ -574,6 +634,8 @@
     @keyframes cardShuffle { 0% { transform: none; } 32% { transform: translateX(var(--shuffle-x, 0)) translateY(-52px) rotate(var(--shuffle-r, 0)) scale(1.03); } 65% { transform: translateX(calc(var(--shuffle-x, 0) * -.45)) translateY(22px) rotate(calc(var(--shuffle-r, 0) * -1.6)) scale(.88); filter: brightness(1.35); } 100% { transform: none; } }
     @keyframes portalReveal { 0% { opacity: 0; transform: scale(.4) rotate(-20deg); } 45% { opacity: 1; transform: scale(1.16) rotate(8deg); } 100% { opacity: .9; transform: scale(1) rotate(0); } }
     @keyframes selectedCardPulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.2); } }
+    @keyframes sealedSense { from { transform: translateY(-3px) rotate(-1deg); } to { transform: translateY(3px) rotate(1deg); } }
+    @keyframes impossibleFlash { 0%, 42% { opacity: 0; transform: scale(.6); } 55% { opacity: 1; transform: scale(1.08); } 70%, 100% { opacity: 0; transform: scale(1.35); } }
     @keyframes emptyCardReveal { 0% { opacity: 0; transform: scale(.2) rotate(90deg); filter: blur(10px); } 65% { opacity: 1; transform: scale(1.08) rotate(-4deg); filter: blur(0); } 100% { transform: scale(1) rotate(0); } }
     @keyframes portalIdle { to { transform: rotate(360deg); } }
     @keyframes portalReverse { to { transform: rotate(-360deg); } }
@@ -589,6 +651,7 @@
     .tool-card h3 { margin: 32px 0 8px; font-size: 20px; }
     .tool-card p { color: var(--muted); line-height: 1.6; font-size: 13px; }
     .tool-card span { color: var(--gold); font-weight: 800; font-size: 12px; }
+    .tool-link { display:inline-flex; margin-top:16px; color:var(--gold); font-size:12px; font-weight:900; text-decoration:underline; text-underline-offset:4px; }
     .calculator-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
     .calculator { padding: 27px; border: 1px solid var(--line); border-radius: 24px; background: var(--panel); }
     .pizza-copy { display: grid; align-content: center; }
@@ -608,6 +671,26 @@
     .parents-toggle button.active { color: #16111d; background: var(--gold); border-color: var(--gold); font-weight: 900; }
     .pizza-result { padding: 19px; border-radius: 16px; background: rgba(101,212,169,.1); color: #c6f4e2; text-align: center; }
     .pizza-result strong { display: block; color: var(--white); font-size: 33px; }
+    .planner-selects { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
+    .planner-selects label { margin:0; }
+    .planner-selects select { width:100%; padding:11px 12px; }
+    .planner-checks { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 18px; }
+    .planner-check { min-height:48px; padding:9px; border:1px solid var(--line); border-radius:11px; color:#d9d5df; background:rgba(255,255,255,.04); cursor:pointer; font:inherit; font-size:12px; font-weight:800; }
+    .planner-check[aria-pressed="true"] { color:#151019; border-color:var(--gold); background:var(--gold); }
+    .planner-summary { display:grid; gap:10px; margin-top:12px; }
+    .planner-summary-row { display:flex; justify-content:space-between; gap:16px; padding:10px 12px; border:1px solid rgba(255,255,255,.08); border-radius:10px; background:rgba(255,255,255,.025); font-size:12px; }
+    .planner-summary-row b { color:white; }
+    .planner-warning { margin:0; padding:11px 12px; border-radius:10px; color:#ffe6a9; background:rgba(237,192,105,.09); font-size:11px; line-height:1.6; }
+    .planner-advice { grid-column:1 / -1; display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px; }
+    .planner-advice-card { padding:20px; border:1px solid var(--line); border-radius:18px; background:linear-gradient(145deg,#171622,#101016); }
+    .planner-advice-card h3 { margin:0 0 12px; font-size:19px; }
+    .planner-advice-card ul { display:grid; gap:8px; margin:0; padding:0 18px 0 0; color:#c7c3cf; font-size:13px; line-height:1.55; }
+    .venue-list { display:grid; gap:9px; }
+    .venue-option { display:grid; gap:4px; padding:11px; border:1px solid rgba(255,255,255,.1); border-radius:11px; background:rgba(255,255,255,.03); }
+    .venue-option b { color:white; }
+    .venue-option span { color:var(--muted); font-size:11px; line-height:1.5; }
+    .venue-option a { color:var(--gold); font-size:11px; font-weight:800; text-decoration:underline; text-underline-offset:3px; }
+    .planner-source-note { margin:11px 0 0; color:var(--muted); font-size:10px; line-height:1.5; }
     .business-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .business-card { min-height: 230px; padding: 25px; border: 1px solid var(--line); border-radius: 23px; background: linear-gradient(145deg, #171622, #101016); }
     .business-card b { color: var(--gold); font-size: 13px; }
@@ -704,6 +787,7 @@
       .mini-video { min-height: 150px; padding: 16px; }
       .mini-video b { font-size: 16px; }
       .invite-controls { grid-template-columns: 1fr; }
+      .invite-template-picker { grid-template-columns: 1fr 1fr; }
       .invite-controls label:first-child { grid-column: auto; }
       .invite-controls label.wide { grid-column: auto; }
       .invite-ui .screen { min-height: 500px; padding: 18px; }
@@ -712,6 +796,7 @@
       .invite-art { top: 38px; width: 50%; height: 210px; }
       .invite-detail-grid { grid-template-columns: 1fr; }
       .pizza-visual { min-height: 230px; }
+      .planner-selects, .planner-checks, .planner-advice { grid-template-columns:1fr; }
       .grid-4 { grid-template-columns: 1fr 1fr; }
       .service-card { min-height: 220px; padding: 18px; }
       .number { margin-bottom: 25px; }
@@ -1103,6 +1188,14 @@
               <div class="mystic-portal" aria-hidden="true"></div>
               <div class="magic-beam" aria-hidden="true"></div>
               <div class="magic-smoke" aria-hidden="true"><i style="--smoke-x:-115px;--smoke-y:-75px"></i><i style="--smoke-x:105px;--smoke-y:-95px"></i><i style="--smoke-x:35px;--smoke-y:110px"></i></div>
+              <div class="sealed-prediction" id="sealed-prediction" aria-live="polite">
+                <small>נחתם לפני הבחירה</small>
+                <div class="sealed-card">
+                  <div class="sealed-card-back"><span>AM</span><i>✦</i></div>
+                  <div class="sealed-card-face" id="sealed-card-face"><b id="sealed-card-value">?</b><span id="sealed-card-suit">✦</span></div>
+                </div>
+                <strong id="sealed-caption">התחזית נעולה</strong>
+              </div>
               <div class="card-deck" id="card-deck" aria-label="בחרו קלף">
                 <button class="playing-card red" type="button" data-card="Q♥" aria-label="מלכה לב"><span class="corner">Q<br>♥</span><span class="suit">♥</span><span class="corner bottom">Q<br>♥</span></button>
                 <button class="playing-card" type="button" data-card="7♠" aria-label="שבע עלה"><span class="corner">7<br>♠</span><span class="suit">♠</span><span class="corner bottom">7<br>♠</span></button>
@@ -1185,12 +1278,18 @@
     <section class="section" id="invitation">
       <div class="shell invite-box">
         <div>
-          <div class="kicker">שירות משלים לאירועים</div><h2 class="section-title">הזמנה דיגיטלית ואישורי הגעה</h2><p class="section-copy">בנו כאן הזמנה לדוגמה, החליפו עיצוב, אשרו הגעה ושלחו אותה בוואטסאפ. כל הכפתורים בהמחשה פעילים.</p>
+          <div class="kicker">שירות משלים לאירועים</div><h2 class="section-title">הזמנה דיגיטלית שמתאימה לאירוע</h2><p class="section-copy">בחרו עולם עיצוב, עדכנו את הפרטים וראו איך אותה מערכת הופכת להזמנה קסומה, חגיגית, עסקית או אלגנטית.</p>
+          <div class="invite-template-picker" aria-label="בחירת סגנון להזמנה">
+            <button class="invite-template-option" type="button" data-template="magic" aria-pressed="true"><b>קסומה לילדים</b><small>סגול, שובב ומלא הפתעה</small></button>
+            <button class="invite-template-option" type="button" data-template="celebration" aria-pressed="false"><b>חגיגית למשפחה</b><small>חמה, צבעונית ומרגשת</small></button>
+            <button class="invite-template-option" type="button" data-template="corporate" aria-pressed="false"><b>חברה ועסק</b><small>מדויקת, נקייה ומקצועית</small></button>
+            <button class="invite-template-option" type="button" data-template="elegant" aria-pressed="false"><b>ערב אלגנטי</b><small>כהה, יוקרתי ומעודן</small></button>
+          </div>
           <div class="invite-controls">
-            <label>שם החוגג או החוגגת<input id="invite-name" value="נועה" maxlength="24"></label>
+            <label>שם החוגג, המשפחה או האירוע<input id="invite-name" value="נועה" maxlength="32"></label>
             <label>תאריך<input id="invite-date" type="date"></label>
             <label>שעה<input id="invite-time" type="time" value="17:00"></label>
-            <label>עיצוב<select id="invite-theme"><option value="purple">סגול קסום</option><option value="gold">זהב חגיגי</option><option value="blue">כחול מסתורי</option></select></label>
+            <label>ערכת עיצוב<select id="invite-theme"><option value="magic">קסומה לילדים</option><option value="celebration">חגיגית למשפחה</option><option value="corporate">חברה ועסק</option><option value="elegant">ערב אלגנטי</option></select></label>
             <label class="wide">מיקום<input id="invite-location" value="המיקום יישלח למוזמנים" maxlength="42"></label>
           </div>
           <div class="invite-features">
@@ -1201,11 +1300,11 @@
           </div>
         </div>
         <div class="invite-ui">
-          <div class="screen theme-purple" id="invite-screen">
-            <div class="invite-brandline"><strong>עמית מיטרני</strong><span>הזמנה קסומה</span></div>
+          <div class="screen theme-magic" id="invite-screen">
+            <div class="invite-brandline"><strong>עמית מיטרני</strong><span id="invite-style-label">הזמנה קסומה</span></div>
             <div class="invite-main">
-              <div class="invite-main-copy"><small>אתם מוזמנים לחוויה בלתי נשכחת</small><b id="invite-title">יום ההולדת הקסום של נועה</b></div>
-              <div class="invite-art"><img src="assets/optimized/amit-time-machine-700.webp" alt="" loading="lazy"></div>
+              <div class="invite-main-copy"><small id="invite-eyebrow">אתם מוזמנים לחוויה בלתי נשכחת</small><b id="invite-title">יום ההולדת הקסום של נועה</b></div>
+              <div class="invite-art"><img id="invite-art-img" src="assets/optimized/amit-time-machine-700.webp" alt="" loading="lazy"></div>
             </div>
             <div class="invite-detail-grid">
               <span><small>תאריך</small><strong id="invite-date-copy">התאריך יישלח למוזמנים</strong></span>
@@ -1228,18 +1327,33 @@
     <section class="section" id="pizza-calculator">
       <div class="shell calculator-wrap">
         <div class="pizza-copy">
-          <div class="kicker">כלי קטן שמוריד כאב ראש גדול</div>
-          <h2 class="section-title">כמה מגשי פיצה באמת צריך?</h2>
-          <p class="section-copy">מחשבון מהיר להורים לפי מספר הילדים והאם גם המבוגרים אוכלים. כלי שימושי שמחזיר הורים לאתר גם אחרי שסגרו את האירוע.</p>
+          <div class="kicker">מתכנן אירוע חכם</div>
+          <h2 class="section-title">כמה אוכל צריך ומה עוד כדאי לסגור?</h2>
+          <p class="section-copy">בחרו סוג אירוע, מספר אורחים והעדפות אוכל. תקבלו חלוקה למגשים, תוספות שכדאי להכין וכיוונים למקומות שאפשר לבדוק בעיר.</p>
           <div class="pizza-visual" id="pizza-visual"><img src="assets/optimized/pizza-party-900.webp" alt="פיצה חגיגית ליום הולדת" loading="lazy"><div class="pizza-visual-badge"><div><strong id="pizza-visual-count">6</strong><span>מגשים מומלצים</span></div></div></div>
         </div>
         <div class="calculator">
-          <label for="kids-range">כמה ילדים מגיעים?</label>
+          <div class="planner-selects">
+            <label>סוג האירוע<select id="planner-event-type"><option value="birthday">יום הולדת לילדים</option><option value="family">אירוע משפחתי</option><option value="corporate">אירוע חברה</option></select></label>
+            <label>עיר<select id="planner-city"><option value="telaviv">תל אביב יפו</option><option value="herzliya">הרצליה</option><option value="other">עיר אחרת</option></select></label>
+          </div>
+          <label for="kids-range" id="guest-count-label">כמה ילדים מגיעים?</label>
           <input id="kids-range" type="range" min="5" max="60" value="20">
           <div class="range-line"><span>5</span><strong id="kids-count">20 ילדים</strong><span>60</span></div>
-          <label>האם גם ההורים אוכלים?</label>
-          <div class="parents-toggle"><button type="button" data-parents="no" class="active">לא</button><button type="button" data-parents="yes">כן</button></div>
-          <div class="pizza-result">ההמלצה הראשונית היא<strong id="pizza-count">5 מגשים</strong><small>החישוב הוא הערכה בלבד ותלוי בגודל המגש ובתיאבון האורחים.</small></div>
+          <div id="parents-question"><label id="parents-label">האם גם ההורים אוכלים?</label>
+          <div class="parents-toggle"><button type="button" data-parents="no" class="active">לא</button><button type="button" data-parents="yes">כן</button></div></div>
+          <label>התאמות מזון</label>
+          <div class="planner-checks">
+            <button class="planner-check" type="button" data-food="gluten" aria-pressed="false">ללא גלוטן</button>
+            <button class="planner-check" type="button" data-food="vegan" aria-pressed="false">טבעוני</button>
+            <button class="planner-check" type="button" data-food="nuts" aria-pressed="false">ללא אגוזים</button>
+          </div>
+          <div class="pizza-result">ההמלצה הראשונית היא<strong id="pizza-count">5 מגשים</strong><small>החישוב הוא הערכה בלבד ותלוי בגודל המגש, בתפריט ובתיאבון האורחים.</small></div>
+          <div class="planner-summary" id="planner-summary"></div>
+        </div>
+        <div class="planner-advice">
+          <article class="planner-advice-card"><h3>מה כדאי להוסיף לשולחן</h3><ul id="planner-additions"></ul></article>
+          <article class="planner-advice-card"><h3>מקומות שכדאי לבדוק בעיר</h3><div class="venue-list" id="venue-list"></div><p class="planner-source-note">ההצעות מבוססות על מקורות עירוניים. זמינות, התאמה ומחיר חייבים לוודא ישירות מול המקום לפני שסוגרים.</p></article>
         </div>
       </div>
     </section>
@@ -1248,9 +1362,9 @@
       <div class="shell">
         <div class="section-head"><div class="kicker">מוצרים וכלים דיגיטליים</div><h2 class="section-title">הקסם ממשיך גם אחרי המופע</h2><p class="section-copy">ערכות לימוד, כלים מקצועיים ומועדון תוכן נבנים כמוצרים משלימים. בשלב זה אפשר להירשם לקבלת עדכון ולספר מה תרצו ללמוד.</p></div>
         <div class="tool-grid">
-          <article class="tool-card"><i>01</i><h3>ערכות קסמים דיגיטליות</h3><p>חבילות וידאו ותרגול לפי גיל, רמה וסיטואציה, עם גישה מיידית לאחר רכישה.</p><span>מוצר דיגיטלי</span></article>
-          <article class="tool-card"><i>02</i><h3>כלים לקוסמים ומפעילים</h3><p>תבניות עבודה, חומרי שיווק, מערכי מופע וכלים לניהול עסק מקצועי.</p><span>ספריית מקצוענים</span></article>
-          <article class="tool-card"><i>03</i><h3>מועדון הקסם</h3><p>תוכן חדש, מפגשי אונליין, אתגרים והטבות למי שרוצה להמשיך ללמוד ולהתאמן.</p><span>מנוי מתחדש, לבחינה</span></article>
+          <article class="tool-card"><i>01</i><h3>ערכות קסמים דיגיטליות</h3><p>חבילות וידאו ותרגול לפי גיל, רמה וסיטואציה. התוכן, המחיר והגישה ייפתחו לאחר אישור עמית וחיבור המערכת.</p><span>מוצר דיגיטלי בתכנון</span><a class="tool-link" href="magic-courses.html">לצפייה במסלולים</a></article>
+          <article class="tool-card"><i>02</i><h3>כלים לקוסמים ומפעילים</h3><p>תבניות עבודה, חומרי שיווק, מערכי מופע וכלים לניהול עסק מקצועי.</p><span>ספריית מקצוענים בתכנון</span><a class="tool-link" href="business-magic.html">לעולם המקצועי</a></article>
+          <article class="tool-card"><i>03</i><h3>מועדון הקסם</h3><p>מסלול תוכן מתוכנן עם אתגרים, מפגשים והטבות למי שרוצה להמשיך ללמוד ולהתאמן.</p><span>מנוי עתידי, לבחינה</span><a class="tool-link" href="https://wa.me/972523416151?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%9E%D7%99%D7%AA%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%9B%D7%A9%D7%9E%D7%95%D7%A2%D7%93%D7%95%D7%9F%20%D7%94%D7%A7%D7%A1%D7%9D%20%D7%99%D7%99%D7%A4%D7%AA%D7%97." target="_blank" rel="noopener">בקשת עדכון בוואטסאפ</a></article>
         </div>
       </div>
     </section>
@@ -1320,8 +1434,9 @@
             <div class="story-step"><strong>10</strong><div><b>ימי הולדת ראשונים</b><span>הוא הופיע לילדי הלקוחות של אמו והפך את התחביב לעשייה עקבית.</span></div></div>
             <div class="story-step"><strong>13</strong><div><b>הבמה המקצועית</b><span>בגיל צעיר החל להופיע באופן מקצועי ולבנות את הדרך שלו כאמן.</span></div></div>
             <div class="story-step"><strong>צה"ל</strong><div><b>קסם גם בשירות</b><span>במהלך השירות פעל כקוסם צבאי והתנדב להופיע בפני חיילים.</span></div></div>
+            <div class="story-step"><strong>לב</strong><div><b>להגשים חלום באמצעות קסם</b><span>עמית סיפר כיצד הצטרף לחזי דין כדי לשמח את אורי בבית החולים ולהגשים לו חלום של ריחוף ביום הולדתו.</span></div></div>
           </div>
-          <p class="story-source">הציר מבוסס על דברים שסיפר עמית בריאיון שפורסם ב<a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">צומת השרון</a>.</p>
+          <p class="story-source">הציר מבוסס על דברים שסיפר עמית בריאיון שפורסם ב<a href="https://www.tzomet-kfs.co.il/around_town/shows/14993" target="_blank" rel="noopener">צומת השרון</a> ועל <a href="https://www.facebook.com/reel/569930207127340/" target="_blank" rel="noopener">סיפור שפרסם בעמוד הפייסבוק שלו</a>.</p>
         </div>
       </div>
     </section>
@@ -1370,7 +1485,7 @@
     </section>
   </main>
 
-  <footer><div class="shell footer-row"><div><strong>עמית מיטרני</strong><br>קוסם ואמן חושים</div><div class="footer-links"><button type="button" data-privacy-open>פרטיות</button><button type="button" data-terms-open>תקנון האתר</button><button type="button" data-accessibility-statement>הצהרת נגישות</button><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">חברות וארגונים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="magic-courses.html">קורסים</a><a href="business-magic.html">תוכן לעסקים</a><a href="#faq">שאלות</a><a href="#contact">יצירת קשר</a></div></div></footer>
+  <footer><div class="shell footer-row"><div><strong>עמית מיטרני</strong><br>קוסם ואמן חושים</div><div class="footer-links"><button type="button" data-privacy-open>פרטיות</button><button type="button" data-terms-open>תקנון האתר</button><button type="button" data-accessibility-statement>הצהרת נגישות</button><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">חברות וארגונים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="magic-courses.html">קורסים</a><a href="business-magic.html">תוכן לעסקים</a><a href="https://www.instagram.com/amitmiterani_magic/" target="_blank" rel="noopener">אינסטגרם</a><a href="https://www.facebook.com/amitgic/" target="_blank" rel="noopener">פייסבוק</a><a href="#faq">שאלות</a><a href="#contact">יצירת קשר</a></div></div></footer>
   <div class="floating-tools"><a class="floating-tool whatsapp" href="https://wa.me/message/VM3WK3GE2KNYL1" target="_blank" rel="noopener">וואטסאפ</a><button class="floating-tool" id="accessibility" type="button">נגישות</button></div>
   <div class="mobile-sticky"><a href="#contact">בדיקת התאמה</a><a href="https://wa.me/message/VM3WK3GE2KNYL1" target="_blank" rel="noopener">וואטסאפ</a></div>
   <div class="toast" id="toast" role="status"></div>
@@ -1500,6 +1615,11 @@
     const cardStatus = document.querySelector("#card-status");
     const vanishMark = document.querySelector("#vanish-mark");
     const cardTable = document.querySelector("#card-table");
+    const sealedPrediction = document.querySelector("#sealed-prediction");
+    const sealedCardFace = document.querySelector("#sealed-card-face");
+    const sealedCardValue = document.querySelector("#sealed-card-value");
+    const sealedCardSuit = document.querySelector("#sealed-card-suit");
+    const sealedCaption = document.querySelector("#sealed-caption");
     let selectedCard;
     let cardVanished = false;
     cards.forEach((card, index) => {
@@ -1521,9 +1641,14 @@
       cardVanished = false;
       selectedCard = undefined;
       cards.forEach((card) => card.classList.remove("selected", "vanished"));
-      cardDeck.classList.remove("is-shuffling");
+      cardDeck.classList.remove("is-shuffling", "mind-locked");
       cardTable.classList.remove("charged", "performing");
       vanishMark.classList.remove("show");
+      sealedPrediction.classList.remove("sensing", "revealed");
+      sealedCardFace.classList.remove("red");
+      sealedCardValue.textContent = "?";
+      sealedCardSuit.textContent = "✦";
+      sealedCaption.textContent = "התחזית נעולה";
       cardAction.hidden = true;
       cardAction.disabled = false;
       cardAction.textContent = "עמית, תעלים אותו";
@@ -1537,18 +1662,30 @@
       }
       if (!selectedCard) return;
       cardAction.disabled = true;
-      cardInstruction.textContent = "השאירו את העיניים על הקלף. הקלפים מתערבבים והמחשבה שלכם נשארת במקום.";
-      cardStatus.textContent = "3... 2... 1...";
+      cardInstruction.textContent = "זכרו את הקלף. עכשיו כל הקלפים נסגרים, ואף אחד לא יכול לדעת איפה הוא.";
+      cardStatus.textContent = "אל תורידו את העיניים מהתחזית הסגורה...";
+      cardDeck.classList.add("mind-locked");
       cardDeck.classList.add("is-shuffling");
       cardTable.classList.add("performing");
+      sealedPrediction.classList.add("sensing");
       playMagicTone(170, .55);
       window.setTimeout(() => {
+        const chosen = selectedCard.dataset.card;
+        const suit = chosen.slice(-1);
+        const value = chosen.slice(0, -1);
+        sealedCardValue.textContent = value;
+        sealedCardSuit.textContent = suit;
+        sealedCardFace.classList.toggle("red", selectedCard.classList.contains("red"));
+        cardDeck.classList.remove("mind-locked");
         selectedCard.classList.add("vanished");
         selectedCard.classList.remove("selected");
         vanishMark.classList.add("show");
+        sealedPrediction.classList.remove("sensing");
+        sealedPrediction.classList.add("revealed");
+        sealedCaption.textContent = "הקלף היה כאן כל הזמן";
         cardVanished = true;
-        cardInstruction.textContent = "בדקו את השולחן. הקלף שבחרתם נעלם, ורק הוא.";
-        cardStatus.textContent = "המחשבה שלכם נשארה. הקלף איננו.";
+        cardInstruction.textContent = "בדקו את השולחן, ואז את הקלף שהיה חתום בצד עוד לפני שבחרתם.";
+        cardStatus.textContent = "הקלף נעלם מהחבילה והופיע בתוך התחזית.";
         cardAction.textContent = "להחזיר את הקלף ולנסות שוב";
         cardAction.disabled = false;
         burstMagic(34);
@@ -1679,14 +1816,85 @@
     const pizzaCount = document.querySelector("#pizza-count");
     const pizzaVisualCount = document.querySelector("#pizza-visual-count");
     const pizzaVisual = document.querySelector("#pizza-visual");
+    const plannerEventType = document.querySelector("#planner-event-type");
+    const plannerCity = document.querySelector("#planner-city");
+    const guestCountLabel = document.querySelector("#guest-count-label");
+    const parentsQuestion = document.querySelector("#parents-question");
+    const plannerSummary = document.querySelector("#planner-summary");
+    const plannerAdditions = document.querySelector("#planner-additions");
+    const venueList = document.querySelector("#venue-list");
+    const foodPreferences = { gluten: false, vegan: false, nuts: false };
     let parentsEat = false;
+    const venueOptions = {
+      telaviv: [
+        {
+          name: "מרכז הקיימות העירוני",
+          copy: "חללים בגדלים שונים ומחירון עירוני גלוי, כולל מסלולים לימי הולדת. כדאי לבדוק את האולם הגדול ואת תנאי ההשכרה המעודכנים.",
+          href: "https://www.tel-aviv.gov.il/Residents/Environment/Pages/MuniSustainabilityCenter.aspx?IccID=267"
+        },
+        {
+          name: "מרכז קהילתי בית דני",
+          copy: "מרכז עירוני שמפרסם אפשרות להשכרת חללים. מתאים ככיוון לבדיקה לאירוע קהילתי או משפחתי.",
+          href: "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/BeitDani.aspx"
+        }
+      ],
+      herzliya: [
+        {
+          name: "מרכז אגדה",
+          copy: "מרחב עירוני שמוצע במפורש לימי הולדת, עם ציוד לילדים, מטבח, קישוטים ואיש צוות מלווה.",
+          href: "https://www.herzliya.muni.il/ימי-הולדת-באגדה/"
+        }
+      ],
+      other: [
+        {
+          name: "מרכז קהילתי או אולם עירוני",
+          copy: "מומלץ להתחיל בחלל עירוני קרוב לבית ולבדוק מטבח, חניה, נגישות, רעש ושעת סיום לפני שסוגרים.",
+          href: "https://www.google.com/maps/search/מרכז+קהילתי+להשכרה+יום+הולדת"
+        }
+      ]
+    };
+    const renderVenues = () => {
+      venueList.innerHTML = (venueOptions[plannerCity.value] || venueOptions.other).map((venue) => `
+        <div class="venue-option"><b>${venue.name}</b><span>${venue.copy}</span><a href="${venue.href}" target="_blank" rel="noopener">בדיקת פרטים במקור</a></div>
+      `).join("");
+    };
     const updatePizza = () => {
-      const kids = Number(kidsRange.value);
-      const eaters = kids + (parentsEat ? Math.ceil(kids * .55) : 0);
-      const pizzas = Math.max(2, Math.ceil(eaters * 2.2 / 8));
-      kidsCount.textContent = kids + " ילדים";
+      const guests = Number(kidsRange.value);
+      const eventType = plannerEventType.value;
+      let slices;
+      if (eventType === "birthday") {
+        const estimatedParents = parentsEat ? Math.ceil(guests * .55) : 0;
+        slices = guests * 2.2 + estimatedParents * 2.5;
+      } else if (eventType === "family") {
+        slices = guests * 2.35;
+      } else {
+        slices = guests * 2.5;
+      }
+      const pizzas = Math.max(2, Math.ceil(slices / 8));
+      const glutenTrays = foodPreferences.gluten ? 1 : 0;
+      const veganTrays = foodPreferences.vegan ? 1 : 0;
+      const regularTrays = Math.max(0, pizzas - glutenTrays - veganTrays);
+      const guestWord = eventType === "birthday" ? " ילדים" : " משתתפים";
+      kidsCount.textContent = guests + guestWord;
       pizzaCount.textContent = pizzas + " מגשים";
       pizzaVisualCount.textContent = pizzas;
+      const rows = [
+        `<div class="planner-summary-row"><span>מגשים רגילים</span><b>${regularTrays}</b></div>`,
+        foodPreferences.gluten ? `<div class="planner-summary-row"><span>מגש ללא גלוטן</span><b>1, מסומן ונפרד</b></div>` : "",
+        foodPreferences.vegan ? `<div class="planner-summary-row"><span>מגש טבעוני</span><b>1</b></div>` : "",
+        foodPreferences.nuts ? `<div class="planner-summary-row"><span>ללא אגוזים</span><b>לסמן מול כל הספקים</b></div>` : ""
+      ].filter(Boolean);
+      if (foodPreferences.gluten) {
+        rows.push(`<p class="planner-warning">אם מדובר בצליאק, לא מספיק להזמין בצק ללא גלוטן. צריך לוודא מול הספק הכנה נפרדת ומניעת זיהום משני.</p>`);
+      }
+      plannerSummary.innerHTML = rows.join("");
+      const additions = eventType === "birthday"
+        ? ["מים אישיים או עמדת מים נגישה", "ירקות חתוכים ופירות", "עוגה, נרות, סכין ומצת", "צלחות, מפיות ושקיות אשפה"]
+        : eventType === "family"
+          ? ["שתי קערות סלט גדולות", "ירקות, פירות ושתייה קלה", "קפה ותה למבוגרים", "כלים נפרדים למנות מיוחדות"]
+          : ["עמדת מים, קפה ותה", "שתי אפשרויות נשנוש שקל לאכול בעמידה", "סימון ברור לטבעוני וללא גלוטן", "מפיות, כוסות ופינת פינוי מסודרת"];
+      if (eventType === "birthday" && parentsEat) additions.push("להורים: שתי קערות סלט, קפה, מים ושתייה ללא סוכר");
+      plannerAdditions.innerHTML = additions.map((item) => `<li>${item}</li>`).join("");
       pizzaVisual.classList.remove("pop");
       void pizzaVisual.offsetWidth;
       pizzaVisual.classList.add("pop");
@@ -1700,6 +1908,22 @@
         updatePizza();
       });
     });
+    document.querySelectorAll("[data-food]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const key = button.dataset.food;
+        foodPreferences[key] = !foodPreferences[key];
+        button.setAttribute("aria-pressed", String(foodPreferences[key]));
+        updatePizza();
+      });
+    });
+    plannerEventType.addEventListener("change", () => {
+      const isBirthday = plannerEventType.value === "birthday";
+      guestCountLabel.textContent = isBirthday ? "כמה ילדים מגיעים?" : "כמה משתתפים מגיעים?";
+      parentsQuestion.hidden = !isBirthday;
+      updatePizza();
+    });
+    plannerCity.addEventListener("change", renderVenues);
+    renderVenues();
     updatePizza();
 
     const inviteName = document.querySelector("#invite-name");
@@ -1709,6 +1933,9 @@
     const inviteLocation = document.querySelector("#invite-location");
     const inviteScreen = document.querySelector("#invite-screen");
     const inviteTitle = document.querySelector("#invite-title");
+    const inviteStyleLabel = document.querySelector("#invite-style-label");
+    const inviteEyebrow = document.querySelector("#invite-eyebrow");
+    const inviteArtImg = document.querySelector("#invite-art-img");
     const inviteDetails = document.querySelector("#invite-details");
     const inviteDateCopy = document.querySelector("#invite-date-copy");
     const inviteTimeCopy = document.querySelector("#invite-time-copy");
@@ -1717,6 +1944,40 @@
     const inviteRsvp = document.querySelector("#invite-rsvp");
     const rsvpCopy = document.querySelector("#rsvp-copy");
     const rsvpCount = document.querySelector("#rsvp-count");
+    const inviteTemplates = {
+      magic: {
+        label: "הזמנה קסומה",
+        eyebrow: "אתם מוזמנים לחוויה בלתי נשכחת",
+        title: (name) => "יום ההולדת הקסום של " + name,
+        details: "הזמנה שובבה עם אישורי הגעה ושיתוף מהיר",
+        art: "assets/optimized/amit-time-machine-700.webp",
+        share: (name) => "הזמנה קסומה ליום ההולדת של " + name
+      },
+      celebration: {
+        label: "חגיגה משפחתית",
+        eyebrow: "משפחה, חברים ורגע אחד שזוכרים",
+        title: (name) => "חוגגים באהבה עם " + name,
+        details: "עיצוב חם למשפחה, חברים ואירועים פרטיים",
+        art: "assets/optimized/amit-golden-800.webp",
+        share: (name) => "מצטרפים לחגיגה של " + name
+      },
+      corporate: {
+        label: "אירוע חברה",
+        eyebrow: "ערב שמחבר אנשים ויוצר שיחה",
+        title: (name) => "חוויה בלתי צפויה עם " + name,
+        details: "הזמנה מדויקת לעובדים, לקוחות ואירועים עסקיים",
+        art: "assets/optimized/amit-mentalism-1200.webp",
+        share: (name) => "הזמנה לאירוע החברה של " + name
+      },
+      elegant: {
+        label: "ערב אלגנטי",
+        eyebrow: "קסם, סטייל ורגעים שלא ניתן להסביר",
+        title: (name) => "ערב מיוחד עם " + name,
+        details: "עיצוב יוקרתי לקבלת פנים, ערב פרטי או אירוע בוטיק",
+        art: "assets/optimized/amit-cards-1200.webp",
+        share: (name) => "נפגשים לערב מיוחד עם " + name
+      }
+    };
     let rsvpApproved = false;
     const formatInviteDate = (value) => {
       if (!value) return "התאריך יישלח למוזמנים";
@@ -1727,14 +1988,19 @@
       const dateCopy = formatInviteDate(inviteDate.value);
       const timeCopy = inviteTime.value || "17:00";
       const locationCopy = inviteLocation.value.trim() || "המיקום יישלח למוזמנים";
-      inviteTitle.textContent = "יום ההולדת הקסום של " + name;
+      const template = inviteTemplates[inviteTheme.value] || inviteTemplates.magic;
+      inviteStyleLabel.textContent = template.label;
+      inviteEyebrow.textContent = template.eyebrow;
+      inviteTitle.textContent = template.title(name);
+      inviteArtImg.src = template.art;
       inviteDateCopy.textContent = dateCopy;
       inviteTimeCopy.textContent = timeCopy;
       inviteLocationCopy.textContent = locationCopy;
-      inviteDetails.textContent = "הזמנה אישית עם אישורי הגעה ושיתוף מהיר";
+      inviteDetails.textContent = template.details;
       inviteScreen.className = "screen theme-" + inviteTheme.value;
+      document.querySelectorAll("[data-template]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.template === inviteTheme.value)));
       const shareText = [
-        "הזמנה קסומה ליום ההולדת של " + name,
+        template.share(name),
         dateCopy + " בשעה " + timeCopy,
         "מיקום: " + locationCopy,
         "נשמח לראות אתכם. אנא אשרו הגעה."
@@ -1747,6 +2013,12 @@
     document.querySelector("#invite-demo").addEventListener("click", () => updateInvite(true));
     [inviteName, inviteDate, inviteTime, inviteLocation].forEach((control) => control.addEventListener("input", () => updateInvite(false)));
     inviteTheme.addEventListener("change", () => updateInvite(true));
+    document.querySelectorAll("[data-template]").forEach((button) => {
+      button.addEventListener("click", () => {
+        inviteTheme.value = button.dataset.template;
+        updateInvite(true);
+      });
+    });
     inviteRsvp.addEventListener("click", () => {
       rsvpApproved = !rsvpApproved;
       rsvpCopy.textContent = rsvpApproved ? "ההגעה אושרה בהצלחה" : "עדיין לא אושרה הגעה";
@@ -1758,7 +2030,7 @@
       inviteName.value = "נועה";
       inviteDate.value = "";
       inviteTime.value = "17:00";
-      inviteTheme.value = "purple";
+      inviteTheme.value = "magic";
       inviteLocation.value = "המיקום יישלח למוזמנים";
       rsvpApproved = false;
       rsvpCopy.textContent = "עדיין לא אושרה הגעה";
@@ -1770,7 +2042,7 @@
       button.addEventListener("click", () => {
         const feature = button.dataset.inviteFeature;
         if (feature === "theme") {
-          const themes = ["purple", "gold", "blue"];
+          const themes = ["magic", "celebration", "corporate", "elegant"];
           inviteTheme.value = themes[(themes.indexOf(inviteTheme.value) + 1) % themes.length];
           updateInvite(true);
         }
