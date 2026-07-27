@@ -589,67 +589,6 @@
     .magic-result { display: none; text-align: center; }
     .magic-result strong { display: block; color: var(--gold); font-size: 92px; line-height: 1; margin: 12px 0; text-shadow: 0 0 40px rgba(237,192,105,.38); }
     .magic-result.active { display: block; animation: reveal .65s cubic-bezier(.2,.8,.2,1) both; }
-    .prediction-stage { min-height: 390px; display: grid; align-content: center; justify-items: center; }
-    .envelope {
-      position: relative;
-      width: 230px;
-      height: 145px;
-      margin-bottom: 26px;
-      border: 1px solid rgba(237,192,105,.35);
-      border-radius: 10px;
-      background: linear-gradient(145deg, #e8d6ad, #a68b5b);
-      box-shadow: 0 25px 50px rgba(0,0,0,.45);
-      perspective: 700px;
-    }
-    .envelope::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      clip-path: polygon(0 0, 50% 63%, 100% 0);
-      background: linear-gradient(155deg, #f0dfba, #b79b69);
-      transform-origin: top;
-      z-index: 3;
-      transition: transform .8s cubic-bezier(.2,.8,.2,1);
-    }
-    .envelope.open::before { transform: rotateX(180deg); }
-    .prediction-paper {
-      position: absolute;
-      right: 18px;
-      bottom: 10px;
-      left: 18px;
-      height: 112px;
-      display: grid;
-      place-items: center;
-      border-radius: 7px;
-      color: #1a1420;
-      background: #fffdf6;
-      font-size: 48px;
-      font-weight: 900;
-      transform: translateY(0);
-      transition: transform .85s .25s cubic-bezier(.2,.8,.2,1);
-      z-index: 2;
-    }
-    .envelope.open .prediction-paper { transform: translateY(-82px); }
-    .wax-seal {
-      position: absolute;
-      top: 54px;
-      left: 50%;
-      z-index: 5;
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      color: #f3d591;
-      background: #6c1830;
-      box-shadow: 0 4px 10px rgba(0,0,0,.3);
-      transform: translateX(-50%);
-      transition: opacity .3s ease, transform .3s ease;
-    }
-    .envelope.open .wax-seal { opacity: 0; transform: translateX(-50%) scale(.5); }
-    .symbol-picker { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; direction: ltr; }
-    .symbol-picker button { width: 54px; height: 54px; border: 1px solid var(--line); border-radius: 50%; color: #fff; background: rgba(255,255,255,.05); font-size: 23px; cursor: pointer; transition: .25s ease; }
-    .symbol-picker button:hover, .symbol-picker button.selected { color: #16111d; border-color: var(--gold); background: var(--gold); transform: translateY(-4px); }
     .illusion-stage {
       min-height: 390px;
       display: grid;
@@ -898,7 +837,7 @@
       .trick-copy { text-align: center; }
       .trick-copy p { min-height: 0; }
       .trick-action { width: 100%; }
-      .card-table, .number-stage, .prediction-stage, .illusion-stage, .object-stage { min-height: 350px; }
+      .card-table, .number-stage, .illusion-stage, .object-stage { min-height: 350px; }
       .illusion-stage { grid-template-columns: 1fr; gap: 18px; }
       .illusion-target img { width: 126px; }
       .illusion-controls, .magic-footer-actions { display: grid; grid-template-columns: 1fr; }
@@ -909,7 +848,6 @@
       .playing-card .corner.bottom { inset: auto 8px 7px auto; }
       .playing-card .suit { font-size: 33px; }
       .number-orb { width: 104px; height: 104px; font-size: 44px; }
-      .envelope { transform: scale(.88); margin-bottom: 13px; }
       .tool-card, .business-card { min-height: 0; }
       .system-step:not(:last-child)::after { content: "↓"; left: 50%; top: auto; bottom: -19px; }
       .video-box { min-height: 330px; }
@@ -1303,7 +1241,6 @@
           <div class="magic-tabs" aria-label="בחירת קסם">
             <button class="magic-tab active" type="button" aria-pressed="true" data-trick="cards">קלף נעלם</button>
             <button class="magic-tab" type="button" aria-pressed="false" data-trick="number">קריאת מספר</button>
-            <button class="magic-tab" type="button" aria-pressed="false" data-trick="symbol">תחזית סגורה</button>
             <button class="magic-tab" type="button" aria-pressed="false" data-trick="illusion">אשליית ראייה</button>
             <button class="magic-tab" type="button" aria-pressed="false" data-trick="object">חפץ במחשבה</button>
           </div>
@@ -1315,7 +1252,7 @@
             <div class="trick-copy">
               <span class="trick-step">קסם ראשון</span>
               <h3>הקלף שנעלם</h3>
-              <p id="card-instruction">בחרו קלף אחד בעיניים בלבד. אל תלחצו עליו ואל תספרו לאף אחד. זכרו אותו היטב.</p>
+              <p id="card-instruction">בחרו קלף אחד בעיניים בלבד. אל תלחצו עליו ואל תספרו לאף אחד. זכרו היטב את המספר, הצבע והצורה שלו.</p>
               <button class="btn btn-gold trick-action" id="card-action" type="button">זכרתי קלף</button>
               <div class="effect-status" id="card-status"></div>
             </div>
@@ -1363,32 +1300,9 @@
             </div>
           </div>
 
-          <div class="trick-panel" data-panel="symbol">
-            <div class="trick-copy">
-              <span class="trick-step">קסם שלישי</span>
-              <h3>התחזית כבר בפנים</h3>
-              <p id="symbol-copy">המעטפה נסגרה לפני שבחרתם. בחרו עכשיו סמל אחד שמושך אתכם, ואז פתחו את התחזית.</p>
-              <button class="btn btn-gold trick-action" id="symbol-reveal" type="button" disabled>לפתוח את המעטפה</button>
-              <div class="effect-status" id="symbol-status">אל תשנו את הבחירה אחרי שהמחשבה ננעלה.</div>
-            </div>
-            <div class="prediction-stage">
-              <div class="envelope" id="envelope" aria-label="מעטפת התחזית">
-                <div class="prediction-paper" id="prediction-paper">?</div>
-                <div class="wax-seal">A</div>
-              </div>
-              <div class="symbol-picker" aria-label="בחרו סמל">
-                <button type="button" data-symbol="★" aria-label="כוכב">★</button>
-                <button type="button" data-symbol="☾" aria-label="ירח">☾</button>
-                <button type="button" data-symbol="♦" aria-label="יהלום">♦</button>
-                <button type="button" data-symbol="●" aria-label="עיגול">●</button>
-                <button type="button" data-symbol="✚" aria-label="צלב">✚</button>
-              </div>
-            </div>
-          </div>
-
           <div class="trick-panel" data-panel="illusion">
             <div class="trick-copy">
-              <span class="trick-step">חוויה רביעית</span>
+              <span class="trick-step">חוויה שלישית</span>
               <h3>העולם עומד לשנות גודל</h3>
               <p id="illusion-copy">הביטו במרכז המעגל במשך 15 שניות. כשהספירה מסתיימת, העבירו מיד את המבט לכף היד שלכם או לפנים של עמית.</p>
               <span class="illusion-note">החוויה כוללת תנועה חזותית. אם תנועה, הבהובים או סחרחורת אינם נוחים לכם, דלגו עליה. במצב הפחתת תנועה החוויה אינה מופעלת.</span>
@@ -1412,7 +1326,7 @@
 
           <div class="trick-panel" data-panel="object">
             <div class="trick-copy">
-              <span class="trick-step">חוויה חמישית</span>
+              <span class="trick-step">חוויה רביעית</span>
               <h3>עמית ימצא את החפץ שבחרתם</h3>
               <p id="object-copy">בחרו חפץ אחד מהרשימה בעיניים בלבד. אל תלחצו עליו ואל תגידו את שמו. כשתהיו מוכנים, ענו על ארבע שאלות קצרות.</p>
               <button class="btn btn-gold trick-action" id="object-start" type="button">בחרתי חפץ במחשבה</button>
@@ -1809,7 +1723,7 @@
       cardTable.classList.remove("performing");
       cardAction.disabled = false;
       cardAction.textContent = "זכרתי קלף";
-      cardInstruction.textContent = "בחרו קלף אחד בעיניים בלבד. אל תלחצו עליו ואל תספרו לאף אחד. זכרו אותו היטב.";
+      cardInstruction.textContent = "בחרו קלף אחד בעיניים בלבד. אל תלחצו עליו ואל תספרו לאף אחד. זכרו היטב את המספר, הצבע והצורה שלו.";
       cardStatus.textContent = "";
     };
     cardAction.addEventListener("click", () => {
@@ -1913,50 +1827,6 @@
         button.disabled = false;
         button.classList.remove("selected");
       });
-    });
-
-    const symbolButtons = document.querySelectorAll("[data-symbol]");
-    const symbolReveal = document.querySelector("#symbol-reveal");
-    const symbolStatus = document.querySelector("#symbol-status");
-    const symbolCopy = document.querySelector("#symbol-copy");
-    const envelope = document.querySelector("#envelope");
-    const predictionPaper = document.querySelector("#prediction-paper");
-    let selectedSymbol;
-    let predictionOpen = false;
-    symbolButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        if (predictionOpen) return;
-        symbolButtons.forEach((item) => item.classList.remove("selected"));
-        button.classList.add("selected");
-        selectedSymbol = button.dataset.symbol;
-        symbolReveal.disabled = false;
-        symbolStatus.textContent = "המחשבה ננעלה. המעטפה לא השתנתה.";
-        playMagicTone(470, .12);
-      });
-    });
-    symbolReveal.addEventListener("click", () => {
-      if (predictionOpen) {
-        predictionOpen = false;
-        selectedSymbol = undefined;
-        envelope.classList.remove("open");
-        predictionPaper.textContent = "?";
-        symbolButtons.forEach((button) => button.classList.remove("selected"));
-        symbolReveal.disabled = true;
-        symbolReveal.textContent = "לפתוח את המעטפה";
-        symbolCopy.textContent = "המעטפה נסגרה לפני שבחרתם. בחרו עכשיו סמל אחד שמושך אתכם, ואז פתחו את התחזית.";
-        symbolStatus.textContent = "אל תשנו את הבחירה אחרי שהמחשבה ננעלה.";
-        return;
-      }
-      if (!selectedSymbol) return;
-      predictionOpen = true;
-      predictionPaper.textContent = selectedSymbol;
-      envelope.classList.add("open");
-      symbolReveal.textContent = "לסגור ולנסות שוב";
-      symbolCopy.textContent = "התחזית הייתה סגורה מולכם מהרגע הראשון. עכשיו הביטו בסמל שבתוכה.";
-      symbolStatus.textContent = "אותו סמל. אותה מחשבה.";
-      burstMagic(32);
-      playMagicTone(570, .18);
-      playMagicTone(870, .32, .11);
     });
 
     const illusionDisc = document.querySelector("#illusion-disc");
