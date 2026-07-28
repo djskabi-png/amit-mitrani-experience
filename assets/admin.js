@@ -17,7 +17,10 @@ import {
   updateDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const ADMIN_EMAILS = new Set(["djskabi@gmail.com"]);
+const ADMIN_EMAILS = new Set([
+  "djskabi@gmail.com",
+  "amitmagician6@gmail.com",
+]);
 const statusLabels = {
   new: "חדש",
   contacted: "נוצר קשר",
