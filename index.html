@@ -116,7 +116,7 @@
     .btn { display: inline-flex; justify-content: center; align-items: center; padding: 14px 22px; border-radius: 13px; font-weight: 800; border: 1px solid var(--line); }
     .btn-gold { color: #16111d; border-color: var(--gold); background: var(--gold); box-shadow: 0 12px 34px rgba(237,192,105,.18); }
     .btn-dark { background: rgba(255,255,255,.04); }
-    .mobile-menu { display: none; }
+    .mobile-menu { display: none; color: var(--white); background: rgba(255,255,255,.055); font: inherit; font-size: 23px; line-height: 1; cursor: pointer; }
     .hero { min-height: 690px; display: grid; grid-template-columns: 1.02fr .98fr; gap: 60px; align-items: center; padding: 56px 0 70px; }
     .eyebrow { display: inline-flex; gap: 9px; align-items: center; color: #e0d7ff; border: 1px solid rgba(139,104,255,.35); background: rgba(139,104,255,.1); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 700; }
     .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 15px var(--purple); }
@@ -135,8 +135,9 @@
     .hero-note p { margin: 0; color: #c4c1cc; font-size: 13px; line-height: 1.55; }
     .trustbar { border-block: 1px solid var(--line); background: rgba(255,255,255,.025); }
     .trust-items { min-height: 96px; display: grid; grid-template-columns: repeat(4,1fr); align-items: center; text-align: center; color: #d8d5de; }
-    .trust-items div { border-left: 1px solid var(--line); padding: 8px 15px; }
-    .trust-items div:last-child { border: 0; }
+    .trust-items a { min-height: 96px; display: grid; align-content: center; border-left: 1px solid var(--line); padding: 8px 15px; transition: color .2s ease, background .2s ease; }
+    .trust-items a:last-child { border: 0; }
+    .trust-items a:hover,.trust-items a:focus-visible { color: var(--gold); background: rgba(237,192,105,.06); outline: 3px solid rgba(237,192,105,.35); outline-offset: -3px; }
     .trust-items strong { display: block; color: var(--white); font-size: 17px; margin-bottom: 3px; }
     .video-layout { display: grid; grid-template-columns: 1.3fr .7fr; gap: 24px; }
     .video-box { min-height: 460px; position: relative; overflow: hidden; border-radius: 28px; border: 1px solid var(--line); background: #17131f; }
@@ -604,10 +605,8 @@
       aspect-ratio: 1;
       border: 2px solid rgba(255,255,255,.2);
       border-radius: 50%;
-      background:
-        repeating-radial-gradient(circle, transparent 0 8px, rgba(255,255,255,.86) 9px 13px, transparent 14px 22px),
-        repeating-conic-gradient(from 0deg, #f0c569 0 7deg, #6f4bd8 7deg 14deg, #0a0910 14deg 21deg);
-      box-shadow: inset 0 0 45px rgba(0,0,0,.55), 0 0 48px rgba(139,104,255,.28);
+      background: #fff url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj48cmVjdCB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMTI4LjAgMTI1LjAgTDEyOC43IDEyNi4xIEwxMjguOSAxMjcuNSBMMTI4LjYgMTI5LjAgTDEyNy43IDEzMC42IEwxMjYuMiAxMzIuMCBMMTI0LjEgMTMyLjggTDEyMS43IDEzMy4wIEwxMTkuMSAxMzIuNCBMMTE2LjYgMTMxLjAgTDExNC41IDEyOC43IEwxMTMuMSAxMjUuNyBMMTEyLjYgMTIyLjIgTDExMy4xIDExOC41IEwxMTQuOCAxMTQuOSBMMTE3LjYgMTExLjggTDEyMS4zIDEwOS40IEwxMjUuOCAxMDguMiBMMTMwLjcgMTA4LjMgTDEzNS41IDEwOS45IEwxMzkuOSAxMTIuOSBMMTQzLjQgMTE3LjEgTDE0NS43IDEyMi40IEwxNDYuNCAxMjguNCBMMTQ1LjQgMTM0LjUgTDE0Mi42IDE0MC4zIEwxMzguMSAxNDUuMiBMMTMyLjIgMTQ4LjkgTDEyNS40IDE1MC43IEwxMTguMCAxNTAuNiBMMTEwLjggMTQ4LjQgTDEwNC4zIDE0NC4xIEw5OS4xIDEzOC4wIEw5NS43IDEzMC41IEw5NC41IDEyMi4xIEw5NS44IDExMy41IEw5OS40IDEwNS40IEwxMDUuNCA5OC40IEwxMTMuMiA5My4zIEwxMjIuNCA5MC40IEwxMzIuMiA5MC4zIEwxNDEuOSA5Mi45IEwxNTAuNyA5OC4yIEwxNTcuOCAxMDYuMCBMMTYyLjYgMTE1LjYgTDE2NC41IDEyNi4zIEwxNjMuNCAxMzcuNCBMMTU5LjEgMTQ4LjAgTDE1Mi4wIDE1Ny4yIEwxNDIuMyAxNjQuMSBMMTMxLjAgMTY4LjIgTDExOC43IDE2OS4wIEwxMDYuNCAxNjYuMiBMOTUuMiAxNjAuMSBMODYuMCAxNTEuMCBMNzkuNiAxMzkuNCBMNzYuNSAxMjYuNCBMNzcuMyAxMTIuNyBMODEuOCA5OS42IEw5MC4wIDg4LjEgTDEwMS4yIDc5LjEgTDExNC42IDczLjUgTDEyOS4zIDcxLjggTDE0NC4xIDc0LjMgTDE1Ny45IDgxLjAgTDE2OS40IDkxLjMgTDE3Ny44IDEwNC42IEwxODIuMiAxMTkuOSBMMTgyLjIgMTM2LjAgTDE3Ny42IDE1MS44IEwxNjguOCAxNjUuOCBMMTU2LjIgMTc3LjAgTDE0MC44IDE4NC40IEwxMjMuOCAxODcuMyBMMTA2LjQgMTg1LjMgTDkwLjAgMTc4LjUgTDc2LjAgMTY3LjIgTDY1LjUgMTUyLjQgTDU5LjQgMTM1LjAgTDU4LjQgMTE2LjQgTDYyLjYgOTguMCBMNzEuOSA4MS4zIEw4NS42IDY3LjYgTDEwMi43IDU4LjIgTDEyMi4wIDUzLjkgTDE0Mi4wIDU1LjAgTDE2MS4xIDYxLjcgTDE3Ny43IDczLjYgTDE5MC42IDg5LjggTDE5OC42IDEwOS4xIEwyMDAuOSAxMzAuMSBMMTk3LjMgMTUxLjIgTDE4Ny45IDE3MC42IEwxNzMuNCAxODYuOSBMMTU0LjcgMTk4LjYgTDEzMy4zIDIwNC43IEwxMTAuOCAyMDQuNyBMODkuMCAxOTguNCBMNjkuNSAxODYuMiBMNTQuMSAxNjguOSBMNDMuOSAxNDcuOCBMNDAuMCAxMjQuNSBMNDIuNyAxMDAuOCBMNTEuOSA3OC42IEw2Ny4wIDU5LjYgTDg3LjAgNDUuMyBMMTEwLjQgMzcuMSBMMTM1LjMgMzUuNyBMMTU5LjkgNDEuMyBMMTgyLjIgNTMuNiBMMjAwLjQgNzEuNyBMMjEyLjkgOTQuMyBMMjE4LjggMTE5LjcgTDIxNy40IDE0Ni4xIEwyMDguNyAxNzEuMiBMMTkzLjIgMTkzLjEgTDE3Mi4yIDIxMC4wIEwxNDcuMCAyMjAuNSBMMTE5LjcgMjIzLjcgTDkyLjQgMjE5LjEgTDY3LjIgMjA3LjEgTDQ2LjEgMTg4LjUgTDMwLjkgMTY0LjUgTDIyLjggMTM3LjEgTDIyLjcgMTA4LjIgTDMwLjYgODAuMyBMNDYuMCA1NS40IEw2Ny45IDM1LjYgTDk0LjYgMjIuNSBMMTI0LjEgMTcuMyBMMTU0LjEgMjAuNCBMMTgyLjMgMzEuOSBMMjA2LjQgNTAuOCBMMjI0LjUgNzUuOCBMMjM1LjAgMTA1LjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMTIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==") center / cover no-repeat;
+      box-shadow: inset 0 0 45px rgba(0,0,0,.62), 0 0 46px rgba(255,255,255,.18);
       transform: translateZ(0);
     }
     .illusion-disc.running { animation: illusionIn 1.15s linear infinite; }
@@ -618,7 +617,7 @@
       place-items: center;
       width: 76px;
       height: 76px;
-      border: 1px solid rgba(237,192,105,.55);
+      border: 2px solid rgba(255,255,255,.78);
       border-radius: 50%;
       color: #17111d;
       background: rgba(255,249,231,.93);
@@ -820,8 +819,8 @@
       .btn { padding: 12px 14px; font-size: 13px; }
       .hero-proof { font-size: 11px; gap: 10px 14px; margin-top: 18px; }
       .trust-items { grid-template-columns: 1fr 1fr; padding: 12px 0; }
-      .trust-items div { min-height: 62px; border-bottom: 1px solid var(--line); display: grid; align-content: center; }
-      .trust-items div:nth-child(2) { border-left: 0; }
+      .trust-items a { min-height: 62px; border-bottom: 1px solid var(--line); }
+      .trust-items a:nth-child(2) { border-left: 0; }
       .video-layout, .why-layout, .invite-box, .about, .seo-grid, .contact { grid-template-columns: 1fr; }
       .portal-grid, .course-grid, .tool-grid, .business-grid, .system-flow { grid-template-columns: 1fr; }
       .academy-layout, .calculator-wrap { grid-template-columns: 1fr; }
@@ -1141,10 +1140,10 @@
 
     <section class="trustbar">
       <div class="shell trust-items">
-        <div><strong>מופעים חיים</strong><span>לילדים, משפחות וארגונים</span></div>
-        <div><strong>קורסים דיגיטליים</strong><span>לכל גיל ולכל רמה</span></div>
-        <div><strong>כלים חכמים</strong><span>הזמנות, אישורי הגעה ומחשבונים</span></div>
-        <div><strong>מופעים עסקיים</strong><span>במה, קבלת פנים ואירועי חברה</span></div>
+        <a href="#shows"><strong>מופעים חיים</strong><span>לילדים, משפחות וארגונים</span></a>
+        <a href="magic-courses.html"><strong>קורסים דיגיטליים</strong><span>לכל גיל ולכל רמה</span></a>
+        <a href="#invitation"><strong>כלים חכמים</strong><span>הזמנות, אישורי הגעה ומחשבונים</span></a>
+        <a href="shows-for-companies.html"><strong>מופעים עסקיים</strong><span>במה, קבלת פנים ואירועי חברה</span></a>
       </div>
     </section>
 
@@ -1475,7 +1474,7 @@
       <div class="shell">
         <div class="section-head"><div class="kicker">ניסיון מול קהלים מגוונים</div><h2 class="section-title">מבין הארגונים שעמית ציין</h2><p class="section-copy">רשימת שמות להצגה ראשונית. לפני פרסום סופי נוודא עם עמית את הניסוח, הזכויות והאישור להצגת כל לוגו.</p></div>
         <div class="client-cloud">
-          <span>בנק הפועלים</span><span>בנק דיסקונט</span><span>אמדרוקס</span><span>קוקה קולה</span><span>רשת 13</span><span>קשת 12</span><span>סלקום</span><span>פרטנר</span><span>פלאפון</span><span>בזק בינלאומי</span><span>חברת החשמל</span><span>אסם</span><span>סינמה סיטי</span><span>צה"ל</span><span>רשויות מקומיות</span>
+          <span>בנק הפועלים</span><span>בנק דיסקונט</span><span>אמדוקס</span><span>קוקה קולה</span><span>רשת 13</span><span>קשת 12</span><span>סלקום</span><span>פרטנר</span><span>פלאפון</span><span>בזק בינלאומי</span><span>חברת החשמל</span><span>אסם</span><span>סינמה סיטי</span><span>צה"ל</span><span>רשויות מקומיות</span>
         </div>
         <p class="disclaimer">שמות הארגונים נמסרו בשיחה עם עמית. הם אינם מוצגים בשלב זה כלוגואים או כהמלצה רשמית.</p>
       </div>

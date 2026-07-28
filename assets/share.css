@@ -140,3 +140,59 @@
     transition: none !important;
   }
 }
+
+html {
+  max-width: 100%;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  max-width: 100%;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}
+
+button.mobile-menu,
+details.mobile-nav > summary {
+  color: #fff;
+  background: rgba(255, 255, 255, .055);
+  font: inherit;
+  font-size: 23px;
+  line-height: 1;
+}
+
+button.mobile-menu:hover,
+button.mobile-menu:focus-visible,
+details.mobile-nav > summary:hover,
+details.mobile-nav > summary:focus-visible {
+  border-color: rgba(237, 192, 105, .65);
+  background: rgba(237, 192, 105, .12);
+  outline: 3px solid rgba(237, 192, 105, .28);
+  outline-offset: 2px;
+}
+
+.review-gallery .review-slide {
+  flex-basis: min(390px, 82vw);
+  border-radius: 24px;
+}
+
+.review-gallery .review-slide img {
+  width: 100%;
+  aspect-ratio: 9 / 12;
+  padding: 12px;
+  object-fit: contain;
+  object-position: center;
+  background: #f3f4f6;
+}
+
+.review-gallery .review-slide figcaption {
+  min-height: 142px;
+  align-content: center;
+}
