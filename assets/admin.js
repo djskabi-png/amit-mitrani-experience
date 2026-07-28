@@ -1,4 +1,5 @@
 import { auth, db } from "./firebase-config.js";
+import { startCms } from "./cms-admin.js?v=2";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -21,11 +22,16 @@ const ADMIN_EMAILS = new Set([
   "djskabi@gmail.com",
   "amitmagician6@gmail.com",
 ]);
+const localCmsQa = ["127.0.0.1", "localhost"].includes(window.location.hostname)
+  && new URLSearchParams(window.location.search).has("cmsQa");
 const statusLabels = {
+  pending: "ממתין לאישור",
   new: "חדש",
+  approved: "אושר",
   contacted: "נוצר קשר",
   quoted: "נשלחה הצעה",
   booked: "נסגר",
+  declined: "לא אושר",
   closed: "לא רלוונטי"
 };
 
@@ -79,8 +85,8 @@ const whatsappHref = (phone, name) => {
 };
 
 const updateStats = () => {
-  document.querySelector("#stat-new").textContent = leads.filter((lead) => lead.status === "new").length;
-  document.querySelector("#stat-open").textContent = leads.filter((lead) => ["contacted", "quoted"].includes(lead.status)).length;
+  document.querySelector("#stat-new").textContent = leads.filter((lead) => ["pending", "new"].includes(lead.status)).length;
+  document.querySelector("#stat-open").textContent = leads.filter((lead) => ["approved", "contacted", "quoted"].includes(lead.status)).length;
   document.querySelector("#stat-booked").textContent = leads.filter((lead) => lead.status === "booked").length;
   document.querySelector("#stat-total").textContent = leads.length;
 };
@@ -89,8 +95,10 @@ const filteredLeads = () => {
   const term = searchInput.value.trim().toLowerCase();
   const status = statusFilter.value;
   return leads.filter((lead) => {
-    const matchesStatus = status === "all" || lead.status === status;
-    const haystack = [lead.name, lead.phone, lead.interest, lead.city, lead.message].join(" ").toLowerCase();
+    const matchesStatus = status === "all"
+      || lead.status === status
+      || (status === "pending" && lead.status === "new");
+    const haystack = [lead.name, lead.phone, lead.email, lead.interest, lead.city, lead.message, lead.requestNumber].join(" ").toLowerCase();
     return matchesStatus && (!term || haystack.includes(term));
   });
 };
@@ -108,7 +116,7 @@ const renderLeads = () => {
       <div>
         <div class="lead-title">
           <strong>${escapeHtml(lead.name || "ללא שם")}</strong>
-          <span class="badge badge-${escapeHtml(lead.status || "new")}">${escapeHtml(statusLabels[lead.status] || "חדש")}</span>
+          <span class="badge badge-${escapeHtml(lead.status || "pending")}">${escapeHtml(statusLabels[lead.status] || "ממתין לאישור")}</span>
         </div>
         <p>${escapeHtml(lead.interest || "פנייה כללית")} · ${escapeHtml(lead.city || "מיקום לא צוין")}</p>
       </div>
@@ -137,13 +145,17 @@ const selectLead = (id) => {
   leadDetail.innerHTML = `
     <h3>${escapeHtml(lead.name || "פנייה")}</h3>
     ${lead.demo ? '<p class="badge badge-quoted">נתוני הדגמה</p>' : ""}
+    ${lead.requestType === "booking_request" ? '<p class="badge badge-pending">בקשת הזמנה</p>' : '<p class="badge">פנייה כללית</p>'}
     <div class="detail-grid">
+      <div class="detail-row"><small>מספר פנייה</small><strong>${escapeHtml(lead.requestNumber || lead.id)}</strong></div>
       <div class="detail-row"><small>טלפון</small><a href="${phoneHref(lead.phone)}">${escapeHtml(lead.phone || "לא צוין")}</a></div>
+      <div class="detail-row"><small>דוא״ל</small>${lead.email ? `<a href="mailto:${escapeHtml(lead.email)}">${escapeHtml(lead.email)}</a>` : "<strong>לא צוין</strong>"}</div>
       <div class="detail-row"><small>סוג אירוע או פנייה</small><strong>${escapeHtml(lead.interest || "לא צוין")}</strong></div>
       <div class="detail-row"><small>תאריך</small><strong>${escapeHtml(lead.date || "לא צוין")}</strong></div>
-      <div class="detail-row"><small>מקום</small><strong>${escapeHtml(lead.city || "לא צוין")}</strong></div>
+      <div class="detail-row"><small>מקום</small><strong>${escapeHtml([lead.country, lead.city].filter(Boolean).join(", ") || "לא צוין")}</strong></div>
       <div class="detail-row"><small>מספר משתתפים</small><strong>${escapeHtml(lead.participants || "לא צוין")}</strong></div>
       <div class="detail-row"><small>פרטים נוספים</small><span>${escapeHtml(lead.message || "לא נכתבו פרטים נוספים")}</span></div>
+      <div class="detail-row"><small>התראת מייל</small><strong>${lead.notificationStatus === "sent" ? "נשלחה" : "ממתינה לחיבור שירות מייל"}</strong></div>
     </div>
     <label><small>סטטוס טיפול</small>
       <select class="control" id="detail-status">
@@ -152,12 +164,30 @@ const selectLead = (id) => {
     </label>
     <label><small>הערת ניהול</small><textarea class="control" id="detail-note" placeholder="מה סוכם, מתי חוזרים, מה הצעד הבא">${escapeHtml(lead.note || "")}</textarea></label>
     <div class="detail-actions">
+      ${["pending", "new"].includes(lead.status) ? '<button class="btn btn-primary" id="approve-lead" type="button">אישור הבקשה</button><button class="btn" id="decline-lead" type="button">אי אישור</button>' : ""}
       <button class="btn btn-primary" id="save-lead" type="button">שמירת עדכון</button>
       <a class="btn" href="${whatsappHref(lead.phone, lead.name)}" target="_blank" rel="noopener">וואטסאפ</a>
       <a class="btn" href="${phoneHref(lead.phone)}">חיוג</a>
       <button class="btn btn-danger" id="delete-lead" type="button">מחיקה</button>
     </div>
   `;
+
+  document.querySelector("#approve-lead")?.addEventListener("click", async () => {
+    await updateDoc(doc(db, "leads", id), {
+      status: "approved",
+      approvedAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    });
+    showToast("הבקשה אושרה.");
+  });
+
+  document.querySelector("#decline-lead")?.addEventListener("click", async () => {
+    await updateDoc(doc(db, "leads", id), {
+      status: "declined",
+      updatedAt: serverTimestamp()
+    });
+    showToast("הבקשה סומנה כלא מאושרת.");
+  });
 
   document.querySelector("#save-lead").addEventListener("click", async () => {
     await updateDoc(doc(db, "leads", id), {
@@ -246,7 +276,7 @@ document.querySelector("#demo-button").addEventListener("click", async () => {
   }
   const now = serverTimestamp();
   const examples = [
-    { name: "משפחת ישראלי", phone: "050-0000000", interest: "יום הולדת לילדים", date: "", city: "ראשון לציון", participants: "35", message: "מבקשים להבין התאמה לגילאי 8 ולבדוק תאריך.", status: "new" },
+    { name: "משפחת ישראלי", phone: "050-0000000", interest: "יום הולדת לילדים", date: "", city: "ראשון לציון", participants: "35", message: "מבקשים להבין התאמה לגילאי 8 ולבדוק תאריך.", status: "pending" },
     { name: "מנהלת רווחה, חברת הדגמה", phone: "050-0000001", interest: "אירוע חברה או רווחה", date: "", city: "תל אביב", participants: "120", message: "קבלת פנים ומופע מרכזי לעובדי החברה.", status: "quoted" },
     { name: "משפחת כהן", phone: "050-0000002", interest: "בר או בת מצווה", date: "", city: "רחובות", participants: "80", message: "אירוע ערב למשפחה ולחברים.", status: "booked" }
   ];
@@ -277,6 +307,15 @@ document.querySelector("#export-button").addEventListener("click", () => {
 });
 
 onAuthStateChanged(auth, (user) => {
+  if (localCmsQa) {
+    loginScreen.hidden = true;
+    dashboard.hidden = false;
+    logoutButton.hidden = true;
+    userLabel.textContent = "בדיקה מקומית";
+    startCms();
+    return;
+  }
+
   const allowed = user && ADMIN_EMAILS.has(user.email);
   loginScreen.hidden = Boolean(allowed);
   dashboard.hidden = !allowed;
@@ -286,6 +325,7 @@ onAuthStateChanged(auth, (user) => {
   if (allowed) {
     loginError.textContent = "";
     startRealtime();
+    startCms();
     return;
   }
 

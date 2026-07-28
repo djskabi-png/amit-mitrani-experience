@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex,nofollow">
   <title>מערכת הניהול | עמית מיטרני</title>
   <meta name="description" content="מערכת ניהול הפניות והאירועים של עמית מיטרני">
-  <link rel="stylesheet" href="assets/admin.css">
+  <link rel="stylesheet" href="assets/admin.css?v=2">
 </head>
 <body>
   <header class="admin-header">
@@ -42,30 +42,109 @@
         <div class="welcome">
           <div>
             <h1>מרכז הפניות והאירועים</h1>
-            <p>כל פנייה חדשה מהאתר נכנסת לכאן בזמן אמת.</p>
+            <p>עריכת האתר, פניות, משימות והערות עבודה במקום אחד.</p>
           </div>
           <span class="live-pill"><span class="live-dot"></span>מחובר בזמן אמת</span>
         </div>
 
-        <div class="stats" aria-label="סיכום פניות">
-          <article class="stat new"><small>פניות חדשות</small><strong id="stat-new">0</strong></article>
-          <article class="stat open"><small>בטיפול ובהצעה</small><strong id="stat-open">0</strong></article>
-          <article class="stat closed"><small>אירועים שנסגרו</small><strong id="stat-booked">0</strong></article>
-          <article class="stat"><small>כל הפניות</small><strong id="stat-total">0</strong></article>
-        </div>
+        <nav class="admin-tabs" aria-label="אזורי מערכת הניהול">
+          <button class="admin-tab active" type="button" data-admin-view="content">תוכן האתר</button>
+          <button class="admin-tab" type="button" data-admin-view="crm">פניות, הזמנות ומשימות</button>
+        </nav>
 
-        <div class="workspace">
+        <section class="content-view" id="content-view">
+          <div class="cms-intro">
+            <div>
+              <span class="eyebrow">ניהול תוכן</span>
+              <h2>עורכים את האתר ורואים את השינוי לפני הפרסום</h2>
+              <p>בחרו עמוד, חפשו שדה וערכו טקסט, תמונה, סרטון או קישור. השמירה מפרסמת את השינוי מיד ויוצרת נקודת חזרה אחת.</p>
+            </div>
+            <div class="cms-publish-note">
+              <strong>מדיה חדשה</strong>
+              <span>אפשר לבחור תמונה קיימת או להדביק כתובת מאובטחת. העלאה ישירה מהמחשב תופעל לאחר חיבור אחסון קבצים.</span>
+            </div>
+          </div>
+
+          <div class="cms-layout">
+            <aside class="panel cms-sidebar">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">עמוד לעריכה</span>
+                  <h2>עמודי האתר</h2>
+                </div>
+              </div>
+              <div class="cms-sidebar-body">
+                <label for="cms-page-select">בחירת עמוד</label>
+                <select class="control" id="cms-page-select"></select>
+                <label for="cms-field-search">חיפוש בשדות</label>
+                <input class="control" id="cms-field-search" type="search" placeholder="כותרת, טקסט, תמונה או קישור">
+                <div class="cms-field-list" id="cms-field-list">
+                  <p class="empty">טוען את שדות העמוד...</p>
+                </div>
+              </div>
+            </aside>
+
+            <section class="panel cms-editor-panel">
+              <div class="panel-head cms-editor-head">
+                <div>
+                  <span class="eyebrow" id="cms-field-kind">שדה תוכן</span>
+                  <h2 id="cms-field-title">בחרו שדה לעריכה</h2>
+                </div>
+                <span class="cms-change-pill" id="cms-change-count">אין שינויים</span>
+              </div>
+              <form class="cms-editor-form" id="cms-editor-form">
+                <div class="cms-editor-empty" id="cms-editor-empty">
+                  <span class="brand-mark" aria-hidden="true">AM</span>
+                  <h3>הכול מתחיל בבחירת שדה</h3>
+                  <p>בחרו שדה מהרשימה. המיקום שלו יודגש בתצוגה המקדימה.</p>
+                </div>
+                <div id="cms-editor-fields" hidden></div>
+              </form>
+              <div class="cms-editor-actions">
+                <button class="btn" id="cms-reset-field" type="button" disabled>איפוס השדה</button>
+                <button class="btn" id="cms-rollback" type="button" disabled>חזרה לפרסום הקודם</button>
+                <button class="btn btn-primary" id="cms-save" type="button" disabled>שמירה ופרסום</button>
+              </div>
+              <p class="cms-status" id="cms-status" role="status" aria-live="polite"></p>
+            </section>
+
+            <section class="panel cms-preview-panel">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">תצוגה מקדימה</span>
+                  <h2 id="cms-preview-title">העמוד הראשי</h2>
+                </div>
+                <a class="btn btn-quiet" id="cms-open-page" href="./" target="_blank" rel="noopener">פתיחה בלשונית חדשה</a>
+              </div>
+              <div class="cms-preview-frame">
+                <iframe id="cms-preview" title="תצוגה מקדימה של העמוד לעריכה"></iframe>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="crm-view" hidden>
+          <div class="stats" aria-label="סיכום פניות">
+            <article class="stat new"><small>ממתינות לאישור</small><strong id="stat-new">0</strong></article>
+            <article class="stat open"><small>אושרו או בטיפול</small><strong id="stat-open">0</strong></article>
+            <article class="stat closed"><small>אירועים שנסגרו</small><strong id="stat-booked">0</strong></article>
+            <article class="stat"><small>כל הפניות</small><strong id="stat-total">0</strong></article>
+          </div>
+
+          <div class="workspace">
           <section class="panel">
             <div class="panel-head">
-              <h2>פניות</h2>
+              <h2>פניות והזמנות</h2>
               <div class="toolbar">
                 <input class="control search" id="lead-search" type="search" placeholder="חיפוש בשם, טלפון או אירוע" aria-label="חיפוש פניות">
                 <select class="control" id="status-filter" aria-label="סינון לפי סטטוס">
                   <option value="all">כל הסטטוסים</option>
-                  <option value="new">חדש</option>
+                  <option value="pending">ממתין לאישור</option>
+                  <option value="approved">אושר</option>
                   <option value="contacted">נוצר קשר</option>
                   <option value="quoted">נשלחה הצעה</option>
                   <option value="booked">נסגר</option>
+                  <option value="declined">לא אושר</option>
                   <option value="closed">לא רלוונטי</option>
                 </select>
                 <button class="btn" id="export-button" type="button">יצוא CSV</button>
@@ -92,12 +171,13 @@
               </form>
             </section>
           </aside>
-        </div>
+          </div>
+        </section>
       </div>
     </section>
   </main>
 
   <div class="toast" id="admin-toast" role="status"></div>
-  <script type="module" src="assets/admin.js?v=4"></script>
+  <script type="module" src="assets/admin.js?v=6"></script>
 </body>
 </html>

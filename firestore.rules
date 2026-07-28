@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in [
+          'djskabi@gmail.com',
+          'amitmagician6@gmail.com'
+        ];
+    }
+
+    match /leads/{leadId} {
+      allow create: if request.resource.data.keys().hasOnly([
+        'name', 'phone', 'email', 'interest', 'product', 'date', 'country',
+        'city', 'participants', 'message', 'requestType', 'requestNumber',
+        'status', 'notificationStatus', 'source', 'createdAt', 'updatedAt'
+      ])
+      && request.resource.data.name is string
+      && request.resource.data.name.size() >= 2
+      && request.resource.data.name.size() <= 100
+      && request.resource.data.phone is string
+      && request.resource.data.phone.size() >= 7
+      && request.resource.data.phone.size() <= 30
+      && request.resource.data.email is string
+      && request.resource.data.email.size() <= 180
+      && request.resource.data.interest is string
+      && request.resource.data.interest.size() >= 2
+      && request.resource.data.interest.size() <= 120
+      && request.resource.data.message is string
+      && request.resource.data.message.size() <= 1500
+      && request.resource.data.requestType in ['booking_request', 'contact_request']
+      && request.resource.data.status == 'pending'
+      && request.resource.data.notificationStatus == 'not_configured'
+      && request.resource.data.source is string
+      && request.resource.data.source.size() <= 500
+      && request.resource.data.createdAt == request.time
+      && request.resource.data.updatedAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /siteContent/{pageId} {
+      allow read: if true;
+      allow create, update: if isAdmin()
+        && request.resource.data.keys().hasOnly([
+          'pagePath', 'payload', 'previousPayload', 'updatedAt', 'updatedBy'
+        ])
+        && request.resource.data.pagePath is string
+        && request.resource.data.pagePath.size() <= 500
+        && request.resource.data.payload is string
+        && request.resource.data.payload.size() <= 850000
+        && request.resource.data.previousPayload is string
+        && request.resource.data.previousPayload.size() <= 850000
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.updatedBy == request.auth.token.email;
+      allow delete: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
