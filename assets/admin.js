@@ -2,7 +2,7 @@ import { auth, db } from "./firebase-config.js";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
-  signInWithRedirect,
+  signInWithPopup,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import {
@@ -217,7 +217,7 @@ const startRealtime = () => {
 loginButton.addEventListener("click", async () => {
   loginError.textContent = "";
   try {
-    await signInWithRedirect(auth, new GoogleAuthProvider());
+    await signInWithPopup(auth, new GoogleAuthProvider());
   } catch (error) {
     loginError.textContent = "הכניסה לא הושלמה. נסו שוב ובחרו בחשבון הניהול.";
   }
