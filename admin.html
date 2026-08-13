@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="assets/admin.css?v=2">
 </head>
 <body>
+  <a class="skip-link" href="#admin-main">דילוג לתוכן המרכזי</a>
   <header class="admin-header">
     <div class="admin-shell header-row">
       <a class="brand" href="./">
@@ -23,7 +24,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="admin-main">
     <section class="login-screen" id="login-screen">
       <div class="admin-shell">
         <div class="login-card">
@@ -166,7 +167,7 @@
               <div class="panel-head"><h2>משימות מהירות</h2></div>
               <div class="quick-list" id="task-list"><p class="empty">אין משימות פתוחות.</p></div>
               <form class="quick-form" id="task-form">
-                <input class="control" name="title" required maxlength="120" placeholder="משימה חדשה">
+                <input class="control" name="title" required maxlength="120" placeholder="משימה חדשה" aria-label="כותרת המשימה החדשה">
                 <button class="btn btn-primary" type="submit">הוספה</button>
               </form>
             </section>

@@ -1107,7 +1107,7 @@
       <div class="nav-tools">
         <div class="language-control">
           <button class="language-switcher" type="button" aria-expanded="false" aria-controls="language-menu" aria-label="בחירת שפה"><span>HE</span><span class="language-label">עברית</span></button>
-          <div class="language-menu" id="language-menu">
+          <div class="language-menu" id="language-menu" hidden inert>
             <a href="./" lang="he">עברית</a>
             <a href="en/" lang="en" hreflang="en">English</a>
             <a href="ru/" lang="ru" hreflang="ru">Русский</a>
@@ -1529,12 +1529,12 @@
       <div class="shell seo-grid">
         <div><div class="section-head"><div class="kicker">שאלות נפוצות</div><h2 class="section-title">כל מה שרוצים לדעת לפני שסוגרים</h2><p class="section-copy">השאלות יענו למשתמשים וגם יחזקו את האתר בחיפושי Google ובתשובות מבוססות AI.</p></div>
           <div class="faq">
-            <div><button type="button">לאילו גילאים המופע מתאים?<span>+</span></button><p class="faq-answer">עמית מתאים את מבנה המופע לגיל המשתתפים, לסוג האירוע ולאופי הקהל. ההתאמה המדויקת נעשית בשיחה קצרה לפני סגירה.</p></div>
-            <div><button type="button">כמה זמן נמשך המופע?<span>+</span></button><p class="faq-answer">משך המופע והפעילות משתנה לפי סוג האירוע והחבילה. לוח הזמנים המוצג באתר הוא דוגמה ולא התחייבות קבועה.</p></div>
-            <div><button type="button">האם ניתן להתאים את המופע לקהל גדול?<span>+</span></button><p class="faq-answer">כן. לעמית יש מסלולים לקייטנות, מוסדות, רשויות, חברות וארגונים. יש לבדוק מראש את גודל הקהל, הבמה, ההגברה והמיקום.</p></div>
-            <div><button type="button">מה צריך להכין במקום האירוע?<span>+</span></button><p class="faq-answer">לאחר בחירת המופע מתקבלת רשימת הכנות מסודרת בהתאם למקום, לקהל ולציוד שנדרש בפועל.</p></div>
-            <div><button type="button">האם עמית מופיע גם באירועים עסקיים?<span>+</span></button><p class="faq-answer">כן. אפשר לבדוק התאמה של מופע, קטע אמנות חושים או קסמי קבלת פנים לאירוע חברה, רווחה, השקה או הרמת כוסית.</p></div>
-            <div><button type="button">איך יעבדו הקורסים והמוצרים הדיגיטליים?<span>+</span></button><p class="faq-answer">לאחר אישור עמית וחיבור עתידי של סליקה ואזור אישי, המשתמש יוכל לרכוש ולקבל גישה לתוכן. כרגע מוצגת המחשה בלבד, ללא חיוב וללא פתיחת קורס.</p></div>
+            <div><button type="button" aria-expanded="false" aria-controls="faq-answer-1">לאילו גילאים המופע מתאים?<span aria-hidden="true">+</span></button><p class="faq-answer" id="faq-answer-1" hidden>עמית מתאים את מבנה המופע לגיל המשתתפים, לסוג האירוע ולאופי הקהל. ההתאמה המדויקת נעשית בשיחה קצרה לפני סגירה.</p></div>
+            <div><button type="button" aria-expanded="false" aria-controls="faq-answer-2">כמה זמן נמשך המופע?<span aria-hidden="true">+</span></button><p class="faq-answer" id="faq-answer-2" hidden>משך המופע והפעילות משתנה לפי סוג האירוע והחבילה. לוח הזמנים המוצג באתר הוא דוגמה ולא התחייבות קבועה.</p></div>
+            <div><button type="button" aria-expanded="false" aria-controls="faq-answer-3">האם ניתן להתאים את המופע לקהל גדול?<span aria-hidden="true">+</span></button><p class="faq-answer" id="faq-answer-3" hidden>כן. לעמית יש מסלולים לקייטנות, מוסדות, רשויות, חברות וארגונים. יש לבדוק מראש את גודל הקהל, הבמה, ההגברה והמיקום.</p></div>
+            <div><button type="button" aria-expanded="false" aria-controls="faq-answer-4">מה צריך להכין במקום האירוע?<span aria-hidden="true">+</span></button><p class="faq-answer" id="faq-answer-4" hidden>לאחר בחירת המופע מתקבלת רשימת הכנות מסודרת בהתאם למקום, לקהל ולציוד שנדרש בפועל.</p></div>
+            <div><button type="button" aria-expanded="false" aria-controls="faq-answer-5">האם עמית מופיע גם באירועים עסקיים?<span aria-hidden="true">+</span></button><p class="faq-answer" id="faq-answer-5" hidden>כן. אפשר לבדוק התאמה של מופע, קטע אמנות חושים או קסמי קבלת פנים לאירוע חברה, רווחה, השקה או הרמת כוסית.</p></div>
+            <div><button type="button" aria-expanded="false" aria-controls="faq-answer-6">איך יעבדו הקורסים והמוצרים הדיגיטליים?<span aria-hidden="true">+</span></button><p class="faq-answer" id="faq-answer-6" hidden>לאחר אישור עמית וחיבור עתידי של סליקה ואזור אישי, המשתמש יוכל לרכוש ולקבל גישה לתוכן. כרגע מוצגת המחשה בלבד, ללא חיוב וללא פתיחת קורס.</p></div>
           </div>
         </div>
         <aside class="lang-box"><div class="kicker">שירות ישיר ונוח</div><h3>מתחילים מכמה פרטים קצרים</h3><p>לא צריך לדעת מראש איזו חבילה לבחור. מספרים מי הקהל, היכן מתקיים האירוע ומה התאריך המשוער, ועמית חוזר כדי להתאים את הכיוון.</p><div class="contact-quick"><a href="tel:+972523416151">052-341-6151</a><a href="https://wa.me/972523416151" target="_blank" rel="noopener">פתיחת וואטסאפ</a></div></aside>
@@ -1585,7 +1585,7 @@
   </div>
   <div class="site-modal" id="accessibility-statement-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="accessibility-statement-title">
     <div class="modal-backdrop" data-accessibility-statement-close></div>
-    <div class="modal-card legal-modal-card"><button class="modal-close" type="button" data-accessibility-statement-close aria-label="סגירה">×</button><h2 id="accessibility-statement-title">הצהרת נגישות</h2><div class="legal-copy"><section><h3>מחויבות לנגישות</h3><p>נעשה מאמץ לאפשר שימוש נוח באתר באמצעות מקלדת, כותרות ברורות, תוויות לטפסים, ניגודיות, טקסט חלופי לתמונות ותמיכה בהפחתת תנועה.</p></section><section><h3>כלי התאמה</h3><p>תפריט הנגישות כולל הגדלת טקסט, ניגודיות גבוהה, גווני אפור, הדגשת קישורים וריווח קריא. ניתן לאפס את ההתאמות בכל עת.</p></section><section><h3>מגבלות ידועות</h3><p>תוכן שמוטמע מאינסטגרם ושירותים חיצוניים נשלט על ידי אותם ספקים. ייתכנו בו מגבלות שאינן בשליטת האתר.</p></section><section><h3>דיווח על בעיית נגישות</h3><p>אם נתקלתם בקושי, אפשר לפנות לעמית בטלפון 052-341-6151 ולציין באיזה עמוד, מכשיר ודפדפן הופיעה הבעיה.</p></section><section><h3>עדכון</h3><p>הצהרה זו עודכנה ביולי 2026 ותיבדק שוב לפני השקה מסחרית מלאה.</p></section></div></div>
+    <div class="modal-card legal-modal-card"><button class="modal-close" type="button" data-accessibility-statement-close aria-label="סגירה">×</button><h2 id="accessibility-statement-title">הצהרת נגישות</h2><div class="legal-copy"><section><h3>מחויבות לנגישות</h3><p>עמית מיטרני פועל לאפשר לאנשים עם מוגבלות להשתמש באתר באופן שוויוני, מכבד, נוח ועצמאי. האתר נבנה ונבדק במטרה להתאים לדרישות תקנות שוויון זכויות לאנשים עם מוגבלות ולתקן הישראלי 5568, המבוסס על הנחיות WCAG 2.0 ברמה AA.</p></section><section><h3>התאמות שבוצעו באתר</h3><p>באתר קיימים ניווט באמצעות מקלדת, קישור דילוג לתוכן המרכזי, מבנה כותרות, תוויות לטפסים, משוב נגיש בשגיאות, טקסט חלופי לתמונות, מיקוד מקלדת נראה, תמיכה בהפחתת תנועה והתאמה למסכים בגדלים שונים.</p></section><section><h3>כלי התאמה</h3><p>תפריט הנגישות כולל הגדלת טקסט, ניגודיות גבוהה, גווני אפור, הדגשת קישורים וריווח קריא. אפשר לאפס את ההתאמות בכל עת. כלי זה משלים את התאמות הנגישות שבקוד האתר ואינו מחליף אותן.</p></section><section><h3>התאמות בשירות ובאירועים</h3><p>כדי לתאם התאמות נגישות הנדרשות במופע, באירוע או בדרך קבלת השירות, מומלץ לפנות לעמית מראש ולמסור את פרטי האירוע וההתאמה הנדרשת. התאמות הקשורות למקום האירוע נבדקות גם מול בעל המקום או המזמין.</p></section><section><h3>מגבלות ידועות</h3><p>תוכן ושירותים חיצוניים, כגון אינסטגרם, יוטיוב ווואטסאפ, נשלטים בידי הספקים שלהם. ייתכן שחלקים מסוימים בהם אינם נגישים במלואם. אם נתקלתם בתוכן שאינו נגיש, אפשר לפנות אלינו לקבלת מידע או חלופה נגישה ככל שניתן.</p></section><section><h3>פרטי איש הקשר לנגישות</h3><p><strong>עמית מיטרני</strong><br>טלפון: <a href="tel:+972523416151">052-341-6151</a><br>דואר אלקטרוני: <a href="mailto:amitmagician6@gmail.com">amitmagician6@gmail.com</a></p><p>בפנייה מומלץ לציין את העמוד שבו נתקלתם בקושי, הפעולה שניסיתם לבצע, סוג המכשיר והדפדפן, וטכנולוגיה מסייעת אם נעשה בה שימוש. עמית יעשה מאמץ לבדוק את הפנייה ולטפל בה בהקדם.</p></section><section><h3>עדכון ההצהרה</h3><p>הצהרה זו עודכנה ביום 13 באוגוסט 2026 לאחר בדיקת נגישות ותיקון רכיבי המקלדת והמידע הסמנטי באתר.</p></section></div></div>
   </div>
   <div class="site-modal" id="email-preview-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="email-preview-title">
     <div class="modal-backdrop" data-email-close></div>
@@ -2381,7 +2381,14 @@
     updateInvite(false);
 
     document.querySelectorAll(".faq > div").forEach((item) => {
-      item.querySelector("button").addEventListener("click", () => item.classList.toggle("open"));
+      const button = item.querySelector("button");
+      const answer = item.querySelector(".faq-answer");
+      button.addEventListener("click", () => {
+        const isOpen = button.getAttribute("aria-expanded") !== "true";
+        item.classList.toggle("open", isOpen);
+        button.setAttribute("aria-expanded", String(isOpen));
+        answer.hidden = !isOpen;
+      });
     });
 
     const leadForm = document.querySelector("#lead-form");
@@ -2441,14 +2448,27 @@
 
     const languageSwitcher = document.querySelector(".language-switcher");
     const languageControl = document.querySelector(".language-control");
-    languageSwitcher.addEventListener("click", (event) => {
-      const isOpen = languageControl.classList.toggle("open");
+    const languageMenu = document.querySelector("#language-menu");
+    const setLanguageMenuOpen = (isOpen, returnFocus = false) => {
+      languageControl.classList.toggle("open", isOpen);
       languageSwitcher.setAttribute("aria-expanded", String(isOpen));
+      languageMenu.hidden = !isOpen;
+      if (isOpen) languageMenu.removeAttribute("inert");
+      else languageMenu.setAttribute("inert", "");
+      if (!isOpen && returnFocus) languageSwitcher.focus();
+    };
+    languageSwitcher.addEventListener("click", () => {
+      setLanguageMenuOpen(languageSwitcher.getAttribute("aria-expanded") !== "true");
     });
     document.addEventListener("click", (event) => {
       if (!event.target.closest(".language-control")) {
-        languageControl.classList.remove("open");
-        languageSwitcher.setAttribute("aria-expanded", "false");
+        setLanguageMenuOpen(false);
+      }
+    });
+    languageControl.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && languageSwitcher.getAttribute("aria-expanded") === "true") {
+        event.preventDefault();
+        setLanguageMenuOpen(false, true);
       }
     });
 
