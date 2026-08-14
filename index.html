@@ -83,6 +83,9 @@
     .brand span { color:var(--gold); }
     .nav-links { display: flex; gap: 28px; color: #d0cdd8; font-size: 14px; font-weight: 600; }
     .nav-tools { display: flex; align-items: center; gap: 10px; }
+    .nav-accessibility { min-width:44px; min-height:44px; display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:0 10px; border:1px solid var(--line); border-radius:11px; color:#f2eff7; background:rgba(255,255,255,.04); font:inherit; font-weight:800; cursor:pointer; }
+    .nav-accessibility:hover { color:#16111d; border-color:var(--gold); background:var(--gold); }
+    .nav-accessibility-icon { font-size:19px; line-height:1; }
     .language-control { position: relative; }
     .language-switcher {
       display: inline-flex;
@@ -798,6 +801,8 @@
       .nav-links.mobile-open a { padding: 13px 14px; border-bottom: 1px solid var(--line); }
       .nav-links.mobile-open a:last-child { border-bottom: 0; }
       .nav-tools { gap: 7px; }
+      .nav-accessibility { padding:0; }
+      .nav-accessibility-label { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
       .language-switcher { min-width: 58px; width: 58px; height: 39px; padding: 0 10px; justify-content: center; font-size: 12px; }
       .language-switcher .language-label { display: none; }
       .language-switcher::after { margin: 0; }
@@ -1107,6 +1112,7 @@
       <a class="brand" href="#top">עמית <span>מיטרני</span></a>
       <div class="nav-links" id="primary-nav"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a></div>
       <div class="nav-tools">
+        <button class="nav-accessibility" type="button" data-accessibility-open aria-label="פתיחת כלי נגישות"><span class="nav-accessibility-icon" aria-hidden="true">♿</span><span class="nav-accessibility-label">נגישות</span></button>
         <div class="language-control">
           <button class="language-switcher" type="button" aria-expanded="false" aria-controls="language-menu" aria-label="בחירת שפה"><span>HE</span><span class="language-label">עברית</span></button>
           <div class="language-menu" id="language-menu" hidden inert>
@@ -2505,7 +2511,7 @@
     termsModal.querySelectorAll("[data-terms-close]").forEach((item) => item.addEventListener("click", () => closeModal(termsModal)));
     const accessibilityModal = document.querySelector("#accessibility-modal");
     const accessibilityStatementModal = document.querySelector("#accessibility-statement-modal");
-    document.querySelector("#accessibility").addEventListener("click", () => openModal(accessibilityModal));
+    document.querySelectorAll("[data-accessibility-open], #accessibility").forEach((item) => item.addEventListener("click", () => openModal(accessibilityModal)));
     accessibilityModal.querySelectorAll("[data-accessibility-close]").forEach((item) => item.addEventListener("click", () => closeModal(accessibilityModal)));
     document.querySelectorAll("[data-accessibility-statement]").forEach((item) => item.addEventListener("click", () => {
       closeModal(accessibilityModal);

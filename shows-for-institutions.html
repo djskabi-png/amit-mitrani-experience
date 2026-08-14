@@ -40,6 +40,9 @@
     .brand span { color:var(--gold); }
     .nav-links { display:flex; gap:18px; align-items:center; color:#ddd9e4; font-size:14px; }
     .nav-links a,.brand { min-height:44px; display:inline-flex; align-items:center; }
+    .nav-accessibility { min-width:44px; min-height:44px; display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:0 8px; border:1px solid var(--line); border-radius:11px; color:#f3f0f8; background:rgba(255,255,255,.04); font:inherit; font-weight:800; cursor:pointer; }
+    .nav-accessibility:hover { color:#18121c; border-color:var(--gold); background:var(--gold); }
+    .nav-accessibility-icon { font-size:19px; line-height:1; }
     .mobile-nav { display:none; position:relative; }
     .mobile-nav summary { min-width:44px; min-height:44px; display:grid; place-items:center; border:1px solid var(--line); border-radius:12px; cursor:pointer; list-style:none; }
     .mobile-nav summary::-webkit-details-marker { display:none; }
@@ -261,6 +264,9 @@
     .order-number { color:var(--gold); font-weight:900; direction:ltr; }
     body.modal-open { overflow:hidden; }
     @media(max-width:760px) {
+      nav { gap:8px; }
+      .nav-links { gap:7px; }
+      .nav-links .btn { min-height:44px; padding:10px 12px; font-size:13px; }
       .review-gallery { padding:17px; }
       .review-gallery-head { align-items:start; flex-direction:column; }
       .review-controls { align-self:flex-end; }
@@ -268,6 +274,8 @@
       .more-media { grid-template-columns:1fr; }
       .media-preview { min-height:245px; }
       .nav-links a:not(.btn) { display:none; }
+      .nav-accessibility { padding:0; }
+      .nav-accessibility-label { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
       .mobile-nav { display:block; }
       .hero h1 { font-size:clamp(38px,11vw,54px); line-height:1.02; }
       .lead { font-size:17px; line-height:1.65; }
@@ -306,7 +314,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">דילוג לתוכן המרכזי</a>
-  <header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><a href="en/school-camp-magic-show.html" lang="en" hreflang="en">EN</a><a href="fr/spectacle-magie-ecoles-centres.html" lang="fr" hreflang="fr">FR</a><a href="ru/magic-show-shkoly-lagerya.html" lang="ru" hreflang="ru">RU</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button></div><details class="mobile-nav"><summary aria-label="פתיחת תפריט">☰</summary><div class="mobile-nav-panel"><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">אירועים לחברות</a><a href="close-up-magic-receptions.html">קסמים בקבלת פנים</a><a href="magic-courses.html">קורסים דיגיטליים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="en/school-camp-magic-show.html" lang="en">English</a><a href="fr/spectacle-magie-ecoles-centres.html" lang="fr">Français</a><a href="ru/magic-show-shkoly-lagerya.html" lang="ru">Русский</a><a href="index.html#contact">יצירת קשר</a></div></details></nav></header>
+<header><nav class="shell"><a class="brand" href="index.html">עמית <span>מיטרני</span></a><div class="nav-links"><a href="shows-for-kids.html">לילדים</a><a href="shows-for-companies.html">לחברות</a><a href="close-up-magic-receptions.html">קבלת פנים</a><a href="magic-courses.html">קורסים</a><a href="shows-abroad-hebrew.html">בחו״ל</a><a href="en/school-camp-magic-show.html" lang="en" hreflang="en">EN</a><a href="fr/spectacle-magie-ecoles-centres.html" lang="fr" hreflang="fr">FR</a><a href="ru/magic-show-shkoly-lagerya.html" lang="ru" hreflang="ru">RU</a><button class="btn btn-gold" type="button" data-commerce-open>הזמנה ישירה</button><button class="nav-accessibility" type="button" data-a11y-open aria-controls="a11y-panel" aria-expanded="false" aria-label="פתיחת כלי נגישות"><span class="nav-accessibility-icon" aria-hidden="true">♿</span><span class="nav-accessibility-label">נגישות</span></button></div><details class="mobile-nav"><summary aria-label="פתיחת תפריט">☰</summary><div class="mobile-nav-panel"><a href="shows-for-kids.html">מופעים לילדים</a><a href="shows-for-companies.html">אירועים לחברות</a><a href="close-up-magic-receptions.html">קסמים בקבלת פנים</a><a href="magic-courses.html">קורסים דיגיטליים</a><a href="shows-abroad-hebrew.html">אירועים בחו״ל</a><a href="en/school-camp-magic-show.html" lang="en">English</a><a href="fr/spectacle-magie-ecoles-centres.html" lang="fr">Français</a><a href="ru/magic-show-shkoly-lagerya.html" lang="ru">Русский</a><a href="index.html#contact">יצירת קשר</a></div></details></nav></header>
   <main id="main-content">
     <div class="shell breadcrumbs"><a href="index.html">עמוד הבית</a> / מוסדות וקבוצות</div>
     <section class="hero shell">
@@ -373,20 +381,23 @@
   </div>
   <script>
     const a11yTrigger = document.querySelector("#a11y-trigger");
+    const a11yTriggers = document.querySelectorAll("[data-a11y-open], #a11y-trigger");
     const a11yPanel = document.querySelector("#a11y-panel");
+    let a11yOpener = a11yTrigger;
     const a11yClasses = { contrast: "a11y-contrast", font: "a11y-font", links: "a11y-links", gray: "a11y-gray" };
     const closeA11y = () => {
       a11yPanel.classList.remove("open");
       a11yPanel.setAttribute("inert", "");
-      a11yTrigger.setAttribute("aria-expanded", "false");
-      a11yTrigger.focus();
+      a11yTriggers.forEach(trigger => trigger.setAttribute("aria-expanded", "false"));
+      a11yOpener.focus();
     };
-    a11yTrigger.addEventListener("click", () => {
+    a11yTriggers.forEach(trigger => trigger.addEventListener("click", () => {
+      a11yOpener = trigger;
       a11yPanel.classList.add("open");
       a11yPanel.removeAttribute("inert");
-      a11yTrigger.setAttribute("aria-expanded", "true");
+      a11yTriggers.forEach(item => item.setAttribute("aria-expanded", String(item === trigger)));
       a11yPanel.querySelector("button").focus();
-    });
+    }));
     a11yPanel.querySelector("[data-a11y-close]").addEventListener("click", closeA11y);
     a11yPanel.querySelectorAll("[data-a11y]").forEach(button => button.addEventListener("click", () => {
       const className = a11yClasses[button.dataset.a11y];
