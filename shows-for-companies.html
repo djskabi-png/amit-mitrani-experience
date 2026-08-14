@@ -253,7 +253,9 @@
     body.a11y-contrast { --bg:#000; --panel:#000; --muted:#fff; background:#000; }
     body.a11y-font { font-size:120%; }
     body.a11y-links a { text-decoration:underline !important; text-decoration-thickness:2px !important; }
-    body.a11y-gray { filter:grayscale(1); }
+    body.a11y-gray > header,
+    body.a11y-gray > main,
+    body.a11y-gray > footer { filter:grayscale(1); }
     :focus-visible { outline:3px solid #fff; outline-offset:4px; }
     .order-success { display:none; padding:25px; border:1px solid rgba(101,212,169,.3); border-radius:18px; background:rgba(101,212,169,.08); text-align:center; }
     .order-success.show { display:block; }

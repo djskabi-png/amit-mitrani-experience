@@ -1062,7 +1062,9 @@
     .cookie-banner strong { display: block; margin-bottom: 4px; }
     .cookie-banner p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
     .cookie-actions { display: flex; gap: 8px; }
-    body.a11y-grayscale { filter: grayscale(1); }
+    body.a11y-grayscale > header,
+    body.a11y-grayscale > main,
+    body.a11y-grayscale > footer { filter: grayscale(1); }
     body.a11y-links a { text-decoration: underline !important; text-underline-offset: 3px; }
     body.a11y-readable { letter-spacing: .035em; line-height: 1.75; }
     @media (max-width: 760px) {
