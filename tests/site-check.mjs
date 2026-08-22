@@ -34,7 +34,7 @@ const home = read(path.join(root, "index.html"));
 assert.doesNotMatch(home, /מערכת הזמנות חכמה|רשימת שמות להצגה ראשונית|יחזקו את האתר בחיפושי Google/);
 assert.match(home, /id="invitation" hidden aria-hidden="true"/);
 assert.match(home, /const closeMobileMenu = \(\) =>/);
-assert.match(home, /הטופס אינו שולח הודעת דואר אלקטרוני/);
+assert.match(home, /הודעת דואר אלקטרוני נשלחת לעמית עם העתק לאדיר לצורך בקרה/);
 
 for (const locale of ["en", "fr", "ru"]) {
   const legal = read(path.join(root, locale, "legal.html"));
