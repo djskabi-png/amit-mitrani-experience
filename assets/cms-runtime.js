@@ -2,8 +2,8 @@ const FIREBASE_PROJECT_ID = "amit-mitrani-crm";
 const FIREBASE_API_KEY = "AIzaSyD_UIZZiiwrKrNMQQAtmO3m4HjVw38VhoY";
 const COLLECTION_NAME = "siteContent";
 
-const ignoredAncestors = "script, style, noscript, svg, input, textarea, select, option, [data-cms-ignore]";
-const textScopes = "header, main, footer";
+const ignoredTextAncestors = "script, style, noscript, svg, template, input, textarea, select, option, [data-cms-ignore]";
+const editableScopes = "header, main, footer";
 
 const pagePath = () => {
   const path = window.location.pathname || "/";
@@ -43,12 +43,61 @@ const textNodeIndex = (node) => [...node.parentNode.childNodes]
 const directTextNode = (element, index) => [...element.childNodes]
   .filter((item) => item.nodeType === Node.TEXT_NODE)[index];
 
-const contextLabel = (element, fallback) => {
-  const section = element.closest("section, article, header, footer, nav") || element.parentElement;
-  const heading = section?.querySelector("h1, h2, h3, h4, [class*='title']");
-  const text = heading?.textContent?.trim();
-  return (text && text !== fallback ? text : fallback).slice(0, 90);
+const cleanExcerpt = (value, limit = 74) => {
+  const clean = String(value || "").replace(/\s+/g, " ").trim();
+  if (!clean) return "ללא תוכן";
+  return clean.length > limit ? `${clean.slice(0, limit - 1)}…` : clean;
 };
+
+const humanizeId = (value) => String(value || "")
+  .replace(/[-_]+/g, " ")
+  .replace(/\b(hero|section|content|wrapper|container)\b/gi, "")
+  .replace(/\s+/g, " ")
+  .trim();
+
+const sectionInfo = (element) => {
+  const section = element?.closest?.("section, article, form, nav, header, footer")
+    || element?.closest?.("main")
+    || document.querySelector("main")
+    || document.body;
+  const scope = section.matches?.("header") ? "כותרת האתר"
+    : section.matches?.("footer") ? "תחתית האתר"
+      : section.matches?.("nav") ? "ניווט"
+        : section.matches?.("form") ? "טופס"
+          : "תוכן העמוד";
+  const heading = section.querySelector?.("h1, h2, h3, h4, [aria-label], [class*='title']");
+  const headingText = heading?.getAttribute?.("aria-label") || heading?.textContent;
+  const idText = humanizeId(section.id);
+  const label = cleanExcerpt(headingText || idText || scope, 64);
+  return {
+    groupId: selectorFor(section) || scope,
+    groupLabel: label,
+    groupScope: scope
+  };
+};
+
+const fieldRole = (element, kind, value = "") => {
+  if (kind === "image") return "תמונה";
+  if (kind === "video") return "סרטון";
+  if (kind === "link") return element.matches(".btn, button, [role='button']") ? "כפתור וקישור" : "קישור";
+  if (kind === "form") return "טקסט בטופס";
+  if (element.matches("h1")) return "כותרת ראשית";
+  if (element.matches("h2, h3, h4, h5, h6")) return "כותרת מקטע";
+  if (element.matches("button, .btn, [role='button']")) return "טקסט כפתור";
+  if (element.matches("a")) return "טקסט קישור";
+  if (element.matches("label")) return "תווית שדה";
+  if (element.matches("li")) return "פריט ברשימה";
+  if (element.matches("small, figcaption, caption")) return "כיתוב משני";
+  return String(value).length > 110 ? "פסקה" : "טקסט";
+};
+
+const descriptorId = (kind, selector, suffix = "") => `${kind}:${selector}${suffix}`;
+
+const addFieldContext = (field, element) => ({
+  ...field,
+  ...sectionInfo(element),
+  roleLabel: field.roleLabel || fieldRole(element, field.kind, field.value || field.alt || field.title || "")
+});
 
 const normalizePageUrl = (value) => {
   const input = String(value || "").trim();
@@ -103,93 +152,163 @@ const normalizeVideoUrl = (value) => {
   }
 };
 
-const descriptorId = (kind, selector, suffix = "") => `${kind}:${selector}${suffix}`;
-
-const scanEditableFields = () => {
-  const fields = [
-    {
-      id: "meta:title",
-      kind: "meta",
-      label: "כותרת הדפדפן והחיפוש",
-      selector: "title",
-      value: document.title
-    }
+const metaFields = () => {
+  const definitions = [
+    ["meta:title", "כותרת הדפדפן והחיפוש", "title", "value"],
+    ["meta:description", "תיאור העמוד במנועי חיפוש", 'meta[name="description"]', "content"],
+    ["meta:og-title", "כותרת השיתוף ברשתות", 'meta[property="og:title"]', "content"],
+    ["meta:og-description", "תיאור השיתוף ברשתות", 'meta[property="og:description"]', "content"],
+    ["meta:og-image", "תמונת השיתוף ברשתות", 'meta[property="og:image"]', "content"],
+    ["meta:twitter-title", "כותרת השיתוף בטוויטר", 'meta[name="twitter:title"]', "content"],
+    ["meta:twitter-description", "תיאור השיתוף בטוויטר", 'meta[name="twitter:description"]', "content"],
+    ["meta:twitter-image", "תמונת השיתוף בטוויטר", 'meta[name="twitter:image"]', "content"],
+    ["meta:canonical", "כתובת קנונית", 'link[rel="canonical"]', "href"]
   ];
 
-  const description = document.querySelector('meta[name="description"]');
-  if (description) {
-    fields.push({
-      id: "meta:description",
+  return definitions.flatMap(([id, label, selector, attribute]) => {
+    const element = selector === "title" ? document.querySelector("title") : document.querySelector(selector);
+    if (!element) return [];
+    const value = selector === "title" ? document.title : element.getAttribute(attribute) || "";
+    return [{
+      id,
       kind: "meta",
-      label: "תיאור העמוד במנועי חיפוש",
-      selector: 'meta[name="description"]',
-      value: description.content
-    });
-  }
+      label,
+      roleLabel: label,
+      selector,
+      attribute,
+      value,
+      groupId: "cms-seo",
+      groupLabel: "חיפוש ושיתוף",
+      groupScope: "הגדרות העמוד"
+    }];
+  });
+};
 
-  document.querySelectorAll(textScopes).forEach((scope) => {
+const scopedSelector = (tail) => editableScopes.split(", ").map((scope) => `${scope} ${tail}`).join(", ");
+
+const scanEditableFields = () => {
+  const fields = [...metaFields()];
+
+  document.querySelectorAll(editableScopes).forEach((scope) => {
     const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
     let node = walker.nextNode();
     while (node) {
       const parent = node.parentElement;
       const value = node.nodeValue?.trim() || "";
-      if (value && parent && !parent.closest(ignoredAncestors)) {
+      if (value && parent && !parent.closest(ignoredTextAncestors)) {
         const selector = selectorFor(parent);
         const index = textNodeIndex(node);
-        fields.push({
+        fields.push(addFieldContext({
           id: descriptorId("text", selector, `::${index}`),
           kind: "text",
-          label: contextLabel(parent, value),
+          label: cleanExcerpt(value),
           selector,
           textIndex: index,
           value
-        });
+        }, parent));
       }
       node = walker.nextNode();
     }
   });
 
-  document.querySelectorAll("img").forEach((element) => {
+  document.querySelectorAll(scopedSelector("img")).forEach((element) => {
     if (element.closest("[data-cms-ignore]")) return;
     const selector = selectorFor(element);
-    fields.push({
+    const pictureSources = element.closest("picture")
+      ? [...element.closest("picture").querySelectorAll("source[srcset]")].map((source) => source.getAttribute("srcset") || "")
+      : [];
+    fields.push(addFieldContext({
       id: descriptorId("image", selector),
       kind: "image",
-      label: contextLabel(element, element.alt || "תמונה"),
+      label: cleanExcerpt(element.alt || element.title || "תמונה"),
       selector,
       src: element.getAttribute("src") || "",
-      alt: element.getAttribute("alt") || ""
-    });
+      alt: element.getAttribute("alt") || "",
+      title: element.getAttribute("title") || "",
+      decorative: element.getAttribute("alt") === "",
+      pictureSources
+    }, element));
   });
 
-  document.querySelectorAll("video, iframe").forEach((element) => {
+  document.querySelectorAll(`${scopedSelector("video")}, ${scopedSelector("iframe")}`).forEach((element) => {
     if (element.closest("[data-cms-ignore]")) return;
     const current = element.getAttribute("src") || element.querySelector("source")?.getAttribute("src") || "";
     if (element.tagName === "IFRAME" && !/youtube|youtu\.be|vimeo/i.test(current)) return;
     const selector = selectorFor(element);
-    fields.push({
+    fields.push(addFieldContext({
       id: descriptorId("video", selector),
       kind: "video",
-      label: contextLabel(element, element.title || "סרטון"),
+      label: cleanExcerpt(element.title || "סרטון"),
       selector,
       src: current,
       title: element.getAttribute("title") || ""
-    });
+    }, element));
   });
 
-  document.querySelectorAll("main a[href]").forEach((element) => {
+  document.querySelectorAll(scopedSelector("a[href]")).forEach((element) => {
     if (element.closest("[data-cms-ignore]")) return;
     const selector = selectorFor(element);
-    fields.push({
+    fields.push(addFieldContext({
       id: descriptorId("link", selector),
       kind: "link",
-      label: contextLabel(element, element.textContent?.trim() || "קישור"),
+      label: cleanExcerpt(element.textContent || element.getAttribute("aria-label") || "קישור"),
       selector,
       href: element.getAttribute("href") || ""
-    });
+    }, element));
   });
 
-  return fields;
+  document.querySelectorAll(`${scopedSelector("input")}, ${scopedSelector("textarea")}, ${scopedSelector("select")}`).forEach((element) => {
+    if (element.closest("[data-cms-ignore]")) return;
+    const selector = selectorFor(element);
+    const placeholder = element.getAttribute("placeholder");
+    if (placeholder) {
+      fields.push(addFieldContext({
+        id: descriptorId("form", selector, "::placeholder"),
+        kind: "form",
+        label: `טקסט עזר: ${cleanExcerpt(placeholder, 54)}`,
+        selector,
+        attribute: "placeholder",
+        value: placeholder
+      }, element));
+    }
+    const ariaLabel = element.getAttribute("aria-label");
+    if (ariaLabel && ariaLabel !== placeholder) {
+      fields.push(addFieldContext({
+        id: descriptorId("form", selector, "::aria-label"),
+        kind: "form",
+        label: `שם נגיש: ${cleanExcerpt(ariaLabel, 54)}`,
+        selector,
+        attribute: "aria-label",
+        value: ariaLabel
+      }, element));
+    }
+    if (element.matches('input[type="submit"], input[type="button"]') && element.value) {
+      fields.push(addFieldContext({
+        id: descriptorId("form", selector, "::value"),
+        kind: "form",
+        label: `טקסט כפתור: ${cleanExcerpt(element.value, 54)}`,
+        selector,
+        attribute: "value",
+        value: element.value
+      }, element));
+    }
+    if (element.matches("select")) {
+      [...element.options].forEach((option, optionIndex) => {
+        if (!option.textContent.trim()) return;
+        fields.push(addFieldContext({
+          id: descriptorId("form", selector, `::option-${optionIndex}`),
+          kind: "form",
+          label: `אפשרות בחירה: ${cleanExcerpt(option.textContent, 50)}`,
+          selector,
+          attribute: "optionText",
+          optionIndex,
+          value: option.textContent.trim()
+        }, element));
+      });
+    }
+  });
+
+  return fields.map((field, index) => ({ ...field, order: index }));
 };
 
 const applyOverride = (entry) => {
@@ -198,7 +317,7 @@ const applyOverride = (entry) => {
     if (entry.selector === "title") document.title = String(entry.value || "").slice(0, 180);
     else {
       const element = document.querySelector(entry.selector);
-      if (element) element.setAttribute("content", String(entry.value || "").slice(0, 500));
+      if (element) element.setAttribute(entry.attribute || "content", String(entry.value || "").slice(0, 800));
     }
     return;
   }
@@ -216,10 +335,27 @@ const applyOverride = (entry) => {
     return;
   }
 
+  if (entry.kind === "form") {
+    if (entry.attribute === "optionText") {
+      const option = element.options?.[Number(entry.optionIndex)];
+      if (option) option.textContent = String(entry.value || "").slice(0, 300);
+    } else if (entry.attribute) {
+      element.setAttribute(entry.attribute, String(entry.value || "").slice(0, 500));
+      if (entry.attribute === "value") element.value = String(entry.value || "").slice(0, 500);
+    }
+    return;
+  }
+
   if (entry.kind === "image") {
     const src = normalizePageUrl(entry.src);
-    if (src) element.setAttribute("src", src);
-    element.setAttribute("alt", String(entry.alt || "").slice(0, 300));
+    if (src) {
+      element.setAttribute("src", src);
+      element.closest("picture")?.querySelectorAll("source[srcset]").forEach((source) => source.setAttribute("srcset", src));
+    }
+    const decorative = Boolean(entry.decorative);
+    element.setAttribute("alt", decorative ? "" : String(entry.alt || "").slice(0, 300));
+    if (entry.title) element.setAttribute("title", String(entry.title).slice(0, 300));
+    else element.removeAttribute("title");
     return;
   }
 
@@ -271,7 +407,8 @@ window.AmitCMS = {
   normalizeVideoUrl,
   pageId,
   pagePath,
-  scanEditableFields
+  scanEditableFields,
+  selectorFor
 };
 document.documentElement.dataset.cmsReady = "true";
 

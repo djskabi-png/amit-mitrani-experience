@@ -1,0 +1,20 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in [
+          'djskabi@gmail.com',
+          'amitmagician6@gmail.com'
+        ];
+    }
+
+    match /cms-media/{allPaths=**} {
+      allow read: if true;
+      allow create, update: if isAdmin()
+        && request.resource.size < 80 * 1024 * 1024
+        && request.resource.contentType.matches('(image|video)/.*');
+      allow delete: if isAdmin();
+    }
+  }
+}

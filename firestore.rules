@@ -42,16 +42,34 @@ service cloud.firestore {
       allow read: if true;
       allow create, update: if isAdmin()
         && request.resource.data.keys().hasOnly([
-          'pagePath', 'payload', 'previousPayload', 'updatedAt', 'updatedBy'
+          'pagePath', 'payload', 'draftPayload', 'previousPayload', 'history',
+          'updatedAt', 'updatedBy', 'draftUpdatedAt', 'draftUpdatedBy',
+          'publishedAt', 'publishedBy'
+        ])
+        && request.resource.data.keys().hasAll([
+          'pagePath', 'payload', 'draftPayload', 'previousPayload', 'history',
+          'updatedAt', 'updatedBy'
         ])
         && request.resource.data.pagePath is string
         && request.resource.data.pagePath.size() <= 500
         && request.resource.data.payload is string
         && request.resource.data.payload.size() <= 850000
+        && request.resource.data.draftPayload is string
+        && request.resource.data.draftPayload.size() <= 850000
         && request.resource.data.previousPayload is string
         && request.resource.data.previousPayload.size() <= 850000
+        && request.resource.data.history is list
+        && request.resource.data.history.size() <= 5
         && request.resource.data.updatedAt == request.time
-        && request.resource.data.updatedBy == request.auth.token.email;
+        && request.resource.data.updatedBy == request.auth.token.email
+        && (!request.resource.data.keys().hasAny(['draftUpdatedAt'])
+          || request.resource.data.draftUpdatedAt is timestamp)
+        && (!request.resource.data.keys().hasAny(['draftUpdatedBy'])
+          || request.resource.data.draftUpdatedBy == request.auth.token.email)
+        && (!request.resource.data.keys().hasAny(['publishedAt'])
+          || request.resource.data.publishedAt is timestamp)
+        && (!request.resource.data.keys().hasAny(['publishedBy'])
+          || request.resource.data.publishedBy == request.auth.token.email);
       allow delete: if isAdmin();
     }
 

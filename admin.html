@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex,nofollow">
   <title>מערכת הניהול | עמית מיטרני</title>
   <meta name="description" content="מערכת ניהול הפניות והאירועים של עמית מיטרני">
-  <link rel="stylesheet" href="assets/admin.css?v=2">
+  <link rel="stylesheet" href="assets/admin.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#admin-main">דילוג לתוכן המרכזי</a>
@@ -56,31 +56,56 @@
         <section class="content-view" id="content-view">
           <div class="cms-intro">
             <div>
-              <span class="eyebrow">ניהול תוכן</span>
-              <h2>עורכים את האתר ורואים את השינוי לפני הפרסום</h2>
-              <p>בחרו עמוד, חפשו שדה וערכו טקסט, תמונה, סרטון או קישור. השמירה מפרסמת את השינוי מיד ויוצרת נקודת חזרה אחת.</p>
+              <span class="eyebrow">ניהול האתר</span>
+              <h2>בוחרים עמוד, לוחצים על התוכן ומשנים</h2>
+              <p>השינויים נשמרים תחילה כטיוטה. האתר הציבורי משתנה רק לאחר לחיצה מפורשת על פרסום.</p>
             </div>
-            <div class="cms-publish-note">
-              <strong>מדיה חדשה</strong>
-              <span>אפשר לבחור תמונה קיימת או להדביק כתובת מאובטחת. העלאה ישירה מהמחשב תופעל לאחר חיבור אחסון קבצים.</span>
+            <ol class="cms-steps" aria-label="שלבי עריכת תוכן">
+              <li><strong>1</strong><span>בוחרים עמוד ומקטע</span></li>
+              <li><strong>2</strong><span>עורכים ושומרים טיוטה</span></li>
+              <li><strong>3</strong><span>בודקים ומפרסמים</span></li>
+            </ol>
+          </div>
+
+          <div class="cms-workflow-bar" aria-label="מצב העריכה והפרסום">
+            <div>
+              <span class="cms-state-pill published" id="cms-state-pill">האתר מעודכן</span>
+              <strong id="cms-current-page-name">עמוד הבית בעברית</strong>
+              <small id="cms-last-save">טוען את מצב העמוד...</small>
+            </div>
+            <div class="cms-workflow-actions">
+              <button class="btn" id="cms-discard" type="button" disabled>ביטול שינויים</button>
+              <button class="btn" id="cms-save-draft" type="button" disabled>שמירת טיוטה</button>
+              <button class="btn btn-primary" id="cms-publish" type="button" disabled>פרסום באתר</button>
             </div>
           </div>
 
-          <div class="cms-layout">
+          <div class="cms-layout cms-layout-v2">
             <aside class="panel cms-sidebar">
               <div class="panel-head">
                 <div>
-                  <span class="eyebrow">עמוד לעריכה</span>
-                  <h2>עמודי האתר</h2>
+                  <span class="eyebrow">מה עורכים?</span>
+                  <h2>עמוד ומקטע</h2>
                 </div>
               </div>
               <div class="cms-sidebar-body">
-                <label for="cms-page-select">בחירת עמוד</label>
+                <label for="cms-page-select">עמוד באתר</label>
                 <select class="control" id="cms-page-select"></select>
-                <label for="cms-field-search">חיפוש בשדות</label>
-                <input class="control" id="cms-field-search" type="search" placeholder="כותרת, טקסט, תמונה או קישור">
+
+                <div class="cms-content-filters" aria-label="סינון סוגי תוכן">
+                  <button class="cms-filter active" type="button" data-cms-kind="all">הכול</button>
+                  <button class="cms-filter" type="button" data-cms-kind="text">טקסט</button>
+                  <button class="cms-filter" type="button" data-cms-kind="image">תמונות</button>
+                  <button class="cms-filter" type="button" data-cms-kind="link">קישורים</button>
+                  <button class="cms-filter" type="button" data-cms-kind="meta">חיפוש</button>
+                </div>
+
+                <label for="cms-field-search">חיפוש בתוך העמוד</label>
+                <input class="control" id="cms-field-search" type="search" placeholder="לדוגמה: כותרת, טופס או תמונה">
+
+                <p class="cms-sidebar-hint">אפשר גם ללחוץ ישירות על תוכן בתצוגה המקדימה.</p>
                 <div class="cms-field-list" id="cms-field-list">
-                  <p class="empty">טוען את שדות העמוד...</p>
+                  <p class="empty">טוען את מקטעי העמוד...</p>
                 </div>
               </div>
             </aside>
@@ -88,37 +113,46 @@
             <section class="panel cms-editor-panel">
               <div class="panel-head cms-editor-head">
                 <div>
-                  <span class="eyebrow" id="cms-field-kind">שדה תוכן</span>
-                  <h2 id="cms-field-title">בחרו שדה לעריכה</h2>
+                  <span class="eyebrow" id="cms-field-kind">עריכת תוכן</span>
+                  <h2 id="cms-field-title">בחרו תוכן לעריכה</h2>
+                  <small id="cms-field-location"></small>
                 </div>
                 <span class="cms-change-pill" id="cms-change-count">אין שינויים</span>
               </div>
               <form class="cms-editor-form" id="cms-editor-form">
                 <div class="cms-editor-empty" id="cms-editor-empty">
-                  <span class="brand-mark" aria-hidden="true">AM</span>
-                  <h3>הכול מתחיל בבחירת שדה</h3>
-                  <p>בחרו שדה מהרשימה. המיקום שלו יודגש בתצוגה המקדימה.</p>
+                  <span class="cms-pointer-icon" aria-hidden="true">↖</span>
+                  <h3>לחצו על משהו בעמוד</h3>
+                  <p>אפשר לבחור מקטע מהרשימה או ללחוץ על טקסט, תמונה וכפתור בתצוגה.</p>
                 </div>
                 <div id="cms-editor-fields" hidden></div>
               </form>
               <div class="cms-editor-actions">
-                <button class="btn" id="cms-reset-field" type="button" disabled>איפוס השדה</button>
-                <button class="btn" id="cms-rollback" type="button" disabled>חזרה לפרסום הקודם</button>
-                <button class="btn btn-primary" id="cms-save" type="button" disabled>שמירה ופרסום</button>
+                <button class="btn" id="cms-reset-field" type="button" disabled>החזרת השדה למקור</button>
+                <button class="btn" id="cms-rollback" type="button" disabled>שחזור פרסום קודם</button>
               </div>
               <p class="cms-status" id="cms-status" role="status" aria-live="polite"></p>
             </section>
 
             <section class="panel cms-preview-panel">
-              <div class="panel-head">
+              <div class="panel-head cms-preview-head">
                 <div>
-                  <span class="eyebrow">תצוגה מקדימה</span>
+                  <span class="eyebrow">תצוגה מקדימה חיה</span>
                   <h2 id="cms-preview-title">העמוד הראשי</h2>
                 </div>
-                <a class="btn btn-quiet" id="cms-open-page" href="./" target="_blank" rel="noopener">פתיחה בלשונית חדשה</a>
+                <div class="cms-preview-actions">
+                  <div class="cms-device-switch" aria-label="גודל התצוגה המקדימה">
+                    <button class="active" type="button" data-cms-device="desktop" aria-label="תצוגת מחשב">מחשב</button>
+                    <button type="button" data-cms-device="mobile" aria-label="תצוגת טלפון">נייד</button>
+                  </div>
+                  <a class="btn btn-quiet" id="cms-open-page" href="./" target="_blank" rel="noopener">פתיחה באתר</a>
+                </div>
               </div>
-              <div class="cms-preview-frame">
-                <iframe id="cms-preview" title="תצוגה מקדימה של העמוד לעריכה"></iframe>
+              <div class="cms-preview-tip">לחצו על תוכן בעמוד כדי לערוך אותו</div>
+              <div class="cms-preview-stage" id="cms-preview-stage" data-device="desktop">
+                <div class="cms-preview-frame">
+                  <iframe id="cms-preview" title="תצוגה מקדימה של העמוד לעריכה"></iframe>
+                </div>
               </div>
             </section>
           </div>
@@ -149,7 +183,6 @@
                   <option value="closed">לא רלוונטי</option>
                 </select>
                 <button class="btn" id="export-button" type="button">יצוא CSV</button>
-                <button class="btn" id="demo-button" type="button">הוספת נתוני הדגמה</button>
               </div>
             </div>
             <div class="lead-list" id="lead-list">
@@ -178,7 +211,20 @@
     </section>
   </main>
 
+  <dialog class="admin-confirm" id="admin-confirm" aria-labelledby="admin-confirm-title" aria-describedby="admin-confirm-message">
+    <form method="dialog" class="admin-confirm-card" id="admin-confirm-form">
+      <span class="eyebrow" id="admin-confirm-eyebrow">אישור פעולה</span>
+      <h2 id="admin-confirm-title">להמשיך?</h2>
+      <p id="admin-confirm-message"></p>
+      <p class="admin-confirm-note" id="admin-confirm-note"></p>
+      <div class="admin-confirm-actions">
+        <button class="btn" id="admin-confirm-cancel" type="button">חזרה לעריכה</button>
+        <button class="btn btn-primary" id="admin-confirm-approve" type="submit" value="approve">אישור</button>
+      </div>
+    </form>
+  </dialog>
+
   <div class="toast" id="admin-toast" role="status"></div>
-  <script type="module" src="assets/admin.js?v=6"></script>
+  <script type="module" src="assets/admin.js?v=8"></script>
 </body>
 </html>

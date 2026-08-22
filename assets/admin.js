@@ -1,5 +1,5 @@
 import { auth, db } from "./firebase-config.js";
-import { startCms } from "./cms-admin.js?v=2";
+import { startCms } from "./cms-admin.js?v=4";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -9,7 +9,6 @@ import {
 import {
   addDoc,
   collection,
-  deleteDoc,
   doc,
   onSnapshot,
   orderBy,
@@ -168,7 +167,6 @@ const selectLead = (id) => {
       <button class="btn btn-primary" id="save-lead" type="button">שמירת עדכון</button>
       <a class="btn" href="${whatsappHref(lead.phone, lead.name)}" target="_blank" rel="noopener">וואטסאפ</a>
       <a class="btn" href="${phoneHref(lead.phone)}">חיוג</a>
-      <button class="btn btn-danger" id="delete-lead" type="button">מחיקה</button>
     </div>
   `;
 
@@ -198,13 +196,6 @@ const selectLead = (id) => {
     showToast("הפנייה עודכנה.");
   });
 
-  document.querySelector("#delete-lead").addEventListener("click", async () => {
-    if (!confirm("למחוק את הפנייה? הפעולה אינה ניתנת לביטול.")) return;
-    await deleteDoc(doc(db, "leads", id));
-    selectedLeadId = "";
-    leadDetail.innerHTML = '<h3>פרטי הפנייה</h3><p class="empty">הפנייה נמחקה.</p>';
-    showToast("הפנייה נמחקה.");
-  });
 };
 
 const renderTasks = () => {
@@ -216,7 +207,6 @@ const renderTasks = () => {
     <div class="quick-item ${task.done ? "done" : ""}">
       <input type="checkbox" ${task.done ? "checked" : ""} data-task-toggle="${escapeHtml(task.id)}" aria-label="סימון משימה">
       <span>${escapeHtml(task.title)}</span>
-      <button type="button" data-task-delete="${escapeHtml(task.id)}" aria-label="מחיקת משימה">מחיקה</button>
     </div>
   `).join("");
 
@@ -225,9 +215,6 @@ const renderTasks = () => {
       done: checkbox.checked,
       updatedAt: serverTimestamp()
     }));
-  });
-  taskList.querySelectorAll("[data-task-delete]").forEach((button) => {
-    button.addEventListener("click", () => deleteDoc(doc(db, "tasks", button.dataset.taskDelete)));
   });
 };
 
@@ -267,27 +254,6 @@ taskForm.addEventListener("submit", async (event) => {
   await addDoc(collection(db, "tasks"), { title: title.slice(0, 120), done: false, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
   taskForm.reset();
   showToast("המשימה נוספה.");
-});
-
-document.querySelector("#demo-button").addEventListener("click", async () => {
-  if (leads.some((lead) => lead.demo)) {
-    showToast("נתוני ההדגמה כבר קיימים.");
-    return;
-  }
-  const now = serverTimestamp();
-  const examples = [
-    { name: "משפחת ישראלי", phone: "050-0000000", interest: "יום הולדת לילדים", date: "", city: "ראשון לציון", participants: "35", message: "מבקשים להבין התאמה לגילאי 8 ולבדוק תאריך.", status: "pending" },
-    { name: "מנהלת רווחה, חברת הדגמה", phone: "050-0000001", interest: "אירוע חברה או רווחה", date: "", city: "תל אביב", participants: "120", message: "קבלת פנים ומופע מרכזי לעובדי החברה.", status: "quoted" },
-    { name: "משפחת כהן", phone: "050-0000002", interest: "בר או בת מצווה", date: "", city: "רחובות", participants: "80", message: "אירוע ערב למשפחה ולחברים.", status: "booked" }
-  ];
-  await Promise.all(examples.map((item) => addDoc(collection(db, "leads"), {
-    ...item,
-    source: "נתוני הדגמה",
-    demo: true,
-    createdAt: now,
-    updatedAt: now
-  })));
-  showToast("נוספו נתוני הדגמה מסומנים.");
 });
 
 document.querySelector("#export-button").addEventListener("click", () => {
