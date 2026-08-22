@@ -952,7 +952,12 @@ const resetSelectedField = async () => {
   if (field) renderEditor(field);
   renderFieldList();
   updateWorkflowState();
-  setStatus("השדה הוחזר לתוכן המקורי. שמרו טיוטה כדי לשמור את האיפוס.");
+  setStatus(
+    isDirty()
+      ? "השדה הוחזר למקור. נשארו שינויים אחרים שאפשר לשמור כטיוטה."
+      : "השדה הוחזר למקור. אין שינויים לשמירה.",
+    "success"
+  );
 };
 
 const rollback = async () => {

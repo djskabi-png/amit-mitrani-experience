@@ -16,7 +16,10 @@ assert.match(adminHtml, /id="admin-confirm-approve"/u, "Confirmation must expose
 assert.doesNotMatch(cmsJs, /\bconfirm\s*\(/u, "CMS must not use blocking browser-native confirms");
 assert.doesNotMatch(adminJs, /\bconfirm\s*\(/u, "CRM must not use blocking browser-native confirms");
 assert.doesNotMatch(adminHtml, /demo-button/u, "Production admin must not expose demo-data controls");
-assert.doesNotMatch(adminJs, /deleteDoc|delete-lead|data-task-delete/u, "Daily admin must not expose irreversible lead or task deletion");
+assert.doesNotMatch(adminJs, /delete-lead/u, "Daily admin must not expose irreversible lead deletion");
+assert.match(adminJs, /data-task-delete/u, "Daily admin must let authorized users remove obsolete tasks");
+assert.match(adminJs, /למחוק את המשימה/u, "Task deletion must require explicit confirmation");
+assert.match(adminJs, /aria-busy/u, "Material CRM actions must prevent duplicate submission while saving");
 
 for (const email of ["djskabi@gmail.com", "amitmagician6@gmail.com"]) {
   assert.match(firestoreRules, new RegExp(email.replace(".", "\\."), "u"), `Firestore must authorize ${email}`);

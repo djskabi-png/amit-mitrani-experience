@@ -1,5 +1,5 @@
 import { auth, db } from "./firebase-config.js";
-import { startCms } from "./cms-admin.js?v=4";
+import { startCms } from "./cms-admin.js?v=5";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -9,6 +9,7 @@ import {
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   onSnapshot,
   orderBy,
@@ -67,6 +68,64 @@ const showToast = (message) => {
   toast.classList.add("show");
   clearTimeout(showToast.timer);
   showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600);
+};
+
+const confirmAction = ({ title, message, approveLabel = "אישור" }) => new Promise((resolve) => {
+  const dialog = document.querySelector("#admin-confirm");
+  const form = document.querySelector("#admin-confirm-form");
+  const cancel = document.querySelector("#admin-confirm-cancel");
+  const approve = document.querySelector("#admin-confirm-approve");
+  if (!dialog?.showModal || !form || !cancel || !approve) {
+    showToast("לא ניתן לפתוח את חלון האישור. לא בוצע שינוי.");
+    resolve(false);
+    return;
+  }
+
+  let settled = false;
+  const finish = (approved) => {
+    if (settled) return;
+    settled = true;
+    form.removeEventListener("submit", onSubmit);
+    cancel.removeEventListener("click", onCancel);
+    dialog.removeEventListener("cancel", onCancel);
+    if (dialog.open) dialog.close();
+    resolve(approved);
+  };
+  const onSubmit = (event) => {
+    event.preventDefault();
+    finish(true);
+  };
+  const onCancel = (event) => {
+    event.preventDefault();
+    finish(false);
+  };
+
+  document.querySelector("#admin-confirm-eyebrow").textContent = "אישור פעולה";
+  document.querySelector("#admin-confirm-title").textContent = title;
+  document.querySelector("#admin-confirm-message").textContent = message;
+  document.querySelector("#admin-confirm-note").hidden = true;
+  approve.textContent = approveLabel;
+  form.addEventListener("submit", onSubmit);
+  cancel.addEventListener("click", onCancel);
+  dialog.addEventListener("cancel", onCancel);
+  dialog.showModal();
+  cancel.focus();
+});
+
+const runButtonAction = async (button, action, successMessage, errorMessage) => {
+  if (!button || button.disabled) return;
+  button.disabled = true;
+  button.setAttribute("aria-busy", "true");
+  try {
+    await action();
+    showToast(successMessage);
+  } catch (error) {
+    console.error(error);
+    showToast(errorMessage);
+  } finally {
+    button.disabled = false;
+    button.removeAttribute("aria-busy");
+  }
 };
 
 const formatDate = (value) => {
@@ -154,7 +213,7 @@ const selectLead = (id) => {
       <div class="detail-row"><small>מקום</small><strong>${escapeHtml([lead.country, lead.city].filter(Boolean).join(", ") || "לא צוין")}</strong></div>
       <div class="detail-row"><small>מספר משתתפים</small><strong>${escapeHtml(lead.participants || "לא צוין")}</strong></div>
       <div class="detail-row"><small>פרטים נוספים</small><span>${escapeHtml(lead.message || "לא נכתבו פרטים נוספים")}</span></div>
-      <div class="detail-row"><small>התראת מייל</small><strong>${lead.notificationStatus === "sent" ? "נשלחה" : "ממתינה לחיבור שירות מייל"}</strong></div>
+      <div class="detail-row"><small>התראת מייל</small><strong>${lead.notificationStatus === "sent" ? "נשלחה" : lead.notificationStatus === "failed" ? "השליחה נכשלה" : "ממתינה לשליחה"}</strong></div>
     </div>
     <label><small>סטטוס טיפול</small>
       <select class="control" id="detail-status">
@@ -170,21 +229,21 @@ const selectLead = (id) => {
     </div>
   `;
 
-  document.querySelector("#approve-lead")?.addEventListener("click", async () => {
-    await updateDoc(doc(db, "leads", id), {
+  document.querySelector("#approve-lead")?.addEventListener("click", async (event) => {
+    if (!(await confirmAction({ title: "לאשר את הבקשה?", message: "הסטטוס ישתנה לאושר ויישמר במערכת.", approveLabel: "אישור הבקשה" }))) return;
+    runButtonAction(event.currentTarget, () => updateDoc(doc(db, "leads", id), {
       status: "approved",
       approvedAt: serverTimestamp(),
       updatedAt: serverTimestamp()
-    });
-    showToast("הבקשה אושרה.");
+    }), "הבקשה אושרה.", "האישור לא נשמר. נסו שוב.");
   });
 
-  document.querySelector("#decline-lead")?.addEventListener("click", async () => {
-    await updateDoc(doc(db, "leads", id), {
+  document.querySelector("#decline-lead")?.addEventListener("click", async (event) => {
+    if (!(await confirmAction({ title: "לסמן כלא מאושרת?", message: "הסטטוס ישתנה ללא אושר ויישמר במערכת.", approveLabel: "אי אישור" }))) return;
+    runButtonAction(event.currentTarget, () => updateDoc(doc(db, "leads", id), {
       status: "declined",
       updatedAt: serverTimestamp()
-    });
-    showToast("הבקשה סומנה כלא מאושרת.");
+    }), "הבקשה סומנה כלא מאושרת.", "העדכון לא נשמר. נסו שוב.");
   });
 
   document.querySelector("#save-lead").addEventListener("click", async () => {
@@ -207,6 +266,7 @@ const renderTasks = () => {
     <div class="quick-item ${task.done ? "done" : ""}">
       <input type="checkbox" ${task.done ? "checked" : ""} data-task-toggle="${escapeHtml(task.id)}" aria-label="סימון משימה">
       <span>${escapeHtml(task.title)}</span>
+      <button type="button" data-task-delete="${escapeHtml(task.id)}" aria-label="מחיקת משימה">מחיקה</button>
     </div>
   `).join("");
 
@@ -215,6 +275,17 @@ const renderTasks = () => {
       done: checkbox.checked,
       updatedAt: serverTimestamp()
     }));
+  });
+  taskList.querySelectorAll("[data-task-delete]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      if (!(await confirmAction({ title: "למחוק את המשימה?", message: "המשימה תוסר מרשימת העבודה.", approveLabel: "מחיקת המשימה" }))) return;
+      runButtonAction(
+        button,
+        () => deleteDoc(doc(db, "tasks", button.dataset.taskDelete)),
+        "המשימה נמחקה.",
+        "המשימה לא נמחקה. נסו שוב."
+      );
+    });
   });
 };
 
