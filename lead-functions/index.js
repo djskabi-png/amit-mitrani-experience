@@ -1,11 +1,14 @@
 import { initializeApp } from "firebase-admin/app";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
-import { onDocumentCreated, onDocumentUpdated } from "firebase-functions/v2/firestore";
+import { defineSecret } from "firebase-functions/params";
+import { onDocumentCreated } from "firebase-functions/v2/firestore";
+import nodemailer from "nodemailer";
 
 initializeApp();
 const db = getFirestore();
 const AMIT_EMAIL = "amitmagician6@gmail.com";
 const ADIR_EMAIL = "djskabi@gmail.com";
+const SMTP_PASSWORD = defineSecret("AMIT_SMTP_PASSWORD");
 
 const text = (value, fallback = "לא צוין") => String(value ?? "").trim() || fallback;
 const escapeHtml = (value) => text(value).replace(/[&<>"']/g, (character) => ({
@@ -31,49 +34,63 @@ const leadLines = (lead, leadId) => [
 
 export const notifyAmitOfLead = onDocumentCreated({
   document: "leads/{leadId}",
-  region: "me-west1"
+  region: "me-west1",
+  secrets: [SMTP_PASSWORD]
 }, async (event) => {
   const lead = event.data?.data();
   if (!lead) return;
   const leadId = event.params.leadId;
   const lines = leadLines(lead, leadId);
   const subject = `פנייה חדשה מהאתר: ${text(lead.interest, "פנייה כללית")}`;
-  const mailRef = db.collection("mail").doc(`lead-${leadId}`);
   const leadRef = db.collection("leads").doc(leadId);
-  const batch = db.batch();
-  batch.create(mailRef, {
-    to: [AMIT_EMAIL],
-    cc: [ADIR_EMAIL],
-    replyTo: text(lead.email, ADIR_EMAIL),
-    message: {
-      subject,
-      text: lines.join("\n"),
-      html: `<div dir="rtl" style="font-family:Arial,sans-serif;line-height:1.7"><h2>${escapeHtml(subject)}</h2>${lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("")}<p><a href="https://amitgic.co.il/admin.html">פתיחת מערכת הניהול</a></p></div>`
-    },
-    leadId,
-    createdAt: FieldValue.serverTimestamp()
+  const claimed = await db.runTransaction(async (transaction) => {
+    const current = await transaction.get(leadRef);
+    if (current.data()?.notificationAttemptId) return false;
+    transaction.set(leadRef, {
+      notificationAttemptId: event.id,
+      notificationStatus: "sending",
+      notificationStartedAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp()
+    }, { merge: true });
+    return true;
   });
-  batch.set(leadRef, {
-    notificationStatus: "queued",
-    notificationQueuedAt: FieldValue.serverTimestamp(),
-    updatedAt: FieldValue.serverTimestamp()
-  }, { merge: true });
-  await batch.commit();
-});
+  if (!claimed) return;
 
-export const syncLeadEmailDelivery = onDocumentUpdated({
-  document: "mail/{messageId}",
-  region: "me-west1"
-}, async (event) => {
-  const mail = event.data?.after.data();
-  if (!mail?.leadId) return;
-  const state = String(mail.delivery?.state || "").toUpperCase();
-  if (!state || ["PENDING", "PROCESSING"].includes(state)) return;
-  const notificationStatus = state === "SUCCESS" ? "sent" : "failed";
-  await db.collection("leads").doc(mail.leadId).set({
-    notificationStatus,
-    notificationMessageId: event.params.messageId,
-    notificationUpdatedAt: FieldValue.serverTimestamp(),
-    updatedAt: FieldValue.serverTimestamp()
-  }, { merge: true });
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: ADIR_EMAIL,
+      pass: SMTP_PASSWORD.value()
+    }
+  });
+
+  try {
+    const result = await transporter.sendMail({
+      from: `"אתר עמית מיטרני" <${ADIR_EMAIL}>`,
+      to: AMIT_EMAIL,
+      cc: ADIR_EMAIL,
+      replyTo: text(lead.email, AMIT_EMAIL),
+      subject,
+      text: `${lines.join("\n")}\n\nמערכת הניהול: https://amitgic.co.il/admin.html`,
+      html: `<div dir="rtl" style="font-family:Arial,sans-serif;line-height:1.7"><h2>${escapeHtml(subject)}</h2>${lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("")}<p><a href="https://amitgic.co.il/admin.html">פתיחת מערכת הניהול</a></p></div>`
+    });
+    await leadRef.set({
+      notificationStatus: "sent",
+      notificationMessageId: result.messageId || "",
+      notificationAccepted: result.accepted || [],
+      notificationRejected: result.rejected || [],
+      notificationSentAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp()
+    }, { merge: true });
+  } catch (error) {
+    await leadRef.set({
+      notificationStatus: "failed",
+      notificationError: String(error?.message || error).slice(0, 500),
+      notificationFailedAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp()
+    }, { merge: true });
+    throw error;
+  }
 });
