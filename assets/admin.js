@@ -1,5 +1,5 @@
 import { auth, db } from "./firebase-config.js";
-import { startCms } from "./cms-admin.js?v=5";
+import { startCms } from "./cms-admin.js?v=6";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
