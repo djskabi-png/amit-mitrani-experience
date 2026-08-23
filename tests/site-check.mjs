@@ -71,6 +71,11 @@ for (const url of indexedUrls) {
   for (const field of ["og:url", "og:image:alt", "og:site_name", "twitter:card", "twitter:title", "twitter:description", "twitter:image", "twitter:image:alt"]) {
     assert.match(html, new RegExp(field.replace(":", "\\:"), "i"), `${relative}: missing ${field}`);
   }
+  for (const match of html.matchAll(/<img\b[^>]*>/gi)) {
+    assert.match(match[0], /\salt="[^"]*"/i, `${relative}: every image requires an alt attribute`);
+    assert.match(match[0], /\swidth="\d+"/i, `${relative}: every image requires an explicit width`);
+    assert.match(match[0], /\sheight="\d+"/i, `${relative}: every image requires an explicit height`);
+  }
   for (const match of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
     assert.doesNotThrow(() => JSON.parse(match[1]), `${relative}: invalid JSON-LD`);
   }
