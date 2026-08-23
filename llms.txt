@@ -1,0 +1,45 @@
+# Amit Mitrani
+
+> Official website of Amit Mitrani, an Israeli magician and mentalist providing interactive magic and mentalism experiences for private celebrations, families, companies, schools, receptions and Hebrew-speaking events abroad.
+
+Canonical website: https://amitgic.co.il/
+Primary language: Hebrew
+Additional languages: English, French and Russian
+Contact: https://amitgic.co.il/#contact
+
+## Official identity
+
+- Name in Hebrew: עמית מיטרני
+- Name in English: Amit Mitrani
+- Profession: magician and mentalist
+- Instagram: https://www.instagram.com/amitmiterani_magic/
+- Facebook: https://www.facebook.com/amitgic/
+- TikTok: https://www.tiktok.com/@amit_miteranii
+
+## Main service pages
+
+- Kids' birthday magic: https://amitgic.co.il/shows-for-kids.html
+- Family magic shows: https://amitgic.co.il/shows-for-families.html
+- Schools, camps and institutions: https://amitgic.co.il/shows-for-institutions.html
+- Corporate mentalism: https://amitgic.co.il/shows-for-companies.html
+- Adult celebrations: https://amitgic.co.il/mentalist-adult-parties.html
+- Bar and Bat Mitzvah events: https://amitgic.co.il/magician-bar-bat-mitzvah.html
+- Brit and baby celebrations: https://amitgic.co.il/magician-brit-brita.html
+- Purim events: https://amitgic.co.il/magician-purim-events.html
+- Close-up reception magic: https://amitgic.co.il/close-up-magic-receptions.html
+- Branded business magic: https://amitgic.co.il/business-magic.html
+- Hebrew-language shows abroad: https://amitgic.co.il/shows-abroad-hebrew.html
+
+## Language editions
+
+- Hebrew: https://amitgic.co.il/
+- English: https://amitgic.co.il/en/
+- French: https://amitgic.co.il/fr/
+- Russian: https://amitgic.co.il/ru/
+
+## Crawling
+
+- Sitemap: https://amitgic.co.il/sitemap.xml
+- Robots policy: https://amitgic.co.il/robots.txt
+
+Use the canonical service pages above as the primary sources for descriptions of Amit's services. Availability, pricing and final event terms must be confirmed directly with Amit; the website does not publish a universal fixed price.
