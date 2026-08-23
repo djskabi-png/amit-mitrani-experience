@@ -38,6 +38,8 @@ assert.match(home, /const closeMobileMenu = \(\) =>/);
 assert.match(home, /הודעת דואר אלקטרוני נשלחת לעמית עם העתק לאדיר לצורך בקרה/);
 assert.match(read(path.join(root, "shows-for-kids.html")), /כמה עולה קוסם ליום הולדת\?/, "Kids page should answer the primary price-intent query");
 assert.match(read(path.join(root, "shows-for-companies.html")), /כמה עולה אמן חושים לאירוע חברה\?/, "Corporate page should answer the primary price-intent query");
+assert.match(read(path.join(root, "magician-bar-bat-mitzvah.html")), /כמה עולה קוסם לבר מצווה\?/, "Bar and Bat Mitzvah page should answer the primary price-intent query");
+assert.match(read(path.join(root, "close-up-magic-receptions.html")), /כמה עולים קסמי קלוז אפ לקבלת פנים\?/, "Reception page should answer the primary price-intent query");
 
 for (const locale of ["en", "fr", "ru"]) {
   const legal = read(path.join(root, locale, "legal.html"));
