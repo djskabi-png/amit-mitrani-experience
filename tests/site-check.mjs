@@ -47,4 +47,47 @@ const sitemap = read(path.join(root, "sitemap.xml"));
 assert.doesNotMatch(sitemap, /legal\.html|admin\.html|magic-courses\.html|online-magic-courses\.html|cours-magie-en-ligne\.html|onlain-kursy-fokusov\.html/);
 assert.match(read(path.join(root, "robots.txt")), /Sitemap: https:\/\/amitgic\.co\.il\/sitemap\.xml/);
 
+const indexedUrls = [...sitemap.matchAll(/<loc>(https:\/\/amitgic\.co\.il\/[^<]*)<\/loc>/g)].map((match) => match[1]);
+assert.equal(indexedUrls.length, 48, "The sitemap must contain the complete 48-page public inventory");
+assert.equal(new Set(indexedUrls).size, indexedUrls.length, "The sitemap must not contain duplicate URLs");
+
+const urlToFile = (url) => {
+  const relative = url.slice("https://amitgic.co.il/".length);
+  if (!relative) return path.join(root, "index.html");
+  if (["en/", "fr/", "ru/"].includes(relative)) return path.join(root, relative, "index.html");
+  return path.join(root, ...relative.split("/"));
+};
+
+for (const url of indexedUrls) {
+  const file = urlToFile(url);
+  const html = read(file);
+  const relative = path.relative(root, file).replaceAll("\\", "/");
+  const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
+  assert.equal(canonical, url, `${relative}: canonical must match the sitemap URL`);
+  assert.match(html, /<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">/, `${relative}: explicit preview-friendly index directive is required`);
+  for (const language of ["he", "en", "fr", "ru", "x-default"]) {
+    assert.match(html, new RegExp(`hreflang="${language}"`, "i"), `${relative}: missing ${language} hreflang`);
+  }
+  for (const field of ["og:url", "og:image:alt", "og:site_name", "twitter:card", "twitter:title", "twitter:description", "twitter:image", "twitter:image:alt"]) {
+    assert.match(html, new RegExp(field.replace(":", "\\:"), "i"), `${relative}: missing ${field}`);
+  }
+  for (const match of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
+    assert.doesNotThrow(() => JSON.parse(match[1]), `${relative}: invalid JSON-LD`);
+  }
+}
+
+for (const localeHome of ["index.html", "en/index.html", "fr/index.html", "ru/index.html"]) {
+  assert.match(read(path.join(root, localeHome)), /data-seo="entity-graph"/, `${localeHome}: entity graph is required`);
+}
+
+for (const url of indexedUrls.filter((value) => !/^https:\/\/amitgic\.co\.il\/(?:en\/|fr\/|ru\/)?$/.test(value))) {
+  const html = read(urlToFile(url));
+  assert.match(html, /data-seo="breadcrumbs"/, `${url}: breadcrumb schema is required`);
+  assert.match(html, /"@type"\s*:\s*"FAQPage"/, `${url}: FAQ schema is required`);
+}
+
+const llms = read(path.join(root, "llms.txt"));
+assert.match(llms, /Canonical website: https:\/\/amitgic\.co\.il\//);
+assert.match(llms, /Sitemap: https:\/\/amitgic\.co\.il\/sitemap\.xml/);
+
 console.log(`PASS: ${htmlFiles.length} HTML files checked`);
