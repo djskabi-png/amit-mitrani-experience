@@ -89,6 +89,8 @@ for (const url of indexedUrls.filter((value) => !/^https:\/\/amitgic\.co\.il\/(?
   const html = read(urlToFile(url));
   assert.match(html, /data-seo="breadcrumbs"/, `${url}: breadcrumb schema is required`);
   assert.match(html, /"@type"\s*:\s*"FAQPage"/, `${url}: FAQ schema is required`);
+  assert.match(html, /data-seo="service-webpage"/, `${url}: connected WebPage schema is required`);
+  assert.match(html, /"provider"\s*:\s*\{\s*"@id"\s*:\s*"https:\/\/amitgic\.co\.il\/#amit-mitrani"/, `${url}: service provider must reference the canonical person entity`);
 }
 
 const llms = read(path.join(root, "llms.txt"));
