@@ -36,6 +36,8 @@ assert.doesNotMatch(home, /מערכת הזמנות חכמה|רשימת שמות 
 assert.match(home, /id="invitation" hidden aria-hidden="true"/);
 assert.match(home, /const closeMobileMenu = \(\) =>/);
 assert.match(home, /הודעת דואר אלקטרוני נשלחת לעמית עם העתק לאדיר לצורך בקרה/);
+assert.match(read(path.join(root, "shows-for-kids.html")), /כמה עולה קוסם ליום הולדת\?/, "Kids page should answer the primary price-intent query");
+assert.match(read(path.join(root, "shows-for-companies.html")), /כמה עולה אמן חושים לאירוע חברה\?/, "Corporate page should answer the primary price-intent query");
 
 for (const locale of ["en", "fr", "ru"]) {
   const legal = read(path.join(root, locale, "legal.html"));
