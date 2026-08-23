@@ -46,6 +46,7 @@ for (const locale of ["en", "fr", "ru"]) {
 const sitemap = read(path.join(root, "sitemap.xml"));
 assert.doesNotMatch(sitemap, /legal\.html|admin\.html|magic-courses\.html|online-magic-courses\.html|cours-magie-en-ligne\.html|onlain-kursy-fokusov\.html/);
 assert.match(read(path.join(root, "robots.txt")), /Sitemap: https:\/\/amitgic\.co\.il\/sitemap\.xml/);
+assert.equal(read(path.join(root, "10434512b7d347b1b575e3f42b4d53ce.txt")).trim(), "10434512b7d347b1b575e3f42b4d53ce", "IndexNow ownership key is required");
 
 const indexedUrls = [...sitemap.matchAll(/<loc>(https:\/\/amitgic\.co\.il\/[^<]*)<\/loc>/g)].map((match) => match[1]);
 assert.equal(indexedUrls.length, 48, "The sitemap must contain the complete 48-page public inventory");
