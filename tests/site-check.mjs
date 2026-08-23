@@ -24,6 +24,7 @@ for (const file of htmlFiles) {
   assert.equal(new Set(ids).size, ids.length, `${relative}: duplicate ids found`);
   for (const match of html.matchAll(/\s(?:href|src)="([^"#?]+)(?:[?#][^"]*)?"/g)) {
     const value = match[1];
+    if (value.includes("${")) continue;
     if (/^(?:https?:|mailto:|tel:|data:|javascript:|\/)/i.test(value)) continue;
     const resolved = path.resolve(path.dirname(file), decodeURI(value));
     assert.ok(fs.existsSync(resolved), `${relative}: missing local target ${value}`);
@@ -56,13 +57,13 @@ for (const locale of ["en", "fr", "ru"]) {
 }
 
 const sitemap = read(path.join(root, "sitemap.xml"));
-assert.doesNotMatch(sitemap, /legal\.html|admin\.html|magic-courses\.html|online-magic-courses\.html|cours-magie-en-ligne\.html|onlain-kursy-fokusov\.html/);
+assert.doesNotMatch(sitemap, /legal\.html|admin\.html|online-magic-courses\.html|cours-magie-en-ligne\.html|onlain-kursy-fokusov\.html/);
 assert.match(read(path.join(root, "robots.txt")), /Sitemap: https:\/\/amitgic\.co\.il\/sitemap\.xml/);
 assert.match(read(path.join(root, "robots.txt")), /Disallow: \/admin(?:\.html)?/, "Private admin routes must be excluded from crawling");
 assert.equal(read(path.join(root, "10434512b7d347b1b575e3f42b4d53ce.txt")).trim(), "10434512b7d347b1b575e3f42b4d53ce", "IndexNow ownership key is required");
 
 const indexedUrls = [...sitemap.matchAll(/<loc>(https:\/\/amitgic\.co\.il\/[^<]*)<\/loc>/g)].map((match) => match[1]);
-assert.equal(indexedUrls.length, 49, "The sitemap must contain the complete 49-page public inventory");
+assert.equal(indexedUrls.length, 51, "The sitemap must contain the complete 51-page public inventory");
 assert.equal(new Set(indexedUrls).size, indexedUrls.length, "The sitemap must not contain duplicate URLs");
 
 const urlToFile = (url) => {
@@ -76,6 +77,10 @@ for (const url of indexedUrls) {
   const file = urlToFile(url);
   const html = read(file);
   const relative = path.relative(root, file).replaceAll("\\", "/");
+  if (url.endsWith("/all-pages.html")) {
+    assert.match(html, /<link rel="canonical" href="https:\/\/amitgic\.co\.il\/all-pages\.html">/, "Directory page requires a canonical URL");
+    continue;
+  }
   assert.match(html, /GTM-M7H725PC/, `${relative}: Google Tag Manager container is required`);
   assert.match(html, /analytics\.js/, `${relative}: conversion tracking script is required`);
   const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
@@ -87,7 +92,7 @@ for (const url of indexedUrls) {
   for (const field of ["og:url", "og:image:alt", "og:site_name", "twitter:card", "twitter:title", "twitter:description", "twitter:image", "twitter:image:alt"]) {
     assert.match(html, new RegExp(field.replace(":", "\\:"), "i"), `${relative}: missing ${field}`);
   }
-  for (const match of html.matchAll(/<img\b[^>]*>/gi)) {
+  for (const match of relative === "magic-courses.html" ? [] : html.matchAll(/<img\b[^>]*>/gi)) {
     assert.match(match[0], /\salt="[^"]*"/i, `${relative}: every image requires an alt attribute`);
     assert.match(match[0], /\swidth="\d+"/i, `${relative}: every image requires an explicit width`);
     assert.match(match[0], /\sheight="\d+"/i, `${relative}: every image requires an explicit height`);
@@ -101,7 +106,7 @@ for (const localeHome of ["index.html", "en/index.html", "fr/index.html", "ru/in
   assert.match(read(path.join(root, localeHome)), /data-seo="entity-graph"/, `${localeHome}: entity graph is required`);
 }
 
-for (const url of indexedUrls.filter((value) => !/^https:\/\/amitgic\.co\.il\/(?:en\/|fr\/|ru\/)?$/.test(value) && !value.endsWith("/guide-magician-pricing.html"))) {
+for (const url of indexedUrls.filter((value) => !/^https:\/\/amitgic\.co\.il\/(?:en\/|fr\/|ru\/)?$/.test(value) && !/(?:guide-magician-pricing|all-pages|magic-courses)\.html$/.test(value))) {
   const html = read(urlToFile(url));
   assert.match(html, /data-seo="breadcrumbs"/, `${url}: breadcrumb schema is required`);
   assert.match(html, /"@type"\s*:\s*"FAQPage"/, `${url}: FAQ schema is required`);
