@@ -62,7 +62,7 @@ assert.match(read(path.join(root, "robots.txt")), /Disallow: \/admin(?:\.html)?/
 assert.equal(read(path.join(root, "10434512b7d347b1b575e3f42b4d53ce.txt")).trim(), "10434512b7d347b1b575e3f42b4d53ce", "IndexNow ownership key is required");
 
 const indexedUrls = [...sitemap.matchAll(/<loc>(https:\/\/amitgic\.co\.il\/[^<]*)<\/loc>/g)].map((match) => match[1]);
-assert.equal(indexedUrls.length, 48, "The sitemap must contain the complete 48-page public inventory");
+assert.equal(indexedUrls.length, 49, "The sitemap must contain the complete 49-page public inventory");
 assert.equal(new Set(indexedUrls).size, indexedUrls.length, "The sitemap must not contain duplicate URLs");
 
 const urlToFile = (url) => {
@@ -101,13 +101,18 @@ for (const localeHome of ["index.html", "en/index.html", "fr/index.html", "ru/in
   assert.match(read(path.join(root, localeHome)), /data-seo="entity-graph"/, `${localeHome}: entity graph is required`);
 }
 
-for (const url of indexedUrls.filter((value) => !/^https:\/\/amitgic\.co\.il\/(?:en\/|fr\/|ru\/)?$/.test(value))) {
+for (const url of indexedUrls.filter((value) => !/^https:\/\/amitgic\.co\.il\/(?:en\/|fr\/|ru\/)?$/.test(value) && !value.endsWith("/guide-magician-pricing.html"))) {
   const html = read(urlToFile(url));
   assert.match(html, /data-seo="breadcrumbs"/, `${url}: breadcrumb schema is required`);
   assert.match(html, /"@type"\s*:\s*"FAQPage"/, `${url}: FAQ schema is required`);
   assert.match(html, /data-seo="service-webpage"/, `${url}: connected WebPage schema is required`);
   assert.match(html, /"provider"\s*:\s*\{\s*"@id"\s*:\s*"https:\/\/amitgic\.co\.il\/#amit-mitrani"/, `${url}: service provider must reference the canonical person entity`);
 }
+
+const pricingGuide = read(path.join(root, "guide-magician-pricing.html"));
+assert.match(pricingGuide, /data-seo="article"/, "Pricing guide requires Article structured data");
+assert.match(pricingGuide, /כמה עולה קוסם לאירוע\?/, "Pricing guide must answer the primary informational query");
+assert.match(pricingGuide, /href="shows-for-kids\.html"/, "Pricing guide must connect to relevant service pages");
 
 const llms = read(path.join(root, "llms.txt"));
 assert.match(llms, /Canonical website: https:\/\/amitgic\.co\.il\//);
