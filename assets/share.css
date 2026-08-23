@@ -27,6 +27,34 @@
   background: #f7cf80;
 }
 
+.page-share__buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-share__directory {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 999px;
+  color: #f8f5ff;
+  background: rgba(17, 15, 25, .94);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .28);
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.page-share__directory:hover {
+  color: #111018;
+  border-color: #edc069;
+  background: #edc069;
+}
+
 .page-share__trigger:focus-visible,
 .page-share__action:focus-visible,
 .page-share__close:focus-visible {
@@ -132,6 +160,12 @@
     min-height: 48px;
     padding: 0 14px;
     font-size: 14px;
+  }
+
+  .page-share__directory {
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: 12px;
   }
 
   .page-share__panel {

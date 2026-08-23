@@ -15,6 +15,7 @@
   const copy = {
     he: {
       trigger: "שיתוף",
+      directory: "כל העמודים",
       title: "לשתף את העמוד",
       description: "שלחו את העמוד המדויק למי שייהנה ממנו.",
       device: "שיתוף במכשיר",
@@ -26,6 +27,7 @@
     },
     en: {
       trigger: "Share",
+      directory: "All pages",
       title: "Share this page",
       description: "Send this exact page to someone planning an event.",
       device: "Share from this device",
@@ -37,6 +39,7 @@
     },
     fr: {
       trigger: "Partager",
+      directory: "Toutes les pages",
       title: "Partager cette page",
       description: "Envoyez cette page précise à une personne qui prépare un événement.",
       device: "Partager depuis cet appareil",
@@ -48,6 +51,7 @@
     },
     ru: {
       trigger: "Поделиться",
+      directory: "Все страницы",
       title: "Поделиться страницей",
       description: "Отправьте эту страницу тому, кто планирует мероприятие.",
       device: "Поделиться с устройства",
@@ -91,7 +95,10 @@
       </div>
       <p class="page-share__status" role="status" aria-live="polite"></p>
     </div>
-    <button class="page-share__trigger" type="button" aria-expanded="false" aria-controls="${panelId}">${text.trigger}</button>
+    <div class="page-share__buttons">
+      <a class="page-share__directory" href="${scriptBase ? new URL('../all-pages.html', scriptBase).href : '/all-pages.html'}">${text.directory}</a>
+      <button class="page-share__trigger" type="button" aria-expanded="false" aria-controls="${panelId}">${text.trigger}</button>
+    </div>
   `;
 
   document.body.append(root);
