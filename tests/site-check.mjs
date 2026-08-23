@@ -40,6 +40,13 @@ assert.match(read(path.join(root, "shows-for-kids.html")), /כמה עולה קו
 assert.match(read(path.join(root, "shows-for-companies.html")), /כמה עולה אמן חושים לאירוע חברה\?/, "Corporate page should answer the primary price-intent query");
 assert.match(read(path.join(root, "magician-bar-bat-mitzvah.html")), /כמה עולה קוסם לבר מצווה\?/, "Bar and Bat Mitzvah page should answer the primary price-intent query");
 assert.match(read(path.join(root, "close-up-magic-receptions.html")), /כמה עולים קסמי קלוז אפ לקבלת פנים\?/, "Reception page should answer the primary price-intent query");
+assert.match(read(path.join(root, "shows-for-families.html")), /כמה עולה מופע קסמים למשפחה\?/, "Families page should answer the primary price-intent query");
+assert.match(read(path.join(root, "shows-for-institutions.html")), /כמה עולה מופע קסמים לבית ספר או לקייטנה\?/, "Institutions page should answer the primary price-intent query");
+assert.match(read(path.join(root, "mentalist-adult-parties.html")), /כמה עולה אמן חושים ליום הולדת למבוגרים\?/, "Adult parties page should answer the primary price-intent query");
+assert.match(read(path.join(root, "magician-brit-brita.html")), /כמה עולה קוסם לברית או לבריתה\?/, "Brit and Brita page should answer the primary price-intent query");
+assert.match(read(path.join(root, "magician-purim-events.html")), /כמה עולה מופע קסמים לפורים\?/, "Purim page should answer the primary price-intent query");
+assert.match(read(path.join(root, "business-magic.html")), /כמה עולה קסם מותאם למותג או לעסק\?/, "Business magic page should answer the primary price-intent query");
+assert.match(read(path.join(root, "shows-abroad-hebrew.html")), /כמה עולה להזמין מופע קסמים בעברית בחו״ל\?/, "Shows abroad page should answer the primary price-intent query");
 
 for (const locale of ["en", "fr", "ru"]) {
   const legal = read(path.join(root, locale, "legal.html"));
