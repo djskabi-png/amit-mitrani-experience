@@ -31,6 +31,7 @@ for (const file of htmlFiles) {
 }
 
 const home = read(path.join(root, "index.html"));
+assert.match(home, /<meta name="msvalidate\.01" content="373407FD78FC0D901E05BDBBFA68F00A">/, "Bing Webmaster verification tag is required");
 assert.doesNotMatch(home, /מערכת הזמנות חכמה|רשימת שמות להצגה ראשונית|יחזקו את האתר בחיפושי Google/);
 assert.match(home, /id="invitation" hidden aria-hidden="true"/);
 assert.match(home, /const closeMobileMenu = \(\) =>/);
