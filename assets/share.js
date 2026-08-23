@@ -2,7 +2,7 @@
   const scriptBase = document.currentScript?.src
     || [...document.scripts].find((script) => /\/assets\/share\.js(?:$|\?)/.test(script.src))?.src;
   if (scriptBase) {
-    import(new URL("cms-runtime.js?v=2", scriptBase).href).catch((error) => {
+    import(new URL("cms-runtime.js?v=3", scriptBase).href).catch((error) => {
       console.warn("Site content editor runtime could not be loaded.", error);
       document.documentElement.dataset.cmsError = error?.message || "load-failed";
     });
@@ -16,7 +16,7 @@
     he: {
       trigger: "שיתוף",
       title: "לשתף את העמוד",
-      description: "שלחו את העמוד המדויק למי שמתכנן אירוע.",
+      description: "שלחו את העמוד המדויק למי שייהנה ממנו.",
       device: "שיתוף במכשיר",
       whatsapp: "שיתוף בוואטסאפ",
       link: "העתקת קישור",

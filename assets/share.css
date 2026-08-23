@@ -122,7 +122,20 @@
 
 @media (max-width: 680px) {
   .page-share {
-    display: none;
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(78px, calc(env(safe-area-inset-bottom) + 14px));
+    z-index: 70;
+  }
+
+  .page-share__trigger {
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0 14px;
+    font-size: 14px;
+  }
+
+  .page-share__panel {
+    width: min(310px, calc(100vw - 24px));
   }
 }
 
