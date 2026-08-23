@@ -98,6 +98,7 @@ for (const url of indexedUrls.filter((value) => !/^https:\/\/amitgic\.co\.il\/(?
 const llms = read(path.join(root, "llms.txt"));
 assert.match(llms, /Canonical website: https:\/\/amitgic\.co\.il\//);
 assert.match(llms, /Sitemap: https:\/\/amitgic\.co\.il\/sitemap\.xml/);
+assert.match(llms, /magic\.org\.il/, "llms.txt should identify an independent professional authority source");
 
 const analytics = read(path.join(root, "assets", "analytics.js"));
 for (const eventName of ["whatsapp_click", "phone_click", "email_click", "generate_lead"]) {
