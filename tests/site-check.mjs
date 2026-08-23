@@ -62,6 +62,8 @@ for (const url of indexedUrls) {
   const file = urlToFile(url);
   const html = read(file);
   const relative = path.relative(root, file).replaceAll("\\", "/");
+  assert.match(html, /GTM-M7H725PC/, `${relative}: Google Tag Manager container is required`);
+  assert.match(html, /analytics\.js/, `${relative}: conversion tracking script is required`);
   const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
   assert.equal(canonical, url, `${relative}: canonical must match the sitemap URL`);
   assert.match(html, /<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">/, `${relative}: explicit preview-friendly index directive is required`);
@@ -96,5 +98,10 @@ for (const url of indexedUrls.filter((value) => !/^https:\/\/amitgic\.co\.il\/(?
 const llms = read(path.join(root, "llms.txt"));
 assert.match(llms, /Canonical website: https:\/\/amitgic\.co\.il\//);
 assert.match(llms, /Sitemap: https:\/\/amitgic\.co\.il\/sitemap\.xml/);
+
+const analytics = read(path.join(root, "assets", "analytics.js"));
+for (const eventName of ["whatsapp_click", "phone_click", "email_click", "generate_lead"]) {
+  assert.match(analytics, new RegExp(eventName), `analytics.js: missing ${eventName} conversion event`);
+}
 
 console.log(`PASS: ${htmlFiles.length} HTML files checked`);
