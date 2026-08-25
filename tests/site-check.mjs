@@ -41,6 +41,11 @@ assert.match(read(path.join(root, "shows-for-kids.html")), /כמה עולה קו
 assert.match(read(path.join(root, "shows-for-kids.html")), /איך בוחרים קוסם ליום הולדת לילדים\?/, "Kids page should cover the primary selection query");
 assert.match(read(path.join(root, "shows-for-kids.html")), /קוסם ליום הולדת לפי גיל/, "Kids page should cover age-specific intent");
 assert.match(read(path.join(root, "shows-for-kids.html")), /קוסם ליום הולדת בבית/, "Kids page should cover at-home event intent");
+assert.match(read(path.join(root, "mentalist-adult-parties.html")), /אמן חושים לאירוע פרטי וליום הולדת למבוגרים/, "Adult page should cover its main commercial intent");
+assert.match(read(path.join(root, "shows-for-companies.html")), /אמן חושים לאירוע חברה, יום גיבוש והרמת כוסית/, "Corporate page should cover its main commercial intents");
+assert.match(read(path.join(root, "magician-bar-bat-mitzvah.html")), /קוסם ואמן חושים לבר מצווה או בת מצווה/, "Mitzvah page should cover both event variants");
+assert.match(read(path.join(root, "magician-brit-brita.html")), /קוסם לברית, לבריתה ולאירוע משפחתי/, "Brit page should cover both event variants");
+assert.match(read(path.join(root, "shows-for-families.html")), /מופע קסמים לכל המשפחה — לילדים ולמבוגרים יחד/, "Families page should cover its exact search intent");
 assert.match(read(path.join(root, "shows-for-companies.html")), /כמה עולה אמן חושים לאירוע חברה\?/, "Corporate page should answer the primary price-intent query");
 assert.match(read(path.join(root, "magician-bar-bat-mitzvah.html")), /כמה עולה קוסם לבר מצווה\?/, "Bar and Bat Mitzvah page should answer the primary price-intent query");
 assert.match(read(path.join(root, "close-up-magic-receptions.html")), /כמה עולים קסמי קלוז אפ לקבלת פנים\?/, "Reception page should answer the primary price-intent query");
