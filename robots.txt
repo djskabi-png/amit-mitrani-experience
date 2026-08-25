@@ -14,12 +14,32 @@ Allow: /
 Disallow: /admin
 Disallow: /admin.html
 
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+
 User-agent: PerplexityBot
 Allow: /
 Disallow: /admin
 Disallow: /admin.html
 
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+
 User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+
+User-agent: Claude-SearchBot
 Allow: /
 Disallow: /admin
 Disallow: /admin.html

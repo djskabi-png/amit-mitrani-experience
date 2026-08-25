@@ -63,6 +63,9 @@ const sitemap = read(path.join(root, "sitemap.xml"));
 assert.doesNotMatch(sitemap, /legal\.html|admin\.html|online-magic-courses\.html|cours-magie-en-ligne\.html|onlain-kursy-fokusov\.html/);
 assert.match(read(path.join(root, "robots.txt")), /Sitemap: https:\/\/amitgic\.co\.il\/sitemap\.xml/);
 assert.match(read(path.join(root, "robots.txt")), /Disallow: \/admin(?:\.html)?/, "Private admin routes must be excluded from crawling");
+for (const crawler of ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "PerplexityBot", "Perplexity-User", "ClaudeBot", "Claude-User", "Claude-SearchBot", "Google-Extended"]) {
+  assert.match(read(path.join(root, "robots.txt")), new RegExp(`User-agent: ${crawler.replace("-", "\\-")}`), `robots.txt must explicitly allow ${crawler}`);
+}
 assert.equal(read(path.join(root, "10434512b7d347b1b575e3f42b4d53ce.txt")).trim(), "10434512b7d347b1b575e3f42b4d53ce", "IndexNow ownership key is required");
 
 const indexedUrls = [...sitemap.matchAll(/<loc>(https:\/\/amitgic\.co\.il\/[^<]*)<\/loc>/g)].map((match) => match[1]);
@@ -126,6 +129,8 @@ const llms = read(path.join(root, "llms.txt"));
 assert.match(llms, /Canonical website: https:\/\/amitgic\.co\.il\//);
 assert.match(llms, /Sitemap: https:\/\/amitgic\.co\.il\/sitemap\.xml/);
 assert.match(llms, /magic\.org\.il/, "llms.txt should identify an independent professional authority source");
+assert.match(llms, /Primary customer questions/, "llms.txt should route answer engines to intent-specific sources");
+assert.match(llms, /Citation guidance/, "llms.txt should include safe citation guidance");
 
 const analytics = read(path.join(root, "assets", "analytics.js"));
 for (const eventName of ["whatsapp_click", "phone_click", "email_click", "generate_lead"]) {
