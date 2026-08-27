@@ -36,7 +36,7 @@ assert.match(home, /<meta name="msvalidate\.01" content="373407FD78FC0D901E05BDB
 assert.doesNotMatch(home, /מערכת הזמנות חכמה|רשימת שמות להצגה ראשונית|יחזקו את האתר בחיפושי Google/);
 assert.match(home, /id="invitation" hidden aria-hidden="true"/);
 assert.match(home, /const closeMobileMenu = \(\) =>/);
-assert.match(home, /הודעת דואר אלקטרוני נשלחת לעמית עם העתק לאדיר לצורך בקרה/);
+assert.match(home, /הודעת דואר אלקטרוני נשלחת לעמית בלבד/);
 assert.match(read(path.join(root, "shows-for-kids.html")), /כמה עולה קוסם ליום הולדת\?/, "Kids page should answer the primary price-intent query");
 assert.match(read(path.join(root, "shows-for-kids.html")), /איך בוחרים קוסם ליום הולדת לילדים\?/, "Kids page should cover the primary selection query");
 assert.match(read(path.join(root, "shows-for-kids.html")), /קוסם ליום הולדת לפי גיל/, "Kids page should cover age-specific intent");

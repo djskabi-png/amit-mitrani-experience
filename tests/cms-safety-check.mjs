@@ -21,7 +21,7 @@ assert.match(adminJs, /data-task-delete/u, "Daily admin must let authorized user
 assert.match(adminJs, /למחוק את המשימה/u, "Task deletion must require explicit confirmation");
 assert.match(adminJs, /aria-busy/u, "Material CRM actions must prevent duplicate submission while saving");
 
-for (const email of ["djskabi@gmail.com", "amitmagician6@gmail.com"]) {
+for (const email of ["amitmagician6@gmail.com"]) {
   assert.match(firestoreRules, new RegExp(email.replace(".", "\\."), "u"), `Firestore must authorize ${email}`);
   assert.match(storageRules, new RegExp(email.replace(".", "\\."), "u"), `Storage must authorize ${email}`);
 }

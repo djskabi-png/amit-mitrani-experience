@@ -19,7 +19,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const ADMIN_EMAILS = new Set([
-  "djskabi@gmail.com",
   "amitmagician6@gmail.com",
 ]);
 const localCmsQa = ["127.0.0.1", "localhost"].includes(window.location.hostname)

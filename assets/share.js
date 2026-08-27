@@ -6,7 +6,7 @@
       console.warn("Site content editor runtime could not be loaded.", error);
       document.documentElement.dataset.cmsError = error?.message || "load-failed";
     });
-    import(new URL("lead-capture.js?v=2", scriptBase).href).catch((error) => {
+    import(new URL("lead-capture.js?v=3", scriptBase).href).catch((error) => {
       console.warn("Site CRM could not be loaded.", error);
       document.documentElement.dataset.crmError = error?.message || "load-failed";
     });

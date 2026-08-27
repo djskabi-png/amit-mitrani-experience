@@ -7,7 +7,6 @@ import nodemailer from "nodemailer";
 initializeApp();
 const db = getFirestore();
 const AMIT_EMAIL = "amitmagician6@gmail.com";
-const ADIR_EMAIL = "djskabi@gmail.com";
 const SMTP_PASSWORD = defineSecret("AMIT_SMTP_PASSWORD");
 
 const text = (value, fallback = "לא צוין") => String(value ?? "").trim() || fallback;
@@ -28,8 +27,19 @@ const leadLines = (lead, leadId) => [
   `תאריך: ${text(lead.date)}`,
   `מקום: ${text([lead.country, lead.city].filter(Boolean).join(", "))}`,
   `משתתפים: ${text(lead.participants)}`,
-  `הודעה: ${text(lead.message, "לא נכתבה הודעה")}`,
-  `מקור: ${text(lead.source)}`
+  `הודעה: ${text(lead.message, "לא נכתבה הודעה")}`
+];
+
+const attributionLines = (lead) => [
+  `Source: ${text(lead.source)}`,
+  `Medium: ${text(lead.medium)}`,
+  `Campaign: ${text(lead.campaign)}`,
+  `Ad / Content: ${text(lead.content)}`,
+  `Term: ${text(lead.term)}`,
+  `Referrer: ${text(lead.referrer)}`,
+  `Landing Page: ${text(lead.landingPage)}`,
+  `Form Page: ${text(lead.formPage)}`,
+  `UTM parameters: ${text(lead.utmParameters, "לא נמצאו פרמטרים")}`
 ];
 
 export const notifyAmitOfLead = onDocumentCreated({
@@ -41,6 +51,7 @@ export const notifyAmitOfLead = onDocumentCreated({
   if (!lead) return;
   const leadId = event.params.leadId;
   const lines = leadLines(lead, leadId);
+  const attribution = attributionLines(lead);
   const subject = `פנייה חדשה מהאתר: ${text(lead.interest, "פנייה כללית")}`;
   const leadRef = db.collection("leads").doc(leadId);
   const claimed = await db.runTransaction(async (transaction) => {
@@ -61,20 +72,19 @@ export const notifyAmitOfLead = onDocumentCreated({
     port: 465,
     secure: true,
     auth: {
-      user: ADIR_EMAIL,
+      user: AMIT_EMAIL,
       pass: SMTP_PASSWORD.value()
     }
   });
 
   try {
     const result = await transporter.sendMail({
-      from: `"אתר עמית מיטרני" <${ADIR_EMAIL}>`,
+      from: `"אתר עמית מיטרני" <${AMIT_EMAIL}>`,
       to: AMIT_EMAIL,
-      cc: ADIR_EMAIL,
       replyTo: text(lead.email, AMIT_EMAIL),
       subject,
-      text: `${lines.join("\n")}\n\nמערכת הניהול: https://amitgic.co.il/admin.html`,
-      html: `<div dir="rtl" style="font-family:Arial,sans-serif;line-height:1.7"><h2>${escapeHtml(subject)}</h2>${lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("")}<p><a href="https://amitgic.co.il/admin.html">פתיחת מערכת הניהול</a></p></div>`
+      text: `${lines.join("\n")}\n\nמקור הליד:\n${attribution.join("\n")}\n\nמערכת הניהול: https://amitgic.co.il/admin.html`,
+      html: `<div dir="rtl" style="font-family:Arial,sans-serif;line-height:1.7"><h2>${escapeHtml(subject)}</h2>${lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("")}<div style="margin-top:24px;padding:16px;border:1px solid #ddd;border-radius:12px;background:#f7f7f7"><h3 style="margin-top:0">מקור הליד</h3>${attribution.map((line) => `<p dir="ltr" style="text-align:left">${escapeHtml(line)}</p>`).join("")}</div><p><a href="https://amitgic.co.il/admin.html">פתיחת מערכת הניהול</a></p></div>`
     });
     await leadRef.set({
       notificationStatus: "sent",

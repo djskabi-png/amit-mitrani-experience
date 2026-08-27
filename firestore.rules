@@ -4,7 +4,6 @@ service cloud.firestore {
     function isAdmin() {
       return request.auth != null
         && request.auth.token.email in [
-          'djskabi@gmail.com',
           'amitmagician6@gmail.com'
         ];
     }
@@ -13,7 +12,9 @@ service cloud.firestore {
       allow create: if request.resource.data.keys().hasOnly([
         'name', 'phone', 'email', 'interest', 'product', 'date', 'country',
         'city', 'participants', 'message', 'requestType', 'requestNumber',
-        'status', 'notificationStatus', 'source', 'createdAt', 'updatedAt'
+        'status', 'notificationStatus', 'source', 'medium', 'campaign',
+        'content', 'term', 'referrer', 'landingPage', 'formPage',
+        'utmParameters', 'createdAt', 'updatedAt'
       ])
       && request.resource.data.name is string
       && request.resource.data.name.size() >= 2
@@ -33,6 +34,22 @@ service cloud.firestore {
       && request.resource.data.notificationStatus == 'not_configured'
       && request.resource.data.source is string
       && request.resource.data.source.size() <= 500
+      && (!request.resource.data.keys().hasAny(['medium'])
+        || (request.resource.data.medium is string && request.resource.data.medium.size() <= 120))
+      && (!request.resource.data.keys().hasAny(['campaign'])
+        || (request.resource.data.campaign is string && request.resource.data.campaign.size() <= 200))
+      && (!request.resource.data.keys().hasAny(['content'])
+        || (request.resource.data.content is string && request.resource.data.content.size() <= 300))
+      && (!request.resource.data.keys().hasAny(['term'])
+        || (request.resource.data.term is string && request.resource.data.term.size() <= 300))
+      && (!request.resource.data.keys().hasAny(['referrer'])
+        || (request.resource.data.referrer is string && request.resource.data.referrer.size() <= 1000))
+      && (!request.resource.data.keys().hasAny(['landingPage'])
+        || (request.resource.data.landingPage is string && request.resource.data.landingPage.size() <= 1000))
+      && (!request.resource.data.keys().hasAny(['formPage'])
+        || (request.resource.data.formPage is string && request.resource.data.formPage.size() <= 1000))
+      && (!request.resource.data.keys().hasAny(['utmParameters'])
+        || (request.resource.data.utmParameters is string && request.resource.data.utmParameters.size() <= 2000))
       && request.resource.data.createdAt == request.time
       && request.resource.data.updatedAt == request.time;
       allow read, update, delete: if isAdmin();

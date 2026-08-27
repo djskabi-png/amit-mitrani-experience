@@ -5,6 +5,69 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+const ATTRIBUTION_KEY = "amitLeadAttributionV1";
+const ATTRIBUTION_MAX_AGE = 90 * 24 * 60 * 60 * 1000;
+
+const limited = (value, limit = 500) => String(value || "").trim().slice(0, limit);
+
+const detectAttribution = () => {
+  const url = new URL(location.href);
+  const params = url.searchParams;
+  const utm = {};
+  for (const [key, value] of params.entries()) {
+    if (key.toLowerCase().startsWith("utm_") || ["gclid", "fbclid", "ttclid", "msclkid", "igshid"].includes(key.toLowerCase())) {
+      utm[key.toLowerCase()] = limited(value, 300);
+    }
+  }
+
+  const rawSource = limited(params.get("utm_source"), 120).toLowerCase();
+  const rawMedium = limited(params.get("utm_medium"), 120).toLowerCase();
+  const referrer = limited(document.referrer, 1000);
+  let referrerHost = "";
+  try { referrerHost = new URL(referrer).hostname.toLowerCase(); } catch {}
+
+  let source = rawSource;
+  let medium = rawMedium;
+  const isPaid = /cpc|ppc|paid|display|ads?/.test(rawMedium);
+  if (params.has("gclid")) { source = "Google Ads"; medium ||= "cpc"; }
+  else if (params.has("fbclid") || ((/facebook|instagram|meta/.test(rawSource)) && isPaid)) { source = "Meta Ads"; medium ||= "paid_social"; }
+  else if (params.has("ttclid")) { source = "TikTok Ads"; medium ||= "paid_social"; }
+  else if (!source && /(^|\.)google\./.test(referrerHost)) { source = "Google Organic"; medium = "organic"; }
+  else if (!source && /(^|\.)instagram\.com$/.test(referrerHost)) { source = "Instagram"; medium = "social"; }
+  else if (!source && /(^|\.)facebook\.com$|(^|\.)facebook\.net$/.test(referrerHost)) { source = "Facebook"; medium = "social"; }
+  else if (!source && /(^|\.)tiktok\.com$/.test(referrerHost)) { source = "TikTok"; medium = "social"; }
+  else if (!source && /(^|\.)youtube\.com$|(^|\.)youtu\.be$/.test(referrerHost)) { source = "YouTube"; medium = "video"; }
+  else if (!source && referrerHost) { source = referrerHost; medium = "referral"; }
+  else if (!source) { source = "Direct"; medium = "none"; }
+
+  return {
+    source: limited(source, 120),
+    medium: limited(medium || "not set", 120),
+    campaign: limited(params.get("utm_campaign"), 200),
+    content: limited(params.get("utm_content"), 300),
+    term: limited(params.get("utm_term"), 300),
+    referrer,
+    landingPage: limited(location.href, 1000),
+    utmParameters: limited(JSON.stringify(utm), 2000),
+    capturedAt: Date.now()
+  };
+};
+
+const readStoredAttribution = () => {
+  try {
+    const stored = JSON.parse(localStorage.getItem(ATTRIBUTION_KEY) || "null");
+    return stored && Date.now() - Number(stored.capturedAt || 0) < ATTRIBUTION_MAX_AGE ? stored : null;
+  } catch { return null; }
+};
+
+const currentAttribution = detectAttribution();
+const hasCampaignSignal = Object.keys(JSON.parse(currentAttribution.utmParameters || "{}")).length > 0;
+let leadAttribution = readStoredAttribution();
+if (!leadAttribution || hasCampaignSignal) {
+  leadAttribution = currentAttribution;
+  try { localStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(leadAttribution)); } catch {}
+}
+
 window.saveAmitLead = async (formData) => {
   const clean = (name, limit = 500) => String(formData.get(name) || "").trim().slice(0, limit);
   const isBookingRequest = Boolean(formData.get("product"));
@@ -23,7 +86,15 @@ window.saveAmitLead = async (formData) => {
     requestNumber: clean("requestNumber", 40),
     status: "pending",
     notificationStatus: "not_configured",
-    source: location.href.slice(0, 500),
+    source: limited(leadAttribution.source, 120),
+    medium: limited(leadAttribution.medium, 120),
+    campaign: limited(leadAttribution.campaign, 200),
+    content: limited(leadAttribution.content, 300),
+    term: limited(leadAttribution.term, 300),
+    referrer: limited(leadAttribution.referrer, 1000),
+    landingPage: limited(leadAttribution.landingPage, 1000),
+    formPage: limited(location.href, 1000),
+    utmParameters: limited(leadAttribution.utmParameters, 2000),
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp()
   };
