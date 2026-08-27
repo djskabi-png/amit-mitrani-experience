@@ -4,20 +4,20 @@
     {id:'wHy5r6ORg-8',title:'קסמים ואמנות חושים באירוע חברה'},
     {id:'kNBIzGt_Ur0',title:'רגע בלתי נשכח במופע'},
     {id:'H2FnxTajopo',title:'טלפתיה ואמנות חושים מול קהל'},
-    {id:'IlPv23NVk1I',title:'קסם מקרוב באירוע עסקי'},
-    {id:'THbIq6-QgUk',title:'חוויה אינטראקטיבית לאורחים'},
+    {id:'IlPv23NVk1I',title:'מחיאות הכפיים בסיום המופע'},
+    {id:'THbIq6-QgUk',title:'הרגע שאחרי הקסם – תגובת הקהל'},
     {id:'-WdN4KHotTE',title:'הרגע שבו הקהל נשאר בלי מילים'}
   ];
   const copy={
     companies:{eyebrow:'אירועים עסקיים בפעולה',title:'רגעים אמיתיים מאירועי חברות',intro:'טעימות קצרות מהמופע, מהמפגש עם העובדים ומהאנרגיה שנוצרת בחדר.'},
-    adults:{eyebrow:'לראות את עמית בפעולה',title:'קסמים ואמנות חושים לקהל בוגר',intro:'רגעים ממופעים ואירועים שמציגים את ההומור, הקצב והקשר הישיר עם הקהל.'},
+    adults:{eyebrow:'לראות ולהרגיש את הקהל',title:'המופע והתגובות שנשארות אחריו',intro:'קטעים אמיתיים מהמופע ומהרגעים שאחריו — ההפתעה, החיוכים ומחיאות הכפיים של הקהל.'},
     mitzvah:{eyebrow:'חוויה לכל המשפחה',title:'כשהנוער והמבוגרים נשאבים לאותו רגע',intro:'מבחר קטעים שממחיש איך המופע מתחבר לקהל רב־גילאי בלי להרגיש ילדותי.'},
     brit:{eyebrow:'תוכן שמתאים לכל האורחים',title:'קסמים שמחברים בין הדורות',intro:'רגעים קצרים שמראים כיצד גם המבוגרים וגם המשפחה נכנסים יחד לחוויה.'}
   };
   const contexts={'shows-for-companies.html':'companies','mentalist-adult-parties.html':'adults','magician-bar-bat-mitzvah.html':'mitzvah','magician-brit-brita.html':'brit'};
   if(!document.querySelector('[data-adult-video-stories]')){
     const legacy=document.querySelector('.experience');
-    if(legacy){const oldSection=legacy.closest('section');const section=document.createElement('section');const shell=document.createElement('div');const mount=document.createElement('div');shell.className='shell';mount.dataset.adultVideoStories='';mount.dataset.context=contexts[location.pathname.split('/').pop()]||'adults';shell.appendChild(mount);section.appendChild(shell);oldSection.before(section);oldSection.hidden=true}
+    if(legacy){const oldSection=legacy.closest('section');const section=document.createElement('section');const shell=document.createElement('div');const mount=document.createElement('div');const context=contexts[location.pathname.split('/').pop()]||'adults';shell.className='shell';mount.dataset.adultVideoStories='';mount.dataset.context=context;shell.appendChild(mount);section.appendChild(shell);if(context==='adults'){document.querySelector('.hero')?.after(section)}else{oldSection.before(section)}oldSection.hidden=true}
   }
   if(contexts[location.pathname.split('/').pop()]==='companies'){document.querySelectorAll('.more-media').forEach(element=>element.hidden=true)}
   document.querySelectorAll('[data-adult-video-stories]').forEach(root=>{
