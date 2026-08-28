@@ -32,6 +32,12 @@ for (const file of htmlFiles) {
 }
 
 const home = read(path.join(root, "index.html"));
+const admin = read(path.join(root, "admin.html"));
+const privateAnalytics = read(path.join(root, "assets", "analytics.js"));
+assert.match(admin, /data-admin-view="analytics"/, "Admin dashboard requires a private analytics tab");
+assert.match(admin, /id="analytics-kpis"/, "Analytics dashboard requires clickable KPI cards");
+assert.match(privateAnalytics, /collection\(db, "analyticsEvents"\)/, "Aggregate analytics events must be saved for the private dashboard");
+assert.doesNotMatch(privateAnalytics, /localStorage|userId|fingerprint/i, "Aggregate analytics must not create individual visitor profiles");
 assert.match(home, /<meta name="msvalidate\.01" content="373407FD78FC0D901E05BDBBFA68F00A">/, "Bing Webmaster verification tag is required");
 assert.doesNotMatch(home, /מערכת הזמנות חכמה|רשימת שמות להצגה ראשונית|יחזקו את האתר בחיפושי Google/);
 assert.match(home, /id="invitation" hidden aria-hidden="true"/);

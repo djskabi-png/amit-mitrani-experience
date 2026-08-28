@@ -55,6 +55,42 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
+    match /analyticsEvents/{eventId} {
+      allow create: if request.resource.data.keys().hasOnly([
+        'eventType', 'pagePath', 'pageTitle', 'target', 'targetLabel',
+        'videoId', 'language', 'source', 'medium', 'campaign', 'content',
+        'createdAt'
+      ])
+      && request.resource.data.eventType in [
+        'page_view', 'youtube_click', 'whatsapp_click', 'phone_click',
+        'email_click', 'form_submit', 'button_click', 'outbound_click',
+        'scroll_depth'
+      ]
+      && request.resource.data.pagePath is string
+      && request.resource.data.pagePath.size() <= 300
+      && request.resource.data.pageTitle is string
+      && request.resource.data.pageTitle.size() <= 200
+      && request.resource.data.target is string
+      && request.resource.data.target.size() <= 300
+      && request.resource.data.targetLabel is string
+      && request.resource.data.targetLabel.size() <= 160
+      && request.resource.data.videoId is string
+      && request.resource.data.videoId.size() <= 32
+      && request.resource.data.language is string
+      && request.resource.data.language.size() <= 8
+      && request.resource.data.source is string
+      && request.resource.data.source.size() <= 100
+      && request.resource.data.medium is string
+      && request.resource.data.medium.size() <= 100
+      && request.resource.data.campaign is string
+      && request.resource.data.campaign.size() <= 160
+      && request.resource.data.content is string
+      && request.resource.data.content.size() <= 160
+      && request.resource.data.createdAt == request.time;
+      allow read, delete: if isAdmin();
+      allow update: if false;
+    }
+
     match /siteContent/{pageId} {
       allow read: if true;
       allow create, update: if isAdmin()

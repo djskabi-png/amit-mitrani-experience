@@ -102,6 +102,7 @@ const previewTitle = document.querySelector("#cms-preview-title");
 const openPage = document.querySelector("#cms-open-page");
 const contentView = document.querySelector("#content-view");
 const crmView = document.querySelector("#crm-view");
+const analyticsView = document.querySelector("#analytics-view");
 const confirmDialog = document.querySelector("#admin-confirm");
 const confirmForm = document.querySelector("#admin-confirm-form");
 const confirmEyebrow = document.querySelector("#admin-confirm-eyebrow");
@@ -1022,13 +1023,14 @@ const changePage = async (path) => {
 const bindViewTabs = () => {
   document.querySelectorAll("[data-admin-view]").forEach((button) => {
     button.addEventListener("click", () => {
-      const contentSelected = button.dataset.adminView === "content";
+      const selectedView = button.dataset.adminView;
       document.querySelectorAll("[data-admin-view]").forEach((item) => {
         item.classList.toggle("active", item === button);
         item.setAttribute("aria-selected", String(item === button));
       });
-      contentView.hidden = !contentSelected;
-      crmView.hidden = contentSelected;
+      contentView.hidden = selectedView !== "content";
+      crmView.hidden = selectedView !== "crm";
+      if (analyticsView) analyticsView.hidden = selectedView !== "analytics";
     });
   });
 };
