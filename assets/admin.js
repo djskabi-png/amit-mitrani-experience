@@ -128,6 +128,17 @@ const runButtonAction = async (button, action, successMessage, errorMessage) => 
   }
 };
 
+const persistLeadUpdate = async (id, changes) => {
+  await updateDoc(doc(db, "leads", id), {
+    ...changes,
+    updatedAt: serverTimestamp()
+  });
+  const lead = leads.find((item) => item.id === id);
+  if (lead) Object.assign(lead, changes);
+  renderLeads();
+  selectLead(id);
+};
+
 const formatDate = (value) => {
   if (!value) return "לא צוין";
   if (typeof value.toDate === "function") {
@@ -231,28 +242,24 @@ const selectLead = (id) => {
 
   document.querySelector("#approve-lead")?.addEventListener("click", async (event) => {
     if (!(await confirmAction({ title: "לאשר את הבקשה?", message: "הסטטוס ישתנה לאושר ויישמר במערכת.", approveLabel: "אישור הבקשה" }))) return;
-    runButtonAction(event.currentTarget, () => updateDoc(doc(db, "leads", id), {
+    runButtonAction(event.currentTarget, () => persistLeadUpdate(id, {
       status: "approved",
-      approvedAt: serverTimestamp(),
-      updatedAt: serverTimestamp()
+      approvedAt: serverTimestamp()
     }), "הבקשה אושרה.", "האישור לא נשמר. נסו שוב.");
   });
 
   document.querySelector("#decline-lead")?.addEventListener("click", async (event) => {
     if (!(await confirmAction({ title: "לסמן כלא מאושרת?", message: "הסטטוס ישתנה ללא אושר ויישמר במערכת.", approveLabel: "אי אישור" }))) return;
-    runButtonAction(event.currentTarget, () => updateDoc(doc(db, "leads", id), {
-      status: "declined",
-      updatedAt: serverTimestamp()
+    runButtonAction(event.currentTarget, () => persistLeadUpdate(id, {
+      status: "declined"
     }), "הבקשה סומנה כלא מאושרת.", "העדכון לא נשמר. נסו שוב.");
   });
 
-  document.querySelector("#save-lead").addEventListener("click", async () => {
-    await updateDoc(doc(db, "leads", id), {
+  document.querySelector("#save-lead").addEventListener("click", (event) => {
+    runButtonAction(event.currentTarget, () => persistLeadUpdate(id, {
       status: document.querySelector("#detail-status").value,
-      note: document.querySelector("#detail-note").value.trim().slice(0, 2000),
-      updatedAt: serverTimestamp()
-    });
-    showToast("הפנייה עודכנה.");
+      note: document.querySelector("#detail-note").value.trim().slice(0, 2000)
+    }), "הפנייה עודכנה.", "העדכון לא נשמר. נסו שוב.");
   });
 
 };
@@ -271,10 +278,23 @@ const renderTasks = () => {
   `).join("");
 
   taskList.querySelectorAll("[data-task-toggle]").forEach((checkbox) => {
-    checkbox.addEventListener("change", () => updateDoc(doc(db, "tasks", checkbox.dataset.taskToggle), {
-      done: checkbox.checked,
-      updatedAt: serverTimestamp()
-    }));
+    checkbox.addEventListener("change", async () => {
+      const nextValue = checkbox.checked;
+      checkbox.disabled = true;
+      try {
+        await updateDoc(doc(db, "tasks", checkbox.dataset.taskToggle), {
+          done: nextValue,
+          updatedAt: serverTimestamp()
+        });
+        showToast("המשימה עודכנה.");
+      } catch (error) {
+        console.error(error);
+        checkbox.checked = !nextValue;
+        showToast("המשימה לא עודכנה. נסו שוב.");
+      } finally {
+        checkbox.disabled = false;
+      }
+    });
   });
   taskList.querySelectorAll("[data-task-delete]").forEach((button) => {
     button.addEventListener("click", async () => {
