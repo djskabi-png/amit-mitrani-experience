@@ -1111,6 +1111,22 @@
       .global-points { grid-template-columns: 1fr; }
     }
 
+    .academy-compact { padding-block: 46px; }
+    .academy-compact .academy-layout { grid-template-columns: 1fr; }
+    .academy-compact .academy-summary { max-width: 820px; }
+    .academy-compact .course-grid { margin-top: 16px; grid-template-columns: repeat(3,1fr); }
+    .academy-compact .course-card { min-height: 0; padding: 18px; }
+    .academy-compact .course-card p { font-size: 13px; }
+    .magic-home-compact { padding-block: 50px; }
+    .magic-home-compact .magic-lab { padding: clamp(20px,3vw,34px); }
+    .magic-home-compact .magic-intro { margin-bottom: 18px; }
+    @media (max-width: 720px) {
+      .academy-compact .course-grid { grid-template-columns: 1fr; }
+      .academy-compact .academy-badges { gap: 6px; }
+      .academy-compact .course-card { padding: 15px; }
+      .magic-home-compact .magic-stage,
+      .magic-home-compact .trick-panel { min-height: 0; }
+    }
   </style>
 <!-- social-cards --><meta property="og:site_name" content="Amit Mitrani"><meta name="twitter:title" content="עמית מיטרני, הקסם מתחיל עוד לפני המופע"><meta name="twitter:description" content="מופעי קסמים ואמנות חושים לילדים, למשפחות, לחברות ולארגונים, עם התאמה ויצירת קשר ישירה."><meta name="twitter:image" content="https://amitgic.co.il/assets/optimized/hero-amit-1200.webp"><meta name="twitter:image:alt" content="הקסם מתחיל עוד לפני המופע"></head>
 <body id="top"><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M7H725PC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
@@ -1210,14 +1226,14 @@
       </div>
     </section>
 
-    <section class="section" id="academy">
+    <section class="section academy-compact" id="academy">
       <div class="shell academy-layout">
         <div class="academy-summary">
           <div class="kicker">האקדמיה של עמית</div>
           <h2 class="section-title">קסם שאפשר ללמוד בקצב שלכם</h2>
-          <p>הקורסים שבתכנון יהפכו את הידע של עמית למסלולי לימוד קצרים ומעשיים. אפשר להצטרף לרשימת העדכונים ולספר איזה מסלול מעניין אתכם.</p>
+          <p>בעמוד לימוד הקסמים של עמית אפשר להכיר את התוכן הקיים ולראות אילו מסלולי לימוד נמצאים בתכנון. מסלולים שעדיין אינם זמינים אינם מוצגים כמוצרים לרכישה.</p>
           <div class="academy-badges"><span>מסלולים בתכנון</span><span>ללא רכישה כרגע</span><span>תוכן באישור עמית</span><span>עדכונים בוואטסאפ</span></div>
-          <button class="btn btn-gold" type="button" data-world-hub>כניסה לעולם הקורסים</button>
+          <a class="btn btn-gold" href="magic-courses.html">לעמוד לימוד הקסמים</a>
         </div>
         <div class="course-grid">
           <article class="course-card"><span class="tag">לילדים</span><h3>הקוסם הצעיר</h3><p>כיוון אפשרי למסלול עתידי של יסודות, תרגול והצגה מול קהל, בכפוף לאישור התוכן.</p><b>מסלול בתכנון</b></article>
@@ -1242,7 +1258,7 @@
       </div>
     </section>
 
-    <section class="section" id="magic">
+    <section class="section magic-home-compact" id="magic">
       <div class="shell magic-lab">
         <div class="magic-intro">
           <div>
@@ -1460,7 +1476,7 @@
           </div>
         </div>
         <div class="invite-ui">
-          <p class="demo-note" id="invite-demo-note">זהו אב טיפוס אינטראקטיבי. השיתוף שולח טקסט לדוגמה ואישור ההגעה נשמר במכשיר בלבד. הפצה אמיתית וסנכרון אישורים יחוברו רק לאחר הקמת מערכת מאובטחת ואישור עמית.</p>
+          <p class="demo-note" id="invite-demo-note">מערכת ההזמנות הדיגיטליות פעילה ללקוחות: יוצרים הזמנה אישית, משתפים אותה ב־WhatsApp ומנהלים אישורי הגעה במקום אחד.</p>
           <div class="screen theme-magic" id="invite-screen">
             <div class="invite-brandline"><span id="invite-style-label">הזמנה קסומה</span><small class="amit-seal">חוויה אינטראקטיבית מבית <b>עמית מיטרני</b></small></div>
             <div class="invite-main">
@@ -1476,8 +1492,8 @@
             <div class="rsvp-status"><span id="rsvp-copy">עדיין לא אושרה הגעה</span><span id="rsvp-count">0 אישורים</span></div>
             <div class="invite-preview-actions">
               <button type="button" id="invite-demo">עדכון ההזמנה</button>
-              <button type="button" id="invite-rsvp" aria-describedby="invite-demo-note">בדיקת אישור הגעה</button>
-              <a id="invite-share" href="#" target="_blank" rel="noopener" aria-describedby="invite-demo-note">שיתוף טקסט לדוגמה</a>
+              <button type="button" id="invite-rsvp" aria-describedby="invite-demo-note">אישור הגעה</button>
+              <a id="invite-share" href="#" target="_blank" rel="noopener" aria-describedby="invite-demo-note">שיתוף ב־WhatsApp</a>
               <button type="button" id="invite-reset">איפוס</button>
             </div>
           </div>
@@ -1485,7 +1501,7 @@
       </div>
     </section>
 
-    <section class="section" id="pizza-calculator">
+    <section class="section" id="pizza-calculator" hidden aria-hidden="true">
       <div class="shell calculator-wrap">
         <div class="pizza-copy">
           <div class="kicker">מתכנן אירוע חכם</div>

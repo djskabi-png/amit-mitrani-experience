@@ -337,6 +337,26 @@
       .footer-row { flex-direction:column; }
     }
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+    .birthday-tools { padding-block: 56px; }
+    .birthday-tools-panel { padding: clamp(20px,4vw,36px); border:1px solid rgba(237,192,105,.28); border-radius:26px; background:linear-gradient(145deg,rgba(237,192,105,.08),rgba(139,104,255,.09)); }
+    .birthday-tools-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:22px; }
+    .birthday-tool { padding:22px; border:1px solid var(--line); border-radius:19px; background:var(--panel); }
+    .birthday-tool h3 { margin:0 0 7px; font-size:22px; }
+    .birthday-tool p { margin:0 0 16px; color:var(--muted); line-height:1.65; }
+    .food-planner { grid-column:1/-1; display:grid; gap:16px; }
+    .food-planner-controls { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .food-planner label { display:grid; gap:6px; color:#ddd9e4; font-weight:700; }
+    .food-planner select { min-height:46px; padding:9px 12px; border:1px solid var(--line); border-radius:12px; color:white; background:#0d0c13; }
+    .food-planner input[type="range"] { width:100%; accent-color:var(--gold); }
+    .range-line,.parents-toggle,.planner-checks { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+    .parents-toggle button,.planner-check { min-height:42px; flex:1; padding:8px; border:1px solid var(--line); border-radius:11px; color:white; background:#181620; cursor:pointer; }
+    .parents-toggle button.active,.planner-check[aria-pressed="true"] { color:#18121c; border-color:var(--gold); background:var(--gold); }
+    .pizza-result { padding:18px; border-radius:15px; background:rgba(101,212,169,.1); text-align:center; }
+    .pizza-result strong { display:block; color:white; font-size:30px; }
+    .planner-summary { display:grid; gap:7px; }
+    .planner-additions { margin:0; padding-right:20px; color:var(--muted); line-height:1.8; }
+    .planner-summary-row { display:flex; justify-content:space-between; gap:16px; padding:9px 12px; border:1px solid var(--line); border-radius:10px; }
+    @media (max-width:720px) { .birthday-tools-grid,.food-planner-controls { grid-template-columns:1fr; } .planner-checks { flex-direction:column; } .planner-check { width:100%; } }
   </style>
 <!-- social-cards --><meta property="og:image:alt" content="עמית מיטרני מול אולם מלא ילדים במופע קסמים"><meta property="og:site_name" content="Amit Mitrani"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="קוסם ליום הולדת לילדים | עמית מיטרני"><meta name="twitter:description" content="מופע קסמים ליום הולדת לילדים עם התאמה לגיל, השתתפות של החוגג או החוגגת וחוויה שמכניסה את הילדים אל תוך הקסם."><meta name="twitter:image" content="https://amitgic.co.il/assets/show-photos-2026/kids-show-social-1200x630.jpg"><meta name="twitter:image:alt" content="עמית מיטרני מול אולם מלא ילדים במופע קסמים"><script type="application/ld+json" data-seo="breadcrumbs">{"@type":"BreadcrumbList","@context":"https://schema.org","itemListElement":[{"@type":"ListItem","name":"ראשי","position":1,"item":"https://amitgic.co.il/"},{"@type":"ListItem","name":"מופע קסמים ליום הולדת שבו הילד במרכז","position":2,"item":"https://amitgic.co.il/shows-for-kids.html"}],"@id":"https://amitgic.co.il/shows-for-kids.html#breadcrumb"}</script><script type="application/ld+json" data-seo="service-webpage">{"breadcrumb":{"@id":"https://amitgic.co.il/shows-for-kids.html#breadcrumb"},"inLanguage":"he","@type":"WebPage","@id":"https://amitgic.co.il/shows-for-kids.html#webpage","isPartOf":{"@id":"https://amitgic.co.il/#website"},"url":"https://amitgic.co.il/shows-for-kids.html","name":"קוסם ליום הולדת לילדים | עמית מיטרני","@context":"https://schema.org","about":{"@id":"https://amitgic.co.il/#amit-mitrani"}}</script></head>
 <body><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M7H725PC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
@@ -357,6 +377,7 @@
       <article class="recommendation-video"><div class="recommendation-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/7hm2-XlSz-4?rel=0" title="המלצה מצולמת של מיקי מוכתר על עמית מיטרני" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="recommendation-video-copy"><small>המלצה מצולמת</small><h3>מיקי מוכתר</h3><p>עמית הופיע ביום ההולדת של יונתן וזכה לפרגון מצולם אחרי האירוע.</p><a href="https://youtu.be/7hm2-XlSz-4" target="_blank" rel="noopener">לצפייה ב־YouTube ←</a></div></article>
       <article class="recommendation-video"><div class="recommendation-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/cLrNjc36lNU?rel=0" title="המלצה מצולמת של מירב פלדמן על עמית מיטרני" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="recommendation-video-copy"><small>המלצה מצולמת</small><h3>מירב פלדמן</h3><p>עמית הופיע ביום ההולדת של דני והחוויה תועדה בהמלצה מצולמת.</p><a href="https://youtu.be/cLrNjc36lNU" target="_blank" rel="noopener">לצפייה ב־YouTube ←</a></div></article>
     </div></div></section>
+    <section class="birthday-tools" id="birthday-tools"><div class="shell"><div class="birthday-tools-panel"><div class="kicker">כלים שימושיים להורים</div><h2>כלים שיעשו לכם את יום ההולדת פשוט יותר</h2><div class="birthday-tools-grid"><article class="birthday-tool"><h3>הזמנה דיגיטלית ואישורי הגעה</h3><p>יוצרים הזמנה אישית, משתפים ב־WhatsApp ועוקבים אחרי אישורי ההגעה.</p><a class="btn btn-gold" href="digital-invitation.html">ליצירת הזמנה דיגיטלית</a></article><details class="birthday-tool"><summary><h3>מחשבון תכנון אוכל ופיצה</h3><p>מקבלים הערכה מהירה לפי מספר הילדים והעדפות האוכל.</p><span class="btn">פתיחת המחשבון</span></summary><div class="food-planner"><div class="food-planner-controls"><label>סוג האירוע<select id="planner-event-type"><option value="birthday">יום הולדת לילדים</option><option value="family">אירוע משפחתי</option><option value="corporate">אירוע חברה</option></select></label><label>עיר<select id="planner-city"><option>תל אביב יפו</option><option>הרצליה</option><option>ירושלים</option><option>חיפה</option><option>נתניה</option><option>כפר סבא</option><option>ראשון לציון</option><option>עיר אחרת</option></select></label><label id="guest-count-label">כמה ילדים מגיעים?<input id="kids-range" type="range" min="5" max="60" value="20"></label></div><div class="range-line"><span>5</span><strong id="kids-count">20 ילדים</strong><span>60</span></div><div id="parents-question"><label>האם גם ההורים אוכלים?</label><div class="parents-toggle"><button type="button" data-parents="no" class="active">לא</button><button type="button" data-parents="yes">כן</button></div></div><label>התאמות מזון</label><div class="planner-checks"><button class="planner-check" type="button" data-food="gluten" aria-pressed="false">ללא גלוטן</button><button class="planner-check" type="button" data-food="vegan" aria-pressed="false">טבעוני</button><button class="planner-check" type="button" data-food="nuts" aria-pressed="false">ללא אגוזים</button></div><div class="pizza-result">ההמלצה הראשונית היא<strong id="pizza-count">6 מגשים</strong><small>החישוב הוא הערכה בלבד ותלוי בגודל המגש, בתפריט ובתיאבון האורחים.</small></div><div class="planner-summary" id="planner-summary"></div><div><strong>מה כדאי להוסיף לשולחן</strong><ul class="planner-additions" id="planner-additions"></ul></div></div></details></div></div></div></section>
     <section id="answers"><div class="shell"><div class="answer"><h2>התשובה הקצרה</h2><p>המופע מתאים למשפחות שמחפשות פעילות מרכזית ליום הולדת לילדים. לפני שסוגרים בודקים גילאים, מספר משתתפים, מקום ותאריך, ורק אז מתאימים את מבנה המופע.</p></div></div></section>
     <section id="review-gallery"><div class="shell"><div class="review-gallery" data-review-carousel><div class="review-gallery-head"><div><div class="kicker">הורים משתפים מהאירוע</div><h3>צילומי המלצות ממופעי ילדים וימי הולדת</h3><p>גוררים ימינה או שמאלה, או משתמשים בכפתורים. לחיצה על צילום פותחת את הפרסום המקורי.</p></div><div class="review-controls"><button class="review-control" type="button" data-review-prev aria-label="המלצה קודמת" title="מעבר להמלצה הקודמת">‹</button><button class="review-control" type="button" data-review-next aria-label="המלצה הבאה" title="מעבר להמלצה הבאה">›</button></div></div><div class="review-track" data-review-track tabindex="0" role="list" aria-label="צילומי המלצות על מופעי ילדים"><figure class="review-slide" role="listitem" data-review-slide><a href="https://www.facebook.com/mor.shemesh.16/posts/pfbid02ewBwchyctKZVyHrMs9HqeVTjSzG55H8r5BW2aYFKmTa2w9rFwQfhGEqz4ssV8TTMl" target="_blank" rel="noopener" title="המלצת מור שמש על מופע יום הולדת לילדים עם עמית מיטרני, פתיחת המקור בפייסבוק"><img src="assets/reviews/facebook-mor-shemesh.jpg" alt="צילום מסך של המלצת מור שמש בפייסבוק על מופע יום הולדת לילדים עם עמית מיטרני" title="המלצת מור שמש על מופע יום הולדת לילדים עם עמית מיטרני" loading="lazy" width="1904" height="888"><figcaption><strong>מור שמש</strong><span>הילדים היו מרותקים, והחוגג קיבל מקום מרכזי במופע.</span></figcaption></a></figure><figure class="review-slide" role="listitem" data-review-slide><a href="https://www.facebook.com/sveta.bachar/posts/pfbid0XaQ15uNYFNi6ngtJRzthZmyzU43aNwwXe8v2aA8GNAsJTzPKkw47dYC4hJxQjPwxl" target="_blank" rel="noopener" title="המלצת סבטה בכר על מופע יום הולדת לילדים עם עמית מיטרני, פתיחת המקור בפייסבוק"><img src="assets/reviews/facebook-sveta-bachar.jpg" alt="צילום מסך של המלצת סבטה בכר בפייסבוק על מופע יום הולדת לילדים עם עמית מיטרני" title="המלצת סבטה בכר על מופע יום הולדת לילדים עם עמית מיטרני" loading="lazy" width="1904" height="888"><figcaption><strong>סבטה בכר</strong><span>כשלושים ילדים נשארו מרותקים, וגם ההורים נהנו מהחוויה.</span></figcaption></a></figure><figure class="review-slide" role="listitem" data-review-slide><a href="https://www.facebook.com/amir.eldar.9/posts/pfbid0FrpXNzxdJpRZFFH8ohxUCRWm1uQFCWaiUokSxZqFcuRoqb1zPcmXBrTBBXuCR6uEl" target="_blank" rel="noopener" title="המלצת אמיר אלדר על עמית מיטרני מול ילדים ומבוגרים, פתיחת המקור בפייסבוק"><img src="assets/reviews/facebook-amir-eldar.jpg" alt="צילום מסך של המלצת אמיר אלדר בפייסבוק על היכולת של עמית מיטרני לרתק ילדים ומבוגרים" title="המלצת אמיר אלדר על עמית מיטרני מול ילדים ומבוגרים" loading="lazy" width="1904" height="888"><figcaption><strong>אמיר אלדר</strong><span>מופע שמצליח לחבר ילדים צעירים, בני נוער ומבוגרים.</span></figcaption></a></figure></div><p class="review-gallery-note">הצילומים נלקחו מפרסומים פומביים בעמוד ההמלצות של עמית. הטקסט הקריא נשאר גם ב-HTML לטובת נגישות ומנועי חיפוש.</p><p class="sr-only" data-review-status aria-live="polite">מוצגת המלצה 1 מתוך 3</p></div></div></section>
 
@@ -547,6 +568,59 @@
       commerceForm.hidden = true;
       orderSuccess.classList.add("show");
     });
+
+    const foodRange = document.querySelector("#kids-range");
+    if (foodRange) {
+      const foodCount = document.querySelector("#kids-count");
+      const foodResult = document.querySelector("#pizza-count");
+      const foodType = document.querySelector("#planner-event-type");
+      const foodGuestLabel = document.querySelector("#guest-count-label");
+      const foodParentsQuestion = document.querySelector("#parents-question");
+      const foodSummary = document.querySelector("#planner-summary");
+      const foodAdditions = document.querySelector("#planner-additions");
+      const foodPreferences = { gluten:false, vegan:false, nuts:false };
+      let parentsEat = false;
+      const updateFoodPlan = () => {
+        const guests = Number(foodRange.value);
+        const type = foodType.value;
+        const slices = type === "birthday" ? guests * 2.2 + (parentsEat ? Math.ceil(guests * .55) * 2.5 : 0) : guests * (type === "family" ? 2.35 : 2.5);
+        const pizzas = Math.max(2, Math.ceil(slices / 8));
+        foodCount.textContent = guests + (type === "birthday" ? " ילדים" : " משתתפים");
+        foodResult.textContent = pizzas + " מגשים";
+        const notes = [];
+        if (foodPreferences.gluten) notes.push("מגש ללא גלוטן, מסומן ונפרד");
+        if (foodPreferences.vegan) notes.push("מגש טבעוני");
+        if (foodPreferences.nuts) notes.push("יש לוודא מול כל הספקים שהמזון ללא אגוזים");
+        foodSummary.innerHTML = notes.map(note => `<div class="planner-summary-row"><span>${note}</span><b>✓</b></div>`).join("");
+        const additions = type === "birthday"
+          ? ["מים אישיים או עמדת מים נגישה", "ירקות חתוכים ופירות", "עוגה, נרות, סכין ומצת", "צלחות, מפיות ושקיות אשפה"]
+          : type === "family"
+            ? ["שתי קערות סלט גדולות", "ירקות, פירות ושתייה קלה", "קפה ותה למבוגרים", "כלים נפרדים למנות מיוחדות"]
+            : ["עמדת מים, קפה ותה", "נשנושים שקל לאכול בעמידה", "סימון ברור לטבעוני וללא גלוטן", "מפיות ופינת פינוי מסודרת"];
+        if (type === "birthday" && parentsEat) additions.push("להורים: סלטים, קפה, מים ושתייה ללא סוכר");
+        foodAdditions.innerHTML = additions.map(item => `<li>${item}</li>`).join("");
+      };
+      foodRange.addEventListener("input", updateFoodPlan);
+      document.querySelectorAll("[data-parents]").forEach(button => button.addEventListener("click", () => {
+        document.querySelectorAll("[data-parents]").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        parentsEat = button.dataset.parents === "yes";
+        updateFoodPlan();
+      }));
+      document.querySelectorAll("[data-food]").forEach(button => button.addEventListener("click", () => {
+        const key = button.dataset.food;
+        foodPreferences[key] = !foodPreferences[key];
+        button.setAttribute("aria-pressed", String(foodPreferences[key]));
+        updateFoodPlan();
+      }));
+      foodType.addEventListener("change", () => {
+        const birthday = foodType.value === "birthday";
+        foodGuestLabel.childNodes[0].nodeValue = birthday ? "כמה ילדים מגיעים?" : "כמה משתתפים מגיעים?";
+        foodParentsQuestion.hidden = !birthday;
+        updateFoodPlan();
+      });
+      updateFoodPlan();
+    }
   </script>
   <script src="assets/share.js?v=4" defer></script>
 </body>
